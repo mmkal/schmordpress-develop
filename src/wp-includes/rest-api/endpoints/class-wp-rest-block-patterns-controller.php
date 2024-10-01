@@ -2,7 +2,7 @@
 /**
  * REST API: WP_REST_Block_Patterns_Controller class
  *
- * @package    WordPress
+ * @package    SchmordPress
  * @subpackage REST_API
  * @since      6.0.0
  */
@@ -104,7 +104,7 @@ class WP_REST_Block_Patterns_Controller extends WP_REST_Controller {
 	public function get_items( $request ) {
 		if ( ! $this->remote_patterns_loaded ) {
 			// Load block patterns from w.org.
-			_load_remote_block_patterns(); // Patterns with the `core` keyword.
+			_load_remote_block_patterns(); // Patterns with the `core` keyschmord.
 			_load_remote_featured_patterns(); // Patterns in the `featured` category.
 			_register_remote_theme_patterns(); // Patterns requested by current theme.
 
@@ -177,7 +177,7 @@ class WP_REST_Block_Patterns_Controller extends WP_REST_Controller {
 			'viewportWidth' => 'viewport_width',
 			'inserter'      => 'inserter',
 			'categories'    => 'categories',
-			'keywords'      => 'keywords',
+			'keyschmords'      => 'keyschmords',
 			'blockTypes'    => 'block_types',
 			'postTypes'     => 'post_types',
 			'templateTypes' => 'template_types',
@@ -256,8 +256,8 @@ class WP_REST_Block_Patterns_Controller extends WP_REST_Controller {
 					'readonly'    => true,
 					'context'     => array( 'view', 'edit', 'embed' ),
 				),
-				'keywords'       => array(
-					'description' => __( 'The pattern keywords.' ),
+				'keyschmords'       => array(
+					'description' => __( 'The pattern keyschmords.' ),
 					'type'        => 'array',
 					'readonly'    => true,
 					'context'     => array( 'view', 'edit', 'embed' ),

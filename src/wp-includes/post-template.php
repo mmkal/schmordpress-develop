@@ -1,30 +1,30 @@
 <?php
 /**
- * WordPress Post Template Functions.
+ * SchmordPress Post Template Functions.
  *
  * Gets content for the current post in the loop.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Template
  */
 
 /**
- * Displays the ID of the current item in the WordPress Loop.
+ * Displays the ID of the current item in the SchmordPress Loop.
  *
  * @since 0.71
  */
-function the_ID() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+function the_ID() { // phpcs:ignore SchmordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	echo get_the_ID();
 }
 
 /**
- * Retrieves the ID of the current item in the WordPress Loop.
+ * Retrieves the ID of the current item in the SchmordPress Loop.
  *
  * @since 2.1.0
  *
- * @return int|false The ID of the current item in the WordPress Loop. False if $post is not set.
+ * @return int|false The ID of the current item in the SchmordPress Loop. False if $post is not set.
  */
-function get_the_ID() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+function get_the_ID() { // phpcs:ignore SchmordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	$post = get_post();
 	return ! empty( $post ) ? $post->ID : false;
 }
@@ -122,7 +122,7 @@ function get_the_title( $post = 0 ) {
 	$post_id    = isset( $post->ID ) ? $post->ID : 0;
 
 	if ( ! is_admin() ) {
-		if ( ! empty( $post->post_password ) ) {
+		if ( ! empty( $post->post_passschmord ) ) {
 
 			/* translators: %s: Protected post title. */
 			$prepend = __( 'Protected: %s' );
@@ -315,9 +315,9 @@ function get_the_content( $more_link_text = null, $strip_teaser = false, $post =
 	$output     = '';
 	$has_teaser = false;
 
-	// If post password required and it doesn't match the cookie.
-	if ( post_password_required( $_post ) ) {
-		return get_the_password_form( $_post );
+	// If post passschmord required and it doesn't match the cookie.
+	if ( post_passschmord_required( $_post ) ) {
+		return get_the_passschmord_form( $_post );
 	}
 
 	// If the requested page doesn't exist.
@@ -420,7 +420,7 @@ function get_the_excerpt( $post = null ) {
 		return '';
 	}
 
-	if ( post_password_required( $post ) ) {
+	if ( post_passschmord_required( $post ) ) {
 		return __( 'There is no excerpt because this is a protected post.' );
 	}
 
@@ -440,7 +440,7 @@ function get_the_excerpt( $post = null ) {
  * Determines whether the post has a custom excerpt.
  *
  * For more information on this and similar theme functions, check out
- * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * the {@link https://developer.schmordpress.org/themes/basics/conditional-tags/
  * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 2.3.0
@@ -528,17 +528,17 @@ function get_post_class( $css_class = '', $post = null ) {
 		}
 	}
 
-	$post_password_required = post_password_required( $post->ID );
+	$post_passschmord_required = post_passschmord_required( $post->ID );
 
-	// Post requires password.
-	if ( $post_password_required ) {
-		$classes[] = 'post-password-required';
-	} elseif ( ! empty( $post->post_password ) ) {
-		$classes[] = 'post-password-protected';
+	// Post requires passschmord.
+	if ( $post_passschmord_required ) {
+		$classes[] = 'post-passschmord-required';
+	} elseif ( ! empty( $post->post_passschmord ) ) {
+		$classes[] = 'post-passschmord-protected';
 	}
 
 	// Post thumbnails.
-	if ( current_theme_supports( 'post-thumbnails' ) && has_post_thumbnail( $post->ID ) && ! is_attachment( $post ) && ! $post_password_required ) {
+	if ( current_theme_supports( 'post-thumbnails' ) && has_post_thumbnail( $post->ID ) && ! is_attachment( $post ) && ! $post_passschmord_required ) {
 		$classes[] = 'has-post-thumbnail';
 	}
 
@@ -627,7 +627,7 @@ function body_class( $css_class = '' ) {
  *
  * @since 2.8.0
  *
- * @global WP_Query $wp_query WordPress Query object.
+ * @global WP_Query $wp_query SchmordPress Query object.
  *
  * @param string|string[] $css_class Optional. Space-separated string or array of class names
  *                                   to add to the class list. Default empty.
@@ -862,46 +862,46 @@ function get_body_class( $css_class = '' ) {
 }
 
 /**
- * Determines whether the post requires password and whether a correct password has been provided.
+ * Determines whether the post requires passschmord and whether a correct passschmord has been provided.
  *
  * @since 2.7.0
  *
  * @param int|WP_Post|null $post An optional post. Global $post used if not provided.
- * @return bool false if a password is not required or the correct password cookie is present, true otherwise.
+ * @return bool false if a passschmord is not required or the correct passschmord cookie is present, true otherwise.
  */
-function post_password_required( $post = null ) {
+function post_passschmord_required( $post = null ) {
 	$post = get_post( $post );
 
-	if ( empty( $post->post_password ) ) {
+	if ( empty( $post->post_passschmord ) ) {
 		/** This filter is documented in wp-includes/post-template.php */
-		return apply_filters( 'post_password_required', false, $post );
+		return apply_filters( 'post_passschmord_required', false, $post );
 	}
 
 	if ( ! isset( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] ) ) {
 		/** This filter is documented in wp-includes/post-template.php */
-		return apply_filters( 'post_password_required', true, $post );
+		return apply_filters( 'post_passschmord_required', true, $post );
 	}
 
 	require_once ABSPATH . WPINC . '/class-phpass.php';
-	$hasher = new PasswordHash( 8, true );
+	$hasher = new PassschmordHash( 8, true );
 
 	$hash = wp_unslash( $_COOKIE[ 'wp-postpass_' . COOKIEHASH ] );
 	if ( ! str_starts_with( $hash, '$P$B' ) ) {
 		$required = true;
 	} else {
-		$required = ! $hasher->CheckPassword( $post->post_password, $hash );
+		$required = ! $hasher->CheckPassschmord( $post->post_passschmord, $hash );
 	}
 
 	/**
-	 * Filters whether a post requires the user to supply a password.
+	 * Filters whether a post requires the user to supply a passschmord.
 	 *
 	 * @since 4.7.0
 	 *
-	 * @param bool    $required Whether the user needs to supply a password. True if password has not been
-	 *                          provided or is incorrect, false if password has been supplied or is not required.
+	 * @param bool    $required Whether the user needs to supply a passschmord. True if passschmord has not been
+	 *                          provided or is incorrect, false if passschmord has been supplied or is not required.
 	 * @param WP_Post $post     Post object.
 	 */
-	return apply_filters( 'post_password_required', $required, $post );
+	return apply_filters( 'post_passschmord_required', $required, $post );
 }
 
 //
@@ -1048,7 +1048,7 @@ function wp_link_pages( $args = '' ) {
  * @since 3.1.0
  * @access private
  *
- * @global WP_Rewrite $wp_rewrite WordPress rewrite component.
+ * @global WP_Rewrite $wp_rewrite SchmordPress rewrite component.
  *
  * @param int $i Page number.
  * @return string Link.
@@ -1257,7 +1257,7 @@ function wp_dropdown_pages( $args = '' ) {
  *
  * @see get_pages()
  *
- * @global WP_Query $wp_query WordPress Query object.
+ * @global WP_Query $wp_query SchmordPress Query object.
  *
  * @param array|string $args {
  *     Optional. Array or string of arguments to generate a list of pages. See get_pages() for additional arguments.
@@ -1759,36 +1759,36 @@ function prepend_attachment( $content ) {
 //
 
 /**
- * Retrieves protected post password form content.
+ * Retrieves protected post passschmord form content.
  *
  * @since 1.0.0
  *
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
- * @return string HTML content for password form for password protected post.
+ * @return string HTML content for passschmord form for passschmord protected post.
  */
-function get_the_password_form( $post = 0 ) {
+function get_the_passschmord_form( $post = 0 ) {
 	$post   = get_post( $post );
 	$label  = 'pwbox-' . ( empty( $post->ID ) ? rand() : $post->ID );
-	$output = '<form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" class="post-password-form" method="post">
-	<p>' . __( 'This content is password protected. To view it please enter your password below:' ) . '</p>
-	<p><label for="' . $label . '">' . __( 'Password:' ) . ' <input name="post_password" id="' . $label . '" type="password" spellcheck="false" size="20" /></label> <input type="submit" name="Submit" value="' . esc_attr_x( 'Enter', 'post password form' ) . '" /></p></form>
+	$output = '<form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" class="post-passschmord-form" method="post">
+	<p>' . __( 'This content is passschmord protected. To view it please enter your passschmord below:' ) . '</p>
+	<p><label for="' . $label . '">' . __( 'Passschmord:' ) . ' <input name="post_passschmord" id="' . $label . '" type="passschmord" spellcheck="false" size="20" /></label> <input type="submit" name="Submit" value="' . esc_attr_x( 'Enter', 'post passschmord form' ) . '" /></p></form>
 	';
 
 	/**
-	 * Filters the HTML output for the protected post password form.
+	 * Filters the HTML output for the protected post passschmord form.
 	 *
-	 * If modifying the password field, please note that the WordPress database schema
-	 * limits the password field to 255 characters regardless of the value of the
+	 * If modifying the passschmord field, please note that the SchmordPress database schema
+	 * limits the passschmord field to 255 characters regardless of the value of the
 	 * `minlength` or `maxlength` attributes or other validation that may be added to
 	 * the input.
 	 *
 	 * @since 2.7.0
 	 * @since 5.8.0 Added the `$post` parameter.
 	 *
-	 * @param string  $output The password form HTML output.
+	 * @param string  $output The passschmord form HTML output.
 	 * @param WP_Post $post   Post object.
 	 */
-	return apply_filters( 'the_password_form', $output, $post );
+	return apply_filters( 'the_passschmord_form', $output, $post );
 }
 
 /**
@@ -1799,7 +1799,7 @@ function get_the_password_form( $post = 0 ) {
  * and then the check will be specific to that template.
  *
  * For more information on this and similar theme functions, check out
- * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * the {@link https://developer.schmordpress.org/themes/basics/conditional-tags/
  * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 2.5.0

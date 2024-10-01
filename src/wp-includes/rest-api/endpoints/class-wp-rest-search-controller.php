@@ -2,13 +2,13 @@
 /**
  * REST API: WP_REST_Search_Controller class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage REST_API
  * @since 5.0.0
  */
 
 /**
- * Core class to search through all WordPress content via the REST API.
+ * Core class to search through all SchmordPress content via the REST API.
  *
  * @since 5.0.0
  *

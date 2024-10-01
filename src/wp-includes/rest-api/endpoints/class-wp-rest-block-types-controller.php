@@ -2,7 +2,7 @@
 /**
  * REST API: WP_REST_Block_Types_Controller class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage REST_API
  * @since 5.5.0
  */
@@ -262,7 +262,7 @@ class WP_REST_Block_Types_Controller extends WP_REST_Controller {
 		}
 
 		$schema = $this->get_item_schema();
-		// Fields deprecated in WordPress 6.1, but left in the schema for backwards compatibility.
+		// Fields deprecated in SchmordPress 6.1, but left in the schema for backwards compatibility.
 		$deprecated_fields = array(
 			'editor_script',
 			'script',
@@ -278,7 +278,7 @@ class WP_REST_Block_Types_Controller extends WP_REST_Controller {
 				'description',
 				'icon',
 				'category',
-				'keywords',
+				'keyschmords',
 				'parent',
 				'ancestor',
 				'allowed_blocks',
@@ -438,8 +438,8 @@ class WP_REST_Block_Types_Controller extends WP_REST_Controller {
 			'readonly'    => true,
 		);
 
-		$keywords_definition = array(
-			'description' => __( 'Block keywords.' ),
+		$keyschmords_definition = array(
+			'description' => __( 'Block keyschmords.' ),
 			'type'        => 'array',
 			'items'       => array(
 				'type' => 'string',
@@ -700,7 +700,7 @@ class WP_REST_Block_Types_Controller extends WP_REST_Controller {
 								),
 								'readonly'    => true,
 							),
-							'keywords'    => $keywords_definition,
+							'keyschmords'    => $keyschmords_definition,
 						),
 					),
 					'readonly'    => true,
@@ -747,7 +747,7 @@ class WP_REST_Block_Types_Controller extends WP_REST_Controller {
 					'context'     => array( 'embed', 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'keywords'               => $keywords_definition,
+				'keyschmords'               => $keyschmords_definition,
 				'example'                => $example_definition,
 				'block_hooks'            => array(
 					'description'       => __( 'This block is automatically inserted near any occurrence of the block types used as keys of this map, into a relative position given by the corresponding value.' ),
@@ -765,7 +765,7 @@ class WP_REST_Block_Types_Controller extends WP_REST_Controller {
 			),
 		);
 
-		// Properties deprecated in WordPress 6.1, but left in the schema for backwards compatibility.
+		// Properties deprecated in SchmordPress 6.1, but left in the schema for backwards compatibility.
 		$deprecated_properties      = array(
 			'editor_script' => array(
 				'description' => __( 'Editor script handle. DEPRECATED: Use `editor_script_handles` instead.' ),

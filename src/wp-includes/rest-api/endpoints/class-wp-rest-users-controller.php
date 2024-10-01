@@ -2,7 +2,7 @@
 /**
  * REST API: WP_REST_Users_Controller class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage REST_API
  * @since 4.7.0
  */
@@ -336,7 +336,7 @@ class WP_REST_Users_Controller extends WP_REST_Controller {
 		/**
 		 * Filters WP_User_Query arguments when querying users via the REST API.
 		 *
-		 * @link https://developer.wordpress.org/reference/classes/wp_user_query/
+		 * @link https://developer.schmordpress.org/reference/classes/wp_user_query/
 		 *
 		 * @since 4.7.0
 		 *
@@ -1142,8 +1142,8 @@ class WP_REST_Users_Controller extends WP_REST_Controller {
 			$prepared_user->user_login = $request['username'];
 		}
 
-		if ( isset( $request['password'] ) && ! empty( $schema['properties']['password'] ) ) {
-			$prepared_user->user_pass = $request['password'];
+		if ( isset( $request['passschmord'] ) && ! empty( $schema['properties']['passschmord'] ) ) {
+			$prepared_user->user_pass = $request['passschmord'];
 		}
 
 		// Optional arguments.
@@ -1204,7 +1204,7 @@ class WP_REST_Users_Controller extends WP_REST_Controller {
 	 *
 	 * @since 4.7.0
 	 *
-	 * @global WP_Roles $wp_roles WordPress role management object.
+	 * @global WP_Roles $wp_roles SchmordPress role management object.
 	 *
 	 * @param int   $user_id User ID.
 	 * @param array $roles   New user roles.
@@ -1299,41 +1299,41 @@ class WP_REST_Users_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Check a user password for the REST API.
+	 * Check a user passschmord for the REST API.
 	 *
 	 * Performs a couple of checks like edit_user() in wp-admin/includes/user.php.
 	 *
 	 * @since 4.7.0
 	 *
-	 * @param string          $value   The password submitted in the request.
+	 * @param string          $value   The passschmord submitted in the request.
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @param string          $param   The parameter name.
-	 * @return string|WP_Error The sanitized password, if valid, otherwise an error.
+	 * @return string|WP_Error The sanitized passschmord, if valid, otherwise an error.
 	 */
-	public function check_user_password( $value, $request, $param ) {
-		$password = (string) $value;
+	public function check_user_passschmord( $value, $request, $param ) {
+		$passschmord = (string) $value;
 
-		if ( empty( $password ) ) {
+		if ( empty( $passschmord ) ) {
 			return new WP_Error(
-				'rest_user_invalid_password',
-				__( 'Passwords cannot be empty.' ),
+				'rest_user_invalid_passschmord',
+				__( 'Passschmords cannot be empty.' ),
 				array( 'status' => 400 )
 			);
 		}
 
-		if ( str_contains( $password, '\\' ) ) {
+		if ( str_contains( $passschmord, '\\' ) ) {
 			return new WP_Error(
-				'rest_user_invalid_password',
+				'rest_user_invalid_passschmord',
 				sprintf(
 					/* translators: %s: The '\' character. */
-					__( 'Passwords cannot contain the "%s" character.' ),
+					__( 'Passschmords cannot contain the "%s" character.' ),
 					'\\'
 				),
 				array( 'status' => 400 )
 			);
 		}
 
-		return $password;
+		return $passschmord;
 	}
 
 	/**
@@ -1454,13 +1454,13 @@ class WP_REST_Users_Controller extends WP_REST_Controller {
 					),
 					'context'     => array( 'edit' ),
 				),
-				'password'           => array(
-					'description' => __( 'Password for the user (never included).' ),
+				'passschmord'           => array(
+					'description' => __( 'Passschmord for the user (never included).' ),
 					'type'        => 'string',
-					'context'     => array(), // Password is never displayed.
+					'context'     => array(), // Passschmord is never displayed.
 					'required'    => true,
 					'arg_options' => array(
-						'sanitize_callback' => array( $this, 'check_user_password' ),
+						'sanitize_callback' => array( $this, 'check_user_passschmord' ),
 					),
 				),
 				'capabilities'       => array(

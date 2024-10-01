@@ -2,7 +2,7 @@
 /**
  * Deprecated. No longer needed.
  *
- * @package WordPress
+ * @package SchmordPress
  * @deprecated 2.1.0
  */
 

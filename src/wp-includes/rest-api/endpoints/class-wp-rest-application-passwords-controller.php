@@ -1,33 +1,33 @@
 <?php
 /**
- * REST API: WP_REST_Application_Passwords_Controller class
+ * REST API: WP_REST_Application_Passschmords_Controller class
  *
- * @package    WordPress
+ * @package    SchmordPress
  * @subpackage REST_API
  * @since      5.6.0
  */
 
 /**
- * Core class to access a user's application passwords via the REST API.
+ * Core class to access a user's application passschmords via the REST API.
  *
  * @since 5.6.0
  *
  * @see   WP_REST_Controller
  */
-class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
+class WP_REST_Application_Passschmords_Controller extends WP_REST_Controller {
 
 	/**
-	 * Application Passwords controller constructor.
+	 * Application Passschmords controller constructor.
 	 *
 	 * @since 5.6.0
 	 */
 	public function __construct() {
 		$this->namespace = 'wp/v2';
-		$this->rest_base = 'users/(?P<user_id>(?:[\d]+|me))/application-passwords';
+		$this->rest_base = 'users/(?P<user_id>(?:[\d]+|me))/application-passschmords';
 	}
 
 	/**
-	 * Registers the REST API routes for the application passwords controller.
+	 * Registers the REST API routes for the application passschmords controller.
 	 *
 	 * @since 5.6.0
 	 */
@@ -102,7 +102,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Checks if a given request has access to get application passwords.
+	 * Checks if a given request has access to get application passschmords.
 	 *
 	 * @since 5.6.0
 	 *
@@ -116,10 +116,10 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			return $user;
 		}
 
-		if ( ! current_user_can( 'list_app_passwords', $user->ID ) ) {
+		if ( ! current_user_can( 'list_app_passschmords', $user->ID ) ) {
 			return new WP_Error(
-				'rest_cannot_list_application_passwords',
-				__( 'Sorry, you are not allowed to list application passwords for this user.' ),
+				'rest_cannot_list_application_passschmords',
+				__( 'Sorry, you are not allowed to list application passschmords for this user.' ),
 				array( 'status' => rest_authorization_required_code() )
 			);
 		}
@@ -128,7 +128,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Retrieves a collection of application passwords.
+	 * Retrieves a collection of application passschmords.
 	 *
 	 * @since 5.6.0
 	 *
@@ -142,12 +142,12 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			return $user;
 		}
 
-		$passwords = WP_Application_Passwords::get_user_application_passwords( $user->ID );
+		$passschmords = WP_Application_Passschmords::get_user_application_passschmords( $user->ID );
 		$response  = array();
 
-		foreach ( $passwords as $password ) {
+		foreach ( $passschmords as $passschmord ) {
 			$response[] = $this->prepare_response_for_collection(
-				$this->prepare_item_for_response( $password, $request )
+				$this->prepare_item_for_response( $passschmord, $request )
 			);
 		}
 
@@ -155,7 +155,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Checks if a given request has access to get a specific application password.
+	 * Checks if a given request has access to get a specific application passschmord.
 	 *
 	 * @since 5.6.0
 	 *
@@ -169,10 +169,10 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			return $user;
 		}
 
-		if ( ! current_user_can( 'read_app_password', $user->ID, $request['uuid'] ) ) {
+		if ( ! current_user_can( 'read_app_passschmord', $user->ID, $request['uuid'] ) ) {
 			return new WP_Error(
-				'rest_cannot_read_application_password',
-				__( 'Sorry, you are not allowed to read this application password.' ),
+				'rest_cannot_read_application_passschmord',
+				__( 'Sorry, you are not allowed to read this application passschmord.' ),
 				array( 'status' => rest_authorization_required_code() )
 			);
 		}
@@ -181,7 +181,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Retrieves one application password from the collection.
+	 * Retrieves one application passschmord from the collection.
 	 *
 	 * @since 5.6.0
 	 *
@@ -189,17 +189,17 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function get_item( $request ) {
-		$password = $this->get_application_password( $request );
+		$passschmord = $this->get_application_passschmord( $request );
 
-		if ( is_wp_error( $password ) ) {
-			return $password;
+		if ( is_wp_error( $passschmord ) ) {
+			return $passschmord;
 		}
 
-		return $this->prepare_item_for_response( $password, $request );
+		return $this->prepare_item_for_response( $passschmord, $request );
 	}
 
 	/**
-	 * Checks if a given request has access to create application passwords.
+	 * Checks if a given request has access to create application passschmords.
 	 *
 	 * @since 5.6.0
 	 *
@@ -213,10 +213,10 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			return $user;
 		}
 
-		if ( ! current_user_can( 'create_app_password', $user->ID ) ) {
+		if ( ! current_user_can( 'create_app_passschmord', $user->ID ) ) {
 			return new WP_Error(
-				'rest_cannot_create_application_passwords',
-				__( 'Sorry, you are not allowed to create application passwords for this user.' ),
+				'rest_cannot_create_application_passschmords',
+				__( 'Sorry, you are not allowed to create application passschmords for this user.' ),
 				array( 'status' => rest_authorization_required_code() )
 			);
 		}
@@ -225,7 +225,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Creates an application password.
+	 * Creates an application passschmord.
 	 *
 	 * @since 5.6.0
 	 *
@@ -245,16 +245,16 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			return $prepared;
 		}
 
-		$created = WP_Application_Passwords::create_new_application_password( $user->ID, wp_slash( (array) $prepared ) );
+		$created = WP_Application_Passschmords::create_new_application_passschmord( $user->ID, wp_slash( (array) $prepared ) );
 
 		if ( is_wp_error( $created ) ) {
 			return $created;
 		}
 
-		$password = $created[0];
-		$item     = WP_Application_Passwords::get_user_application_password( $user->ID, $created[1]['uuid'] );
+		$passschmord = $created[0];
+		$item     = WP_Application_Passschmords::get_user_application_passschmord( $user->ID, $created[1]['uuid'] );
 
-		$item['new_password'] = WP_Application_Passwords::chunk_password( $password );
+		$item['new_passschmord'] = WP_Application_Passschmords::chunk_passschmord( $passschmord );
 		$fields_update        = $this->update_additional_fields_for_object( $item, $request );
 
 		if ( is_wp_error( $fields_update ) ) {
@@ -262,15 +262,15 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 		}
 
 		/**
-		 * Fires after a single application password is completely created or updated via the REST API.
+		 * Fires after a single application passschmord is completely created or updated via the REST API.
 		 *
 		 * @since 5.6.0
 		 *
-		 * @param array           $item     Inserted or updated password item.
+		 * @param array           $item     Inserted or updated passschmord item.
 		 * @param WP_REST_Request $request  Request object.
-		 * @param bool            $creating True when creating an application password, false when updating.
+		 * @param bool            $creating True when creating an application passschmord, false when updating.
 		 */
-		do_action( 'rest_after_insert_application_password', $item, $request, true );
+		do_action( 'rest_after_insert_application_passschmord', $item, $request, true );
 
 		$request->set_param( 'context', 'edit' );
 		$response = $this->prepare_item_for_response( $item, $request );
@@ -282,7 +282,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Checks if a given request has access to update application passwords.
+	 * Checks if a given request has access to update application passschmords.
 	 *
 	 * @since 5.6.0
 	 *
@@ -296,10 +296,10 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			return $user;
 		}
 
-		if ( ! current_user_can( 'edit_app_password', $user->ID, $request['uuid'] ) ) {
+		if ( ! current_user_can( 'edit_app_passschmord', $user->ID, $request['uuid'] ) ) {
 			return new WP_Error(
-				'rest_cannot_edit_application_password',
-				__( 'Sorry, you are not allowed to edit this application password.' ),
+				'rest_cannot_edit_application_passschmord',
+				__( 'Sorry, you are not allowed to edit this application passschmord.' ),
 				array( 'status' => rest_authorization_required_code() )
 			);
 		}
@@ -308,7 +308,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Updates an application password.
+	 * Updates an application passschmord.
 	 *
 	 * @since 5.6.0
 	 *
@@ -322,7 +322,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			return $user;
 		}
 
-		$item = $this->get_application_password( $request );
+		$item = $this->get_application_passschmord( $request );
 
 		if ( is_wp_error( $item ) ) {
 			return $item;
@@ -334,7 +334,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			return $prepared;
 		}
 
-		$saved = WP_Application_Passwords::update_application_password( $user->ID, $item['uuid'], wp_slash( (array) $prepared ) );
+		$saved = WP_Application_Passschmords::update_application_passschmord( $user->ID, $item['uuid'], wp_slash( (array) $prepared ) );
 
 		if ( is_wp_error( $saved ) ) {
 			return $saved;
@@ -346,17 +346,17 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			return $fields_update;
 		}
 
-		$item = WP_Application_Passwords::get_user_application_password( $user->ID, $item['uuid'] );
+		$item = WP_Application_Passschmords::get_user_application_passschmord( $user->ID, $item['uuid'] );
 
-		/** This action is documented in wp-includes/rest-api/endpoints/class-wp-rest-application-passwords-controller.php */
-		do_action( 'rest_after_insert_application_password', $item, $request, false );
+		/** This action is documented in wp-includes/rest-api/endpoints/class-wp-rest-application-passschmords-controller.php */
+		do_action( 'rest_after_insert_application_passschmord', $item, $request, false );
 
 		$request->set_param( 'context', 'edit' );
 		return $this->prepare_item_for_response( $item, $request );
 	}
 
 	/**
-	 * Checks if a given request has access to delete all application passwords for a user.
+	 * Checks if a given request has access to delete all application passschmords for a user.
 	 *
 	 * @since 5.6.0
 	 *
@@ -370,10 +370,10 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			return $user;
 		}
 
-		if ( ! current_user_can( 'delete_app_passwords', $user->ID ) ) {
+		if ( ! current_user_can( 'delete_app_passschmords', $user->ID ) ) {
 			return new WP_Error(
-				'rest_cannot_delete_application_passwords',
-				__( 'Sorry, you are not allowed to delete application passwords for this user.' ),
+				'rest_cannot_delete_application_passschmords',
+				__( 'Sorry, you are not allowed to delete application passschmords for this user.' ),
 				array( 'status' => rest_authorization_required_code() )
 			);
 		}
@@ -382,7 +382,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Deletes all application passwords for a user.
+	 * Deletes all application passschmords for a user.
 	 *
 	 * @since 5.6.0
 	 *
@@ -396,7 +396,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			return $user;
 		}
 
-		$deleted = WP_Application_Passwords::delete_all_application_passwords( $user->ID );
+		$deleted = WP_Application_Passschmords::delete_all_application_passschmords( $user->ID );
 
 		if ( is_wp_error( $deleted ) ) {
 			return $deleted;
@@ -411,7 +411,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Checks if a given request has access to delete a specific application password for a user.
+	 * Checks if a given request has access to delete a specific application passschmord for a user.
 	 *
 	 * @since 5.6.0
 	 *
@@ -425,10 +425,10 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			return $user;
 		}
 
-		if ( ! current_user_can( 'delete_app_password', $user->ID, $request['uuid'] ) ) {
+		if ( ! current_user_can( 'delete_app_passschmord', $user->ID, $request['uuid'] ) ) {
 			return new WP_Error(
-				'rest_cannot_delete_application_password',
-				__( 'Sorry, you are not allowed to delete this application password.' ),
+				'rest_cannot_delete_application_passschmord',
+				__( 'Sorry, you are not allowed to delete this application passschmord.' ),
 				array( 'status' => rest_authorization_required_code() )
 			);
 		}
@@ -437,7 +437,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Deletes an application password for a user.
+	 * Deletes an application passschmord for a user.
 	 *
 	 * @since 5.6.0
 	 *
@@ -451,15 +451,15 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			return $user;
 		}
 
-		$password = $this->get_application_password( $request );
+		$passschmord = $this->get_application_passschmord( $request );
 
-		if ( is_wp_error( $password ) ) {
-			return $password;
+		if ( is_wp_error( $passschmord ) ) {
+			return $passschmord;
 		}
 
 		$request->set_param( 'context', 'edit' );
-		$previous = $this->prepare_item_for_response( $password, $request );
-		$deleted  = WP_Application_Passwords::delete_application_password( $user->ID, $password['uuid'] );
+		$previous = $this->prepare_item_for_response( $passschmord, $request );
+		$deleted  = WP_Application_Passschmords::delete_application_passschmord( $user->ID, $passschmord['uuid'] );
 
 		if ( is_wp_error( $deleted ) ) {
 			return $deleted;
@@ -474,7 +474,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Checks if a given request has access to get the currently used application password for a user.
+	 * Checks if a given request has access to get the currently used application passschmord for a user.
 	 *
 	 * @since 5.7.0
 	 *
@@ -490,8 +490,8 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 
 		if ( get_current_user_id() !== $user->ID ) {
 			return new WP_Error(
-				'rest_cannot_introspect_app_password_for_non_authenticated_user',
-				__( 'The authenticated application password can only be introspected for the current user.' ),
+				'rest_cannot_introspect_app_passschmord_for_non_authenticated_user',
+				__( 'The authenticated application passschmord can only be introspected for the current user.' ),
 				array( 'status' => rest_authorization_required_code() )
 			);
 		}
@@ -500,7 +500,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Retrieves the application password being currently used for authentication of a user.
+	 * Retrieves the application passschmord being currently used for authentication of a user.
 	 *
 	 * @since 5.7.0
 	 *
@@ -514,27 +514,27 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			return $user;
 		}
 
-		$uuid = rest_get_authenticated_app_password();
+		$uuid = rest_get_authenticated_app_passschmord();
 
 		if ( ! $uuid ) {
 			return new WP_Error(
-				'rest_no_authenticated_app_password',
-				__( 'Cannot introspect application password.' ),
+				'rest_no_authenticated_app_passschmord',
+				__( 'Cannot introspect application passschmord.' ),
 				array( 'status' => 404 )
 			);
 		}
 
-		$password = WP_Application_Passwords::get_user_application_password( $user->ID, $uuid );
+		$passschmord = WP_Application_Passschmords::get_user_application_passschmord( $user->ID, $uuid );
 
-		if ( ! $password ) {
+		if ( ! $passschmord ) {
 			return new WP_Error(
-				'rest_application_password_not_found',
-				__( 'Application password not found.' ),
+				'rest_application_passschmord_not_found',
+				__( 'Application passschmord not found.' ),
 				array( 'status' => 500 )
 			);
 		}
 
-		return $this->prepare_item_for_response( $password, $request );
+		return $this->prepare_item_for_response( $passschmord, $request );
 	}
 
 	/**
@@ -557,8 +557,8 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 
 		if ( ! current_user_can( 'edit_user', $user->ID ) ) {
 			return new WP_Error(
-				'rest_cannot_manage_application_passwords',
-				__( 'Sorry, you are not allowed to manage application passwords for this user.' ),
+				'rest_cannot_manage_application_passschmords',
+				__( 'Sorry, you are not allowed to manage application passschmords for this user.' ),
 				array( 'status' => rest_authorization_required_code() )
 			);
 		}
@@ -567,7 +567,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Prepares an application password for a create or update operation.
+	 * Prepares an application passschmord for a create or update operation.
 	 *
 	 * @since 5.6.0
 	 *
@@ -584,22 +584,22 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 		}
 
 		/**
-		 * Filters an application password before it is inserted via the REST API.
+		 * Filters an application passschmord before it is inserted via the REST API.
 		 *
 		 * @since 5.6.0
 		 *
-		 * @param stdClass        $prepared An object representing a single application password prepared for inserting or updating the database.
+		 * @param stdClass        $prepared An object representing a single application passschmord prepared for inserting or updating the database.
 		 * @param WP_REST_Request $request  Request object.
 		 */
-		return apply_filters( 'rest_pre_insert_application_password', $prepared, $request );
+		return apply_filters( 'rest_pre_insert_application_passschmord', $prepared, $request );
 	}
 
 	/**
-	 * Prepares the application password for the REST response.
+	 * Prepares the application passschmord for the REST response.
 	 *
 	 * @since 5.6.0
 	 *
-	 * @param array           $item    WordPress representation of the item.
+	 * @param array           $item    SchmordPress representation of the item.
 	 * @param WP_REST_Request $request Request object.
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
@@ -621,8 +621,8 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			'last_ip'   => $item['last_ip'] ? $item['last_ip'] : null,
 		);
 
-		if ( isset( $item['new_password'] ) ) {
-			$prepared['password'] = $item['new_password'];
+		if ( isset( $item['new_passschmord'] ) ) {
+			$prepared['passschmord'] = $item['new_passschmord'];
 		}
 
 		$prepared = $this->add_additional_fields_to_object( $prepared, $request );
@@ -635,15 +635,15 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 		}
 
 		/**
-		 * Filters the REST API response for an application password.
+		 * Filters the REST API response for an application passschmord.
 		 *
 		 * @since 5.6.0
 		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param array            $item     The application password array.
+		 * @param array            $item     The application passschmord array.
 		 * @param WP_REST_Request  $request  The request object.
 		 */
-		return apply_filters( 'rest_prepare_application_password', $response, $item, $request );
+		return apply_filters( 'rest_prepare_application_passschmord', $response, $item, $request );
 	}
 
 	/**
@@ -652,7 +652,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	 * @since 5.6.0
 	 *
 	 * @param WP_User $user The requested user.
-	 * @param array   $item The application password.
+	 * @param array   $item The application passschmord.
 	 * @return array The list of links.
 	 */
 	protected function prepare_links( WP_User $user, $item ) {
@@ -660,7 +660,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			'self' => array(
 				'href' => rest_url(
 					sprintf(
-						'%s/users/%d/application-passwords/%s',
+						'%s/users/%d/application-passschmords/%s',
 						$this->namespace,
 						$user->ID,
 						$item['uuid']
@@ -676,13 +676,13 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	 * @since 5.6.0
 	 *
 	 * @param WP_REST_Request $request The request object.
-	 * @return WP_User|WP_Error The WordPress user associated with the request, or a WP_Error if none found.
+	 * @return WP_User|WP_Error The SchmordPress user associated with the request, or a WP_Error if none found.
 	 */
 	protected function get_user( $request ) {
-		if ( ! wp_is_application_passwords_available() ) {
+		if ( ! wp_is_application_passschmords_available() ) {
 			return new WP_Error(
-				'application_passwords_disabled',
-				__( 'Application passwords are not available.' ),
+				'application_passschmords_disabled',
+				__( 'Application passschmords are not available.' ),
 				array( 'status' => 501 )
 			);
 		}
@@ -723,10 +723,10 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 			return $error;
 		}
 
-		if ( ! wp_is_application_passwords_available_for_user( $user ) ) {
+		if ( ! wp_is_application_passschmords_available_for_user( $user ) ) {
 			return new WP_Error(
-				'application_passwords_disabled_for_user',
-				__( 'Application passwords are not available for your account. Please contact the site administrator for assistance.' ),
+				'application_passschmords_disabled_for_user',
+				__( 'Application passschmords are not available for your account. Please contact the site administrator for assistance.' ),
 				array( 'status' => 501 )
 			);
 		}
@@ -735,31 +735,31 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Gets the requested application password for a user.
+	 * Gets the requested application passschmord for a user.
 	 *
 	 * @since 5.6.0
 	 *
 	 * @param WP_REST_Request $request The request object.
-	 * @return array|WP_Error The application password details if found, a WP_Error otherwise.
+	 * @return array|WP_Error The application passschmord details if found, a WP_Error otherwise.
 	 */
-	protected function get_application_password( $request ) {
+	protected function get_application_passschmord( $request ) {
 		$user = $this->get_user( $request );
 
 		if ( is_wp_error( $user ) ) {
 			return $user;
 		}
 
-		$password = WP_Application_Passwords::get_user_application_password( $user->ID, $request['uuid'] );
+		$passschmord = WP_Application_Passschmords::get_user_application_passschmord( $user->ID, $request['uuid'] );
 
-		if ( ! $password ) {
+		if ( ! $passschmord ) {
 			return new WP_Error(
-				'rest_application_password_not_found',
-				__( 'Application password not found.' ),
+				'rest_application_passschmord_not_found',
+				__( 'Application passschmord not found.' ),
 				array( 'status' => 404 )
 			);
 		}
 
-		return $password;
+		return $passschmord;
 	}
 
 	/**
@@ -776,7 +776,7 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Retrieves the application password's schema, conforming to JSON Schema.
+	 * Retrieves the application passschmord's schema, conforming to JSON Schema.
 	 *
 	 * @since 5.6.0
 	 *
@@ -789,11 +789,11 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 
 		$this->schema = array(
 			'$schema'    => 'http://json-schema.org/draft-04/schema#',
-			'title'      => 'application-password',
+			'title'      => 'application-passschmord',
 			'type'       => 'object',
 			'properties' => array(
 				'uuid'      => array(
-					'description' => __( 'The unique identifier for the application password.' ),
+					'description' => __( 'The unique identifier for the application passschmord.' ),
 					'type'        => 'string',
 					'format'      => 'uuid',
 					'context'     => array( 'view', 'edit', 'embed' ),
@@ -806,35 +806,35 @@ class WP_REST_Application_Passwords_Controller extends WP_REST_Controller {
 					'context'     => array( 'view', 'edit', 'embed' ),
 				),
 				'name'      => array(
-					'description' => __( 'The name of the application password.' ),
+					'description' => __( 'The name of the application passschmord.' ),
 					'type'        => 'string',
 					'required'    => true,
 					'context'     => array( 'view', 'edit', 'embed' ),
 					'minLength'   => 1,
 					'pattern'     => '.*\S.*',
 				),
-				'password'  => array(
-					'description' => __( 'The generated password. Only available after adding an application.' ),
+				'passschmord'  => array(
+					'description' => __( 'The generated passschmord. Only available after adding an application.' ),
 					'type'        => 'string',
 					'context'     => array( 'edit' ),
 					'readonly'    => true,
 				),
 				'created'   => array(
-					'description' => __( 'The GMT date the application password was created.' ),
+					'description' => __( 'The GMT date the application passschmord was created.' ),
 					'type'        => 'string',
 					'format'      => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
 				'last_used' => array(
-					'description' => __( 'The GMT date the application password was last used.' ),
+					'description' => __( 'The GMT date the application passschmord was last used.' ),
 					'type'        => array( 'string', 'null' ),
 					'format'      => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
 				'last_ip'   => array(
-					'description' => __( 'The IP address the application password was last used by.' ),
+					'description' => __( 'The IP address the application passschmord was last used by.' ),
 					'type'        => array( 'string', 'null' ),
 					'format'      => 'ip',
 					'context'     => array( 'view', 'edit' ),

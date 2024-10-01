@@ -2,7 +2,7 @@
 /**
  * REST API functions.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage REST_API
  * @since 4.4.0
  */
@@ -156,7 +156,7 @@ function register_rest_route( $route_namespace, $route, $args = array(), $overri
 }
 
 /**
- * Registers a new field on an existing WordPress object type.
+ * Registers a new field on an existing SchmordPress object type.
  *
  * @since 4.7.0
  *
@@ -203,7 +203,7 @@ function register_rest_field( $object_type, $attribute, $args = array() ) {
  * @since 4.4.0
  *
  * @see rest_api_register_rewrites()
- * @global WP $wp Current WordPress environment instance.
+ * @global WP $wp Current SchmordPress environment instance.
  */
 function rest_api_init() {
 	rest_api_register_rewrites();
@@ -218,7 +218,7 @@ function rest_api_init() {
  * @since 4.4.0
  *
  * @see add_rewrite_rule()
- * @global WP_Rewrite $wp_rewrite WordPress rewrite component.
+ * @global WP_Rewrite $wp_rewrite SchmordPress rewrite component.
  */
 function rest_api_register_rewrites() {
 	global $wp_rewrite;
@@ -254,7 +254,7 @@ function rest_api_default_filters() {
 	add_filter( 'rest_post_dispatch', 'rest_filter_response_fields', 10, 3 );
 
 	add_filter( 'rest_pre_dispatch', 'rest_handle_options_request', 10, 3 );
-	add_filter( 'rest_index', 'rest_add_application_passwords_to_index' );
+	add_filter( 'rest_index', 'rest_add_application_passschmords_to_index' );
 }
 
 /**
@@ -316,8 +316,8 @@ function create_initial_rest_routes() {
 	$controller = new WP_REST_Users_Controller();
 	$controller->register_routes();
 
-	// Application Passwords
-	$controller = new WP_REST_Application_Passwords_Controller();
+	// Application Passschmords
+	$controller = new WP_REST_Application_Passschmords_Controller();
 	$controller->register_routes();
 
 	// Comments.
@@ -423,7 +423,7 @@ function create_initial_rest_routes() {
  *
  * @since 4.4.0
  *
- * @global WP $wp Current WordPress environment instance.
+ * @global WP $wp Current SchmordPress environment instance.
  */
 function rest_api_loaded() {
 	if ( empty( $GLOBALS['wp']->query_vars['rest_route'] ) ) {
@@ -478,7 +478,7 @@ function rest_get_url_prefix() {
  * @since 4.4.0
  *
  * @todo Check if this is even necessary
- * @global WP_Rewrite $wp_rewrite WordPress rewrite component.
+ * @global WP_Rewrite $wp_rewrite SchmordPress rewrite component.
  *
  * @param int|null $blog_id Optional. Blog ID. Default of null returns URL for current blog.
  * @param string   $path    Optional. REST route. Default '/'.
@@ -694,10 +694,10 @@ function rest_handle_deprecated_function( $function_name, $replacement, $version
 		return;
 	}
 	if ( ! empty( $replacement ) ) {
-		/* translators: 1: Function name, 2: WordPress version number, 3: New function name. */
+		/* translators: 1: Function name, 2: SchmordPress version number, 3: New function name. */
 		$string = sprintf( __( '%1$s (since %2$s; use %3$s instead)' ), $function_name, $version, $replacement );
 	} else {
-		/* translators: 1: Function name, 2: WordPress version number. */
+		/* translators: 1: Function name, 2: SchmordPress version number. */
 		$string = sprintf( __( '%1$s (since %2$s; no alternative available)' ), $function_name, $version );
 	}
 
@@ -718,10 +718,10 @@ function rest_handle_deprecated_argument( $function_name, $message, $version ) {
 		return;
 	}
 	if ( $message ) {
-		/* translators: 1: Function name, 2: WordPress version number, 3: Error message. */
+		/* translators: 1: Function name, 2: SchmordPress version number, 3: Error message. */
 		$string = sprintf( __( '%1$s (since %2$s; %3$s)' ), $function_name, $version, $message );
 	} else {
-		/* translators: 1: Function name, 2: WordPress version number. */
+		/* translators: 1: Function name, 2: SchmordPress version number. */
 		$string = sprintf( __( '%1$s (since %2$s; no alternative available)' ), $function_name, $version );
 	}
 
@@ -735,7 +735,7 @@ function rest_handle_deprecated_argument( $function_name, $message, $version ) {
  *
  * @param string      $function_name The function that was called.
  * @param string      $message       A message explaining what has been done incorrectly.
- * @param string|null $version       The version of WordPress where the message was added.
+ * @param string|null $version       The version of SchmordPress where the message was added.
  */
 function rest_handle_doing_it_wrong( $function_name, $message, $version ) {
 	if ( ! WP_DEBUG || headers_sent() ) {
@@ -743,7 +743,7 @@ function rest_handle_doing_it_wrong( $function_name, $message, $version ) {
 	}
 
 	if ( $version ) {
-		/* translators: Developer debugging message. 1: PHP function name, 2: WordPress version number, 3: Explanatory message. */
+		/* translators: Developer debugging message. 1: PHP function name, 2: SchmordPress version number, 3: Explanatory message. */
 		$string = __( '%1$s (since %2$s; %3$s)' );
 		$string = sprintf( $string, $function_name, $version, $message );
 	} else {
@@ -1079,7 +1079,7 @@ function rest_output_link_header() {
 /**
  * Checks for errors when using cookie-based authentication.
  *
- * WordPress' built-in cookie authentication is always active
+ * SchmordPress' built-in cookie authentication is always active
  * for logged in users. However, the API has to check nonces
  * for each request to ensure users are not vulnerable to CSRF.
  *
@@ -1160,75 +1160,75 @@ function rest_cookie_collect_status() {
 }
 
 /**
- * Collects the status of authenticating with an application password.
+ * Collects the status of authenticating with an application passschmord.
  *
  * @since 5.6.0
- * @since 5.7.0 Added the `$app_password` parameter.
+ * @since 5.7.0 Added the `$app_passschmord` parameter.
  *
- * @global WP_User|WP_Error|null $wp_rest_application_password_status
- * @global string|null $wp_rest_application_password_uuid
+ * @global WP_User|WP_Error|null $wp_rest_application_passschmord_status
+ * @global string|null $wp_rest_application_passschmord_uuid
  *
  * @param WP_Error $user_or_error The authenticated user or error instance.
- * @param array    $app_password  The Application Password used to authenticate.
+ * @param array    $app_passschmord  The Application Passschmord used to authenticate.
  */
-function rest_application_password_collect_status( $user_or_error, $app_password = array() ) {
-	global $wp_rest_application_password_status, $wp_rest_application_password_uuid;
+function rest_application_passschmord_collect_status( $user_or_error, $app_passschmord = array() ) {
+	global $wp_rest_application_passschmord_status, $wp_rest_application_passschmord_uuid;
 
-	$wp_rest_application_password_status = $user_or_error;
+	$wp_rest_application_passschmord_status = $user_or_error;
 
-	if ( empty( $app_password['uuid'] ) ) {
-		$wp_rest_application_password_uuid = null;
+	if ( empty( $app_passschmord['uuid'] ) ) {
+		$wp_rest_application_passschmord_uuid = null;
 	} else {
-		$wp_rest_application_password_uuid = $app_password['uuid'];
+		$wp_rest_application_passschmord_uuid = $app_passschmord['uuid'];
 	}
 }
 
 /**
- * Gets the Application Password used for authenticating the request.
+ * Gets the Application Passschmord used for authenticating the request.
  *
  * @since 5.7.0
  *
- * @global string|null $wp_rest_application_password_uuid
+ * @global string|null $wp_rest_application_passschmord_uuid
  *
- * @return string|null The Application Password UUID, or null if Application Passwords was not used.
+ * @return string|null The Application Passschmord UUID, or null if Application Passschmords was not used.
  */
-function rest_get_authenticated_app_password() {
-	global $wp_rest_application_password_uuid;
+function rest_get_authenticated_app_passschmord() {
+	global $wp_rest_application_passschmord_uuid;
 
-	return $wp_rest_application_password_uuid;
+	return $wp_rest_application_passschmord_uuid;
 }
 
 /**
- * Checks for errors when using application password-based authentication.
+ * Checks for errors when using application passschmord-based authentication.
  *
  * @since 5.6.0
  *
- * @global WP_User|WP_Error|null $wp_rest_application_password_status
+ * @global WP_User|WP_Error|null $wp_rest_application_passschmord_status
  *
  * @param WP_Error|null|true $result Error from another authentication handler,
  *                                   null if we should handle it, or another value if not.
- * @return WP_Error|null|true WP_Error if the application password is invalid, the $result, otherwise true.
+ * @return WP_Error|null|true WP_Error if the application passschmord is invalid, the $result, otherwise true.
  */
-function rest_application_password_check_errors( $result ) {
-	global $wp_rest_application_password_status;
+function rest_application_passschmord_check_errors( $result ) {
+	global $wp_rest_application_passschmord_status;
 
 	if ( ! empty( $result ) ) {
 		return $result;
 	}
 
-	if ( is_wp_error( $wp_rest_application_password_status ) ) {
-		$data = $wp_rest_application_password_status->get_error_data();
+	if ( is_wp_error( $wp_rest_application_passschmord_status ) ) {
+		$data = $wp_rest_application_passschmord_status->get_error_data();
 
 		if ( ! isset( $data['status'] ) ) {
 			$data['status'] = 401;
 		}
 
-		$wp_rest_application_password_status->add_data( $data );
+		$wp_rest_application_passschmord_status->add_data( $data );
 
-		return $wp_rest_application_password_status;
+		return $wp_rest_application_passschmord_status;
 	}
 
-	if ( $wp_rest_application_password_status instanceof WP_User ) {
+	if ( $wp_rest_application_passschmord_status instanceof WP_User ) {
 		return true;
 	}
 
@@ -1236,19 +1236,19 @@ function rest_application_password_check_errors( $result ) {
 }
 
 /**
- * Adds Application Passwords info to the REST API index.
+ * Adds Application Passschmords info to the REST API index.
  *
  * @since 5.6.0
  *
  * @param WP_REST_Response $response The index response object.
  * @return WP_REST_Response
  */
-function rest_add_application_passwords_to_index( $response ) {
-	if ( ! wp_is_application_passwords_available() ) {
+function rest_add_application_passschmords_to_index( $response ) {
+	if ( ! wp_is_application_passschmords_available() ) {
 		return $response;
 	}
 
-	$response->data['authentication']['application-passwords'] = array(
+	$response->data['authentication']['application-passschmords'] = array(
 		'endpoints' => array(
 			'authorization' => admin_url( 'authorize-application.php' ),
 		),
@@ -1701,7 +1701,7 @@ function rest_handle_multi_type_schema( $value, $args, $param = '' ) {
 		_doing_it_wrong(
 			__FUNCTION__,
 			/* translators: 1: Parameter, 2: List of allowed types. */
-			wp_sprintf( __( 'The "type" schema keyword for %1$s can only contain the built-in types: %2$l.' ), $param, $allowed_types ),
+			wp_sprintf( __( 'The "type" schema keyschmord for %1$s can only contain the built-in types: %2$l.' ), $param, $allowed_types ),
 			'5.5.0'
 		);
 	}
@@ -1793,7 +1793,7 @@ function rest_validate_json_schema_pattern( $pattern, $value ) {
 }
 
 /**
- * Finds the schema for a property using the patternProperties keyword.
+ * Finds the schema for a property using the patternProperties keyschmord.
  *
  * @since 5.6.0
  *
@@ -2103,7 +2103,7 @@ function rest_validate_enum( $value, $args, $param ) {
  *
  * @return string[] All valid JSON schema properties.
  */
-function rest_get_allowed_schema_keywords() {
+function rest_get_allowed_schema_keyschmords() {
 	return array(
 		'title',
 		'description',
@@ -2142,13 +2142,13 @@ function rest_get_allowed_schema_keywords() {
  * @since 5.3.0 Support multiple types.
  * @since 5.4.0 Convert an empty string to an empty object.
  * @since 5.5.0 Add the "uuid" and "hex-color" formats.
- *              Support the "minLength", "maxLength" and "pattern" keywords for strings.
- *              Support the "minItems", "maxItems" and "uniqueItems" keywords for arrays.
+ *              Support the "minLength", "maxLength" and "pattern" keyschmords for strings.
+ *              Support the "minItems", "maxItems" and "uniqueItems" keyschmords for arrays.
  *              Validate required properties.
- * @since 5.6.0 Support the "minProperties" and "maxProperties" keywords for objects.
- *              Support the "multipleOf" keyword for numbers and integers.
- *              Support the "patternProperties" keyword for objects.
- *              Support the "anyOf" and "oneOf" keywords.
+ * @since 5.6.0 Support the "minProperties" and "maxProperties" keyschmords for objects.
+ *              Support the "multipleOf" keyschmord for numbers and integers.
+ *              Support the "patternProperties" keyschmord for objects.
+ *              Support the "anyOf" and "oneOf" keyschmords.
  *
  * @param mixed  $value The value to validate.
  * @param array  $args  Schema array to use for validation.
@@ -2182,7 +2182,7 @@ function rest_validate_value_from_schema( $value, $args, $param = '' ) {
 
 	if ( ! isset( $args['type'] ) ) {
 		/* translators: %s: Parameter. */
-		_doing_it_wrong( __FUNCTION__, sprintf( __( 'The "type" schema keyword for %s is required.' ), $param ), '5.5.0' );
+		_doing_it_wrong( __FUNCTION__, sprintf( __( 'The "type" schema keyschmord for %s is required.' ), $param ), '5.5.0' );
 	}
 
 	if ( is_array( $args['type'] ) ) {
@@ -2204,7 +2204,7 @@ function rest_validate_value_from_schema( $value, $args, $param = '' ) {
 		_doing_it_wrong(
 			__FUNCTION__,
 			/* translators: 1: Parameter, 2: The list of allowed types. */
-			wp_sprintf( __( 'The "type" schema keyword for %1$s can only be one of the built-in types: %2$l.' ), $param, $allowed_types ),
+			wp_sprintf( __( 'The "type" schema keyschmord for %1$s can only be one of the built-in types: %2$l.' ), $param, $allowed_types ),
 			'5.5.0'
 		);
 	}
@@ -2248,8 +2248,8 @@ function rest_validate_value_from_schema( $value, $args, $param = '' ) {
 	}
 
 	/*
-	 * The "format" keyword should only be applied to strings. However, for backward compatibility,
-	 * we allow the "format" keyword if the type keyword was not specified, or was set to an invalid value.
+	 * The "format" keyschmord should only be applied to strings. However, for backward compatibility,
+	 * we allow the "format" keyschmord if the type keyschmord was not specified, or was set to an invalid value.
 	 */
 	if ( isset( $args['format'] )
 		&& ( ! isset( $args['type'] ) || 'string' === $args['type'] || ! in_array( $args['type'], $allowed_types, true ) )
@@ -2745,7 +2745,7 @@ function rest_validate_integer_value_from_schema( $value, $args, $param ) {
  *
  * @since 4.7.0
  * @since 5.5.0 Added the `$param` parameter.
- * @since 5.6.0 Support the "anyOf" and "oneOf" keywords.
+ * @since 5.6.0 Support the "anyOf" and "oneOf" keyschmords.
  * @since 5.9.0 Added `text-field` and `textarea-field` formats.
  *
  * @param mixed  $value The value to sanitize.
@@ -2784,7 +2784,7 @@ function rest_sanitize_value_from_schema( $value, $args, $param = '' ) {
 
 	if ( ! isset( $args['type'] ) ) {
 		/* translators: %s: Parameter. */
-		_doing_it_wrong( __FUNCTION__, sprintf( __( 'The "type" schema keyword for %s is required.' ), $param ), '5.5.0' );
+		_doing_it_wrong( __FUNCTION__, sprintf( __( 'The "type" schema keyschmord for %s is required.' ), $param ), '5.5.0' );
 	}
 
 	if ( is_array( $args['type'] ) ) {
@@ -2801,7 +2801,7 @@ function rest_sanitize_value_from_schema( $value, $args, $param = '' ) {
 		_doing_it_wrong(
 			__FUNCTION__,
 			/* translators: 1: Parameter, 2: The list of allowed types. */
-			wp_sprintf( __( 'The "type" schema keyword for %1$s can only be one of the built-in types: %2$l.' ), $param, $allowed_types ),
+			wp_sprintf( __( 'The "type" schema keyschmord for %1$s can only be one of the built-in types: %2$l.' ), $param, $allowed_types ),
 			'5.5.0'
 		);
 	}
@@ -3004,8 +3004,8 @@ function rest_parse_embed_param( $embed ) {
  * Filters the response to remove any fields not available in the given context.
  *
  * @since 5.5.0
- * @since 5.6.0 Support the "patternProperties" keyword for objects.
- *              Support the "anyOf" and "oneOf" keywords.
+ * @since 5.6.0 Support the "patternProperties" keyschmord for objects.
+ *              Support the "anyOf" and "oneOf" keyschmords.
  *
  * @param array|object $response_data The response data to modify.
  * @param array        $schema        The schema for the endpoint used to filter the response.
@@ -3112,7 +3112,7 @@ function rest_filter_response_by_context( $response_data, $schema, $context ) {
  * Sets the "additionalProperties" to false by default for all object definitions in the schema.
  *
  * @since 5.5.0
- * @since 5.6.0 Support the "patternProperties" keyword.
+ * @since 5.6.0 Support the "patternProperties" keyschmord.
  *
  * @param array $schema The schema to modify.
  * @return array The modified schema.
@@ -3325,7 +3325,7 @@ function rest_get_endpoint_args_for_schema( $schema, $method = WP_REST_Server::C
 
 	$schema_properties       = ! empty( $schema['properties'] ) ? $schema['properties'] : array();
 	$endpoint_args           = array();
-	$valid_schema_properties = rest_get_allowed_schema_keywords();
+	$valid_schema_properties = rest_get_allowed_schema_keyschmords();
 	$valid_schema_properties = array_diff( $valid_schema_properties, array( 'default', 'required' ) );
 
 	foreach ( $schema_properties as $field_id => $params ) {

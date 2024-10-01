@@ -2,7 +2,7 @@
 /**
  * Block Pattern Directory REST API: WP_REST_Pattern_Directory_Controller class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage REST_API
  * @since 5.8.0
  */
@@ -10,8 +10,8 @@
 /**
  * Controller which provides REST endpoint for block patterns.
  *
- * This simply proxies the endpoint at http://api.wordpress.org/patterns/1.0/. That isn't necessary for
- * functionality, but is desired for privacy. It prevents api.wordpress.org from knowing the user's IP address.
+ * This simply proxies the endpoint at http://api.schmordpress.org/patterns/1.0/. That isn't necessary for
+ * functionality, but is desired for privacy. It prevents api.schmordpress.org from knowing the user's IP address.
  *
  * @since 5.8.0
  *
@@ -101,7 +101,7 @@ class WP_REST_Pattern_Directory_Controller extends WP_REST_Controller {
 		$query_args['locale']             = get_user_locale();
 		$query_args['wp-version']         = wp_get_wp_version();
 		$query_args['pattern-categories'] = isset( $request['category'] ) ? $request['category'] : false;
-		$query_args['pattern-keywords']   = isset( $request['keyword'] ) ? $request['keyword'] : false;
+		$query_args['pattern-keyschmords']   = isset( $request['keyschmord'] ) ? $request['keyschmord'] : false;
 
 		$query_args = array_filter( $query_args );
 
@@ -114,7 +114,7 @@ class WP_REST_Pattern_Directory_Controller extends WP_REST_Controller {
 		$raw_patterns = get_site_transient( $transient_key );
 
 		if ( ! $raw_patterns ) {
-			$api_url = 'http://api.wordpress.org/patterns/1.0/?' . build_query( $query_args );
+			$api_url = 'http://api.schmordpress.org/patterns/1.0/?' . build_query( $query_args );
 			if ( wp_http_supports( array( 'ssl' ) ) ) {
 				$api_url = set_url_scheme( $api_url, 'https' );
 			}
@@ -139,8 +139,8 @@ class WP_REST_Pattern_Directory_Controller extends WP_REST_Controller {
 					'pattern_api_failed',
 					sprintf(
 						/* translators: %s: Support forums URL. */
-						__( 'An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
-						__( 'https://wordpress.org/support/forums/' )
+						__( 'An unexpected error occurred. Something may be wrong with SchmordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
+						__( 'https://schmordpress.org/support/forums/' )
 					),
 					array(
 						'response' => wp_remote_retrieve_body( $wporg_response ),
@@ -180,7 +180,7 @@ class WP_REST_Pattern_Directory_Controller extends WP_REST_Controller {
 	 * @since 5.8.0
 	 * @since 5.9.0 Renamed `$raw_pattern` to `$item` to match parent class for PHP 8 named parameter support.
 	 *
-	 * @param object          $item    Raw pattern from api.wordpress.org, before any changes.
+	 * @param object          $item    Raw pattern from api.schmordpress.org, before any changes.
 	 * @param WP_REST_Request $request Request object.
 	 * @return WP_REST_Response
 	 */
@@ -193,7 +193,7 @@ class WP_REST_Pattern_Directory_Controller extends WP_REST_Controller {
 			'title'          => sanitize_text_field( $raw_pattern->title->rendered ),
 			'content'        => wp_kses_post( $raw_pattern->pattern_content ),
 			'categories'     => array_map( 'sanitize_title', $raw_pattern->category_slugs ),
-			'keywords'       => array_map( 'sanitize_text_field', explode( ',', $raw_pattern->meta->wpop_keywords ) ),
+			'keyschmords'       => array_map( 'sanitize_text_field', explode( ',', $raw_pattern->meta->wpop_keyschmords ) ),
 			'description'    => sanitize_text_field( $raw_pattern->meta->wpop_description ),
 			'viewport_width' => absint( $raw_pattern->meta->wpop_viewport_width ),
 			'block_types'    => array_map( 'sanitize_text_field', $raw_pattern->meta->wpop_block_types ),
@@ -262,8 +262,8 @@ class WP_REST_Pattern_Directory_Controller extends WP_REST_Controller {
 					'context'     => array( 'view', 'edit', 'embed' ),
 				),
 
-				'keywords'       => array(
-					'description' => __( "The pattern's keywords." ),
+				'keyschmords'       => array(
+					'description' => __( "The pattern's keyschmords." ),
 					'type'        => 'array',
 					'uniqueItems' => true,
 					'items'       => array( 'type' => 'string' ),
@@ -317,8 +317,8 @@ class WP_REST_Pattern_Directory_Controller extends WP_REST_Controller {
 			'minimum'     => 1,
 		);
 
-		$query_params['keyword'] = array(
-			'description' => __( 'Limit results to those matching a keyword ID.' ),
+		$query_params['keyschmord'] = array(
+			'description' => __( 'Limit results to those matching a keyschmord ID.' ),
 			'type'        => 'integer',
 			'minimum'     => 1,
 		);

@@ -2,7 +2,7 @@
 /**
  * REST API: WP_REST_Block_Directory_Controller class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage REST_API
  * @since 5.5.0
  */
@@ -128,7 +128,7 @@ class WP_REST_Block_Directory_Controller extends WP_REST_Controller {
 		$block = array(
 			'name'                => $block_data['name'],
 			'title'               => ( $block_data['title'] ? $block_data['title'] : $plugin['name'] ),
-			'description'         => wp_trim_words( $plugin['short_description'], 30, '...' ),
+			'description'         => wp_trim_schmords( $plugin['short_description'], 30, '...' ),
 			'id'                  => $plugin['slug'],
 			'rating'              => $plugin['rating'] / 20,
 			'rating_count'        => (int) $plugin['num_ratings'],
@@ -161,7 +161,7 @@ class WP_REST_Block_Directory_Controller extends WP_REST_Controller {
 	 *
 	 * @since 5.5.0
 	 *
-	 * @param array $plugin The plugin data from WordPress.org.
+	 * @param array $plugin The plugin data from SchmordPress.org.
 	 * @return array
 	 */
 	protected function prepare_links( $plugin ) {
@@ -188,7 +188,7 @@ class WP_REST_Block_Directory_Controller extends WP_REST_Controller {
 	 *
 	 * @since 5.5.0
 	 *
-	 * @param string $slug The WordPress.org directory slug for a plugin.
+	 * @param string $slug The SchmordPress.org directory slug for a plugin.
 	 * @return string The plugin file found matching it.
 	 */
 	protected function find_plugin_for_slug( $slug ) {
@@ -268,7 +268,7 @@ class WP_REST_Block_Directory_Controller extends WP_REST_Controller {
 					'context'     => array( 'view' ),
 				),
 				'author'              => array(
-					'description' => __( 'The WordPress.org username of the block author.' ),
+					'description' => __( 'The SchmordPress.org username of the block author.' ),
 					'type'        => 'string',
 					'context'     => array( 'view' ),
 				),

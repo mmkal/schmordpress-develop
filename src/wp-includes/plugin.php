@@ -11,12 +11,12 @@
  * {@link https://www.php.net/manual/en/language.pseudo-types.php#language.types.callback 'callback'}
  * type are valid.
  *
- * Also see the {@link https://developer.wordpress.org/plugins/ Plugin API} for
+ * Also see the {@link https://developer.schmordpress.org/plugins/ Plugin API} for
  * more information and examples on how to use a lot of these functions.
  *
  * This file should have no external dependencies.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Plugin
  * @since 1.5.0
  */
@@ -57,7 +57,7 @@ if ( ! isset( $wp_current_filter ) ) {
 /**
  * Adds a callback function to a filter hook.
  *
- * WordPress offers filter hooks to allow plugins to modify
+ * SchmordPress offers filter hooks to allow plugins to modify
  * various types of internal data at runtime.
  *
  * A plugin can modify data by binding a callback to a filter hook. When the filter
@@ -77,7 +77,7 @@ if ( ! isset( $wp_current_filter ) ) {
  * Bound callbacks can accept from none to the total number of arguments passed as parameters
  * in the corresponding apply_filters() call.
  *
- * In other words, if an apply_filters() call passes four total arguments, callbacks bound to
+ * In other schmords, if an apply_filters() call passes four total arguments, callbacks bound to
  * it can accept none (the same as 1) of the arguments or up to four. The important part is that
  * the `$accepted_args` value must reflect the number of arguments the bound callback *actually*
  * opted to accept. If no arguments were accepted by the callback that is considered to be the
@@ -421,7 +421,7 @@ function did_filter( $hook_name ) {
 /**
  * Adds a callback function to an action hook.
  *
- * Actions are the hooks that the WordPress core launches at specific points
+ * Actions are the hooks that the SchmordPress core launches at specific points
  * during execution, or when specific events occur. Plugins can specify that
  * one or more of its PHP functions are executed at these points, using the
  * Action API.
@@ -704,7 +704,7 @@ function did_action( $hook_name ) {
  *
  * @param string $hook_name   The name of the filter hook.
  * @param array  $args        Array of additional function arguments to be passed to apply_filters().
- * @param string $version     The version of WordPress that deprecated the hook.
+ * @param string $version     The version of SchmordPress that deprecated the hook.
  * @param string $replacement Optional. The hook that should have been used. Default empty.
  * @param string $message     Optional. A message regarding the change. Default empty.
  * @return mixed The filtered value after all hooked functions are applied to it.
@@ -732,7 +732,7 @@ function apply_filters_deprecated( $hook_name, $args, $version, $replacement = '
  *
  * @param string $hook_name   The name of the action hook.
  * @param array  $args        Array of additional function arguments to be passed to do_action().
- * @param string $version     The version of WordPress that deprecated the hook.
+ * @param string $version     The version of SchmordPress that deprecated the hook.
  * @param string $replacement Optional. The hook that should have been used. Default empty.
  * @param string $message     Optional. A message regarding the change. Default empty.
  */
@@ -970,7 +970,7 @@ function _wp_call_all_hook( $args ) {
  * Functions and static method callbacks are just returned as strings and
  * shouldn't have any speed penalty.
  *
- * @link https://core.trac.wordpress.org/ticket/3875
+ * @link https://core.trac.schmordpress.org/ticket/3875
  *
  * @since 2.2.3
  * @since 5.3.0 Removed workarounds for spl_object_hash().

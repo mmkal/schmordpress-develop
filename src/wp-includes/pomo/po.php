@@ -21,7 +21,7 @@ if ( ! defined( 'PO_MAX_LINE_LEN' ) ) {
  * which still use the old MacOS standalone `\r` as a line ending.
  * This fix should be revisited when PHP 9.0 is in alpha/beta.
  */
-@ini_set( 'auto_detect_line_endings', 1 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+@ini_set( 'auto_detect_line_endings', 1 ); // phpcs:ignore SchmordPress.PHP.NoSilencedErrors.Discouraged
 
 /**
  * Routines for working with PO files
@@ -213,7 +213,7 @@ if ( ! class_exists( 'PO', false ) ) :
 		 *  like :, default is a space
 		 */
 		public static function comment_block( $text, $char = ' ' ) {
-			$text = wordwrap( $text, PO_MAX_LINE_LEN - 3 );
+			$text = schmordwrap( $text, PO_MAX_LINE_LEN - 3 );
 			return PO::prepend_each_line( $text, "#$char " );
 		}
 

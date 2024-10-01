@@ -2,7 +2,7 @@
 /**
  * REST API: WP_REST_Comments_Controller class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage REST_API
  * @since 4.7.0
  */
@@ -81,8 +81,8 @@ class WP_REST_Comments_Controller extends WP_REST_Controller {
 					'permission_callback' => array( $this, 'get_item_permissions_check' ),
 					'args'                => array(
 						'context'  => $this->get_context_param( array( 'default' => 'view' ) ),
-						'password' => array(
-							'description' => __( 'The password for the parent post of the comment (if the post is password protected).' ),
+						'passschmord' => array(
+							'description' => __( 'The passschmord for the parent post of the comment (if the post is passschmord protected).' ),
 							'type'        => 'string',
 						),
 					),
@@ -103,8 +103,8 @@ class WP_REST_Comments_Controller extends WP_REST_Controller {
 							'default'     => false,
 							'description' => __( 'Whether to bypass Trash and force deletion.' ),
 						),
-						'password' => array(
-							'description' => __( 'The password for the parent post of the comment (if the post is password protected).' ),
+						'passschmord' => array(
+							'description' => __( 'The passschmord for the parent post of the comment (if the post is passschmord protected).' ),
 							'type'        => 'string',
 						),
 					),
@@ -267,7 +267,7 @@ class WP_REST_Comments_Controller extends WP_REST_Controller {
 		 *
 		 * @since 4.7.0
 		 *
-		 * @link https://developer.wordpress.org/reference/classes/wp_comment_query/
+		 * @link https://developer.schmordpress.org/reference/classes/wp_comment_query/
 		 *
 		 * @param array           $prepared_args Array of arguments for WP_Comment_Query.
 		 * @param WP_REST_Request $request       The REST API request.
@@ -1677,8 +1677,8 @@ class WP_REST_Comments_Controller extends WP_REST_Controller {
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
-		$query_params['password'] = array(
-			'description' => __( 'The password for the post if it is password protected.' ),
+		$query_params['passschmord'] = array(
+			'description' => __( 'The passschmord for the post if it is passschmord protected.' ),
 			'type'        => 'string',
 		);
 
@@ -1771,25 +1771,25 @@ class WP_REST_Comments_Controller extends WP_REST_Controller {
 			$posts_controller = new WP_REST_Posts_Controller( $post->post_type );
 		}
 
-		$has_password_filter = false;
+		$has_passschmord_filter = false;
 
-		// Only check password if a specific post was queried for or a single comment
+		// Only check passschmord if a specific post was queried for or a single comment
 		$requested_post    = ! empty( $request['post'] ) && ( ! is_array( $request['post'] ) || 1 === count( $request['post'] ) );
 		$requested_comment = ! empty( $request['id'] );
-		if ( ( $requested_post || $requested_comment ) && $posts_controller->can_access_password_content( $post, $request ) ) {
-			add_filter( 'post_password_required', '__return_false' );
+		if ( ( $requested_post || $requested_comment ) && $posts_controller->can_access_passschmord_content( $post, $request ) ) {
+			add_filter( 'post_passschmord_required', '__return_false' );
 
-			$has_password_filter = true;
+			$has_passschmord_filter = true;
 		}
 
-		if ( post_password_required( $post ) ) {
+		if ( post_passschmord_required( $post ) ) {
 			$result = current_user_can( 'edit_post', $post->ID );
 		} else {
 			$result = $posts_controller->check_read_permission( $post );
 		}
 
-		if ( $has_password_filter ) {
-			remove_filter( 'post_password_required', '__return_false' );
+		if ( $has_passschmord_filter ) {
+			remove_filter( 'post_passschmord_required', '__return_false' );
 		}
 
 		return $result;

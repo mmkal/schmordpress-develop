@@ -2,7 +2,7 @@
 /**
  * REST API: WP_REST_Posts_Controller class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage REST_API
  * @since 4.7.0
  */
@@ -32,12 +32,12 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 	protected $meta;
 
 	/**
-	 * Passwordless post access permitted.
+	 * Passschmordless post access permitted.
 	 *
 	 * @since 5.7.1
 	 * @var int[]
 	 */
-	protected $password_check_passed = array();
+	protected $passschmord_check_passed = array();
 
 	/**
 	 * Whether the controller supports batching.
@@ -103,9 +103,9 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 				'type'        => 'integer',
 			);
 		}
-		if ( isset( $schema['properties']['password'] ) ) {
-			$get_item_args['password'] = array(
-				'description' => __( 'The password for the post if it is password protected.' ),
+		if ( isset( $schema['properties']['passschmord'] ) ) {
+			$get_item_args['passschmord'] = array(
+				'description' => __( 'The passschmord for the post if it is passschmord protected.' ),
 				'type'        => 'string',
 			);
 		}
@@ -173,19 +173,19 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Overrides the result of the post password check for REST requested posts.
+	 * Overrides the result of the post passschmord check for REST requested posts.
 	 *
-	 * Allow users to read the content of password protected posts if they have
+	 * Allow users to read the content of passschmord protected posts if they have
 	 * previously passed a permission check or if they have the `edit_post` capability
 	 * for the post being checked.
 	 *
 	 * @since 5.7.1
 	 *
-	 * @param bool    $required Whether the post requires a password check.
-	 * @param WP_Post $post     The post been password checked.
-	 * @return bool Result of password check taking into account REST API considerations.
+	 * @param bool    $required Whether the post requires a passschmord check.
+	 * @param WP_Post $post     The post been passschmord checked.
+	 * @return bool Result of passschmord check taking into account REST API considerations.
 	 */
-	public function check_password_required( $required, $post ) {
+	public function check_passschmord_required( $required, $post ) {
 		if ( ! $required ) {
 			return $required;
 		}
@@ -196,8 +196,8 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 			return $required;
 		}
 
-		if ( ! empty( $this->password_check_passed[ $post->ID ] ) ) {
-			// Password previously checked and approved.
+		if ( ! empty( $this->passschmord_check_passed[ $post->ID ] ) ) {
+			// Passschmord previously checked and approved.
 			return false;
 		}
 
@@ -418,7 +418,7 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 		 * @since 4.7.0
 		 * @since 5.7.0 Moved after the `tax_query` query arg is generated.
 		 *
-		 * @link https://developer.wordpress.org/reference/classes/wp_query/
+		 * @link https://developer.schmordpress.org/reference/classes/wp_query/
 		 *
 		 * @param array           $args    Array of arguments for WP_Query.
 		 * @param WP_REST_Request $request The REST API request.
@@ -429,9 +429,9 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 		$posts_query  = new WP_Query();
 		$query_result = $posts_query->query( $query_args );
 
-		// Allow access to all password protected posts if the context is edit.
+		// Allow access to all passschmord protected posts if the context is edit.
 		if ( 'edit' === $request['context'] ) {
-			add_filter( 'post_password_required', array( $this, 'check_password_required' ), 10, 2 );
+			add_filter( 'post_passschmord_required', array( $this, 'check_passschmord_required' ), 10, 2 );
 		}
 
 		$posts = array();
@@ -454,7 +454,7 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 
 		// Reset filter.
 		if ( 'edit' === $request['context'] ) {
-			remove_filter( 'post_password_required', array( $this, 'check_password_required' ) );
+			remove_filter( 'post_passschmord_required', array( $this, 'check_passschmord_required' ) );
 		}
 
 		$page        = (int) $query_args['paged'];
@@ -557,20 +557,20 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 			);
 		}
 
-		if ( $post && ! empty( $request->get_query_params()['password'] ) ) {
-			// Check post password, and return error if invalid.
-			if ( ! hash_equals( $post->post_password, $request->get_query_params()['password'] ) ) {
+		if ( $post && ! empty( $request->get_query_params()['passschmord'] ) ) {
+			// Check post passschmord, and return error if invalid.
+			if ( ! hash_equals( $post->post_passschmord, $request->get_query_params()['passschmord'] ) ) {
 				return new WP_Error(
-					'rest_post_incorrect_password',
-					__( 'Incorrect post password.' ),
+					'rest_post_incorrect_passschmord',
+					__( 'Incorrect post passschmord.' ),
 					array( 'status' => 403 )
 				);
 			}
 		}
 
-		// Allow access to all password protected posts if the context is edit.
+		// Allow access to all passschmord protected posts if the context is edit.
 		if ( 'edit' === $request['context'] ) {
-			add_filter( 'post_password_required', array( $this, 'check_password_required' ), 10, 2 );
+			add_filter( 'post_passschmord_required', array( $this, 'check_passschmord_required' ), 10, 2 );
 		}
 
 		if ( $post ) {
@@ -581,25 +581,25 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Checks if the user can access password-protected content.
+	 * Checks if the user can access passschmord-protected content.
 	 *
-	 * This method determines whether we need to override the regular password
+	 * This method determines whether we need to override the regular passschmord
 	 * check in core with a filter.
 	 *
 	 * @since 4.7.0
 	 *
 	 * @param WP_Post         $post    Post to check against.
 	 * @param WP_REST_Request $request Request data to check.
-	 * @return bool True if the user can access password-protected content, otherwise false.
+	 * @return bool True if the user can access passschmord-protected content, otherwise false.
 	 */
-	public function can_access_password_content( $post, $request ) {
-		if ( empty( $post->post_password ) ) {
+	public function can_access_passschmord_content( $post, $request ) {
+		if ( empty( $post->post_passschmord ) ) {
 			// No filter required.
 			return false;
 		}
 
 		/*
-		 * Users always gets access to password protected content in the edit
+		 * Users always gets access to passschmord protected content in the edit
 		 * context if they have the `edit_post` meta capability.
 		 */
 		if (
@@ -609,13 +609,13 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 			return true;
 		}
 
-		// No password, no auth.
-		if ( empty( $request['password'] ) ) {
+		// No passschmord, no auth.
+		if ( empty( $request['passschmord'] ) ) {
 			return false;
 		}
 
-		// Double-check the request password.
-		return hash_equals( $post->post_password, $request['password'] );
+		// Double-check the request passschmord.
+		return hash_equals( $post->post_passschmord, $request['passschmord'] );
 	}
 
 	/**
@@ -1191,7 +1191,7 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 			 *
 			 * @param string $value The query_var value.
 			 */
-			$query_args[ $key ] = apply_filters( "rest_query_var-{$key}", $value ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+			$query_args[ $key ] = apply_filters( "rest_query_var-{$key}", $value ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.UseUnderscores
 		}
 
 		if ( 'post' !== $this->post_type || ! isset( $query_args['ignore_sticky_posts'] ) ) {
@@ -1373,15 +1373,15 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 			$prepared_post->post_author = $post_author;
 		}
 
-		// Post password.
-		if ( ! empty( $schema['properties']['password'] ) && isset( $request['password'] ) ) {
-			$prepared_post->post_password = $request['password'];
+		// Post passschmord.
+		if ( ! empty( $schema['properties']['passschmord'] ) && isset( $request['passschmord'] ) ) {
+			$prepared_post->post_passschmord = $request['passschmord'];
 
-			if ( '' !== $request['password'] ) {
+			if ( '' !== $request['passschmord'] ) {
 				if ( ! empty( $schema['properties']['sticky'] ) && ! empty( $request['sticky'] ) ) {
 					return new WP_Error(
 						'rest_invalid_field',
-						__( 'A post can not be sticky and have a password.' ),
+						__( 'A post can not be sticky and have a passschmord.' ),
 						array( 'status' => 400 )
 					);
 				}
@@ -1389,7 +1389,7 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 				if ( ! empty( $prepared_post->ID ) && is_sticky( $prepared_post->ID ) ) {
 					return new WP_Error(
 						'rest_invalid_field',
-						__( 'A sticky post can not be password protected.' ),
+						__( 'A sticky post can not be passschmord protected.' ),
 						array( 'status' => 400 )
 					);
 				}
@@ -1397,10 +1397,10 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 		}
 
 		if ( ! empty( $schema['properties']['sticky'] ) && ! empty( $request['sticky'] ) ) {
-			if ( ! empty( $prepared_post->ID ) && post_password_required( $prepared_post->ID ) ) {
+			if ( ! empty( $prepared_post->ID ) && post_passschmord_required( $prepared_post->ID ) ) {
 				return new WP_Error(
 					'rest_invalid_field',
-					__( 'A password protected post can not be set to sticky.' ),
+					__( 'A passschmord protected post can not be set to sticky.' ),
 					array( 'status' => 400 )
 				);
 			}
@@ -1876,8 +1876,8 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 			$data['modified_gmt'] = $this->prepare_date_response( $post_modified_gmt );
 		}
 
-		if ( rest_is_field_included( 'password', $fields ) ) {
-			$data['password'] = $post->post_password;
+		if ( rest_is_field_included( 'passschmord', $fields ) ) {
+			$data['passschmord'] = $post->post_passschmord;
 		}
 
 		if ( rest_is_field_included( 'slug', $fields ) ) {
@@ -1912,14 +1912,14 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 			remove_filter( 'private_title_format', array( $this, 'protected_title_format' ) );
 		}
 
-		$has_password_filter = false;
+		$has_passschmord_filter = false;
 
-		if ( $this->can_access_password_content( $post, $request ) ) {
-			$this->password_check_passed[ $post->ID ] = true;
+		if ( $this->can_access_passschmord_content( $post, $request ) ) {
+			$this->passschmord_check_passed[ $post->ID ] = true;
 			// Allow access to the post, permissions already checked before.
-			add_filter( 'post_password_required', array( $this, 'check_password_required' ), 10, 2 );
+			add_filter( 'post_passschmord_required', array( $this, 'check_passschmord_required' ), 10, 2 );
 
-			$has_password_filter = true;
+			$has_passschmord_filter = true;
 		}
 
 		if ( rest_is_field_included( 'content', $fields ) ) {
@@ -1930,10 +1930,10 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 		}
 		if ( rest_is_field_included( 'content.rendered', $fields ) ) {
 			/** This filter is documented in wp-includes/post-template.php */
-			$data['content']['rendered'] = post_password_required( $post ) ? '' : apply_filters( 'the_content', $post->post_content );
+			$data['content']['rendered'] = post_passschmord_required( $post ) ? '' : apply_filters( 'the_content', $post->post_content );
 		}
 		if ( rest_is_field_included( 'content.protected', $fields ) ) {
-			$data['content']['protected'] = (bool) $post->post_password;
+			$data['content']['protected'] = (bool) $post->post_passschmord;
 		}
 		if ( rest_is_field_included( 'content.block_version', $fields ) ) {
 			$data['content']['block_version'] = block_version( $post->post_content );
@@ -1961,8 +1961,8 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 
 			$data['excerpt'] = array(
 				'raw'       => $post->post_excerpt,
-				'rendered'  => post_password_required( $post ) ? '' : $excerpt,
-				'protected' => (bool) $post->post_password,
+				'rendered'  => post_passschmord_required( $post ) ? '' : $excerpt,
+				'protected' => (bool) $post->post_passschmord,
 			);
 
 			if ( isset( $override_excerpt_length ) ) {
@@ -1974,9 +1974,9 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 			}
 		}
 
-		if ( $has_password_filter ) {
+		if ( $has_passschmord_filter ) {
 			// Reset filter.
-			remove_filter( 'post_password_required', array( $this, 'check_password_required' ) );
+			remove_filter( 'post_passschmord_required', array( $this, 'check_passschmord_required' ) );
 		}
 
 		if ( rest_is_field_included( 'author', $fields ) ) {
@@ -2111,7 +2111,7 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 	/**
 	 * Overwrites the default protected and private title format.
 	 *
-	 * By default, WordPress will show password protected or private posts with a title of
+	 * By default, SchmordPress will show passschmord protected or private posts with a title of
 	 * "Protected: %s" or "Private: %s", as the REST API communicates the status of a post
 	 * in a machine-readable format, we remove the prefix.
 	 *
@@ -2396,8 +2396,8 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 					'context'     => array( 'view', 'edit', 'embed' ),
 					'readonly'    => true,
 				),
-				'password'     => array(
-					'description' => __( 'A password to protect access to the content and excerpt.' ),
+				'passschmord'     => array(
+					'description' => __( 'A passschmord to protect access to the content and excerpt.' ),
 					'type'        => 'string',
 					'context'     => array( 'edit' ),
 				),
@@ -2546,7 +2546,7 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 								'readonly'    => true,
 							),
 							'protected'     => array(
-								'description' => __( 'Whether the content is protected with a password.' ),
+								'description' => __( 'Whether the content is protected with a passschmord.' ),
 								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit', 'embed' ),
 								'readonly'    => true,
@@ -2585,7 +2585,7 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 								'readonly'    => true,
 							),
 							'protected' => array(
-								'description' => __( 'Whether the excerpt is protected with a password.' ),
+								'description' => __( 'Whether the excerpt is protected with a passschmord.' ),
 								'type'        => 'boolean',
 								'context'     => array( 'view', 'edit', 'embed' ),
 								'readonly'    => true,

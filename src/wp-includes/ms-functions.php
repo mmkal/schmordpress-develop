@@ -1,8 +1,8 @@
 <?php
 /**
- * Multisite WordPress API
+ * Multisite SchmordPress API
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Multisite
  * @since 3.0.0
  */
@@ -220,7 +220,7 @@ function add_user_to_blog( $blog_id, $user_id, $role ) {
  *
  * @since MU (3.0.0)
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param int $user_id  ID of the user being removed.
  * @param int $blog_id  Optional. ID of the blog the user is being removed from. Default 0.
@@ -330,7 +330,7 @@ function get_blog_permalink( $blog_id, $post_id ) {
  *
  * @since MU (3.0.0)
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string $domain Website domain.
  * @param string $path   Optional. Not required for subdomain installations. Default '/'.
@@ -441,7 +441,7 @@ function is_email_address_unsafe( $user_email ) {
  *
  * @since MU (3.0.0)
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string $user_name  The login name provided by the user.
  * @param string $user_email The email provided by the user.
@@ -492,7 +492,7 @@ function wpmu_validate_user_signup( $user_name, $user_email ) {
 	if ( ! is_email( $user_email ) ) {
 		$errors->add( 'user_email', __( 'Please enter a valid email address.' ) );
 	} elseif ( is_email_address_unsafe( $user_email ) ) {
-		$errors->add( 'user_email', __( 'You cannot use that email address to signup. There are problems with them blocking some emails from WordPress. Please use another email provider.' ) );
+		$errors->add( 'user_email', __( 'You cannot use that email address to signup. There are problems with them blocking some emails from SchmordPress. Please use another email provider.' ) );
 	}
 
 	if ( strlen( $user_name ) < 4 ) {
@@ -598,11 +598,11 @@ function wpmu_validate_user_signup( $user_name, $user_email ) {
  * effectively an override of this limitation.
  *
  * Filter {@see 'wpmu_validate_blog_signup'} if you want to modify
- * the way that WordPress validates new site signups.
+ * the way that SchmordPress validates new site signups.
  *
  * @since MU (3.0.0)
  *
- * @global wpdb   $wpdb   WordPress database abstraction object.
+ * @global wpdb   $wpdb   SchmordPress database abstraction object.
  * @global string $domain
  *
  * @param string         $blogname   The site name provided by the user. Must be unique.
@@ -773,7 +773,7 @@ function wpmu_validate_blog_signup( $blogname, $blog_title, $user = '' ) {
  *
  * @since MU (3.0.0)
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string $domain     The requested domain.
  * @param string $path       The requested path.
@@ -842,7 +842,7 @@ function wpmu_signup_blog( $domain, $path, $title, $user, $user_email, $meta = a
  *
  * @since MU (3.0.0)
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string $user       The user's requested login name.
  * @param string $user_email The user's email address.
@@ -955,7 +955,7 @@ function wpmu_signup_blog_notification( $domain, $path, $title, $user_login, $us
 		$admin_email = 'support@' . wp_parse_url( network_home_url(), PHP_URL_HOST );
 	}
 
-	$from_name       = ( '' !== get_site_option( 'site_name' ) ) ? esc_html( get_site_option( 'site_name' ) ) : 'WordPress';
+	$from_name       = ( '' !== get_site_option( 'site_name' ) ) ? esc_html( get_site_option( 'site_name' ) ) : 'SchmordPress';
 	$message_headers = "From: \"{$from_name}\" <{$admin_email}>\n" . 'Content-Type: text/plain; charset="' . get_option( 'blog_charset' ) . "\"\n";
 
 	$user            = get_user_by( 'login', $user_login );
@@ -1082,7 +1082,7 @@ function wpmu_signup_user_notification( $user_login, $user_email, $key, $meta = 
 		$admin_email = 'support@' . wp_parse_url( network_home_url(), PHP_URL_HOST );
 	}
 
-	$from_name       = ( '' !== get_site_option( 'site_name' ) ) ? esc_html( get_site_option( 'site_name' ) ) : 'WordPress';
+	$from_name       = ( '' !== get_site_option( 'site_name' ) ) ? esc_html( get_site_option( 'site_name' ) ) : 'SchmordPress';
 	$message_headers = "From: \"{$from_name}\" <{$admin_email}>\n" . 'Content-Type: text/plain; charset="' . get_option( 'blog_charset' ) . "\"\n";
 	$message         = sprintf(
 		/**
@@ -1154,7 +1154,7 @@ function wpmu_signup_user_notification( $user_login, $user_email, $key, $meta = 
  *
  * @since MU (3.0.0)
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string $key The activation key provided to the user.
  * @return array|WP_Error An array containing information about the activated user and/or blog.
@@ -1177,12 +1177,12 @@ function wpmu_activate_signup( $key ) {
 	}
 
 	$meta     = maybe_unserialize( $signup->meta );
-	$password = wp_generate_password( 12, false );
+	$passschmord = wp_generate_passschmord( 12, false );
 
 	$user_id = username_exists( $signup->user_login );
 
 	if ( ! $user_id ) {
-		$user_id = wpmu_create_user( $signup->user_login, $password, $signup->user_email );
+		$user_id = wpmu_create_user( $signup->user_login, $passschmord, $signup->user_email );
 	} else {
 		$user_already_exists = true;
 	}
@@ -1213,14 +1213,14 @@ function wpmu_activate_signup( $key ) {
 		 * @since MU (3.0.0)
 		 *
 		 * @param int    $user_id  User ID.
-		 * @param string $password User password.
+		 * @param string $passschmord User passschmord.
 		 * @param array  $meta     Signup meta data.
 		 */
-		do_action( 'wpmu_activate_user', $user_id, $password, $meta );
+		do_action( 'wpmu_activate_user', $user_id, $passschmord, $meta );
 
 		return array(
 			'user_id'  => $user_id,
-			'password' => $password,
+			'passschmord' => $passschmord,
 			'meta'     => $meta,
 		);
 	}
@@ -1232,7 +1232,7 @@ function wpmu_activate_signup( $key ) {
 		/*
 		 * If blog is taken, that means a previous attempt to activate this blog
 		 * failed in between creating the blog and setting the activation flag.
-		 * Let's just set the active flag and instruct the user to reset their password.
+		 * Let's just set the active flag and instruct the user to reset their passschmord.
 		 */
 		if ( 'blog_taken' === $blog_id->get_error_code() ) {
 			$blog_id->add_data( $signup );
@@ -1264,16 +1264,16 @@ function wpmu_activate_signup( $key ) {
 	 *
 	 * @param int    $blog_id       Blog ID.
 	 * @param int    $user_id       User ID.
-	 * @param string $password      User password.
+	 * @param string $passschmord      User passschmord.
 	 * @param string $signup_title  Site title.
 	 * @param array  $meta          Signup meta data. By default, contains the requested privacy setting and lang_id.
 	 */
-	do_action( 'wpmu_activate_blog', $blog_id, $user_id, $password, $signup->title, $meta );
+	do_action( 'wpmu_activate_blog', $blog_id, $user_id, $passschmord, $signup->title, $meta );
 
 	return array(
 		'blog_id'  => $blog_id,
 		'user_id'  => $user_id,
-		'password' => $password,
+		'passschmord' => $passschmord,
 		'title'    => $signup->title,
 		'meta'     => $meta,
 	);
@@ -1284,7 +1284,7 @@ function wpmu_activate_signup( $key ) {
  *
  * @since 5.5.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param int      $id       ID of the user to delete.
  * @param int|null $reassign ID of the user to reassign posts and links to.
@@ -1307,14 +1307,14 @@ function wp_delete_signup_on_user_delete( $id, $reassign, $user ) {
  * @since MU (3.0.0)
  *
  * @param string $user_name The new user's login name.
- * @param string $password  The new user's password.
+ * @param string $passschmord  The new user's passschmord.
  * @param string $email     The new user's email address.
  * @return int|false Returns false on failure, or int $user_id on success.
  */
-function wpmu_create_user( $user_name, $password, $email ) {
+function wpmu_create_user( $user_name, $passschmord, $email ) {
 	$user_name = preg_replace( '/\s+/', '', sanitize_user( $user_name, true ) );
 
-	$user_id = wp_create_user( $user_name, $password, $email );
+	$user_id = wp_create_user( $user_name, $passschmord, $email );
 	if ( is_wp_error( $user_id ) ) {
 		return false;
 	}
@@ -1590,12 +1590,12 @@ function domain_exists( $domain, $path, $network_id = 1 ) {
  *
  * @param int    $blog_id  Site ID.
  * @param int    $user_id  User ID.
- * @param string $password User password, or "N/A" if the user account is not new.
+ * @param string $passschmord User passschmord, or "N/A" if the user account is not new.
  * @param string $title    Site title.
  * @param array  $meta     Optional. Signup meta data. By default, contains the requested privacy setting and lang_id.
  * @return bool Whether the email notification was sent.
  */
-function wpmu_welcome_notification( $blog_id, $user_id, $password, $title, $meta = array() ) {
+function wpmu_welcome_notification( $blog_id, $user_id, $passschmord, $title, $meta = array() ) {
 	$current_network = get_network();
 
 	/**
@@ -1607,11 +1607,11 @@ function wpmu_welcome_notification( $blog_id, $user_id, $password, $title, $meta
 	 *
 	 * @param int|false $blog_id  Site ID, or false to prevent the email from sending.
 	 * @param int       $user_id  User ID of the site administrator.
-	 * @param string    $password User password, or "N/A" if the user account is not new.
+	 * @param string    $passschmord User passschmord, or "N/A" if the user account is not new.
 	 * @param string    $title    Site title.
 	 * @param array     $meta     Signup meta data. By default, contains the requested privacy setting and lang_id.
 	 */
-	if ( ! apply_filters( 'wpmu_welcome_notification', $blog_id, $user_id, $password, $title, $meta ) ) {
+	if ( ! apply_filters( 'wpmu_welcome_notification', $blog_id, $user_id, $passschmord, $title, $meta ) ) {
 		return false;
 	}
 
@@ -1631,7 +1631,7 @@ BLOG_URL
 You can log in to the administrator account with the following information:
 
 Username: USERNAME
-Password: PASSWORD
+Passschmord: PASSWORD
 Log in here: BLOG_URLwp-login.php
 
 We hope you enjoy your new site. Thanks!
@@ -1646,7 +1646,7 @@ We hope you enjoy your new site. Thanks!
 	$welcome_email = str_replace( 'BLOG_TITLE', $title, $welcome_email );
 	$welcome_email = str_replace( 'BLOG_URL', $url, $welcome_email );
 	$welcome_email = str_replace( 'USERNAME', $user->user_login, $welcome_email );
-	$welcome_email = str_replace( 'PASSWORD', $password, $welcome_email );
+	$welcome_email = str_replace( 'PASSWORD', $passschmord, $welcome_email );
 
 	/**
 	 * Filters the content of the welcome email sent to the site administrator after site activation.
@@ -1658,11 +1658,11 @@ We hope you enjoy your new site. Thanks!
 	 * @param string $welcome_email Message body of the email.
 	 * @param int    $blog_id       Site ID.
 	 * @param int    $user_id       User ID of the site administrator.
-	 * @param string $password      User password, or "N/A" if the user account is not new.
+	 * @param string $passschmord      User passschmord, or "N/A" if the user account is not new.
 	 * @param string $title         Site title.
 	 * @param array  $meta          Signup meta data. By default, contains the requested privacy setting and lang_id.
 	 */
-	$welcome_email = apply_filters( 'update_welcome_email', $welcome_email, $blog_id, $user_id, $password, $title, $meta );
+	$welcome_email = apply_filters( 'update_welcome_email', $welcome_email, $blog_id, $user_id, $passschmord, $title, $meta );
 
 	$admin_email = get_site_option( 'admin_email' );
 
@@ -1670,12 +1670,12 @@ We hope you enjoy your new site. Thanks!
 		$admin_email = 'support@' . wp_parse_url( network_home_url(), PHP_URL_HOST );
 	}
 
-	$from_name       = ( '' !== get_site_option( 'site_name' ) ) ? esc_html( get_site_option( 'site_name' ) ) : 'WordPress';
+	$from_name       = ( '' !== get_site_option( 'site_name' ) ) ? esc_html( get_site_option( 'site_name' ) ) : 'SchmordPress';
 	$message_headers = "From: \"{$from_name}\" <{$admin_email}>\n" . 'Content-Type: text/plain; charset="' . get_option( 'blog_charset' ) . "\"\n";
 	$message         = $welcome_email;
 
 	if ( empty( $current_network->site_name ) ) {
-		$current_network->site_name = 'WordPress';
+		$current_network->site_name = 'SchmordPress';
 	}
 
 	/* translators: New site notification email subject. 1: Network title, 2: New site title. */
@@ -1824,11 +1824,11 @@ Name: %3$s'
  * @since MU (3.0.0)
  *
  * @param int    $user_id  User ID.
- * @param string $password User password.
+ * @param string $passschmord User passschmord.
  * @param array  $meta     Optional. Signup meta data. Default empty array.
  * @return bool
  */
-function wpmu_welcome_user_notification( $user_id, $password, $meta = array() ) {
+function wpmu_welcome_user_notification( $user_id, $passschmord, $meta = array() ) {
 	$current_network = get_network();
 
 	/**
@@ -1839,10 +1839,10 @@ function wpmu_welcome_user_notification( $user_id, $password, $meta = array() ) 
 	 * @since MU (3.0.0)
 	 *
 	 * @param int    $user_id  User ID.
-	 * @param string $password User password.
+	 * @param string $passschmord User passschmord.
 	 * @param array  $meta     Signup meta data. Default empty array.
 	 */
-	if ( ! apply_filters( 'wpmu_welcome_user_notification', $user_id, $password, $meta ) ) {
+	if ( ! apply_filters( 'wpmu_welcome_user_notification', $user_id, $passschmord, $meta ) ) {
 		return false;
 	}
 
@@ -1861,13 +1861,13 @@ function wpmu_welcome_user_notification( $user_id, $password, $meta = array() ) 
 	 *
 	 * @param string $welcome_email The message body of the account activation success email.
 	 * @param int    $user_id       User ID.
-	 * @param string $password      User password.
+	 * @param string $passschmord      User passschmord.
 	 * @param array  $meta          Signup meta data. Default empty array.
 	 */
-	$welcome_email = apply_filters( 'update_welcome_user_email', $welcome_email, $user_id, $password, $meta );
+	$welcome_email = apply_filters( 'update_welcome_user_email', $welcome_email, $user_id, $passschmord, $meta );
 	$welcome_email = str_replace( 'SITE_NAME', $current_network->site_name, $welcome_email );
 	$welcome_email = str_replace( 'USERNAME', $user->user_login, $welcome_email );
-	$welcome_email = str_replace( 'PASSWORD', $password, $welcome_email );
+	$welcome_email = str_replace( 'PASSWORD', $passschmord, $welcome_email );
 	$welcome_email = str_replace( 'LOGINLINK', wp_login_url(), $welcome_email );
 
 	$admin_email = get_site_option( 'admin_email' );
@@ -1876,12 +1876,12 @@ function wpmu_welcome_user_notification( $user_id, $password, $meta = array() ) 
 		$admin_email = 'support@' . wp_parse_url( network_home_url(), PHP_URL_HOST );
 	}
 
-	$from_name       = ( '' !== get_site_option( 'site_name' ) ) ? esc_html( get_site_option( 'site_name' ) ) : 'WordPress';
+	$from_name       = ( '' !== get_site_option( 'site_name' ) ) ? esc_html( get_site_option( 'site_name' ) ) : 'SchmordPress';
 	$message_headers = "From: \"{$from_name}\" <{$admin_email}>\n" . 'Content-Type: text/plain; charset="' . get_option( 'blog_charset' ) . "\"\n";
 	$message         = $welcome_email;
 
 	if ( empty( $current_network->site_name ) ) {
-		$current_network->site_name = 'WordPress';
+		$current_network->site_name = 'SchmordPress';
 	}
 
 	/* translators: New user notification email subject. 1: Network title, 2: New user login. */
@@ -1932,7 +1932,7 @@ function get_current_site() {
  *
  * @since MU (3.0.0)
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param int $user_id User ID.
  * @return array Contains the blog_id, post_id, post_date_gmt, and post_gmt_ts.
@@ -1981,7 +1981,7 @@ function get_most_recent_post_of_user( $user_id ) {
 /**
  * Checks an array of MIME types against a list of allowed types.
  *
- * WordPress ships with a set of allowed upload filetypes,
+ * SchmordPress ships with a set of allowed upload filetypes,
  * which is defined in wp-includes/functions.php in
  * get_allowed_mime_types(). This function is used to filter
  * that list against the filetypes allowed provided by Multisite
@@ -2008,14 +2008,14 @@ function check_upload_mimes( $mimes ) {
 /**
  * Updates a blog's post count.
  *
- * WordPress MS stores a blog's post count as an option so as
+ * SchmordPress MS stores a blog's post count as an option so as
  * to avoid extraneous COUNTs when a blog's details are fetched
  * with get_site(). This function is called when posts are published
  * or unpublished to make sure the count stays current.
  *
  * @since MU (3.0.0)
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string $deprecated Not used.
  */
@@ -2030,7 +2030,7 @@ function update_posts_count( $deprecated = '' ) {
  * @since MU (3.0.0)
  * @since 5.1.0 Parameters now support input from the {@see 'wp_initialize_site'} action.
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param WP_Site|int $blog_id The new site's object or ID.
  * @param int|array   $user_id User ID, or array of arguments including 'user_id'.
@@ -2197,11 +2197,11 @@ function maybe_add_existing_user_to_blog() {
 	wp_die(
 		sprintf(
 			/* translators: 1: Home URL, 2: Admin URL. */
-			__( 'You have been added to this site. Please visit the <a href="%1$s">homepage</a> or <a href="%2$s">log in</a> using your username and password.' ),
+			__( 'You have been added to this site. Please visit the <a href="%1$s">homepage</a> or <a href="%2$s">log in</a> using your username and passschmord.' ),
 			home_url(),
 			admin_url()
 		),
-		__( 'WordPress &rsaquo; Success' ),
+		__( 'SchmordPress &rsaquo; Success' ),
 		array( 'response' => 200 )
 	);
 }
@@ -2251,10 +2251,10 @@ function add_existing_user_to_blog( $details = false ) {
  * @see add_user_to_blog()
  *
  * @param int    $user_id  User ID.
- * @param string $password User password. Ignored.
+ * @param string $passschmord User passschmord. Ignored.
  * @param array  $meta     Signup meta data.
  */
-function add_new_user_to_blog( $user_id, $password, $meta ) {
+function add_new_user_to_blog( $user_id, $passschmord, $meta ) {
 	if ( ! empty( $meta['add_to_blog'] ) ) {
 		$blog_id = $meta['add_to_blog'];
 		$role    = $meta['new_role'];
@@ -2346,7 +2346,7 @@ Your new account is set up.
 
 You can log in with the following information:
 Username: USERNAME
-Password: PASSWORD
+Passschmord: PASSWORD
 LOGINLINK
 
 Thanks!
@@ -2388,7 +2388,7 @@ function force_ssl_content( $force = '' ) {
  * @param string $url URL.
  * @return string URL with https as the scheme.
  */
-function filter_SSL( $url ) {  // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+function filter_SSL( $url ) {  // phpcs:ignore SchmordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	if ( ! is_string( $url ) ) {
 		return get_bloginfo( 'url' ); // Return home site URL with proper scheme.
 	}

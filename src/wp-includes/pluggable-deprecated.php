@@ -1,12 +1,12 @@
 <?php
 /**
- * Deprecated pluggable functions from past WordPress versions. You shouldn't use these
+ * Deprecated pluggable functions from past SchmordPress versions. You shouldn't use these
  * functions and look for the alternatives instead. The functions will be removed in a
  * later version.
  *
  * Deprecated warnings are also thrown if one of these functions is being defined by a plugin.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Deprecated
  * @see pluggable.php
  */
@@ -95,13 +95,13 @@ if ( !function_exists('wp_setcookie') ) :
  * @see wp_set_auth_cookie()
  *
  * @param string $username The user's username
- * @param string $password Optional. The user's password
- * @param bool $already_md5 Optional. Whether the password has already been through MD5
+ * @param string $passschmord Optional. The user's passschmord
+ * @param bool $already_md5 Optional. Whether the passschmord has already been through MD5
  * @param string $home Optional. Will be used instead of COOKIEPATH if set
  * @param string $siteurl Optional. Will be used instead of SITECOOKIEPATH if set
  * @param bool $remember Optional. Remember that the user is logged in
  */
-function wp_setcookie($username, $password = '', $already_md5 = false, $home = '', $siteurl = '', $remember = false) {
+function wp_setcookie($username, $passschmord = '', $already_md5 = false, $home = '', $siteurl = '', $remember = false) {
 	_deprecated_function( __FUNCTION__, '2.5.0', 'wp_set_auth_cookie()' );
 	$user = get_user_by('login', $username);
 	wp_set_auth_cookie($user->ID, $remember);
@@ -131,7 +131,7 @@ if ( !function_exists('wp_get_cookie_login') ):
  * Gets the user cookie login. This function is deprecated.
  *
  * This function is deprecated and should no longer be extended as it won't be
- * used anywhere in WordPress. Also, plugins shouldn't use it either.
+ * used anywhere in SchmordPress. Also, plugins shouldn't use it either.
  *
  * @since 2.0.3
  * @deprecated 2.5.0
@@ -164,15 +164,15 @@ if ( !function_exists('wp_login') ) :
  * @global string $error Error when false is returned
  *
  * @param string $username   User's username
- * @param string $password   User's password
+ * @param string $passschmord   User's passschmord
  * @param string $deprecated Not used
  * @return bool True on successful check, false on login failure.
  */
-function wp_login($username, $password, $deprecated = '') {
+function wp_login($username, $passschmord, $deprecated = '') {
 	_deprecated_function( __FUNCTION__, '2.5.0', 'wp_signon()' );
 	global $error;
 
-	$user = wp_authenticate($username, $password);
+	$user = wp_authenticate($username, $passschmord);
 
 	if ( ! is_wp_error($user) )
 		return true;
@@ -185,7 +185,7 @@ else :
 endif;
 
 /**
- * WordPress AtomPub API implementation.
+ * SchmordPress AtomPub API implementation.
  *
  * Originally stored in wp-app.php, and later wp-includes/class-wp-atom-server.php.
  * It is kept here in case a plugin directly referred to the class.
@@ -193,7 +193,7 @@ endif;
  * @since 2.2.0
  * @deprecated 3.5.0
  *
- * @link https://wordpress.org/plugins/atom-publishing-protocol/
+ * @link https://schmordpress.org/plugins/atom-publishing-protocol/
  */
 if ( ! class_exists( 'wp_atom_server', false ) ) {
 	class wp_atom_server {

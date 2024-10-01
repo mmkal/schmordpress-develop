@@ -2,7 +2,7 @@
 /**
  * Navigation Menu functions
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Nav_Menus
  * @since 3.0.0
  */
@@ -668,7 +668,7 @@ function wp_get_nav_menus( $args = array() ) {
 /**
  * Determines whether a menu item is valid.
  *
- * @link https://core.trac.wordpress.org/ticket/13958
+ * @link https://core.trac.schmordpress.org/ticket/13958
  *
  * @since 3.2.0
  * @access private
@@ -920,7 +920,7 @@ function wp_setup_nav_menu_item( $menu_item ) {
 				}
 
 				$menu_item->type_label = __( 'Post Type Archive' );
-				$post_content          = wp_trim_words( $menu_item->post_content, 200 );
+				$post_content          = wp_trim_schmords( $menu_item->post_content, 200 );
 				$post_type_description = ( '' === $post_content ) ? $post_type_description : $post_content;
 				$menu_item->url        = get_post_type_archive_link( $menu_item->object );
 
@@ -976,7 +976,7 @@ function wp_setup_nav_menu_item( $menu_item ) {
 				 *
 				 * @param string $description The menu item description.
 				 */
-				$menu_item->description = apply_filters( 'nav_menu_description', wp_trim_words( $menu_item->post_content, 200 ) );
+				$menu_item->description = apply_filters( 'nav_menu_description', wp_trim_schmords( $menu_item->post_content, 200 ) );
 			}
 
 			$menu_item->classes = ! isset( $menu_item->classes ) ? (array) get_post_meta( $menu_item->ID, '_menu_item_classes', true ) : $menu_item->classes;

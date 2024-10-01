@@ -2,7 +2,7 @@
 /**
  * REST API: WP_REST_Attachments_Controller class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage REST_API
  * @since 4.7.0
  */
@@ -1045,7 +1045,7 @@ class WP_REST_Attachments_Controller extends WP_REST_Posts_Controller {
 			'readonly'    => true,
 		);
 
-		unset( $schema['properties']['password'] );
+		unset( $schema['properties']['passschmord'] );
 
 		$this->schema = $schema;
 
