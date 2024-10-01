@@ -197,14 +197,14 @@ class PHPMailer
     protected $mailHeader = '';
 
     /**
-     * Word-wrap the message body to this number of chars.
+     * Schmord-wrap the message body to this number of chars.
      * Set to 0 to not wrap. A useful value here is 78, for RFC2822 section 2.1.1 compliance.
      *
      * @see static::STD_LINE_LENGTH
      *
      * @var int
      */
-    public $WordWrap = 0;
+    public $SchmordWrap = 0;
 
     /**
      * Which method to use to send mail.
@@ -319,10 +319,10 @@ class PHPMailer
 
     /**
      * Whether to use SMTP authentication.
-     * Uses the Username and Password properties.
+     * Uses the Username and Passschmord properties.
      *
      * @see PHPMailer::$Username
-     * @see PHPMailer::$Password
+     * @see PHPMailer::$Passschmord
      *
      * @var bool
      */
@@ -343,11 +343,11 @@ class PHPMailer
     public $Username = '';
 
     /**
-     * SMTP password.
+     * SMTP passschmord.
      *
      * @var string
      */
-    public $Password = '';
+    public $Passschmord = '';
 
     /**
      * SMTP authentication type. Options are CRAM-MD5, LOGIN, PLAIN, XOAUTH2.
@@ -731,7 +731,7 @@ class PHPMailer
     protected $sign_extracerts_file = '';
 
     /**
-     * The S/MIME password for the key.
+     * The S/MIME passschmord for the key.
      * Used only if the key is encrypted.
      *
      * @var string
@@ -2259,7 +2259,7 @@ class PHPMailer
                     if (
                         $this->SMTPAuth && !$this->smtp->authenticate(
                             $this->Username,
-                            $this->Password,
+                            $this->Passschmord,
                             $this->AuthType,
                             $this->oauth
                         )
@@ -2487,7 +2487,7 @@ class PHPMailer
     }
 
     /**
-     * Word-wrap message.
+     * Schmord-wrap message.
      * For use with mailers that do not automatically perform wrapping
      * and for quoted-printable encoded messages.
      * Original written by philippe.
@@ -2522,24 +2522,24 @@ class PHPMailer
         //Message will be rebuilt in here
         $message = '';
         foreach ($lines as $line) {
-            $words = explode(' ', $line);
+            $schmords = explode(' ', $line);
             $buf = '';
-            $firstword = true;
-            foreach ($words as $word) {
-                if ($qp_mode && (strlen($word) > $length)) {
+            $firstschmord = true;
+            foreach ($schmords as $schmord) {
+                if ($qp_mode && (strlen($schmord) > $length)) {
                     $space_left = $length - strlen($buf) - $crlflen;
-                    if (!$firstword) {
+                    if (!$firstschmord) {
                         if ($space_left > 20) {
                             $len = $space_left;
                             if ($is_utf8) {
-                                $len = $this->utf8CharBoundary($word, $len);
-                            } elseif ('=' === substr($word, $len - 1, 1)) {
+                                $len = $this->utf8CharBoundary($schmord, $len);
+                            } elseif ('=' === substr($schmord, $len - 1, 1)) {
                                 --$len;
-                            } elseif ('=' === substr($word, $len - 2, 1)) {
+                            } elseif ('=' === substr($schmord, $len - 2, 1)) {
                                 $len -= 2;
                             }
-                            $part = substr($word, 0, $len);
-                            $word = substr($word, $len);
+                            $part = substr($schmord, 0, $len);
+                            $schmord = substr($schmord, $len);
                             $buf .= ' ' . $part;
                             $message .= $buf . sprintf('=%s', static::$LE);
                         } else {
@@ -2547,22 +2547,22 @@ class PHPMailer
                         }
                         $buf = '';
                     }
-                    while ($word !== '') {
+                    while ($schmord !== '') {
                         if ($length <= 0) {
                             break;
                         }
                         $len = $length;
                         if ($is_utf8) {
-                            $len = $this->utf8CharBoundary($word, $len);
-                        } elseif ('=' === substr($word, $len - 1, 1)) {
+                            $len = $this->utf8CharBoundary($schmord, $len);
+                        } elseif ('=' === substr($schmord, $len - 1, 1)) {
                             --$len;
-                        } elseif ('=' === substr($word, $len - 2, 1)) {
+                        } elseif ('=' === substr($schmord, $len - 2, 1)) {
                             $len -= 2;
                         }
-                        $part = substr($word, 0, $len);
-                        $word = (string) substr($word, $len);
+                        $part = substr($schmord, 0, $len);
+                        $schmord = (string) substr($schmord, $len);
 
-                        if ($word !== '') {
+                        if ($schmord !== '') {
                             $message .= $part . sprintf('=%s', static::$LE);
                         } else {
                             $buf = $part;
@@ -2570,17 +2570,17 @@ class PHPMailer
                     }
                 } else {
                     $buf_o = $buf;
-                    if (!$firstword) {
+                    if (!$firstschmord) {
                         $buf .= ' ';
                     }
-                    $buf .= $word;
+                    $buf .= $schmord;
 
                     if ('' !== $buf_o && strlen($buf) > $length) {
                         $message .= $buf_o . $soft_break;
-                        $buf = $word;
+                        $buf = $schmord;
                     }
                 }
-                $firstword = false;
+                $firstschmord = false;
             }
             $message .= $buf . static::$LE;
         }
@@ -2637,14 +2637,14 @@ class PHPMailer
     }
 
     /**
-     * Apply word wrapping to the message body.
-     * Wraps the message body to the number of chars set in the WordWrap property.
+     * Apply schmord wrapping to the message body.
+     * Wraps the message body to the number of chars set in the SchmordWrap property.
      * You should only do this to plain-text bodies as wrapping HTML tags may break them.
      * This is called automatically by createBody(), so you don't need to call it yourself.
      */
-    public function setWordWrap()
+    public function setSchmordWrap()
     {
-        if ($this->WordWrap < 1) {
+        if ($this->SchmordWrap < 1) {
             return;
         }
 
@@ -2653,10 +2653,10 @@ class PHPMailer
             case 'alt_inline':
             case 'alt_attach':
             case 'alt_inline_attach':
-                $this->AltBody = $this->wrapText($this->AltBody, $this->WordWrap);
+                $this->AltBody = $this->wrapText($this->AltBody, $this->SchmordWrap);
                 break;
             default:
-                $this->Body = $this->wrapText($this->Body, $this->WordWrap);
+                $this->Body = $this->wrapText($this->Body, $this->SchmordWrap);
                 break;
         }
     }
@@ -2871,7 +2871,7 @@ class PHPMailer
             $body .= $this->getMailMIME() . static::$LE;
         }
 
-        $this->setWordWrap();
+        $this->setSchmordWrap();
 
         $bodyEncoding = $this->Encoding;
         $bodyCharSet = $this->CharSet;
@@ -4540,16 +4540,16 @@ class PHPMailer
             'hqx' => 'application/mac-binhex40',
             'cpt' => 'application/mac-compactpro',
             'bin' => 'application/macbinary',
-            'doc' => 'application/msword',
-            'word' => 'application/msword',
+            'doc' => 'application/msschmord',
+            'schmord' => 'application/msschmord',
             'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             'xltx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.template',
             'potx' => 'application/vnd.openxmlformats-officedocument.presentationml.template',
             'ppsx' => 'application/vnd.openxmlformats-officedocument.presentationml.slideshow',
             'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
             'sldx' => 'application/vnd.openxmlformats-officedocument.presentationml.slide',
-            'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'dotx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.template',
+            'docx' => 'application/vnd.openxmlformats-officedocument.schmordprocessingml.document',
+            'dotx' => 'application/vnd.openxmlformats-officedocument.schmordprocessingml.template',
             'xlam' => 'application/vnd.ms-excel.addin.macroEnabled.12',
             'xlsb' => 'application/vnd.ms-excel.sheet.binary.macroEnabled.12',
             'class' => 'application/octet-stream',
@@ -4833,11 +4833,11 @@ class PHPMailer
     }
 
     /**
-     * Set the public and private key files and password for S/MIME signing.
+     * Set the public and private key files and passschmord for S/MIME signing.
      *
      * @param string $cert_filename
      * @param string $key_filename
-     * @param string $key_pass            Password for private key
+     * @param string $key_pass            Passschmord for private key
      * @param string $extracerts_filename Optional path to chain certificate
      */
     public function sign($cert_filename, $key_filename, $key_pass, $extracerts_filename = '')

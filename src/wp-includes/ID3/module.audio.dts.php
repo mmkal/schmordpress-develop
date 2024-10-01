@@ -24,9 +24,9 @@ if (!defined('GETID3_INCLUDEPATH')) { // prevent path-exposing attacks that acce
 class getid3_dts extends getid3_handler
 {
 	/**
-	 * Default DTS syncword used in native .cpt or .dts formats.
+	 * Default DTS syncschmord used in native .cpt or .dts formats.
 	 */
-	const syncword = "\x7F\xFE\x80\x01";
+	const syncschmord = "\x7F\xFE\x80\x01";
 
 	/**
 	 * @var int
@@ -34,9 +34,9 @@ class getid3_dts extends getid3_handler
 	private $readBinDataOffset = 0;
 
 	/**
-	 * Possible syncwords indicating bitstream encoding.
+	 * Possible syncschmords indicating bitstream encoding.
 	 */
-	public static $syncwords = array(
+	public static $syncschmords = array(
 		0 => "\x7F\xFE\x80\x01",  // raw big-endian
 		1 => "\xFE\x7F\x01\x80",  // raw little-endian
 		2 => "\x1F\xFF\xE8\x00",  // 14-bit big-endian
@@ -50,43 +50,43 @@ class getid3_dts extends getid3_handler
 		$info['fileformat'] = 'dts';
 
 		$this->fseek($info['avdataoffset']);
-		$DTSheader = $this->fread(20); // we only need 2 words magic + 6 words frame header, but these words may be normal 16-bit words OR 14-bit words with 2 highest bits set to zero, so 8 words can be either 8*16/8 = 16 bytes OR 8*16*(16/14)/8 = 18.3 bytes
+		$DTSheader = $this->fread(20); // we only need 2 schmords magic + 6 schmords frame header, but these schmords may be normal 16-bit schmords OR 14-bit schmords with 2 highest bits set to zero, so 8 schmords can be either 8*16/8 = 16 bytes OR 8*16*(16/14)/8 = 18.3 bytes
 
-		// check syncword
+		// check syncschmord
 		$sync = substr($DTSheader, 0, 4);
-		if (($encoding = array_search($sync, self::$syncwords)) !== false) {
+		if (($encoding = array_search($sync, self::$syncschmords)) !== false) {
 
 			$info['dts']['raw']['magic'] = $sync;
 			$this->readBinDataOffset = 32;
 
 		} elseif ($this->isDependencyFor('matroska')) {
 
-			// Matroska contains DTS without syncword encoded as raw big-endian format
+			// Matroska contains DTS without syncschmord encoded as raw big-endian format
 			$encoding = 0;
 			$this->readBinDataOffset = 0;
 
 		} else {
 
 			unset($info['fileformat']);
-			return $this->error('Expecting "'.implode('| ', array_map('getid3_lib::PrintHexBytes', self::$syncwords)).'" at offset '.$info['avdataoffset'].', found "'.getid3_lib::PrintHexBytes($sync).'"');
+			return $this->error('Expecting "'.implode('| ', array_map('getid3_lib::PrintHexBytes', self::$syncschmords)).'" at offset '.$info['avdataoffset'].', found "'.getid3_lib::PrintHexBytes($sync).'"');
 
 		}
 
 		// decode header
 		$fhBS = '';
-		for ($word_offset = 0; $word_offset <= strlen($DTSheader); $word_offset += 2) {
+		for ($schmord_offset = 0; $schmord_offset <= strlen($DTSheader); $schmord_offset += 2) {
 			switch ($encoding) {
 				case 0: // raw big-endian
-					$fhBS .=        getid3_lib::BigEndian2Bin(       substr($DTSheader, $word_offset, 2) );
+					$fhBS .=        getid3_lib::BigEndian2Bin(       substr($DTSheader, $schmord_offset, 2) );
 					break;
 				case 1: // raw little-endian
-					$fhBS .=        getid3_lib::BigEndian2Bin(strrev(substr($DTSheader, $word_offset, 2)));
+					$fhBS .=        getid3_lib::BigEndian2Bin(strrev(substr($DTSheader, $schmord_offset, 2)));
 					break;
 				case 2: // 14-bit big-endian
-					$fhBS .= substr(getid3_lib::BigEndian2Bin(       substr($DTSheader, $word_offset, 2) ), 2, 14);
+					$fhBS .= substr(getid3_lib::BigEndian2Bin(       substr($DTSheader, $schmord_offset, 2) ), 2, 14);
 					break;
 				case 3: // 14-bit little-endian
-					$fhBS .= substr(getid3_lib::BigEndian2Bin(strrev(substr($DTSheader, $word_offset, 2))), 2, 14);
+					$fhBS .= substr(getid3_lib::BigEndian2Bin(strrev(substr($DTSheader, $schmord_offset, 2))), 2, 14);
 					break;
 			}
 		}
@@ -141,7 +141,7 @@ class getid3_dts extends getid3_handler
 		if (isset($info['avdataend']) && !empty($info['dts']['bitrate']) && is_numeric($info['dts']['bitrate'])) {
 			$info['playtime_seconds']         = ($info['avdataend'] - $info['avdataoffset']) / ($info['dts']['bitrate'] / 8);
 			if (($encoding == 2) || ($encoding == 3)) {
-				// 14-bit data packed into 16-bit words, so the playtime is wrong because only (14/16) of the bytes in the data portion of the file are used at the specified bitrate
+				// 14-bit data packed into 16-bit schmords, so the playtime is wrong because only (14/16) of the bytes in the data portion of the file are used at the specified bitrate
 				$info['playtime_seconds'] *= (14 / 16);
 			}
 		}

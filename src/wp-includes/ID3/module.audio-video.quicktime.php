@@ -405,7 +405,7 @@ class getid3_quicktime extends getid3_handler
 				case 'geID': //
 				case 'gnre': // GeNRE
 				case 'hdvd': // HD ViDeo
-				case 'keyw': // KEYWord
+				case 'keyw': // KEYSchmord
 				case 'ldes': // Long DEScription
 				case 'pcst': // PodCaST
 				case 'pgap': // GAPless Playback
@@ -2875,7 +2875,7 @@ $this->error('fragmented mp4 files not currently supported');
 			$handyatomtranslatorarray['gnre'] = 'genre';               // iTunes 4.0
 			$handyatomtranslatorarray['hdvd'] = 'hd_video';            // iTunes 4.0
 			$handyatomtranslatorarray['ldes'] = 'description_long';    //
-			$handyatomtranslatorarray['keyw'] = 'keyword';             // iTunes 4.9
+			$handyatomtranslatorarray['keyw'] = 'keyschmord';             // iTunes 4.9
 			$handyatomtranslatorarray['pcst'] = 'podcast';             // iTunes 4.9
 			$handyatomtranslatorarray['pgap'] = 'gapless_playback';    // iTunes 7.0
 			$handyatomtranslatorarray['purd'] = 'purchase_date';       // iTunes 6.0.2

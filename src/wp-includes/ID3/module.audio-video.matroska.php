@@ -423,7 +423,7 @@ class getid3_matroska extends getid3_handler
 								}
 								$vorbis_offset = strpos($trackarray['CodecPrivate'], 'vorbis', 1);
 								if ($vorbis_offset === false) {
-									$this->warning('Unable to parse audio data ['.basename(__FILE__).':'.__LINE__.'] because CodecPrivate data does not contain "vorbis" keyword');
+									$this->warning('Unable to parse audio data ['.basename(__FILE__).':'.__LINE__.'] because CodecPrivate data does not contain "vorbis" keyschmord');
 									break;
 								}
 								$vorbis_offset -= 1;

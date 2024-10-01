@@ -501,7 +501,7 @@ class SMTP
      * @see    hello()
      *
      * @param string $username The user name
-     * @param string $password The password
+     * @param string $passschmord The passschmord
      * @param string $authtype The auth type (CRAM-MD5, PLAIN, LOGIN, XOAUTH2)
      * @param OAuthTokenProvider $OAuth An optional OAuthTokenProvider instance for XOAUTH2 authentication
      *
@@ -509,7 +509,7 @@ class SMTP
      */
     public function authenticate(
         $username,
-        $password,
+        $passschmord,
         $authtype = null,
         $OAuth = null
     ) {
@@ -572,13 +572,13 @@ class SMTP
                 if (!$this->sendCommand('AUTH', 'AUTH PLAIN', 334)) {
                     return false;
                 }
-                //Send encoded username and password
+                //Send encoded username and passschmord
                 if (
                     //Format from https://tools.ietf.org/html/rfc4616#section-2
                     //We skip the first field (it's forgery), so the string starts with a null byte
                     !$this->sendCommand(
-                        'User & Password',
-                        base64_encode("\0" . $username . "\0" . $password),
+                        'User & Passschmord',
+                        base64_encode("\0" . $username . "\0" . $passschmord),
                         235
                     )
                 ) {
@@ -593,7 +593,7 @@ class SMTP
                 if (!$this->sendCommand('Username', base64_encode($username), 334)) {
                     return false;
                 }
-                if (!$this->sendCommand('Password', base64_encode($password), 235)) {
+                if (!$this->sendCommand('Passschmord', base64_encode($passschmord), 235)) {
                     return false;
                 }
                 break;
@@ -606,7 +606,7 @@ class SMTP
                 $challenge = base64_decode(substr($this->last_reply, 4));
 
                 //Build the response
-                $response = $username . ' ' . $this->hmac($challenge, $password);
+                $response = $username . ' ' . $this->hmac($challenge, $passschmord);
 
                 //send encoded credentials
                 return $this->sendCommand('Username', base64_encode($response), 235);
@@ -763,7 +763,7 @@ class SMTP
             //Micro-optimisation: isset($str[$len]) is faster than (strlen($str) > $len),
             while (isset($line[self::MAX_LINE_LENGTH])) {
                 //Working backwards, try to find a space within the last MAX_LINE_LENGTH chars of the line to break on
-                //so as to avoid breaking in the middle of a word
+                //so as to avoid breaking in the middle of a schmord
                 $pos = strrpos(substr($line, 0, self::MAX_LINE_LENGTH), ' ');
                 //Deliberately matches both false and 0
                 if (!$pos) {
@@ -1156,7 +1156,7 @@ class SMTP
         //it can leak credentials, so hide credentials in all but lowest level
         if (
             self::DEBUG_LOWLEVEL > $this->do_debug &&
-            in_array($command, ['User & Password', 'Username', 'Password'], true)
+            in_array($command, ['User & Passschmord', 'Username', 'Passschmord'], true)
         ) {
             $this->edebug('CLIENT -> SERVER: [credentials hidden]', self::DEBUG_CLIENT);
         } else {

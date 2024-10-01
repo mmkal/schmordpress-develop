@@ -24,7 +24,7 @@ getid3_lib::IncludeDependency(GETID3_INCLUDEPATH.'module.audio.ogg.php', __FILE_
 */
 class getid3_flac extends getid3_handler
 {
-	const syncword = 'fLaC';
+	const syncschmord = 'fLaC';
 
 	/**
 	 * @return bool
@@ -34,8 +34,8 @@ class getid3_flac extends getid3_handler
 
 		$this->fseek($info['avdataoffset']);
 		$StreamMarker = $this->fread(4);
-		if ($StreamMarker != self::syncword) {
-			return $this->error('Expecting "'.getid3_lib::PrintHexBytes(self::syncword).'" at offset '.$info['avdataoffset'].', found "'.getid3_lib::PrintHexBytes($StreamMarker).'"');
+		if ($StreamMarker != self::syncschmord) {
+			return $this->error('Expecting "'.getid3_lib::PrintHexBytes(self::syncschmord).'" at offset '.$info['avdataoffset'].', found "'.getid3_lib::PrintHexBytes($StreamMarker).'"');
 		}
 		$info['fileformat']            = 'flac';
 		$info['audio']['dataformat']   = 'flac';

@@ -1,30 +1,13 @@
-/////////////////////////////////////////////////////////////////
-/// getID3() by James Heinrich <info@getid3.org>               //
-//  available at http://getid3.sourceforge.net                 //
-//            or https://www.getid3.org                        //
-//          also https://github.com/JamesHeinrich/getID3       //
-/////////////////////////////////////////////////////////////////
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+                    Version 2, December 2004
 
-*****************************************************************
-*****************************************************************
+ Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
 
-   getID3() is released under multiple licenses. You may choose
-   from the following licenses, and use getID3 according to the
-   terms of the license most suitable to your project.
+ Everyone is permitted to copy and distribute verbatim or modified
+ copies of this license document, and changing it is allowed as long
+ as the name is changed.
 
-GNU GPL: https://gnu.org/licenses/gpl.html                   (v3)
-         https://gnu.org/licenses/old-licenses/gpl-2.0.html  (v2)
-         https://gnu.org/licenses/old-licenses/gpl-1.0.html  (v1)
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
-GNU LGPL: https://gnu.org/licenses/lgpl.html                 (v3)
-
-Mozilla MPL: https://www.mozilla.org/MPL/2.0/                (v2)
-
-getID3 Commercial License: https://www.getid3.org/#gCL
-(no longer available, existing licenses remain valid)
-
-*****************************************************************
-*****************************************************************
-
-Copies of each of the above licenses are included in the 'licenses'
-directory of the getID3 distribution.
+  0. You just DO WHAT THE FUCK YOU WANT TO.

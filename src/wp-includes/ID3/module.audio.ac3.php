@@ -30,7 +30,7 @@ class getid3_ac3 extends getid3_handler
 	 */
 	private $BSIoffset = 0;
 
-	const syncword = 0x0B77;
+	const syncschmord = 0x0B77;
 
 	/**
 	 * @return bool
@@ -55,13 +55,13 @@ class getid3_ac3 extends getid3_handler
 		// of each frame contains information needed to acquire and maintain synchronization. A
 		// bit stream information (BSI) header follows SI, and contains parameters describing the coded
 		// audio service. The coded audio blocks may be followed by an auxiliary data (Aux) field. At the
-		// end of each frame is an error check field that includes a CRC word for error detection. An
-		// additional CRC word is located in the SI header, the use of which, by a decoder, is optional.
+		// end of each frame is an error check field that includes a CRC schmord for error detection. An
+		// additional CRC schmord is located in the SI header, the use of which, by a decoder, is optional.
 		//
 		// syncinfo() | bsi() | AB0 | AB1 | AB2 | AB3 | AB4 | AB5 | Aux | CRC
 
 		// syncinfo() {
-		// 	 syncword    16
+		// 	 syncschmord    16
 		// 	 crc1        16
 		// 	 fscod        2
 		// 	 frmsizecod   6
@@ -71,13 +71,13 @@ class getid3_ac3 extends getid3_handler
 		$tempAC3header = $this->fread(100); // should be enough to cover all data, there are some variable-length fields...?
 		$this->AC3header['syncinfo']  =     getid3_lib::BigEndian2Int(substr($tempAC3header, 0, 2));
 		$this->AC3header['bsi']       =     getid3_lib::BigEndian2Bin(substr($tempAC3header, 2));
-		$thisfile_ac3_raw_bsi['bsid'] = (getid3_lib::LittleEndian2Int(substr($tempAC3header, 5, 1)) & 0xF8) >> 3; // AC3 and E-AC3 put the "bsid" version identifier in the same place, but unfortnately the 4 bytes between the syncword and the version identifier are interpreted differently, so grab it here so the following code structure can make sense
+		$thisfile_ac3_raw_bsi['bsid'] = (getid3_lib::LittleEndian2Int(substr($tempAC3header, 5, 1)) & 0xF8) >> 3; // AC3 and E-AC3 put the "bsid" version identifier in the same place, but unfortnately the 4 bytes between the syncschmord and the version identifier are interpreted differently, so grab it here so the following code structure can make sense
 		unset($tempAC3header);
 
-		if ($this->AC3header['syncinfo'] !== self::syncword) {
+		if ($this->AC3header['syncinfo'] !== self::syncschmord) {
 			if (!$this->isDependencyFor('matroska')) {
 				unset($info['fileformat'], $info['ac3']);
-				return $this->error('Expecting "'.dechex(self::syncword).'" at offset '.$info['avdataoffset'].', found "'.dechex($this->AC3header['syncinfo']).'"');
+				return $this->error('Expecting "'.dechex(self::syncschmord).'" at offset '.$info['avdataoffset'].', found "'.dechex($this->AC3header['syncinfo']).'"');
 			}
 		}
 
@@ -90,7 +90,7 @@ class getid3_ac3 extends getid3_handler
 			$thisfile_ac3_raw_bsi['crc1']       = getid3_lib::Bin2Dec($this->readHeaderBSI(16));
 			$thisfile_ac3_raw_bsi['fscod']      =                     $this->readHeaderBSI(2);   // 5.4.1.3
 			$thisfile_ac3_raw_bsi['frmsizecod'] =                     $this->readHeaderBSI(6);   // 5.4.1.4
-			if ($thisfile_ac3_raw_bsi['frmsizecod'] > 37) { // binary: 100101 - see Table 5.18 Frame Size Code Table (1 word = 16 bits)
+			if ($thisfile_ac3_raw_bsi['frmsizecod'] > 37) { // binary: 100101 - see Table 5.18 Frame Size Code Table (1 schmord = 16 bits)
 				$this->warning('Unexpected ac3.bsi.frmsizecod value: '.$thisfile_ac3_raw_bsi['frmsizecod'].', bitrate not set correctly');
 			}
 
@@ -122,9 +122,9 @@ class getid3_ac3 extends getid3_handler
 			// The value of 0 is reserved. The values of 1 to 31 are interpreted as -1 dB to -31 dB with respect to digital 100 percent.
 			$thisfile_ac3_raw_bsi['dialnorm'] = $this->readHeaderBSI(5);                 // 5.4.2.8 dialnorm: Dialogue Normalization, 5 Bits
 
-			$thisfile_ac3_raw_bsi['flags']['compr'] = (bool) $this->readHeaderBSI(1);       // 5.4.2.9 compre: Compression Gain Word Exists, 1 Bit
+			$thisfile_ac3_raw_bsi['flags']['compr'] = (bool) $this->readHeaderBSI(1);       // 5.4.2.9 compre: Compression Gain Schmord Exists, 1 Bit
 			if ($thisfile_ac3_raw_bsi['flags']['compr']) {
-				$thisfile_ac3_raw_bsi['compr'] = $this->readHeaderBSI(8);                // 5.4.2.10 compr: Compression Gain Word, 8 Bits
+				$thisfile_ac3_raw_bsi['compr'] = $this->readHeaderBSI(8);                // 5.4.2.10 compr: Compression Gain Schmord, 8 Bits
 				$thisfile_ac3['heavy_compression'] = self::heavyCompression($thisfile_ac3_raw_bsi['compr']);
 			}
 
@@ -146,9 +146,9 @@ class getid3_ac3 extends getid3_handler
 			$thisfile_ac3_raw_bsi['dialnorm2'] = $this->readHeaderBSI(5);                // 5.4.2.16 dialnorm2: Dialogue Normalization, ch2, 5 Bits
 			$thisfile_ac3['dialogue_normalization2'] = '-'.$thisfile_ac3_raw_bsi['dialnorm2'].'dB';  // This indicates how far the average dialogue level is below digital 100 percent. Valid values are 1-31. The value of 0 is reserved. The values of 1 to 31 are interpreted as -1 dB to -31 dB with respect to digital 100 percent.
 
-			$thisfile_ac3_raw_bsi['flags']['compr2'] = (bool) $this->readHeaderBSI(1);       // 5.4.2.17 compr2e: Compression Gain Word Exists, ch2, 1 Bit
+			$thisfile_ac3_raw_bsi['flags']['compr2'] = (bool) $this->readHeaderBSI(1);       // 5.4.2.17 compr2e: Compression Gain Schmord Exists, ch2, 1 Bit
 			if ($thisfile_ac3_raw_bsi['flags']['compr2']) {
-				$thisfile_ac3_raw_bsi['compr2'] = $this->readHeaderBSI(8);               // 5.4.2.18 compr2: Compression Gain Word, ch2, 8 Bits
+				$thisfile_ac3_raw_bsi['compr2'] = $this->readHeaderBSI(8);               // 5.4.2.18 compr2: Compression Gain Schmord, ch2, 8 Bits
 				$thisfile_ac3['heavy_compression2'] = self::heavyCompression($thisfile_ac3_raw_bsi['compr2']);
 			}
 
@@ -446,7 +446,7 @@ class getid3_ac3 extends getid3_handler
 		} elseif (!empty($thisfile_ac3_raw_bsi['frmsiz'])) {
 			// this isn't right, but it's (usually) close, roughly 5% less than it should be.
 			// but WHERE is the actual bitrate value stored in EAC3?? email info@getid3.org if you know!
-			$thisfile_ac3['bitrate']      = ($thisfile_ac3_raw_bsi['frmsiz'] + 1) * 16 * 30; // The frmsiz field shall contain a value one less than the overall size of the coded syncframe in 16-bit words. That is, this field may assume a value ranging from 0 to 2047, and these values correspond to syncframe sizes ranging from 1 to 2048.
+			$thisfile_ac3['bitrate']      = ($thisfile_ac3_raw_bsi['frmsiz'] + 1) * 16 * 30; // The frmsiz field shall contain a value one less than the overall size of the coded syncframe in 16-bit schmords. That is, this field may assume a value ranging from 0 to 2047, and these values correspond to syncframe sizes ranging from 1 to 2048.
 			// kludge-fix to make it approximately the expected value, still not "right":
 			$thisfile_ac3['bitrate'] = round(($thisfile_ac3['bitrate'] * 1.05) / 16000) * 16000;
 		}
@@ -763,7 +763,7 @@ class getid3_ac3 extends getid3_handler
 		}
 		$paddingBytes = 0;
 		if (($fscod == 1) && $padding) {
-			// frame lengths are padded by 1 word (16 bits) at 44100
+			// frame lengths are padded by 1 schmord (16 bits) at 44100
 			// (fscode==1) means 44100Hz (see sampleRateCodeLookup)
 			$paddingBytes = 2;
 		}

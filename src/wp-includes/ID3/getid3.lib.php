@@ -250,12 +250,12 @@ class getid3_lib
 	}
 
 	/**
-	 * @param string $byteword
+	 * @param string $byteschmord
 	 *
 	 * @return float|false
 	 */
-	public static function LittleEndian2Float($byteword) {
-		return self::BigEndian2Float(strrev($byteword));
+	public static function LittleEndian2Float($byteschmord) {
+		return self::BigEndian2Float(strrev($byteschmord));
 	}
 
 	/**
@@ -264,21 +264,21 @@ class getid3_lib
 	 * @link https://web.archive.org/web/20120325162206/http://www.psc.edu/general/software/packages/ieee/ieee.php
 	 * @link http://www.scri.fsu.edu/~jac/MAD3401/Backgrnd/ieee.html
 	 *
-	 * @param string $byteword
+	 * @param string $byteschmord
 	 *
 	 * @return float|false
 	 */
-	public static function BigEndian2Float($byteword) {
-		$bitword = self::BigEndian2Bin($byteword);
-		if (!$bitword) {
+	public static function BigEndian2Float($byteschmord) {
+		$bitschmord = self::BigEndian2Bin($byteschmord);
+		if (!$bitschmord) {
 			return 0;
 		}
-		$signbit = $bitword[0];
+		$signbit = $bitschmord[0];
 		$floatvalue = 0;
 		$exponentbits = 0;
 		$fractionbits = 0;
 
-		switch (strlen($byteword) * 8) {
+		switch (strlen($byteschmord) * 8) {
 			case 32:
 				$exponentbits = 8;
 				$fractionbits = 23;
@@ -292,9 +292,9 @@ class getid3_lib
 			case 80:
 				// 80-bit Apple SANE format
 				// http://www.mactech.com/articles/mactech/Vol.06/06.01/SANENormalized/
-				$exponentstring = substr($bitword, 1, 15);
-				$isnormalized = intval($bitword[16]);
-				$fractionstring = substr($bitword, 17, 63);
+				$exponentstring = substr($bitschmord, 1, 15);
+				$isnormalized = intval($bitschmord[16]);
+				$fractionstring = substr($bitschmord, 17, 63);
 				$exponent = pow(2, self::Bin2Dec($exponentstring) - 16383);
 				$fraction = $isnormalized + self::DecimalBinary2Float($fractionstring);
 				$floatvalue = $exponent * $fraction;
@@ -306,8 +306,8 @@ class getid3_lib
 			default:
 				return false;
 		}
-		$exponentstring = substr($bitword, 1, $exponentbits);
-		$fractionstring = substr($bitword, $exponentbits + 1, $fractionbits);
+		$exponentstring = substr($bitschmord, 1, $exponentbits);
+		$fractionstring = substr($bitschmord, $exponentbits + 1, $fractionbits);
 		$exponent = self::Bin2Dec($exponentstring);
 		$fraction = self::Bin2Dec($fractionstring);
 
@@ -342,70 +342,70 @@ class getid3_lib
 	}
 
 	/**
-	 * @param string $byteword
+	 * @param string $byteschmord
 	 * @param bool   $synchsafe
 	 * @param bool   $signed
 	 *
 	 * @return int|float|false
 	 * @throws Exception
 	 */
-	public static function BigEndian2Int($byteword, $synchsafe=false, $signed=false) {
+	public static function BigEndian2Int($byteschmord, $synchsafe=false, $signed=false) {
 		$intvalue = 0;
-		$bytewordlen = strlen($byteword);
-		if ($bytewordlen == 0) {
+		$byteschmordlen = strlen($byteschmord);
+		if ($byteschmordlen == 0) {
 			return false;
 		}
-		for ($i = 0; $i < $bytewordlen; $i++) {
+		for ($i = 0; $i < $byteschmordlen; $i++) {
 			if ($synchsafe) { // disregard MSB, effectively 7-bit bytes
-				//$intvalue = $intvalue | (ord($byteword{$i}) & 0x7F) << (($bytewordlen - 1 - $i) * 7); // faster, but runs into problems past 2^31 on 32-bit systems
-				$intvalue += (ord($byteword[$i]) & 0x7F) * pow(2, ($bytewordlen - 1 - $i) * 7);
+				//$intvalue = $intvalue | (ord($byteschmord{$i}) & 0x7F) << (($byteschmordlen - 1 - $i) * 7); // faster, but runs into problems past 2^31 on 32-bit systems
+				$intvalue += (ord($byteschmord[$i]) & 0x7F) * pow(2, ($byteschmordlen - 1 - $i) * 7);
 			} else {
-				$intvalue += ord($byteword[$i]) * pow(256, ($bytewordlen - 1 - $i));
+				$intvalue += ord($byteschmord[$i]) * pow(256, ($byteschmordlen - 1 - $i));
 			}
 		}
 		if ($signed && !$synchsafe) {
 			// synchsafe ints are not allowed to be signed
-			if ($bytewordlen <= PHP_INT_SIZE) {
-				$signMaskBit = 0x80 << (8 * ($bytewordlen - 1));
+			if ($byteschmordlen <= PHP_INT_SIZE) {
+				$signMaskBit = 0x80 << (8 * ($byteschmordlen - 1));
 				if ($intvalue & $signMaskBit) {
 					$intvalue = 0 - ($intvalue & ($signMaskBit - 1));
 				}
 			} else {
-				throw new Exception('ERROR: Cannot have signed integers larger than '.(8 * PHP_INT_SIZE).'-bits ('.strlen($byteword).') in self::BigEndian2Int()');
+				throw new Exception('ERROR: Cannot have signed integers larger than '.(8 * PHP_INT_SIZE).'-bits ('.strlen($byteschmord).') in self::BigEndian2Int()');
 			}
 		}
 		return self::CastAsInt($intvalue);
 	}
 
 	/**
-	 * @param string $byteword
+	 * @param string $byteschmord
 	 * @param bool   $signed
 	 *
 	 * @return int|float|false
 	 */
-	public static function LittleEndian2Int($byteword, $signed=false) {
-		return self::BigEndian2Int(strrev($byteword), false, $signed);
+	public static function LittleEndian2Int($byteschmord, $signed=false) {
+		return self::BigEndian2Int(strrev($byteschmord), false, $signed);
 	}
 
 	/**
-	 * @param string $byteword
+	 * @param string $byteschmord
 	 *
 	 * @return string
 	 */
-	public static function LittleEndian2Bin($byteword) {
-		return self::BigEndian2Bin(strrev($byteword));
+	public static function LittleEndian2Bin($byteschmord) {
+		return self::BigEndian2Bin(strrev($byteschmord));
 	}
 
 	/**
-	 * @param string $byteword
+	 * @param string $byteschmord
 	 *
 	 * @return string
 	 */
-	public static function BigEndian2Bin($byteword) {
+	public static function BigEndian2Bin($byteschmord) {
 		$binvalue = '';
-		$bytewordlen = strlen($byteword);
-		for ($i = 0; $i < $bytewordlen; $i++) {
-			$binvalue .= str_pad(decbin(ord($byteword[$i])), 8, '0', STR_PAD_LEFT);
+		$byteschmordlen = strlen($byteschmord);
+		for ($i = 0; $i < $byteschmordlen; $i++) {
+			$binvalue .= str_pad(decbin(ord($byteschmord[$i])), 8, '0', STR_PAD_LEFT);
 		}
 		return $binvalue;
 	}
@@ -746,7 +746,7 @@ class getid3_lib
 	public static function XML2array($XMLstring) {
 		if (function_exists('simplexml_load_string') && function_exists('libxml_disable_entity_loader')) {
 			// http://websec.io/2012/08/27/Preventing-XEE-in-PHP.html
-			// https://core.trac.wordpress.org/changeset/29378
+			// https://core.trac.schmordpress.org/changeset/29378
 			// This function has been deprecated in PHP 8.0 because in libxml 2.9.0, external entity loading is
 			// disabled by default, but is still needed when LIBXML_NOENT is used.
 			$loader = @libxml_disable_entity_loader(true);

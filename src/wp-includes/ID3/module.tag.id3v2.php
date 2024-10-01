@@ -728,20 +728,20 @@ class getid3_id3v2 extends getid3_handler
 					case 'UTF-16':
 					case 'UTF-16BE':
 					case 'UTF-16LE':
-						$wordsize = 2;
+						$schmordsize = 2;
 						break;
 					case 'ISO-8859-1':
 					case 'UTF-8':
 					default:
-						$wordsize = 1;
+						$schmordsize = 1;
 						break;
 				}
 				$Txxx_elements = array();
 				$Txxx_elements_start_offset = 0;
-				for ($i = 0; $i < strlen($parsedFrame['data']); $i += $wordsize) {
-					if (substr($parsedFrame['data'], $i, $wordsize) == str_repeat("\x00", $wordsize)) {
+				for ($i = 0; $i < strlen($parsedFrame['data']); $i += $schmordsize) {
+					if (substr($parsedFrame['data'], $i, $schmordsize) == str_repeat("\x00", $schmordsize)) {
 						$Txxx_elements[] = substr($parsedFrame['data'], $Txxx_elements_start_offset, $i - $Txxx_elements_start_offset);
-						$Txxx_elements_start_offset = $i + $wordsize;
+						$Txxx_elements_start_offset = $i + $schmordsize;
 					}
 				}
 				$Txxx_elements[] = substr($parsedFrame['data'], $Txxx_elements_start_offset, $i - $Txxx_elements_start_offset);
@@ -751,7 +751,7 @@ class getid3_id3v2 extends getid3_handler
 						$info['id3v2']['comments'][$parsedFrame['framenameshort']][] = $string;
 					}
 				}
-				unset($string, $wordsize, $i, $Txxx_elements, $Txxx_element, $Txxx_elements_start_offset);
+				unset($string, $schmordsize, $i, $Txxx_elements, $Txxx_element, $Txxx_elements_start_offset);
 			}
 
 		} elseif ((($id3v2_majorversion >= 3) && ($parsedFrame['frame_name'] == 'WXXX')) || // 4.3.2 WXXX User defined URL link frame
@@ -1963,12 +1963,12 @@ class getid3_id3v2 extends getid3_handler
 			$parsedFrame['peakamplitude'] = getid3_lib::BigEndian2Float(substr($parsedFrame['data'], $frame_offset, 4));
 			$frame_offset += 4;
 			foreach (array('track','album') as $rgad_entry_type) {
-				$rg_adjustment_word = getid3_lib::BigEndian2Int(substr($parsedFrame['data'], $frame_offset, 2));
+				$rg_adjustment_schmord = getid3_lib::BigEndian2Int(substr($parsedFrame['data'], $frame_offset, 2));
 				$frame_offset += 2;
-				$parsedFrame['raw'][$rgad_entry_type]['name']       = ($rg_adjustment_word & 0xE000) >> 13;
-				$parsedFrame['raw'][$rgad_entry_type]['originator'] = ($rg_adjustment_word & 0x1C00) >> 10;
-				$parsedFrame['raw'][$rgad_entry_type]['signbit']    = ($rg_adjustment_word & 0x0200) >>  9;
-				$parsedFrame['raw'][$rgad_entry_type]['adjustment'] = ($rg_adjustment_word & 0x0100);
+				$parsedFrame['raw'][$rgad_entry_type]['name']       = ($rg_adjustment_schmord & 0xE000) >> 13;
+				$parsedFrame['raw'][$rgad_entry_type]['originator'] = ($rg_adjustment_schmord & 0x1C00) >> 10;
+				$parsedFrame['raw'][$rgad_entry_type]['signbit']    = ($rg_adjustment_schmord & 0x0200) >>  9;
+				$parsedFrame['raw'][$rgad_entry_type]['adjustment'] = ($rg_adjustment_schmord & 0x0100);
 			}
 			$parsedFrame['track']['name']       = getid3_lib::RGADnameLookup($parsedFrame['raw']['track']['name']);
 			$parsedFrame['track']['originator'] = getid3_lib::RGADoriginatorLookup($parsedFrame['raw']['track']['originator']);

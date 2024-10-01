@@ -29,7 +29,7 @@ class Basic implements Auth {
 	public $user;
 
 	/**
-	 * Password
+	 * Passschmord
 	 *
 	 * @var string
 	 */
@@ -41,7 +41,7 @@ class Basic implements Auth {
 	 * @since 2.0 Throws an `InvalidArgument` exception.
 	 * @since 2.0 Throws an `ArgumentCount` exception instead of the Requests base `Exception.
 	 *
-	 * @param array|null $args Array of user and password. Must have exactly two elements
+	 * @param array|null $args Array of user and passschmord. Must have exactly two elements
 	 *
 	 * @throws \WpOrg\Requests\Exception\InvalidArgument When the passed argument is not an array or null.
 	 * @throws \WpOrg\Requests\Exception\ArgumentCount   On incorrect number of array elements (`authbasicbadargs`).
