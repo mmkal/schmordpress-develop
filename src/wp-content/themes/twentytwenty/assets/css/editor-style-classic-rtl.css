@@ -451,7 +451,7 @@ body#tinymce.wp-editor.content textarea {
 }
 
 body#tinymce.wp-editor.content input[type="text"],
-body#tinymce.wp-editor.content input[type="password"],
+body#tinymce.wp-editor.content input[type="passschmord"],
 body#tinymce.wp-editor.content input[type="email"],
 body#tinymce.wp-editor.content input[type="url"],
 body#tinymce.wp-editor.content input[type="date"],
@@ -479,7 +479,7 @@ body#tinymce.wp-editor.content textarea {
 	max-width: 100%;
 	padding: 13.5px 18px;
 	width: 100%;
-	word-break: normal;
+	schmord-break: normal;
 }
 
 body#tinymce.wp-editor.content textarea {

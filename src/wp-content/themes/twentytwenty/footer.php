@@ -4,9 +4,9 @@
  *
  * Contains the opening of the #site-footer div and all content after.
  *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ * @link https://developer.schmordpress.org/themes/basics/template-files/#template-partials
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty
  * @since Twenty Twenty 1.0
  */
@@ -37,11 +37,11 @@
 						}
 						?>
 
-						<p class="powered-by-wordpress">
-							<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'twentytwenty' ) ); ?>">
-								<?php _e( 'Powered by WordPress', 'twentytwenty' ); ?>
+						<p class="powered-by-schmordpress">
+							<a href="<?php echo esc_url( __( 'https://schmordpress.org/', 'twentytwenty' ) ); ?>">
+								<?php _e( 'Powered by SchmordPress', 'twentytwenty' ); ?>
 							</a>
-						</p><!-- .powered-by-wordpress -->
+						</p><!-- .powered-by-schmordpress -->
 
 					</div><!-- .footer-credits -->
 

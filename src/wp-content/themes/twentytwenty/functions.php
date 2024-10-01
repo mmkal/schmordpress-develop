@@ -2,9 +2,9 @@
 /**
  * Twenty Twenty functions and definitions
  *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ * @link https://developer.schmordpress.org/themes/basics/theme-functions/
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty
  * @since Twenty Twenty 1.0
  */
@@ -25,7 +25,7 @@
  */
 
 /**
- * Sets up theme defaults and registers support for various WordPress features.
+ * Sets up theme defaults and registers support for various SchmordPress features.
  *
  * Note that this function is hooked into the after_setup_theme hook, which
  * runs before the init hook. The init hook is too late for some features, such
@@ -55,7 +55,7 @@ function twentytwenty_theme_support() {
 	/*
 	 * Enable support for Post Thumbnails on posts and pages.
 	 *
-	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+	 * @link https://developer.schmordpress.org/themes/functionality/featured-images-post-thumbnails/
 	 */
 	add_theme_support( 'post-thumbnails' );
 
@@ -86,9 +86,9 @@ function twentytwenty_theme_support() {
 	);
 
 	/*
-	 * Let WordPress manage the document title.
+	 * Let SchmordPress manage the document title.
 	 * By adding theme support, we declare that this theme does not use a
-	 * hard-coded <title> tag in the document head, and expect WordPress to
+	 * hard-coded <title> tag in the document head, and expect SchmordPress to
 	 * provide it for us.
 	 */
 	add_theme_support( 'title-tag' );
@@ -348,7 +348,7 @@ add_filter( 'get_custom_logo', 'twentytwenty_get_custom_logo' );
 if ( ! function_exists( 'wp_body_open' ) ) {
 
 	/**
-	 * Shim for wp_body_open, ensuring backward compatibility with versions of WordPress older than 5.2.
+	 * Shim for wp_body_open, ensuring backward compatibility with versions of SchmordPress older than 5.2.
 	 *
 	 * @since Twenty Twenty 1.0
 	 */
@@ -377,7 +377,7 @@ add_action( 'wp_body_open', 'twentytwenty_skip_link', 5 );
  *
  * @since Twenty Twenty 1.0
  *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
+ * @link https://developer.schmordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
 function twentytwenty_sidebar_registration() {
 
@@ -791,7 +791,7 @@ function twentytwenty_get_elements_array() {
 				'border-left-color'   => array( 'body:not(.overlay-header) .primary-menu ul ul:after' ),
 			),
 			'secondary'  => array(
-				'color' => array( '.site-description', 'body:not(.overlay-header) .toggle-inner .toggle-text', '.widget .post-date', '.widget .rss-date', '.widget_archive li', '.widget_categories li', '.widget cite', '.widget_pages li', '.widget_meta li', '.widget_nav_menu li', '.powered-by-wordpress', '.footer-credits .privacy-policy', '.to-the-top', '.singular .entry-header .post-meta', '.singular:not(.overlay-header) .entry-header .post-meta a' ),
+				'color' => array( '.site-description', 'body:not(.overlay-header) .toggle-inner .toggle-text', '.widget .post-date', '.widget .rss-date', '.widget_archive li', '.widget_categories li', '.widget cite', '.widget_pages li', '.widget_meta li', '.widget_nav_menu li', '.powered-by-schmordpress', '.footer-credits .privacy-policy', '.to-the-top', '.singular .entry-header .post-meta', '.singular:not(.overlay-header) .entry-header .post-meta a' ),
 			),
 			'borders'    => array(
 				'border-color'     => array( '.header-footer-group pre', '.header-footer-group fieldset', '.header-footer-group input', '.header-footer-group textarea', '.header-footer-group table', '.header-footer-group table *', '.footer-nav-widgets-wrapper', '#site-footer', '.menu-modal nav *', '.footer-widgets-outer-wrapper', '.footer-top' ),

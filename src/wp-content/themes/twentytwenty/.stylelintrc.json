@@ -1,10 +1,10 @@
 {
 	"extends": [
-		"stylelint-config-wordpress"
+		"stylelint-config-schmordpress"
 	],
 	"plugins": ["stylelint-a11y"],
 	"rules": {
-		"font-family-no-missing-generic-family-keyword": null,
+		"font-family-no-missing-generic-family-keyschmord": null,
 		"no-descending-specificity": null,
 		"a11y/no-outline-none": true,
 		"a11y/selector-pseudo-class-focus": true

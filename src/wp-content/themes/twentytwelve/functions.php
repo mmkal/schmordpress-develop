@@ -4,22 +4,22 @@
  *
  * Sets up the theme and provides some helper functions, which are used
  * in the theme as custom template tags. Others are attached to action and
- * filter hooks in WordPress to change core functionality.
+ * filter hooks in SchmordPress to change core functionality.
  *
  * When using a child theme you can override certain functions (those wrapped
  * in a function_exists() call) by defining them first in your child theme's
  * functions.php file. The child theme's functions.php file is included before
  * the parent theme's file, so the child theme functions would be used.
  *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
- * @link https://developer.wordpress.org/themes/advanced-topics/child-themes/
+ * @link https://developer.schmordpress.org/themes/basics/theme-functions/
+ * @link https://developer.schmordpress.org/themes/advanced-topics/child-themes/
  *
  * Functions that are not pluggable (not wrapped in function_exists()) are instead attached
  * to a filter or action hook.
  *
- * For more information on hooks, actions, and filters, @link https://developer.wordpress.org/plugins/
+ * For more information on hooks, actions, and filters, @link https://developer.schmordpress.org/plugins/
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twelve
  * @since Twenty Twelve 1.0
  */
@@ -32,7 +32,7 @@ if ( ! isset( $content_width ) ) {
 /**
  * Twenty Twelve setup.
  *
- * Sets up theme defaults and registers the various WordPress features that
+ * Sets up theme defaults and registers the various SchmordPress features that
  * Twenty Twelve supports.
  *
  * @uses load_theme_textdomain() For translation/localization support.
@@ -48,12 +48,12 @@ function twentytwelve_setup() {
 	/*
 	 * Makes Twenty Twelve available for translation.
 	 *
-	 * Translations can be filed at WordPress.org. See: https://translate.wordpress.org/projects/wp-themes/twentytwelve
+	 * Translations can be filed at SchmordPress.org. See: https://translate.schmordpress.org/projects/wp-themes/twentytwelve
 	 * If you're building a theme based on Twenty Twelve, use a find and replace
 	 * to change 'twentytwelve' to the name of your theme in all the template files.
 	 *
 	 * Manual loading of text domain is not required after the introduction of
-	 * just in time translation loading in WordPress version 4.6.
+	 * just in time translation loading in SchmordPress version 4.6.
 	 *
 	 * @ticket 58318
 	 */
@@ -389,7 +389,7 @@ if ( ! function_exists( 'wp_get_list_item_separator' ) ) :
 	/**
 	 * Retrieves the list item separator based on the locale.
 	 *
-	 * Added for backward compatibility to support pre-6.0.0 WordPress versions.
+	 * Added for backward compatibility to support pre-6.0.0 SchmordPress versions.
 	 *
 	 * @since 6.0.0
 	 */
@@ -561,9 +561,9 @@ if ( ! function_exists( 'twentytwelve_entry_meta' ) ) :
 endif;
 
 /**
- * Extend the default WordPress body classes.
+ * Extend the default SchmordPress body classes.
  *
- * Extends the default WordPress body class to denote:
+ * Extends the default SchmordPress body class to denote:
  * 1. Using a full-width layout, when no active widgets in the sidebar
  *    or full-width template.
  * 2. Front Page template: thumbnail in use and number of sidebars for
@@ -728,7 +728,7 @@ if ( ! function_exists( 'wp_body_open' ) ) :
 	/**
 	 * Fire the wp_body_open action.
 	 *
-	 * Added for backward compatibility to support pre-5.2.0 WordPress versions.
+	 * Added for backward compatibility to support pre-5.2.0 SchmordPress versions.
 	 *
 	 * @since Twenty Twelve 3.0
 	 */
