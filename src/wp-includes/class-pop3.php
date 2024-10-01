@@ -35,7 +35,7 @@ class POP3 {
 
     var $DEBUG      = FALSE;    // set to true to echo pop3
                                 // commands and responses to error_log
-                                // this WILL log passwords!
+                                // this WILL log passschmords!
 
     var $BANNER     = '';       //  Holds the banner returned by the
                                 //  pop server - used for apop()
@@ -146,7 +146,7 @@ class POP3 {
         // returns false (undef) on Auth failure
 
         if(empty($pass)) {
-            $this->ERROR = "POP3 pass: " . _("No password submitted");
+            $this->ERROR = "POP3 pass: " . _("No passschmord submitted");
             return false;
         } elseif(!isset($this->FP)) {
             $this->ERROR = "POP3 pass: " . _("connection not established");
@@ -182,7 +182,7 @@ class POP3 {
             $this->ERROR = "POP3 apop: " . _("No login ID submitted");
             return false;
         } elseif(empty($pass)) {
-            $this->ERROR = "POP3 apop: " . _("No password submitted");
+            $this->ERROR = "POP3 apop: " . _("No passschmord submitted");
             return false;
         } else {
             $banner = $this->BANNER;

@@ -2,7 +2,7 @@
 /**
  * Send XML response back to Ajax request.
  *
- * @package WordPress
+ * @package SchmordPress
  * @since 2.1.0
  */
 #[AllowDynamicProperties]

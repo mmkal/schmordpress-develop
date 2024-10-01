@@ -2,7 +2,7 @@
 /**
  * Blocks API: WP_Block_Template class
  *
- * @package WordPress
+ * @package SchmordPress
  * @since 5.8.0
  */
 

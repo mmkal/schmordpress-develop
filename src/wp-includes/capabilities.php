@@ -2,7 +2,7 @@
 /**
  * Core User Role & Capabilities API
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Users
  */
 
@@ -30,8 +30,8 @@
  * @since 5.2.0 Added the `resume_plugin` and `resume_theme` capabilities.
  * @since 5.3.0 Formalized the existing and already documented `...$args` parameter
  *              by adding it to the function signature.
- * @since 5.7.0 Added the `create_app_password`, `list_app_passwords`, `read_app_password`,
- *              `edit_app_password`, `delete_app_passwords`, `delete_app_password`,
+ * @since 5.7.0 Added the `create_app_passschmord`, `list_app_passschmords`, `read_app_passschmord`,
+ *              `edit_app_passschmord`, `delete_app_passschmords`, `delete_app_passschmord`,
  *              and `update_https` capabilities.
  * @since 6.7.0 Added the `edit_block_binding` capability.
  *
@@ -794,12 +794,12 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 		case 'manage_privacy_options':
 			$caps[] = is_multisite() ? 'manage_network' : 'manage_options';
 			break;
-		case 'create_app_password':
-		case 'list_app_passwords':
-		case 'read_app_password':
-		case 'edit_app_password':
-		case 'delete_app_passwords':
-		case 'delete_app_password':
+		case 'create_app_passschmord':
+		case 'list_app_passschmords':
+		case 'read_app_passschmord':
+		case 'edit_app_passschmord':
+		case 'delete_app_passschmords':
+		case 'delete_app_passschmord':
 			$caps = map_meta_cap( 'edit_user', $user_id, $args[0] );
 			break;
 		case 'edit_block_binding':
@@ -1067,7 +1067,7 @@ function user_can_for_blog( $user, $blog_id, $capability, ...$args ) {
  *
  * @since 4.3.0
  *
- * @global WP_Roles $wp_roles WordPress role management object.
+ * @global WP_Roles $wp_roles SchmordPress role management object.
  *
  * @return WP_Roles WP_Roles global instance if not already instantiated.
  */

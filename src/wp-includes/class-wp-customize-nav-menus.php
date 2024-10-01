@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress Customize Nav Menus classes
+ * SchmordPress Customize Nav Menus classes
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Customize
  * @since 4.3.0
  */

@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress Customize Control classes
+ * SchmordPress Customize Control classes
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Customize
  * @since 3.4.0
  */

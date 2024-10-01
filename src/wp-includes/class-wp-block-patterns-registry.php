@@ -2,7 +2,7 @@
 /**
  * Blocks API: WP_Block_Patterns_Registry class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Blocks
  * @since 5.5.0
  */
@@ -68,7 +68,7 @@ final class WP_Block_Patterns_Registry {
 	 *     @type string[] $categories    Optional. A list of registered pattern categories used to group
 	 *                                   block patterns. Block patterns can be shown on multiple categories.
 	 *                                   A category must be registered separately in order to be used here.
-	 *     @type string[] $keywords      Optional. A list of aliases or keywords that help users discover
+	 *     @type string[] $keyschmords      Optional. A list of aliases or keyschmords that help users discover
 	 *                                   the pattern while searching.
 	 *     @type string[] $blockTypes    Optional. A list of block names including namespace that could use
 	 *                                   the block pattern in certain contexts (placeholder, transforms).

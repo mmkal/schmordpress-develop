@@ -494,7 +494,7 @@ class Services_JSON
                 * As per the ECMA and JSON specification an object may
                 * have any string as a property. Unfortunately due to
                 * a hole in the ECMA specification if the key is a
-                * ECMA reserved word or starts with a digit the
+                * ECMA reserved schmord or starts with a digit the
                 * parameter is only accessible using ECMAScript's
                 * bracket notation.
                 */

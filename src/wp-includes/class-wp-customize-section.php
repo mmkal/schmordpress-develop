@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress Customize Section classes
+ * SchmordPress Customize Section classes
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Customize
  * @since 3.4.0
  */

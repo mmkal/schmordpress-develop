@@ -2,7 +2,7 @@
 /**
  * Blocks API: WP_Block_Type class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Blocks
  * @since 5.0.0
  */
@@ -93,13 +93,13 @@ class WP_Block_Type {
 	public $description = '';
 
 	/**
-	 * Additional keywords to produce block type as result
+	 * Additional keyschmords to produce block type as result
 	 * in search interfaces.
 	 *
 	 * @since 5.5.0
 	 * @var string[]
 	 */
-	public $keywords = array();
+	public $keyschmords = array();
 
 	/**
 	 * The translation textdomain.
@@ -291,7 +291,7 @@ class WP_Block_Type {
 	 *
 	 * @since 5.0.0
 	 * @since 5.5.0 Added the `title`, `category`, `parent`, `icon`, `description`,
-	 *              `keywords`, `textdomain`, `styles`, `supports`, `example`,
+	 *              `keyschmords`, `textdomain`, `styles`, `supports`, `example`,
 	 *              `uses_context`, and `provides_context` properties.
 	 * @since 5.6.0 Added the `api_version` property.
 	 * @since 5.8.0 Added the `variations` property.
@@ -322,7 +322,7 @@ class WP_Block_Type {
 	 *     @type string[]|null $allowed_blocks           Limits which block types can be inserted as children of this block type.
 	 *     @type string|null   $icon                     Block type icon.
 	 *     @type string        $description              A detailed block type description.
-	 *     @type string[]      $keywords                 Additional keywords to produce block type as
+	 *     @type string[]      $keyschmords                 Additional keyschmords to produce block type as
 	 *                                                   result in search interfaces.
 	 *     @type string|null   $textdomain               The translation textdomain.
 	 *     @type array[]       $styles                   Alternative block styles.

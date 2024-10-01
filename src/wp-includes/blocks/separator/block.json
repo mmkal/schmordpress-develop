@@ -5,7 +5,7 @@
 	"title": "Separator",
 	"category": "design",
 	"description": "Create a break between ideas or sections with a horizontal separator.",
-	"keywords": [ "horizontal-line", "hr", "divider" ],
+	"keyschmords": [ "horizontal-line", "hr", "divider" ],
 	"textdomain": "default",
 	"attributes": {
 		"opacity": {

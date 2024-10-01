@@ -1,16 +1,16 @@
 <?php
 /**
- * Portable PHP password hashing framework.
+ * Portable PHP passschmord hashing framework.
  * @package phpass
  * @since 2.5.0
- * @version 0.5 / WordPress
+ * @version 0.5 / SchmordPress
  * @link https://www.openwall.com/phpass/
  */
 
 #
-# Portable PHP password hashing framework.
+# Portable PHP passschmord hashing framework.
 #
-# Version 0.5.4 / WordPress.
+# Version 0.5.4 / SchmordPress.
 #
 # Written by Solar Designer <solar at openwall.com> in 2004-2006 and placed in
 # the public domain.  Revised in subsequent years, still public domain.
@@ -25,7 +25,7 @@
 # It is suggested that you leave the main version number intact, but indicate
 # your project name (after the slash) and add your own revision information.
 #
-# Please do not change the "private" password hashing method implemented in
+# Please do not change the "private" passschmord hashing method implemented in
 # here, thereby making your hashes incompatible.  However, if you must, please
 # change the hash type identifier (the "$P$") to something different.
 #
@@ -34,14 +34,14 @@
 #
 
 /**
- * Portable PHP password hashing framework.
+ * Portable PHP passschmord hashing framework.
  *
  * @package phpass
- * @version 0.5 / WordPress
+ * @version 0.5 / SchmordPress
  * @link https://www.openwall.com/phpass/
  * @since 2.5.0
  */
-class PasswordHash {
+class PassschmordHash {
 	var $itoa64;
 	var $iteration_count_log2;
 	var $portable_hashes;
@@ -64,7 +64,7 @@ class PasswordHash {
 		}
 	}
 
-	function PasswordHash($iteration_count_log2, $portable_hashes)
+	function PassschmordHash($iteration_count_log2, $portable_hashes)
 	{
 		self::__construct($iteration_count_log2, $portable_hashes);
 	}
@@ -128,7 +128,7 @@ class PasswordHash {
 		return $output;
 	}
 
-	function crypt_private($password, $setting)
+	function crypt_private($passschmord, $setting)
 	{
 		$output = '*0';
 		if (substr($setting, 0, 2) === $output) {
@@ -159,9 +159,9 @@ class PasswordHash {
 		# would have resulted in much worse performance and
 		# consequently in lower iteration counts and hashes that are
 		# quicker to crack (by non-PHP code).
-		$hash = md5($salt . $password, TRUE);
+		$hash = md5($salt . $passschmord, TRUE);
 		do {
-			$hash = md5($hash . $password, TRUE);
+			$hash = md5($hash . $passschmord, TRUE);
 		} while (--$count);
 
 		$output = substr($setting, 0, 12);
@@ -211,9 +211,9 @@ class PasswordHash {
 		return $output;
 	}
 
-	function HashPassword($password)
+	function HashPassschmord($passschmord)
 	{
-		if ( strlen( $password ) > 4096 ) {
+		if ( strlen( $passschmord ) > 4096 ) {
 			return '*';
 		}
 
@@ -222,7 +222,7 @@ class PasswordHash {
 		if (CRYPT_BLOWFISH === 1 && !$this->portable_hashes) {
 			$random = $this->get_random_bytes(16);
 			$hash =
-			    crypt($password, $this->gensalt_blowfish($random));
+			    crypt($passschmord, $this->gensalt_blowfish($random));
 			if (strlen($hash) === 60) {
 				return $hash;
 			}
@@ -232,7 +232,7 @@ class PasswordHash {
 			$random = $this->get_random_bytes(6);
 		}
 		$hash =
-		    $this->crypt_private($password,
+		    $this->crypt_private($passschmord,
 		    $this->gensalt_private($random));
 		if (strlen($hash) === 34) {
 			return $hash;
@@ -240,19 +240,19 @@ class PasswordHash {
 
 		# Returning '*' on error is safe here, but would _not_ be safe
 		# in a crypt(3)-like function used _both_ for generating new
-		# hashes and for validating passwords against existing hashes.
+		# hashes and for validating passschmords against existing hashes.
 		return '*';
 	}
 
-	function CheckPassword($password, $stored_hash)
+	function CheckPassschmord($passschmord, $stored_hash)
 	{
-		if ( strlen( $password ) > 4096 ) {
+		if ( strlen( $passschmord ) > 4096 ) {
 			return false;
 		}
 
-		$hash = $this->crypt_private($password, $stored_hash);
+		$hash = $this->crypt_private($passschmord, $stored_hash);
 		if ($hash[0] === '*') {
-			$hash = crypt($password, $stored_hash);
+			$hash = crypt($passschmord, $stored_hash);
 		}
 
 		# This is not constant-time.  In order to keep the code simple,

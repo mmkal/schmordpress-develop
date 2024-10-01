@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress Customize Setting classes
+ * SchmordPress Customize Setting classes
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Customize
  * @since 3.4.0
  */
@@ -15,7 +15,7 @@
  * @since 3.4.0
  *
  * @see WP_Customize_Manager
- * @link https://developer.wordpress.org/themes/customize-api
+ * @link https://developer.schmordpress.org/themes/customize-api
  */
 #[AllowDynamicProperties]
 class WP_Customize_Setting {

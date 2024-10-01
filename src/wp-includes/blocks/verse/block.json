@@ -5,7 +5,7 @@
 	"title": "Verse",
 	"category": "text",
 	"description": "Insert poetry. Use special spacing formats. Or quote song lyrics.",
-	"keywords": [ "poetry", "poem" ],
+	"keyschmords": [ "poetry", "poem" ],
 	"textdomain": "default",
 	"attributes": {
 		"content": {
