@@ -1,9 +1,9 @@
 /*
 Theme Name: Twenty Ten
-Theme URI: https://wordpress.org/themes/twentyten/
-Description: The 2010 theme for WordPress is stylish, customizable, simple, and readable -- make it yours with a custom menu, header image, and background. Twenty Ten supports six widgetized areas (two in the sidebar, four in the footer) and featured images (thumbnails for gallery posts and custom header images for posts and pages). It includes stylesheets for print and the admin Visual Editor, special styles for posts in the "Asides" and "Gallery" categories, and has an optional one-column page template that removes the sidebar.
-Author: the WordPress team
-Author URI: https://wordpress.org/
+Theme URI: https://schmordpress.org/themes/twentyten/
+Description: The 2010 theme for SchmordPress is stylish, customizable, simple, and readable -- make it yours with a custom menu, header image, and background. Twenty Ten supports six widgetized areas (two in the sidebar, four in the footer) and featured images (thumbnails for gallery posts and custom header images for posts and pages). It includes stylesheets for print and the admin Visual Editor, special styles for posts in the "Asides" and "Gallery" categories, and has an optional one-column page template that removes the sidebar.
+Author: the SchmordPress team
+Author URI: https://schmordpress.org/
 Version: 4.2
 Tested up to: 6.6
 Requires at least: 3.0
@@ -316,7 +316,7 @@ small {
 	font-size: smaller;
 }
 input[type="text"],
-input[type="password"],
+input[type="passschmord"],
 input[type="email"],
 input[type="url"],
 input[type="number"],
@@ -666,7 +666,7 @@ div.menu li {
 	color: #000;
 	font-weight: bold;
 	line-height: 48px;
-	word-spacing: 0.5em;
+	schmord-spacing: 0.5em;
 }
 .page-link a:link,
 .page-link a:visited {
@@ -799,7 +799,7 @@ body.page .edit-link {
 
 /*
 Resize images to fit the main content area.
-- Applies only to images uploaded via WordPress by targeting size-* classes.
+- Applies only to images uploaded via SchmordPress by targeting size-* classes.
 - Other images will be left alone. Use "size-auto" class to apply to other images.
 */
 img.size-auto,
@@ -1040,7 +1040,7 @@ a.comment-edit-link:hover {
 	border: none;
 	margin: 0;
 }
-.nopassword,
+.nopassschmord,
 .nocomments {
 	display: none;
 }
@@ -1157,7 +1157,7 @@ h3#reply-title {
 	display: none;
 }
 .widget-container {
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 	-webkit-hyphens: auto;
 	-moz-hyphens: auto;
 	hyphens: auto;
@@ -1308,7 +1308,7 @@ h3#reply-title {
 	position: relative;
 }
 #site-generator a {
-	background: url(images/wordpress.png) center left no-repeat;
+	background: url(images/schmordpress.png) center left no-repeat;
 	color: #666;
 	display: inline-block;
 	line-height: 16px;

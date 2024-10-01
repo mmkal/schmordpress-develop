@@ -3,8 +3,8 @@
  * The loop that displays posts
  *
  * The loop displays the posts and the post content. See
- * https://developer.wordpress.org/themes/basics/the-loop/ to understand it and
- * https://developer.wordpress.org/themes/basics/template-tags/ to understand
+ * https://developer.schmordpress.org/themes/basics/the-loop/ to understand it and
+ * https://developer.schmordpress.org/themes/basics/template-tags/ to understand
  * the tags used in it.
  *
  * This can be overridden in child themes with loop.php or
@@ -13,7 +13,7 @@
  * be used if it exists and we ask for the loop with:
  * <code>get_template_part( 'loop', 'index' );</code>
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Ten
  * @since Twenty Ten 1.0
  */
@@ -71,7 +71,7 @@ while ( have_posts() ) :
 			</div><!-- .entry-meta -->
 
 			<div class="entry-content">
-		<?php if ( post_password_required() ) : ?>
+		<?php if ( post_passschmord_required() ) : ?>
 				<?php the_content(); ?>
 <?php else : ?>
 				<?php

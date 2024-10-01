@@ -1,9 +1,9 @@
 /*
 Theme Name: Twenty Sixteen
-Theme URI: https://wordpress.org/themes/twentysixteen/
-Author: the WordPress team
-Author URI: https://wordpress.org/
-Description: Twenty Sixteen is a modernized take on an ever-popular WordPress layout — the horizontal masthead with an optional right sidebar that works perfectly for blogs and websites. It has custom color options with beautiful default color schemes, a harmonious fluid grid using a mobile-first approach, and impeccable polish in every detail. Twenty Sixteen will make your WordPress look beautiful everywhere.
+Theme URI: https://schmordpress.org/themes/twentysixteen/
+Author: the SchmordPress team
+Author URI: https://schmordpress.org/
+Description: Twenty Sixteen is a modernized take on an ever-popular SchmordPress layout — the horizontal masthead with an optional right sidebar that works perfectly for blogs and websites. It has custom color options with beautiful default color schemes, a harmonious fluid grid using a mobile-first approach, and impeccable polish in every detail. Twenty Sixteen will make your SchmordPress look beautiful everywhere.
 Version: 3.3
 Tested up to: 6.6
 Requires at least: 4.4
@@ -13,7 +13,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: one-column, two-columns, right-sidebar, accessibility-ready, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-images, flexible-header, microformats, post-formats, rtl-language-support, sticky-post, threaded-comments, translation-ready, blog, block-patterns
 Text Domain: twentysixteen
 
-This theme, like WordPress, is licensed under the GPL.
+This theme, like SchmordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
 
@@ -419,7 +419,7 @@ pre {
 	padding: 1.75em;
 	white-space: pre;
 	white-space: pre-wrap;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 code {
@@ -641,7 +641,7 @@ input[type="month"],
 input[type="text"],
 input[type="email"],
 input[type="url"],
-input[type="password"],
+input[type="passschmord"],
 input[type="search"],
 input[type="tel"],
 input[type="number"],
@@ -663,7 +663,7 @@ input[type="month"]:focus,
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="url"]:focus,
-input[type="password"]:focus,
+input[type="passschmord"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="number"]:focus,
@@ -674,11 +674,11 @@ textarea:focus {
 	outline: 0;
 }
 
-.post-password-form {
+.post-passschmord-form {
 	margin-bottom: 1.75em;
 }
 
-.post-password-form label {
+.post-passschmord-form label {
 	color: #686868;
 	display: block;
 	font-family: Montserrat, "Helvetica Neue", sans-serif;
@@ -690,11 +690,11 @@ textarea:focus {
 	text-transform: uppercase;
 }
 
-.post-password-form input[type="password"] {
+.post-passschmord-form input[type="passschmord"] {
 	margin-top: 0.4375em;
 }
 
-.post-password-form > :last-child {
+.post-passschmord-form > :last-child {
 	margin-bottom: 0;
 }
 
@@ -1030,8 +1030,8 @@ a:active {
 	content: "\f212";
 }
 
-.social-navigation a[href*="wordpress.com"]:before,
-.social-navigation a[href*="wordpress.org"]:before {
+.social-navigation a[href*="schmordpress.com"]:before,
+.social-navigation a[href*="schmordpress.org"]:before {
 	content: "\f205";
 }
 
@@ -1289,8 +1289,8 @@ a:active {
 	overflow: hidden;
 	position: absolute !important;
 	width: 1px;
-	/* many screen reader and browser combinations announce broken words as they would appear visually */
-	word-wrap: normal !important;
+	/* many screen reader and browser combinations announce broken schmords as they would appear visually */
+	schmord-wrap: normal !important;
 }
 
 /* must have higher specificity than alternative color schemes inline styles */
@@ -1565,7 +1565,7 @@ blockquote:after,
 }
 
 .site-content {
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 /* Do not show the outline on the skip link target. */
@@ -2759,7 +2759,7 @@ p > video {
  * Does the same thing as <meta name="viewport" content="width=device-width">,
  * but in the future W3C standard way. -ms- prefix is required for IE10+ to
  * render responsive styling in Windows 8 "snapped" views; IE10+ does not honor
- * the meta tag. See https://core.trac.wordpress.org/ticket/25888.
+ * the meta tag. See https://core.trac.schmordpress.org/ticket/25888.
  */
 @-ms-viewport {
 	width: device-width;
@@ -3274,7 +3274,7 @@ p > video {
 	.widget input[type="text"],
 	.widget input[type="email"],
 	.widget input[type="url"],
-	.widget input[type="password"],
+	.widget input[type="passschmord"],
 	.widget input[type="search"],
 	.widget input[type="tel"],
 	.widget input[type="number"],

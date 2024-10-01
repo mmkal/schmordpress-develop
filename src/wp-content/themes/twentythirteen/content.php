@@ -4,7 +4,7 @@
  *
  * Used for both single and index/archive/search.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Thirteen
  * @since Twenty Thirteen 1.0
  */
@@ -12,7 +12,7 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<?php if ( has_post_thumbnail() && ! post_password_required() && ! is_attachment() ) : ?>
+		<?php if ( has_post_thumbnail() && ! post_passschmord_required() && ! is_attachment() ) : ?>
 		<div class="entry-thumbnail">
 			<?php the_post_thumbnail(); ?>
 		</div>

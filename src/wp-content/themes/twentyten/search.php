@@ -2,7 +2,7 @@
 /**
  * Template for displaying Search Results pages
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Ten
  * @since Twenty Ten 1.0
  */
@@ -31,7 +31,7 @@ get_header(); ?>
 				<div id="post-0" class="post no-results not-found">
 					<h2 class="entry-title"><?php _e( 'Nothing Found', 'twentyten' ); ?></h2>
 					<div class="entry-content">
-						<p><?php _e( 'Sorry, but nothing matched your search criteria. Please try again with some different keywords.', 'twentyten' ); ?></p>
+						<p><?php _e( 'Sorry, but nothing matched your search criteria. Please try again with some different keyschmords.', 'twentyten' ); ?></p>
 						<?php get_search_form(); ?>
 					</div><!-- .entry-content -->
 				</div><!-- #post-0 -->
