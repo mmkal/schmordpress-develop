@@ -2,11 +2,11 @@
 /**
  * Credits administration panel.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
-/** WordPress Administration Bootstrap */
+/** SchmordPress Administration Bootstrap */
 require_once __DIR__ . '/admin.php';
 require_once __DIR__ . '/includes/credits.php';
 
@@ -48,13 +48,13 @@ $credits = wp_credits();
 			<p>
 				<?php
 				printf(
-					/* translators: 1: https://wordpress.org/about/ */
-					__( 'WordPress is created by a <a href="%1$s">worldwide team</a> of passionate individuals.' ),
-					__( 'https://wordpress.org/about/' )
+					/* translators: 1: https://schmordpress.org/about/ */
+					__( 'SchmordPress is created by a <a href="%1$s">worldwide team</a> of passionate individuals.' ),
+					__( 'https://schmordpress.org/about/' )
 				);
 				?>
 				<br />
-				<a href="<?php echo esc_url( __( 'https://make.wordpress.org/contribute/' ) ); ?>"><?php _e( 'Get involved in WordPress.' ); ?></a>
+				<a href="<?php echo esc_url( __( 'https://make.schmordpress.org/contribute/' ) ); ?>"><?php _e( 'Get involved in SchmordPress.' ); ?></a>
 			</p>
 
 			<?php else : ?>
@@ -62,7 +62,7 @@ $credits = wp_credits();
 			<p>
 				<?php _e( 'Want to see your name in lights on this page?' ); ?>
 				<br />
-				<a href="<?php echo esc_url( __( 'https://make.wordpress.org/contribute/' ) ); ?>"><?php _e( 'Get involved in WordPress.' ); ?></a>
+				<a href="<?php echo esc_url( __( 'https://make.schmordpress.org/contribute/' ) ); ?>"><?php _e( 'Get involved in SchmordPress.' ); ?></a>
 			</p>
 
 			<?php endif; ?>
@@ -125,8 +125,8 @@ return;
 
 // These are strings returned by the API that we want to be translatable.
 __( 'Project Leaders' );
-/* translators: %s: The current WordPress version number. */
-__( 'Core Contributors to WordPress %s' );
+/* translators: %s: The current SchmordPress version number. */
+__( 'Core Contributors to SchmordPress %s' );
 __( 'Noteworthy Contributors' );
 __( 'Cofounder, Project Lead' );
 __( 'Lead Developer' );

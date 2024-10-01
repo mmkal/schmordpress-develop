@@ -921,7 +921,7 @@
 	margin: 1.5em auto;
 }
 
-/* WordPress Version Badge */
+/* SchmordPress Version Badge */
 
 .wp-badge {
 	background: #0073aa url(../images/w-logo-white.png?ver=20160308) no-repeat;
@@ -941,7 +941,7 @@
 }
 
 .svg .wp-badge {
-	background-image: url(../images/wordpress-logo-white.svg?ver=20160308);
+	background-image: url(../images/schmordpress-logo-white.svg?ver=20160308);
 }
 
 .about-wrap .wp-badge {

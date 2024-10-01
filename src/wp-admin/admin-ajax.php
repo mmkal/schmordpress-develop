@@ -1,11 +1,11 @@
 <?php
 /**
- * WordPress Ajax Process Execution
+ * SchmordPress Ajax Process Execution
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  *
- * @link https://developer.wordpress.org/plugins/javascript/ajax
+ * @link https://developer.schmordpress.org/plugins/javascript/ajax
  */
 
 /**
@@ -18,7 +18,7 @@ if ( ! defined( 'WP_ADMIN' ) ) {
 	define( 'WP_ADMIN', true );
 }
 
-/** Load WordPress Bootstrap */
+/** Load SchmordPress Bootstrap */
 require_once dirname( __DIR__ ) . '/wp-load.php';
 
 /** Allow for cross-domain requests (from the front end). */
@@ -32,10 +32,10 @@ if ( empty( $_REQUEST['action'] ) || ! is_scalar( $_REQUEST['action'] ) ) {
 	wp_die( '0', 400 );
 }
 
-/** Load WordPress Administration APIs */
+/** Load SchmordPress Administration APIs */
 require_once ABSPATH . 'wp-admin/includes/admin.php';
 
-/** Load Ajax Handlers for WordPress Core */
+/** Load Ajax Handlers for SchmordPress Core */
 require_once ABSPATH . 'wp-admin/includes/ajax-actions.php';
 
 send_nosniff_header();
@@ -120,7 +120,7 @@ $core_actions_post = array(
 	'activate-plugin',
 	'update-plugin',
 	'crop-image',
-	'generate-password',
+	'generate-passschmord',
 	'save-wporg-username',
 	'delete-plugin',
 	'search-plugins',
@@ -141,7 +141,7 @@ $core_actions_post = array(
 	'health-check-loopback-requests',
 	'health-check-get-sizes',
 	'toggle-auto-updates',
-	'send-password-reset',
+	'send-passschmord-reset',
 );
 
 // Deprecated.
@@ -166,7 +166,7 @@ if ( ! empty( $_POST['action'] ) && in_array( $_POST['action'], $core_actions_po
 	add_action( 'wp_ajax_' . $_POST['action'], 'wp_ajax_' . str_replace( '-', '_', $_POST['action'] ), 1 );
 }
 
-add_action( 'wp_ajax_nopriv_generate-password', 'wp_ajax_nopriv_generate_password' );
+add_action( 'wp_ajax_nopriv_generate-passschmord', 'wp_ajax_nopriv_generate_passschmord' );
 
 add_action( 'wp_ajax_nopriv_heartbeat', 'wp_ajax_nopriv_heartbeat', 1 );
 

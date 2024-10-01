@@ -2,19 +2,19 @@
 /**
  * Authorize Application Screen
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
-/** WordPress Administration Bootstrap */
+/** SchmordPress Administration Bootstrap */
 require_once __DIR__ . '/admin.php';
 
 $error        = null;
-$new_password = '';
+$new_passschmord = '';
 
 // This is the no-js fallback script. Generally this will all be handled by `auth-app.js`.
-if ( isset( $_POST['action'] ) && 'authorize_application_password' === $_POST['action'] ) {
-	check_admin_referer( 'authorize_application_password' );
+if ( isset( $_POST['action'] ) && 'authorize_application_passschmord' === $_POST['action'] ) {
+	check_admin_referer( 'authorize_application_passschmord' );
 
 	$success_url = $_POST['success_url'];
 	$reject_url  = $_POST['reject_url'];
@@ -29,7 +29,7 @@ if ( isset( $_POST['action'] ) && 'authorize_application_password' === $_POST['a
 			$redirect = admin_url();
 		}
 	} elseif ( isset( $_POST['approve'] ) ) {
-		$created = WP_Application_Passwords::create_new_application_password(
+		$created = WP_Application_Passschmords::create_new_application_passschmord(
 			get_current_user_id(),
 			array(
 				'name'   => $app_name,
@@ -40,14 +40,14 @@ if ( isset( $_POST['action'] ) && 'authorize_application_password' === $_POST['a
 		if ( is_wp_error( $created ) ) {
 			$error = $created;
 		} else {
-			list( $new_password ) = $created;
+			list( $new_passschmord ) = $created;
 
 			if ( $success_url ) {
 				$redirect = add_query_arg(
 					array(
 						'site_url'   => urlencode( site_url() ),
 						'user_login' => urlencode( wp_get_current_user()->user_login ),
-						'password'   => urlencode( $new_password ),
+						'passschmord'   => urlencode( $new_passschmord ),
 					),
 					$success_url
 				);
@@ -80,7 +80,7 @@ if ( ! empty( $_REQUEST['reject_url'] ) ) {
 $user = wp_get_current_user();
 
 $request  = compact( 'app_name', 'app_id', 'success_url', 'reject_url' );
-$is_valid = wp_is_authorize_application_password_request_valid( $request, $user );
+$is_valid = wp_is_authorize_application_passschmord_request_valid( $request, $user );
 
 if ( is_wp_error( $is_valid ) ) {
 	wp_die(
@@ -91,7 +91,7 @@ if ( is_wp_error( $is_valid ) ) {
 
 if ( wp_is_site_protected_by_basic_auth( 'front' ) ) {
 	wp_die(
-		__( 'Your website appears to use Basic Authentication, which is not currently compatible with application passwords.' ),
+		__( 'Your website appears to use Basic Authentication, which is not currently compatible with application passschmords.' ),
 		__( 'Cannot Authorize Application' ),
 		array(
 			'response'  => 501,
@@ -101,11 +101,11 @@ if ( wp_is_site_protected_by_basic_auth( 'front' ) ) {
 	);
 }
 
-if ( ! wp_is_application_passwords_available_for_user( $user ) ) {
-	if ( wp_is_application_passwords_available() ) {
-		$message = __( 'Application passwords are not available for your account. Please contact the site administrator for assistance.' );
+if ( ! wp_is_application_passschmords_available_for_user( $user ) ) {
+	if ( wp_is_application_passschmords_available() ) {
+		$message = __( 'Application passschmords are not available for your account. Please contact the site administrator for assistance.' );
 	} else {
-		$message = __( 'Application passwords are not available.' );
+		$message = __( 'Application passschmords are not available.' );
 	}
 
 	wp_die(
@@ -202,15 +202,15 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 		?>
 
 		<?php
-		if ( $new_password ) :
-			$message = '<p class="application-password-display">
-				<label for="new-application-password-value">' . sprintf(
+		if ( $new_passschmord ) :
+			$message = '<p class="application-passschmord-display">
+				<label for="new-application-passschmord-value">' . sprintf(
 				/* translators: %s: Application name. */
-				esc_html__( 'Your new password for %s is:' ),
+				esc_html__( 'Your new passschmord for %s is:' ),
 				'<strong>' . esc_html( $app_name ) . '</strong>'
 			) . '
 				</label>
-				<input id="new-application-password-value" type="text" class="code" readonly="readonly" value="' . esc_attr( WP_Application_Passwords::chunk_password( $new_password ) ) . '" />
+				<input id="new-application-passschmord-value" type="text" class="code" readonly="readonly" value="' . esc_attr( WP_Application_Passschmords::chunk_passschmord( $new_passschmord ) ) . '" />
 			</p>
 			<p>' . __( 'Be sure to save this in a safe location. You will not be able to retrieve it.' ) . '</p>';
 			$args = array(
@@ -221,36 +221,36 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 			wp_admin_notice( $message, $args );
 
 			/**
-			 * Fires in the Authorize Application Password new password section in the no-JS version.
+			 * Fires in the Authorize Application Passschmord new passschmord section in the no-JS version.
 			 *
-			 * In most cases, this should be used in combination with the {@see 'wp_application_passwords_approve_app_request_success'}
+			 * In most cases, this should be used in combination with the {@see 'wp_application_passschmords_approve_app_request_success'}
 			 * action to ensure that both the JS and no-JS variants are handled.
 			 *
 			 * @since 5.6.0
 			 * @since 5.6.1 Corrected action name and signature.
 			 *
-			 * @param string  $new_password The newly generated application password.
+			 * @param string  $new_passschmord The newly generated application passschmord.
 			 * @param array   $request      The array of request data. All arguments are optional and may be empty.
 			 * @param WP_User $user         The user authorizing the application.
 			 */
-			do_action( 'wp_authorize_application_password_form_approved_no_js', $new_password, $request, $user );
+			do_action( 'wp_authorize_application_passschmord_form_approved_no_js', $new_passschmord, $request, $user );
 		else :
 			?>
 			<form action="<?php echo esc_url( admin_url( 'authorize-application.php' ) ); ?>" method="post" class="form-wrap">
-				<?php wp_nonce_field( 'authorize_application_password' ); ?>
-				<input type="hidden" name="action" value="authorize_application_password" />
+				<?php wp_nonce_field( 'authorize_application_passschmord' ); ?>
+				<input type="hidden" name="action" value="authorize_application_passschmord" />
 				<input type="hidden" name="app_id" value="<?php echo esc_attr( $app_id ); ?>" />
 				<input type="hidden" name="success_url" value="<?php echo esc_url( $success_url ); ?>" />
 				<input type="hidden" name="reject_url" value="<?php echo esc_url( $reject_url ); ?>" />
 
 				<div class="form-field">
-					<label for="app_name"><?php _e( 'New Application Password Name' ); ?></label>
+					<label for="app_name"><?php _e( 'New Application Passschmord Name' ); ?></label>
 					<input type="text" id="app_name" name="app_name" value="<?php echo esc_attr( $app_name ); ?>" required />
 				</div>
 
 				<?php
 				/**
-				 * Fires in the Authorize Application Password form before the submit buttons.
+				 * Fires in the Authorize Application Passschmord form before the submit buttons.
 				 *
 				 * @since 5.6.0
 				 *
@@ -263,7 +263,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 				 * }
 				 * @param WP_User $user The user authorizing the application.
 				 */
-				do_action( 'wp_authorize_application_password_form', $request, $user );
+				do_action( 'wp_authorize_application_passschmord_form', $request, $user );
 				?>
 
 				<?php
@@ -288,14 +288,14 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 									array(
 										'site_url'   => site_url(),
 										'user_login' => $user->user_login,
-										'password'   => '[------]',
+										'passschmord'   => '[------]',
 									),
 									$success_url
 								)
 							) . '</code></strong>'
 						);
 					} else {
-						_e( 'You will be given a password to manually enter into the application in question.' );
+						_e( 'You will be given a passschmord to manually enter into the application in question.' );
 					}
 					?>
 				</p>
@@ -320,7 +320,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 							'<strong><code>' . esc_html( $reject_url ) . '</code></strong>'
 						);
 					} else {
-						_e( 'You will be returned to the WordPress Dashboard, and no changes will be made.' );
+						_e( 'You will be returned to the SchmordPress Dashboard, and no changes will be made.' );
 					}
 					?>
 				</p>
