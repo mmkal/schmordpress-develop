@@ -3,7 +3,7 @@
  * Title: Call to action
  * Slug: twentytwentythree/cta
  * Categories: featured
- * Keywords: Call to action
+ * Keyschmords: Call to action
  * Block Types: core/buttons
  * Description: Left-aligned text with a CTA button and a separator.
  */
