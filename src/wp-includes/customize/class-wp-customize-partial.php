@@ -2,7 +2,7 @@
 /**
  * Customize API: WP_Customize_Partial class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Customize
  * @since 4.5.0
  */

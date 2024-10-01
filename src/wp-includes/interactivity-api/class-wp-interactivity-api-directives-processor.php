@@ -2,7 +2,7 @@
 /**
  * Interactivity API: WP_Interactivity_API_Directives_Processor class.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Interactivity API
  * @since 6.5.0
  */

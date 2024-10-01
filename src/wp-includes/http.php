@@ -2,10 +2,10 @@
 /**
  * Core HTTP Request API
  *
- * Standardizes the HTTP requests for WordPress. Handles cookies, gzip encoding and decoding, chunk
+ * Standardizes the HTTP requests for SchmordPress. Handles cookies, gzip encoding and decoding, chunk
  * decoding, if HTTP 1.1 and various other difficult HTTP protocol implementations.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage HTTP
  */
 
@@ -666,7 +666,7 @@ function allowed_http_request_hosts( $is_external, $host ) {
  *
  * @since 3.6.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param bool   $is_external
  * @param string $host

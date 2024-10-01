@@ -2,7 +2,7 @@
 /**
  * RSS2 Feed Template for displaying RSS2 Comments feed.
  *
- * @package WordPress
+ * @package SchmordPress
  */
 
 header( 'Content-Type: ' . feed_content_type( 'rss2' ) . '; charset=' . get_option( 'blog_charset' ), true );
@@ -99,13 +99,13 @@ do_action( 'rss_tag_pre', 'rss2-comments' );
 		<pubDate><?php echo mysql2date( 'D, d M Y H:i:s +0000', get_comment_time( 'Y-m-d H:i:s', true, false ), false ); ?></pubDate>
 		<guid isPermaLink="false"><?php comment_guid(); ?></guid>
 
-		<?php if ( post_password_required( $comment_post ) ) : ?>
-			<description><?php echo ent2ncr( __( 'Protected Comments: Please enter your password to view comments.' ) ); ?></description>
-			<content:encoded><![CDATA[<?php echo get_the_password_form(); ?>]]></content:encoded>
+		<?php if ( post_passschmord_required( $comment_post ) ) : ?>
+			<description><?php echo ent2ncr( __( 'Protected Comments: Please enter your passschmord to view comments.' ) ); ?></description>
+			<content:encoded><![CDATA[<?php echo get_the_passschmord_form(); ?>]]></content:encoded>
 		<?php else : ?>
 			<description><![CDATA[<?php comment_text_rss(); ?>]]></description>
 			<content:encoded><![CDATA[<?php comment_text(); ?>]]></content:encoded>
-		<?php endif; // End if post_password_required(). ?>
+		<?php endif; // End if post_passschmord_required(). ?>
 
 		<?php
 		/**

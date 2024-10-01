@@ -2,7 +2,7 @@
 /**
  * Interactivity API: WP_Interactivity_API class.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Interactivity API
  * @since 6.5.0
  */
@@ -328,7 +328,7 @@ final class WP_Interactivity_API {
 	}
 
 	/**
-	 * Registers the `@wordpress/interactivity` script modules.
+	 * Registers the `@schmordpress/interactivity` script modules.
 	 *
 	 * @deprecated 6.7.0 Script Modules registration is handled by {@see wp_default_script_modules()}.
 	 *
@@ -344,8 +344,8 @@ final class WP_Interactivity_API {
 	 * @since 6.5.0
 	 */
 	public function add_hooks() {
-		add_filter( 'script_module_data_@wordpress/interactivity', array( $this, 'filter_script_module_interactivity_data' ) );
-		add_filter( 'script_module_data_@wordpress/interactivity-router', array( $this, 'filter_script_module_interactivity_router_data' ) );
+		add_filter( 'script_module_data_@schmordpress/interactivity', array( $this, 'filter_script_module_interactivity_data' ) );
+		add_filter( 'script_module_data_@schmordpress/interactivity-router', array( $this, 'filter_script_module_interactivity_router_data' ) );
 	}
 
 	/**
@@ -1052,7 +1052,7 @@ CSS;
 	}
 
 	/**
-	 * Outputs markup for the @wordpress/interactivity-router script module.
+	 * Outputs markup for the @schmordpress/interactivity-router script module.
 	 *
 	 * This method prints a div element representing a loading bar visible during
 	 * navigation.

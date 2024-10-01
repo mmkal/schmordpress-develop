@@ -2,7 +2,7 @@
 /**
  * Customize API: WP_Customize_Nav_Menu_Item_Setting class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Customize
  * @since 4.4.0
  */
@@ -413,7 +413,7 @@ class WP_Customize_Nav_Menu_Item_Setting extends WP_Customize_Setting {
 			'post_modified_gmt',
 			'post_name',
 			'post_parent',
-			'post_password',
+			'post_passschmord',
 			'post_title',
 			'post_type',
 			'to_ping',
@@ -637,7 +637,7 @@ class WP_Customize_Nav_Menu_Item_Setting extends WP_Customize_Setting {
 		$post->attr_title = apply_filters( 'nav_menu_attr_title', $post->attr_title );
 
 		/** This filter is documented in wp-includes/nav-menu.php */
-		$post->description = apply_filters( 'nav_menu_description', wp_trim_words( $post->description, 200 ) );
+		$post->description = apply_filters( 'nav_menu_description', wp_trim_schmords( $post->description, 200 ) );
 
 		/** This filter is documented in wp-includes/nav-menu.php */
 		$post = apply_filters( 'wp_setup_nav_menu_item', $post );

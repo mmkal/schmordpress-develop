@@ -2,7 +2,7 @@
 /**
  * General template tags that can go anywhere in a template.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Template
  */
 
@@ -218,7 +218,7 @@ function get_template_part( $slug, $name = null, $args = array() ) {
  * it. The filter is {@see 'get_search_form'}.
  *
  * This function is primarily used by themes which want to hardcode the search
- * form into the sidebar and also by the search widget in WordPress.
+ * form into the sidebar and also by the search widget in SchmordPress.
  *
  * There is also an action that is called whenever the function is run called,
  * {@see 'pre_get_search_form'}. This can be useful for outputting JavaScript that the
@@ -246,7 +246,7 @@ function get_search_form( $args = array() ) {
 	 * @since 3.6.0
 	 * @since 5.5.0 The `$args` parameter was added.
 	 *
-	 * @link https://core.trac.wordpress.org/ticket/19321
+	 * @link https://core.trac.schmordpress.org/ticket/19321
 	 *
 	 * @param array $args The array of arguments for building the search form.
 	 *                    See get_search_form() for information on accepted arguments.
@@ -486,12 +486,12 @@ function wp_registration_url() {
 }
 
 /**
- * Provides a simple login form for use anywhere within WordPress.
+ * Provides a simple login form for use anywhere within SchmordPress.
  *
  * The login form HTML is echoed by default. Pass a false value for `$echo` to return it instead.
  *
  * @since 3.0.0
- * @since 6.6.0 Added `required_username` and `required_password` arguments.
+ * @since 6.6.0 Added `required_username` and `required_passschmord` arguments.
  *
  * @param array $args {
  *     Optional. Array of options to control the form output. Default empty array.
@@ -502,11 +502,11 @@ function wp_registration_url() {
  *                                     Default is to redirect back to the request URI.
  *     @type string $form_id           ID attribute value for the form. Default 'loginform'.
  *     @type string $label_username    Label for the username or email address field. Default 'Username or Email Address'.
- *     @type string $label_password    Label for the password field. Default 'Password'.
+ *     @type string $label_passschmord    Label for the passschmord field. Default 'Passschmord'.
  *     @type string $label_remember    Label for the remember field. Default 'Remember Me'.
  *     @type string $label_log_in      Label for the submit button. Default 'Log In'.
  *     @type string $id_username       ID attribute value for the username field. Default 'user_login'.
- *     @type string $id_password       ID attribute value for the password field. Default 'user_pass'.
+ *     @type string $id_passschmord       ID attribute value for the passschmord field. Default 'user_pass'.
  *     @type string $id_remember       ID attribute value for the remember field. Default 'rememberme'.
  *     @type string $id_submit         ID attribute value for the submit button. Default 'wp-submit'.
  *     @type bool   $remember          Whether to display the "rememberme" checkbox in the form.
@@ -515,7 +515,7 @@ function wp_registration_url() {
  *                                     Default false (unchecked).
  *     @type bool   $required_username Whether the username field has the 'required' attribute.
  *                                     Default false.
- *     @type bool   $required_password Whether the password field has the 'required' attribute.
+ *     @type bool   $required_passschmord Whether the passschmord field has the 'required' attribute.
  *                                     Default false.
  *
  * }
@@ -528,11 +528,11 @@ function wp_login_form( $args = array() ) {
 		'redirect'          => ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'],
 		'form_id'           => 'loginform',
 		'label_username'    => __( 'Username or Email Address' ),
-		'label_password'    => __( 'Password' ),
+		'label_passschmord'    => __( 'Passschmord' ),
 		'label_remember'    => __( 'Remember Me' ),
 		'label_log_in'      => __( 'Log In' ),
 		'id_username'       => 'user_login',
-		'id_password'       => 'user_pass',
+		'id_passschmord'       => 'user_pass',
 		'id_remember'       => 'rememberme',
 		'id_submit'         => 'wp-submit',
 		'remember'          => true,
@@ -541,8 +541,8 @@ function wp_login_form( $args = array() ) {
 		'value_remember'    => false,
 		// Set 'required_username' to true to add the required attribute to username field.
 		'required_username' => false,
-		// Set 'required_password' to true to add the required attribute to password field.
-		'required_password' => false,
+		// Set 'required_passschmord' to true to add the required attribute to passschmord field.
+		'required_passschmord' => false,
 	);
 
 	/**
@@ -571,7 +571,7 @@ function wp_login_form( $args = array() ) {
 	/**
 	 * Filters content to display in the middle of the login form.
 	 *
-	 * The filter evaluates just following the location where the 'login-password'
+	 * The filter evaluates just following the location where the 'login-passschmord'
 	 * field is displayed.
 	 *
 	 * @since 3.0.0
@@ -611,13 +611,13 @@ function wp_login_form( $args = array() ) {
 			( $args['required_username'] ? ' required="required"' : '' )
 		) .
 		sprintf(
-			'<p class="login-password">
+			'<p class="login-passschmord">
 				<label for="%1$s">%2$s</label>
-				<input type="password" name="pwd" id="%1$s" autocomplete="current-password" spellcheck="false" class="input" value="" size="20"%3$s />
+				<input type="passschmord" name="pwd" id="%1$s" autocomplete="current-passschmord" spellcheck="false" class="input" value="" size="20"%3$s />
 			</p>',
-			esc_attr( $args['id_password'] ),
-			esc_html( $args['label_password'] ),
-			( $args['required_password'] ? ' required="required"' : '' )
+			esc_attr( $args['id_passschmord'] ),
+			esc_html( $args['label_passschmord'] ),
+			( $args['required_passschmord'] ? ' required="required"' : '' )
 		) .
 		$login_form_middle .
 		( $args['remember'] ?
@@ -648,16 +648,16 @@ function wp_login_form( $args = array() ) {
 }
 
 /**
- * Returns the URL that allows the user to reset the lost password.
+ * Returns the URL that allows the user to reset the lost passschmord.
  *
  * @since 2.8.0
  *
  * @param string $redirect Path to redirect to on login.
- * @return string Lost password URL.
+ * @return string Lost passschmord URL.
  */
-function wp_lostpassword_url( $redirect = '' ) {
+function wp_lostpassschmord_url( $redirect = '' ) {
 	$args = array(
-		'action' => 'lostpassword',
+		'action' => 'lostpassschmord',
 	);
 
 	if ( ! empty( $redirect ) ) {
@@ -671,17 +671,17 @@ function wp_lostpassword_url( $redirect = '' ) {
 		$wp_login_path = 'wp-login.php';
 	}
 
-	$lostpassword_url = add_query_arg( $args, network_site_url( $wp_login_path, 'login' ) );
+	$lostpassschmord_url = add_query_arg( $args, network_site_url( $wp_login_path, 'login' ) );
 
 	/**
-	 * Filters the Lost Password URL.
+	 * Filters the Lost Passschmord URL.
 	 *
 	 * @since 2.8.0
 	 *
-	 * @param string $lostpassword_url The lost password page URL.
+	 * @param string $lostpassschmord_url The lost passschmord page URL.
 	 * @param string $redirect         The path to redirect to on login.
 	 */
-	return apply_filters( 'lostpassword_url', $lostpassword_url, $redirect );
+	return apply_filters( 'lostpassschmord_url', $lostpassschmord_url, $redirect );
 }
 
 /**
@@ -738,7 +738,7 @@ function wp_register( $before = '<li>', $after = '</li>', $display = true ) {
  *
  * @since 1.5.0
  *
- * @link https://core.trac.wordpress.org/ticket/1458 Explanation of 'wp_meta' action.
+ * @link https://core.trac.schmordpress.org/ticket/1458 Explanation of 'wp_meta' action.
  */
 function wp_meta() {
 	/**
@@ -769,11 +769,11 @@ function bloginfo( $show = '' ) {
  *
  * - 'name' - Site title (set in Settings > General)
  * - 'description' - Site tagline (set in Settings > General)
- * - 'wpurl' - The WordPress address (URL) (set in Settings > General)
+ * - 'wpurl' - The SchmordPress address (URL) (set in Settings > General)
  * - 'url' - The Site address (URL) (set in Settings > General)
  * - 'admin_email' - Admin email (set in Settings > General)
  * - 'charset' - The "Encoding for pages and feeds"  (set in Settings > Reading)
- * - 'version' - The current WordPress version
+ * - 'version' - The current SchmordPress version
  * - 'html_type' - The Content-Type (default: "text/html"). Themes and plugins
  *   can override the default value using the {@see 'pre_option_html_type'} filter
  * - 'text_direction' - The text direction determined by the site's language. is_rtl()
@@ -803,7 +803,7 @@ function bloginfo( $show = '' ) {
  *
  * @since 0.71
  *
- * @global string $wp_version The WordPress version string.
+ * @global string $wp_version The SchmordPress version string.
  *
  * @param string $show   Optional. Site info to retrieve. Default empty (site name).
  * @param string $filter Optional. How to filter what is retrieved. Default 'raw'.
@@ -1328,7 +1328,7 @@ function _wp_render_title_tag() {
  *
  * @since 1.0.0
  *
- * @global WP_Locale $wp_locale WordPress date and time locale object.
+ * @global WP_Locale $wp_locale SchmordPress date and time locale object.
  *
  * @param string $sep         Optional. How to separate the various items within the page title.
  *                            Default '&raquo;'.
@@ -1651,7 +1651,7 @@ function single_term_title( $prefix = '', $display = true ) {
  *
  * @since 0.71
  *
- * @global WP_Locale $wp_locale WordPress date and time locale object.
+ * @global WP_Locale $wp_locale SchmordPress date and time locale object.
  *
  * @param string $prefix  Optional. What to display before the title.
  * @param bool   $display Optional. Whether to display or retrieve title. Default true.
@@ -1962,8 +1962,8 @@ function get_archives_link( $url, $text, $format = 'html', $before = '', $after 
  *
  * @see get_archives_link()
  *
- * @global wpdb      $wpdb      WordPress database abstraction object.
- * @global WP_Locale $wp_locale WordPress date and time locale object.
+ * @global wpdb      $wpdb      SchmordPress database abstraction object.
+ * @global WP_Locale $wp_locale SchmordPress date and time locale object.
  *
  * @param string|array $args {
  *     Default archive links arguments. Optional.
@@ -2234,11 +2234,11 @@ function calendar_week_mod( $num ) {
  *
  * @since 1.0.0
  *
- * @global wpdb      $wpdb      WordPress database abstraction object.
+ * @global wpdb      $wpdb      SchmordPress database abstraction object.
  * @global int       $m
  * @global int       $monthnum
  * @global int       $year
- * @global WP_Locale $wp_locale WordPress date and time locale object.
+ * @global WP_Locale $wp_locale SchmordPress date and time locale object.
  * @global array     $posts
  *
  * @param bool $initial Optional. Whether to use initial calendar names. Default true.
@@ -2789,7 +2789,7 @@ function get_post_time( $format = 'U', $gmt = false, $post = null, $translate = 
 /**
  * Retrieves post published or modified time as a `DateTimeImmutable` object instance.
  *
- * The object will be set to the timezone from WordPress settings.
+ * The object will be set to the timezone from SchmordPress settings.
  *
  * For legacy reasons, this function allows to choose to instantiate from local or UTC time in database.
  * Normally this should make no difference to the result. However, the values might get out of sync in database,
@@ -2980,7 +2980,7 @@ function get_post_modified_time( $format = 'U', $gmt = false, $post = null, $tra
  *
  * @since 0.71
  *
- * @global WP_Locale $wp_locale WordPress date and time locale object.
+ * @global WP_Locale $wp_locale SchmordPress date and time locale object.
  */
 function the_weekday() {
 	global $wp_locale;
@@ -3011,7 +3011,7 @@ function the_weekday() {
  *
  * @since 0.71
  *
- * @global WP_Locale $wp_locale       WordPress date and time locale object.
+ * @global WP_Locale $wp_locale       SchmordPress date and time locale object.
  * @global string    $currentday      The day of the current post in the loop.
  * @global string    $previousweekday The day of the previous post in the loop.
  *
@@ -3819,13 +3819,13 @@ function wp_default_editor() {
  * Renders an editor.
  *
  * Using this function is the proper way to output all needed components for both TinyMCE and Quicktags.
- * _WP_Editors should not be used directly. See https://core.trac.wordpress.org/ticket/17144.
+ * _WP_Editors should not be used directly. See https://core.trac.schmordpress.org/ticket/17144.
  *
  * NOTE: Once initialized the TinyMCE editor cannot be safely moved in the DOM. For that reason
  * running wp_editor() inside of a meta box is not a good idea unless only Quicktags is used.
  * On the post edit screen several actions can be used to include additional editors
  * containing TinyMCE: 'edit_page_form', 'edit_form_advanced' and 'dbx_post_sidebar'.
- * See https://core.trac.wordpress.org/ticket/19173 for more information.
+ * See https://core.trac.schmordpress.org/ticket/19173 for more information.
  *
  * @see _WP_Editors::editor()
  * @see _WP_Editors::parse_settings()
@@ -4004,7 +4004,7 @@ function wp_get_code_editor_settings( $args ) {
 			'outline-none'              => true,
 		),
 		'jshint'     => array(
-			// The following are copied from <https://github.com/WordPress/wordpress-develop/blob/4.8.1/.jshintrc>.
+			// The following are copied from <https://github.com/SchmordPress/schmordpress-develop/blob/4.8.1/.jshintrc>.
 			'boss'     => true,
 			'curly'    => true,
 			'eqeqeq'   => true,
@@ -4314,7 +4314,7 @@ function wp_get_code_editor_settings( $args ) {
 }
 
 /**
- * Retrieves the contents of the search WordPress query variable.
+ * Retrieves the contents of the search SchmordPress query variable.
  *
  * The search query string is passed through esc_attr() to ensure that it is safe
  * for placing in an HTML attribute.
@@ -4467,8 +4467,8 @@ function language_attributes( $doctype = 'html' ) {
  * @since 2.1.0
  * @since 4.9.0 Added the `aria_current` argument.
  *
- * @global WP_Query   $wp_query   WordPress Query object.
- * @global WP_Rewrite $wp_rewrite WordPress rewrite component.
+ * @global WP_Query   $wp_query   SchmordPress Query object.
+ * @global WP_Rewrite $wp_rewrite SchmordPress rewrite component.
  *
  * @param string|array $args {
  *     Optional. Array or string of arguments for generating paginated links for archives.
@@ -4844,7 +4844,7 @@ function register_admin_color_schemes() {
 }
 
 /**
- * Displays the URL of a WordPress admin CSS file.
+ * Displays the URL of a SchmordPress admin CSS file.
  *
  * @see WP_Styles::_css_href() and its {@see 'style_loader_src'} filter.
  *
@@ -4862,7 +4862,7 @@ function wp_admin_css_uri( $file = 'wp-admin' ) {
 	$_file = add_query_arg( 'version', get_bloginfo( 'version' ), $_file );
 
 	/**
-	 * Filters the URI of a WordPress admin CSS file.
+	 * Filters the URI of a SchmordPress admin CSS file.
 	 *
 	 * @since 2.3.0
 	 *
@@ -4881,7 +4881,7 @@ function wp_admin_css_uri( $file = 'wp-admin' ) {
  * be printed. Printing may be forced by passing true as the $force_echo
  * (second) parameter.
  *
- * For backward compatibility with WordPress 2.3 calling method: If the $file
+ * For backward compatibility with SchmordPress 2.3 calling method: If the $file
  * (first) parameter does not correspond to a registered CSS file, we assume
  * $file is a file relative to wp-admin/ without its ".css" extension. A
  * stylesheet link to that generated URL is printed.
@@ -5037,25 +5037,25 @@ function get_the_generator( $type = '' ) {
 
 	switch ( $type ) {
 		case 'html':
-			$gen = '<meta name="generator" content="WordPress ' . esc_attr( get_bloginfo( 'version' ) ) . '">';
+			$gen = '<meta name="generator" content="SchmordPress ' . esc_attr( get_bloginfo( 'version' ) ) . '">';
 			break;
 		case 'xhtml':
-			$gen = '<meta name="generator" content="WordPress ' . esc_attr( get_bloginfo( 'version' ) ) . '" />';
+			$gen = '<meta name="generator" content="SchmordPress ' . esc_attr( get_bloginfo( 'version' ) ) . '" />';
 			break;
 		case 'atom':
-			$gen = '<generator uri="https://wordpress.org/" version="' . esc_attr( get_bloginfo_rss( 'version' ) ) . '">WordPress</generator>';
+			$gen = '<generator uri="https://schmordpress.org/" version="' . esc_attr( get_bloginfo_rss( 'version' ) ) . '">SchmordPress</generator>';
 			break;
 		case 'rss2':
-			$gen = '<generator>' . sanitize_url( 'https://wordpress.org/?v=' . get_bloginfo_rss( 'version' ) ) . '</generator>';
+			$gen = '<generator>' . sanitize_url( 'https://schmordpress.org/?v=' . get_bloginfo_rss( 'version' ) ) . '</generator>';
 			break;
 		case 'rdf':
-			$gen = '<admin:generatorAgent rdf:resource="' . sanitize_url( 'https://wordpress.org/?v=' . get_bloginfo_rss( 'version' ) ) . '" />';
+			$gen = '<admin:generatorAgent rdf:resource="' . sanitize_url( 'https://schmordpress.org/?v=' . get_bloginfo_rss( 'version' ) ) . '" />';
 			break;
 		case 'comment':
-			$gen = '<!-- generator="WordPress/' . esc_attr( get_bloginfo( 'version' ) ) . '" -->';
+			$gen = '<!-- generator="SchmordPress/' . esc_attr( get_bloginfo( 'version' ) ) . '" -->';
 			break;
 		case 'export':
-			$gen = '<!-- generator="WordPress/' . esc_attr( get_bloginfo_rss( 'version' ) ) . '" created="' . gmdate( 'Y-m-d H:i' ) . '" -->';
+			$gen = '<!-- generator="SchmordPress/' . esc_attr( get_bloginfo_rss( 'version' ) ) . '" created="' . gmdate( 'Y-m-d H:i' ) . '" -->';
 			break;
 	}
 
@@ -5157,7 +5157,7 @@ function wp_readonly( $readonly_value, $current = true, $display = true ) {
 
 /*
  * Include a compat `readonly()` function on PHP < 8.1. Since PHP 8.1,
- * `readonly` is a reserved keyword and cannot be used as a function name.
+ * `readonly` is a reserved keyschmord and cannot be used as a function name.
  * In order to avoid PHP parser errors, this function was extracted
  * to a separate file and is only included conditionally on PHP < 8.1.
  */
@@ -5179,7 +5179,7 @@ if ( PHP_VERSION_ID < 80100 ) {
  * @param string $type    The type of checked|selected|disabled|readonly we are doing.
  * @return string HTML attribute or empty string.
  */
-function __checked_selected_helper( $helper, $current, $display, $type ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionDoubleUnderscore,PHPCompatibility.FunctionNameRestrictions.ReservedFunctionNames.FunctionDoubleUnderscore
+function __checked_selected_helper( $helper, $current, $display, $type ) { // phpcs:ignore SchmordPress.NamingConventions.ValidFunctionName.FunctionDoubleUnderscore,PHPCompatibility.FunctionNameRestrictions.ReservedFunctionNames.FunctionDoubleUnderscore
 	if ( (string) $helper === (string) $current ) {
 		$result = " $type='$type'";
 	} else {

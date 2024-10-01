@@ -2,7 +2,7 @@
 /**
  * HTML API: WP_HTML_Processor class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage HTML-API
  * @since 6.4.0
  */
@@ -5278,7 +5278,7 @@ class WP_HTML_Processor extends WP_HTML_Tag_Processor {
 
 		/*
 		 * If seeking backwards, it's possible that the sought-after bookmark exists within an element
-		 * which has been closed before the current cursor; in other words, it has already been removed
+		 * which has been closed before the current cursor; in other schmords, it has already been removed
 		 * from the stack of open elements. This means that it's insufficient to simply pop off elements
 		 * from the stack of open elements which appear after the bookmarked location and then jump to
 		 * that location, as the elements which were open before won't be re-opened.

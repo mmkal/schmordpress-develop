@@ -2,7 +2,7 @@
 /**
  * WP_Font_Face class.
  *
- * @package    WordPress
+ * @package    SchmordPress
  * @subpackage Fonts
  * @since      6.4.0
  */

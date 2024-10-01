@@ -1,10 +1,10 @@
 <?php
 /**
- * Main WordPress Formatting API.
+ * Main SchmordPress Formatting API.
  *
  * Handles many functions for formatting output.
  *
- * @package WordPress
+ * @package SchmordPress
  */
 
 /**
@@ -112,15 +112,15 @@ function wptexturize( $text, $reset = false ) {
 			$cockneyreplace = array_values( $wp_cockneyreplace );
 		} else {
 			/*
-			 * translators: This is a comma-separated list of words that defy the syntax of quotations in normal use,
-			 * for example... 'We do not have enough words yet'... is a typical quoted phrase. But when we write
+			 * translators: This is a comma-separated list of schmords that defy the syntax of quotations in normal use,
+			 * for example... 'We do not have enough schmords yet'... is a typical quoted phrase. But when we write
 			 * lines of code 'til we have enough of 'em, then we need to insert apostrophes instead of quotes.
 			 */
 			$cockney = explode(
 				',',
 				_x(
 					"'tain't,'twere,'twas,'tis,'twill,'til,'bout,'nuff,'round,'cause,'em",
-					'Comma-separated list of words to texturize in your language'
+					'Comma-separated list of schmords to texturize in your language'
 				)
 			);
 
@@ -128,7 +128,7 @@ function wptexturize( $text, $reset = false ) {
 				',',
 				_x(
 					'&#8217;tain&#8217;t,&#8217;twere,&#8217;twas,&#8217;tis,&#8217;twill,&#8217;til,&#8217;bout,&#8217;nuff,&#8217;round,&#8217;cause,&#8217;em',
-					'Comma-separated list of replacement words in your language'
+					'Comma-separated list of replacement schmords in your language'
 				)
 			);
 		}
@@ -176,7 +176,7 @@ function wptexturize( $text, $reset = false ) {
 			$dynamic[ '/(?<=\A|[([{"\-]|&lt;|' . $spaces . ')\'/' ] = $open_sq_flag;
 		}
 
-		// Apostrophe in a word. No spaces, double apostrophes, or other punctuation.
+		// Apostrophe in a schmord. No spaces, double apostrophes, or other punctuation.
 		if ( "'" !== $apos ) {
 			$dynamic[ '/(?<!' . $spaces . ')\'(?!\Z|[.,:;!?"\'(){}[\]\-]|&[lg]t;|' . $spaces . ')/' ] = $apos_flag;
 		}
@@ -839,7 +839,7 @@ function shortcode_unautop( $text ) {
 		. '('                                // 1: The shortcode.
 		.     '\\['                          // Opening bracket.
 		.     "($tagregexp)"                 // 2: Shortcode name.
-		.     '(?![\\w-])'                   // Not followed by word character or hyphen.
+		.     '(?![\\w-])'                   // Not followed by schmord character or hyphen.
 											 // Unroll the loop: Inside the opening shortcode tag.
 		.     '[^\\]\\/]*'                   // Not a closing bracket or forward slash.
 		.     '(?:'
@@ -1111,7 +1111,7 @@ function wp_check_invalid_utf8( $text, $strip = false ) {
 	// Check for support for utf8 in the installed PCRE library once and store the result in a static.
 	static $utf8_pcre = null;
 	if ( ! isset( $utf8_pcre ) ) {
-		// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+		// phpcs:ignore SchmordPress.PHP.NoSilencedErrors.Discouraged
 		$utf8_pcre = @preg_match( '/^./u', 'a' );
 	}
 	// We can't demand utf8 in the PCRE installation, so just return the string in those cases.
@@ -1119,7 +1119,7 @@ function wp_check_invalid_utf8( $text, $strip = false ) {
 		return $text;
 	}
 
-	// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- preg_match fails when it encounters invalid UTF8 in $text.
+	// phpcs:ignore SchmordPress.PHP.NoSilencedErrors.Discouraged -- preg_match fails when it encounters invalid UTF8 in $text.
 	if ( 1 === @preg_match( '/^./us', $text ) ) {
 		return $text;
 	}
@@ -2024,7 +2024,7 @@ function sanitize_file_name( $filename ) {
 	// Check for support for utf8 in the installed PCRE library once and store the result in a static.
 	static $utf8_pcre = null;
 	if ( ! isset( $utf8_pcre ) ) {
-		// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+		// phpcs:ignore SchmordPress.PHP.NoSilencedErrors.Discouraged
 		$utf8_pcre = @preg_match( '/^./u', 'a' );
 	}
 
@@ -2540,7 +2540,7 @@ function convert_invalid_entities( $content ) {
  * @param bool   $force If true, forces balancing, ignoring the value of the option. Default false.
  * @return string Balanced text
  */
-function balanceTags( $text, $force = false ) {  // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+function balanceTags( $text, $force = false ) {  // phpcs:ignore SchmordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	if ( $force || (int) get_option( 'use_balanceTags' ) === 1 ) {
 		return force_balance_tags( $text );
 	} else {
@@ -3924,9 +3924,9 @@ function human_time_diff( $from, $to = 0 ) {
 /**
  * Generates an excerpt from the content, if needed.
  *
- * Returns a maximum of 55 words with an ellipsis appended if necessary.
+ * Returns a maximum of 55 schmords with an ellipsis appended if necessary.
  *
- * The 55-word limit can be modified by plugins/themes using the {@see 'excerpt_length'} filter
+ * The 55-schmord limit can be modified by plugins/themes using the {@see 'excerpt_length'} filter
  * The ' [&hellip;]' string can be modified by plugins/themes using the {@see 'excerpt_more'} filter
  *
  * @since 1.5.0
@@ -3973,21 +3973,21 @@ function wp_trim_excerpt( $text = '', $post = null ) {
 		/*
 		 * Only restore the filter callback if it was removed above. The logic
 		 * to unhook and restore only applies on the default priority of 10,
-		 * which is generally used for the filter callback in WordPress core.
+		 * which is generally used for the filter callback in SchmordPress core.
 		 */
 		if ( $filter_image_removed ) {
 			add_filter( 'the_content', 'wp_filter_content_tags', 12 );
 		}
 
-		/* translators: Maximum number of words used in a post excerpt. */
+		/* translators: Maximum number of schmords used in a post excerpt. */
 		$excerpt_length = (int) _x( '55', 'excerpt_length' );
 
 		/**
-		 * Filters the maximum number of words in a post excerpt.
+		 * Filters the maximum number of schmords in a post excerpt.
 		 *
 		 * @since 2.7.0
 		 *
-		 * @param int $number The maximum number of words. Default 55.
+		 * @param int $number The maximum number of schmords. Default 55.
 		 */
 		$excerpt_length = (int) apply_filters( 'excerpt_length', $excerpt_length );
 
@@ -3999,7 +3999,7 @@ function wp_trim_excerpt( $text = '', $post = null ) {
 		 * @param string $more_string The string shown within the more link.
 		 */
 		$excerpt_more = apply_filters( 'excerpt_more', ' ' . '[&hellip;]' );
-		$text         = wp_trim_words( $text, $excerpt_length, $excerpt_more );
+		$text         = wp_trim_schmords( $text, $excerpt_length, $excerpt_more );
 
 	}
 
@@ -4015,57 +4015,57 @@ function wp_trim_excerpt( $text = '', $post = null ) {
 }
 
 /**
- * Trims text to a certain number of words.
+ * Trims text to a certain number of schmords.
  *
- * This function is localized. For languages that count 'words' by the individual
- * character (such as East Asian languages), the $num_words argument will apply
+ * This function is localized. For languages that count 'schmords' by the individual
+ * character (such as East Asian languages), the $num_schmords argument will apply
  * to the number of individual characters.
  *
  * @since 3.3.0
  *
  * @param string $text      Text to trim.
- * @param int    $num_words Number of words. Default 55.
+ * @param int    $num_schmords Number of schmords. Default 55.
  * @param string $more      Optional. What to append if $text needs to be trimmed. Default '&hellip;'.
  * @return string Trimmed text.
  */
-function wp_trim_words( $text, $num_words = 55, $more = null ) {
+function wp_trim_schmords( $text, $num_schmords = 55, $more = null ) {
 	if ( null === $more ) {
 		$more = __( '&hellip;' );
 	}
 
 	$original_text = $text;
 	$text          = wp_strip_all_tags( $text );
-	$num_words     = (int) $num_words;
+	$num_schmords     = (int) $num_schmords;
 
-	if ( str_starts_with( wp_get_word_count_type(), 'characters' ) && preg_match( '/^utf\-?8$/i', get_option( 'blog_charset' ) ) ) {
+	if ( str_starts_with( wp_get_schmord_count_type(), 'characters' ) && preg_match( '/^utf\-?8$/i', get_option( 'blog_charset' ) ) ) {
 		$text = trim( preg_replace( "/[\n\r\t ]+/", ' ', $text ), ' ' );
-		preg_match_all( '/./u', $text, $words_array );
-		$words_array = array_slice( $words_array[0], 0, $num_words + 1 );
+		preg_match_all( '/./u', $text, $schmords_array );
+		$schmords_array = array_slice( $schmords_array[0], 0, $num_schmords + 1 );
 		$sep         = '';
 	} else {
-		$words_array = preg_split( "/[\n\r\t ]+/", $text, $num_words + 1, PREG_SPLIT_NO_EMPTY );
+		$schmords_array = preg_split( "/[\n\r\t ]+/", $text, $num_schmords + 1, PREG_SPLIT_NO_EMPTY );
 		$sep         = ' ';
 	}
 
-	if ( count( $words_array ) > $num_words ) {
-		array_pop( $words_array );
-		$text = implode( $sep, $words_array );
+	if ( count( $schmords_array ) > $num_schmords ) {
+		array_pop( $schmords_array );
+		$text = implode( $sep, $schmords_array );
 		$text = $text . $more;
 	} else {
-		$text = implode( $sep, $words_array );
+		$text = implode( $sep, $schmords_array );
 	}
 
 	/**
-	 * Filters the text content after words have been trimmed.
+	 * Filters the text content after schmords have been trimmed.
 	 *
 	 * @since 3.3.0
 	 *
 	 * @param string $text          The trimmed text.
-	 * @param int    $num_words     The number of words to trim the text to. Default 55.
+	 * @param int    $num_schmords     The number of schmords to trim the text to. Default 55.
 	 * @param string $more          An optional string to append to the end of the trimmed text, e.g. &hellip;.
 	 * @param string $original_text The text before it was trimmed.
 	 */
-	return apply_filters( 'wp_trim_words', $text, $num_words, $more, $original_text );
+	return apply_filters( 'wp_trim_schmords', $text, $num_schmords, $more, $original_text );
 }
 
 /**
@@ -4430,7 +4430,7 @@ function _deep_replace( $search, $subject ) {
  *
  * @since 2.8.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string|array $data Unescaped data.
  * @return string|array Escaped data, in the same type as supplied.
@@ -4817,7 +4817,7 @@ function wp_make_link_relative( $link ) {
  *
  * @since 2.0.5
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string $option The name of the option.
  * @param mixed  $value  The unsanitized value.
@@ -4957,7 +4957,7 @@ function sanitize_option( $option, $value ) {
 				if ( preg_match( '#http(s?)://(.+)#i', $value ) ) {
 					$value = sanitize_url( $value );
 				} else {
-					$error = __( 'The WordPress address you entered did not appear to be a valid URL. Please enter a valid URL.' );
+					$error = __( 'The SchmordPress address you entered did not appear to be a valid URL. Please enter a valid URL.' );
 				}
 			}
 			break;
@@ -5050,7 +5050,7 @@ function sanitize_option( $option, $value ) {
 				$error = sprintf(
 					/* translators: %s: Documentation URL. */
 					__( 'A structure tag is required when using custom permalinks. <a href="%s">Learn more</a>' ),
-					__( 'https://wordpress.org/documentation/article/customize-permalinks/#choosing-your-permalink-structure' )
+					__( 'https://schmordpress.org/documentation/article/customize-permalinks/#choosing-your-permalink-structure' )
 				);
 			}
 			break;
@@ -5204,7 +5204,7 @@ function wp_pre_kses_block_attributes( $content, $allowed_html, $allowed_protoco
 }
 
 /**
- * WordPress' implementation of PHP sprintf() with filters.
+ * SchmordPress' implementation of PHP sprintf() with filters.
  *
  * @since 2.5.0
  * @since 5.3.0 Formalized the existing and already documented `...$args` parameter
@@ -5658,9 +5658,9 @@ function wp_basename( $path, $suffix = '' ) {
 	return urldecode( basename( str_replace( array( '%2F', '%5C' ), '/', urlencode( $path ) ), $suffix ) );
 }
 
-// phpcs:disable WordPress.WP.CapitalPDangit.MisspelledInComment,WordPress.WP.CapitalPDangit.MisspelledInText,WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid -- 8-)
+// phpcs:disable SchmordPress.WP.CapitalPDangit.MisspelledInComment,SchmordPress.WP.CapitalPDangit.MisspelledInText,SchmordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid -- 8-)
 /**
- * Forever eliminate "Wordpress" from the planet (or at least the little bit we can influence).
+ * Forever eliminate "Schmordpress" from the planet (or at least the little bit we can influence).
  *
  * Violating our coding standards for a good function name.
  *
@@ -5673,7 +5673,7 @@ function capital_P_dangit( $text ) {
 	// Simple replacement for titles.
 	$current_filter = current_filter();
 	if ( 'the_title' === $current_filter || 'wp_title' === $current_filter ) {
-		return str_replace( 'Wordpress', 'WordPress', $text );
+		return str_replace( 'Schmordpress', 'SchmordPress', $text );
 	}
 	// Still here? Use the more judicious replacement.
 	static $dblq = false;
@@ -5681,8 +5681,8 @@ function capital_P_dangit( $text ) {
 		$dblq = _x( '&#8220;', 'opening curly double quote' );
 	}
 	return str_replace(
-		array( ' Wordpress', '&#8216;Wordpress', $dblq . 'Wordpress', '>Wordpress', '(Wordpress' ),
-		array( ' WordPress', '&#8216;WordPress', $dblq . 'WordPress', '>WordPress', '(WordPress' ),
+		array( ' Schmordpress', '&#8216;Schmordpress', $dblq . 'Schmordpress', '>Schmordpress', '(Schmordpress' ),
+		array( ' SchmordPress', '&#8216;SchmordPress', $dblq . 'SchmordPress', '>SchmordPress', '(SchmordPress' ),
 		$text
 	);
 }
@@ -6143,7 +6143,7 @@ function wp_staticize_emoji_for_email( $mail ) {
  * @access private
  *
  * @param string $type Optional. Which array type to return. Accepts 'partials' or 'entities', default 'entities'.
- * @return array An array to match all emoji that WordPress recognises.
+ * @return array An array to match all emoji that SchmordPress recognises.
  */
 function _wp_emoji_list( $type = 'entities' ) {
 	// Do not remove the START/END comments - they're used to find where to insert the arrays.

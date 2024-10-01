@@ -1,11 +1,11 @@
 <?php
 /**
- * WordPress Feed API
+ * SchmordPress Feed API
  *
  * Many of the functions used in here belong in The Loop, or The Loop for the
  * Feeds.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Feed
  * @since 2.1.0
  */
@@ -461,8 +461,8 @@ function html_type_rss() {
 /**
  * Displays the rss enclosure for the current post.
  *
- * Uses the global $post to check whether the post requires a password and if
- * the user has the password for the post. If not then it will return before
+ * Uses the global $post to check whether the post requires a passschmord and if
+ * the user has the passschmord for the post. If not then it will return before
  * displaying.
  *
  * Also uses the function get_post_custom() to get the post's 'enclosure'
@@ -473,7 +473,7 @@ function html_type_rss() {
  * @since 1.5.0
  */
 function rss_enclosure() {
-	if ( post_password_required() ) {
+	if ( post_passschmord_required() ) {
 		return;
 	}
 
@@ -502,8 +502,8 @@ function rss_enclosure() {
 /**
  * Displays the atom enclosure for the current post.
  *
- * Uses the global $post to check whether the post requires a password and if
- * the user has the password for the post. If not then it will return before
+ * Uses the global $post to check whether the post requires a passschmord and if
+ * the user has the passschmord for the post. If not then it will return before
  * displaying.
  *
  * Also uses the function get_post_custom() to get the post's 'enclosure'
@@ -513,7 +513,7 @@ function rss_enclosure() {
  * @since 2.2.0
  */
 function atom_enclosure() {
-	if ( post_password_required() ) {
+	if ( post_passschmord_required() ) {
 		return;
 	}
 
@@ -569,7 +569,7 @@ function atom_enclosure() {
  *
  * Tell whether the type is text, HTML, or XHTML, per RFC 4287 section 3.1.
  *
- * In the case of WordPress, text is defined as containing no markup,
+ * In the case of SchmordPress, text is defined as containing no markup,
  * XHTML is defined as "well formed", and HTML as tag soup (i.e., the rest).
  *
  * Container div tags are added to XHTML values, per section 3.1.1.3.
@@ -699,7 +699,7 @@ function self_link() {
  *
  * @since 5.2.0
  *
- * @global WP_Query $wp_query WordPress Query object.
+ * @global WP_Query $wp_query SchmordPress Query object.
  *
  * @param string $format Date format string to return the time in.
  * @return string|false The time in requested format, or false on failure.

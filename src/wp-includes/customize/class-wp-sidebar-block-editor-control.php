@@ -2,7 +2,7 @@
 /**
  * Customize API: WP_Sidebar_Block_Editor_Control class.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Customize
  * @since 5.8.0
  */
@@ -32,6 +32,6 @@ class WP_Sidebar_Block_Editor_Control extends WP_Customize_Control {
 	 */
 	public function render_content() {
 		// Render an empty control. The JavaScript in
-		// @wordpress/customize-widgets will do the rest.
+		// @schmordpress/customize-widgets will do the rest.
 	}
 }

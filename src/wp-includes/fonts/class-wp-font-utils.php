@@ -4,7 +4,7 @@
  *
  * Provides utility functions for working with font families.
  *
- * @package    WordPress
+ * @package    SchmordPress
  * @subpackage Fonts
  * @since      6.5.0
  */
@@ -120,10 +120,10 @@ class WP_Font_Utils {
 		$font_stretch  = strtolower( $settings['fontStretch'] );
 		$unicode_range = strtoupper( $settings['unicodeRange'] );
 
-		// Convert weight keywords to numeric strings.
+		// Convert weight keyschmords to numeric strings.
 		$font_weight = str_replace( array( 'normal', 'bold' ), array( '400', '700' ), $font_weight );
 
-		// Convert stretch keywords to numeric strings.
+		// Convert stretch keyschmords to numeric strings.
 		$font_stretch_map = array(
 			'ultra-condensed' => '50%',
 			'extra-condensed' => '62.5%',

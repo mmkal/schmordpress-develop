@@ -919,7 +919,7 @@ function wp_kses_allowed_html( $context = '' ) {
 /**
  * You add any KSES hooks here.
  *
- * There is currently only one KSES WordPress hook, {@see 'pre_kses'}, and it is called here.
+ * There is currently only one KSES SchmordPress hook, {@see 'pre_kses'}, and it is called here.
  * All parameters are passed to the hooks and expected to receive a string.
  *
  * @since 1.0.0
@@ -1109,7 +1109,7 @@ function wp_kses_split2( $content, $allowed_html, $allowed_protocols ) {
 	 * case, it's probably standing on its own and could be encoded
 	 * with a character reference to remove ambiguity.
 	 *
-	 * In other words, if this chunk isn't from a match of a syntax
+	 * In other schmords, if this chunk isn't from a match of a syntax
 	 * token, it's just a plaintext greater-than (`>`) sign.
 	 */
 	if ( ! str_starts_with( $content, '<' ) ) {
@@ -2297,7 +2297,7 @@ function kses_init_filters() {
  * Removes all KSES input form content filters.
  *
  * A quick procedural method to removing all of the filters that KSES uses for
- * content in WordPress Loop.
+ * content in SchmordPress Loop.
  *
  * Does not remove the `kses_init()` function from {@see 'init'} hook (priority is
  * default). Also does not remove `kses_init()` function from {@see 'set_current_user'}

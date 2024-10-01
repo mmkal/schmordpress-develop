@@ -2,7 +2,7 @@
 /**
  * Atom Feed Template for displaying Atom Comments feed.
  *
- * @package WordPress
+ * @package SchmordPress
  */
 
 header( 'Content-Type: ' . feed_content_type( 'atom' ) . '; charset=' . get_option( 'blog_charset' ), true );
@@ -106,11 +106,11 @@ while ( have_comments() ) :
 		<updated><?php echo mysql2date( 'Y-m-d\TH:i:s\Z', get_comment_time( 'Y-m-d H:i:s', true, false ), false ); ?></updated>
 		<published><?php echo mysql2date( 'Y-m-d\TH:i:s\Z', get_comment_time( 'Y-m-d H:i:s', true, false ), false ); ?></published>
 
-		<?php if ( post_password_required( $comment_post ) ) : ?>
-			<content type="html" xml:base="<?php comment_link(); ?>"><![CDATA[<?php echo get_the_password_form(); ?>]]></content>
+		<?php if ( post_passschmord_required( $comment_post ) ) : ?>
+			<content type="html" xml:base="<?php comment_link(); ?>"><![CDATA[<?php echo get_the_passschmord_form(); ?>]]></content>
 		<?php else : ?>
 			<content type="html" xml:base="<?php comment_link(); ?>"><![CDATA[<?php comment_text(); ?>]]></content>
-		<?php endif; // End if post_password_required(). ?>
+		<?php endif; // End if post_passschmord_required(). ?>
 
 		<?php
 		// Return comment threading information (https://www.ietf.org/rfc/rfc4685.txt).

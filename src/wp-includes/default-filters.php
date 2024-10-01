@@ -1,7 +1,7 @@
 <?php
 /**
  * Sets up the default filters and actions for most
- * of the WordPress hooks.
+ * of the SchmordPress hooks.
  *
  * This file is loaded very early in the bootstrap which
  * means many functions are not yet available and site
@@ -20,7 +20,7 @@
  * (admin area, multisite environment…), please move it
  * to a more appropriate file instead.
  *
- * @package WordPress
+ * @package SchmordPress
  */
 
 // Strip, trim, kses, special chars for string saves.
@@ -160,7 +160,7 @@ foreach ( array( 'comment_author', 'term_name', 'link_name', 'link_description',
 	add_filter( $filter, 'esc_html' );
 }
 
-// Format WordPress.
+// Format SchmordPress.
 foreach ( array( 'the_content', 'the_title', 'wp_title', 'document_title' ) as $filter ) {
 	add_filter( $filter, 'capital_P_dangit', 11 );
 }
@@ -328,9 +328,9 @@ add_action( 'auth_cookie_expired', 'rest_cookie_collect_status' );
 add_action( 'auth_cookie_bad_username', 'rest_cookie_collect_status' );
 add_action( 'auth_cookie_bad_hash', 'rest_cookie_collect_status' );
 add_action( 'auth_cookie_valid', 'rest_cookie_collect_status' );
-add_action( 'application_password_failed_authentication', 'rest_application_password_collect_status' );
-add_action( 'application_password_did_authenticate', 'rest_application_password_collect_status', 10, 2 );
-add_filter( 'rest_authentication_errors', 'rest_application_password_check_errors', 90 );
+add_action( 'application_passschmord_failed_authentication', 'rest_application_passschmord_collect_status' );
+add_action( 'application_passschmord_did_authenticate', 'rest_application_passschmord_collect_status', 10, 2 );
+add_filter( 'rest_authentication_errors', 'rest_application_passschmord_check_errors', 90 );
 add_filter( 'rest_authentication_errors', 'rest_cookie_check_errors', 100 );
 
 // Actions.
@@ -484,13 +484,13 @@ add_filter( 'heartbeat_send', 'wp_auth_check' );
 add_filter( 'heartbeat_nopriv_send', 'wp_auth_check' );
 
 // Default authentication filters.
-add_filter( 'authenticate', 'wp_authenticate_username_password', 20, 3 );
-add_filter( 'authenticate', 'wp_authenticate_email_password', 20, 3 );
-add_filter( 'authenticate', 'wp_authenticate_application_password', 20, 3 );
+add_filter( 'authenticate', 'wp_authenticate_username_passschmord', 20, 3 );
+add_filter( 'authenticate', 'wp_authenticate_email_passschmord', 20, 3 );
+add_filter( 'authenticate', 'wp_authenticate_application_passschmord', 20, 3 );
 add_filter( 'authenticate', 'wp_authenticate_spam_check', 99 );
 add_filter( 'determine_current_user', 'wp_validate_auth_cookie' );
 add_filter( 'determine_current_user', 'wp_validate_logged_in_cookie', 20 );
-add_filter( 'determine_current_user', 'wp_validate_application_password', 20 );
+add_filter( 'determine_current_user', 'wp_validate_application_passschmord', 20 );
 
 // Split term updates.
 add_action( 'admin_init', '_wp_check_for_scheduled_split_terms' );
@@ -506,7 +506,7 @@ add_action( 'wp_update_comment_type_batch', '_wp_batch_update_comment_type' );
 // Email notifications.
 add_action( 'comment_post', 'wp_new_comment_notify_moderator' );
 add_action( 'comment_post', 'wp_new_comment_notify_postauthor' );
-add_action( 'after_password_reset', 'wp_password_change_notification' );
+add_action( 'after_passschmord_reset', 'wp_passschmord_change_notification' );
 add_action( 'register_new_user', 'wp_send_new_user_notifications' );
 add_action( 'edit_user_created_user', 'wp_send_new_user_notifications', 10, 2 );
 
@@ -579,7 +579,7 @@ add_action( 'enqueue_block_assets', 'enqueue_block_styles_assets', 30 );
 /*
  * `wp_enqueue_registered_block_scripts_and_styles` is bound to both
  * `enqueue_block_editor_assets` and `enqueue_block_assets` hooks
- * since the introduction of the block editor in WordPress 5.0.
+ * since the introduction of the block editor in SchmordPress 5.0.
  *
  * The way this works is that the block assets are loaded before any other assets.
  * For example, this is the order of styles for the editor:
@@ -600,7 +600,7 @@ add_action( 'customize_controls_print_styles', 'wp_resource_hints', 1 );
 add_action( 'admin_head', 'wp_check_widget_editor_deps' );
 add_filter( 'block_editor_settings_all', 'wp_add_editor_classic_theme_styles' );
 
-// Global styles can be enqueued in both the header and the footer. See https://core.trac.wordpress.org/ticket/53494.
+// Global styles can be enqueued in both the header and the footer. See https://core.trac.schmordpress.org/ticket/53494.
 add_action( 'wp_enqueue_scripts', 'wp_enqueue_global_styles' );
 add_action( 'wp_footer', 'wp_enqueue_global_styles', 1 );
 

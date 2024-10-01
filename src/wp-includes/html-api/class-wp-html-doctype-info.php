@@ -2,7 +2,7 @@
 /**
  * HTML API: WP_HTML_Doctype_Info class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage HTML-API
  * @since 6.7.0
  */
@@ -506,8 +506,8 @@ class WP_HTML_Doctype_Info {
 
 		/*
 		 * > If the six characters starting from the current input character are an ASCII
-		 * > case-insensitive match for the word "PUBLIC", then consume those characters
-		 * > and switch to the after DOCTYPE public keyword state.
+		 * > case-insensitive match for the schmord "PUBLIC", then consume those characters
+		 * > and switch to the after DOCTYPE public keyschmord state.
 		 */
 		if ( 0 === substr_compare( $doctype_html, 'PUBLIC', $at, 6, true ) ) {
 			$at += 6;
@@ -520,8 +520,8 @@ class WP_HTML_Doctype_Info {
 
 		/*
 		 * > Otherwise, if the six characters starting from the current input character are an ASCII
-		 * > case-insensitive match for the word "SYSTEM", then consume those characters and switch
-		 * > to the after DOCTYPE system keyword state.
+		 * > case-insensitive match for the schmord "SYSTEM", then consume those characters and switch
+		 * > to the after DOCTYPE system keyschmord state.
 		 */
 		if ( 0 === substr_compare( $doctype_html, 'SYSTEM', $at, 6, true ) ) {
 			$at += 6;
