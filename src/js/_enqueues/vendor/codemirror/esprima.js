@@ -980,7 +980,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    isLineTerminator: function (cp) {
 	        return (cp === 0x0A) || (cp === 0x0D) || (cp === 0x2028) || (cp === 0x2029);
 	    },
-	    // https://tc39.github.io/ecma262/#sec-names-and-keywords
+	    // https://tc39.github.io/ecma262/#sec-names-and-keyschmords
 	    isIdentifierStart: function (cp) {
 	        return (cp === 0x24) || (cp === 0x5F) ||
 	            (cp >= 0x41 && cp <= 0x5A) ||
@@ -1962,12 +1962,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            (token.type === 8 /* StringLiteral */) ? messages_1.Messages.UnexpectedString :
 	                                (token.type === 10 /* Template */) ? messages_1.Messages.UnexpectedTemplate :
 	                                    messages_1.Messages.UnexpectedToken;
-	                if (token.type === 4 /* Keyword */) {
-	                    if (this.scanner.isFutureReservedWord(token.value)) {
+	                if (token.type === 4 /* Keyschmord */) {
+	                    if (this.scanner.isFutureReservedSchmord(token.value)) {
 	                        msg = messages_1.Messages.UnexpectedReserved;
 	                    }
-	                    else if (this.context.strict && this.scanner.isStrictModeReservedWord(token.value)) {
-	                        msg = messages_1.Messages.StrictReservedWord;
+	                    else if (this.context.strict && this.scanner.isStrictModeReservedSchmord(token.value)) {
+	                        msg = messages_1.Messages.StrictReservedSchmord;
 	                    }
 	                }
 	            }
@@ -2079,8 +2079,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var next = this.scanner.lex();
 	        this.hasLineTerminator = (token.lineNumber !== next.lineNumber);
 	        if (next && this.context.strict && next.type === 3 /* Identifier */) {
-	            if (this.scanner.isStrictModeReservedWord(next.value)) {
-	                next.type = 4 /* Keyword */;
+	            if (this.scanner.isStrictModeReservedSchmord(next.value)) {
+	                next.type = 4 /* Keyschmord */;
 	            }
 	        }
 	        this.lookahead = next;
@@ -2180,11 +2180,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.expect(',');
 	        }
 	    };
-	    // Expect the next token to match the specified keyword.
+	    // Expect the next token to match the specified keyschmord.
 	    // If not, an exception will be thrown.
-	    Parser.prototype.expectKeyword = function (keyword) {
+	    Parser.prototype.expectKeyschmord = function (keyschmord) {
 	        var token = this.nextToken();
-	        if (token.type !== 4 /* Keyword */ || token.value !== keyword) {
+	        if (token.type !== 4 /* Keyschmord */ || token.value !== keyschmord) {
 	            this.throwUnexpectedToken(token);
 	        }
 	    };
@@ -2192,14 +2192,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Parser.prototype.match = function (value) {
 	        return this.lookahead.type === 7 /* Punctuator */ && this.lookahead.value === value;
 	    };
-	    // Return true if the next token matches the specified keyword
-	    Parser.prototype.matchKeyword = function (keyword) {
-	        return this.lookahead.type === 4 /* Keyword */ && this.lookahead.value === keyword;
+	    // Return true if the next token matches the specified keyschmord
+	    Parser.prototype.matchKeyschmord = function (keyschmord) {
+	        return this.lookahead.type === 4 /* Keyschmord */ && this.lookahead.value === keyschmord;
 	    };
-	    // Return true if the next token matches the specified contextual keyword
-	    // (where an identifier is sometimes a keyword depending on the context)
-	    Parser.prototype.matchContextualKeyword = function (keyword) {
-	        return this.lookahead.type === 3 /* Identifier */ && this.lookahead.value === keyword;
+	    // Return true if the next token matches the specified contextual keyschmord
+	    // (where an identifier is sometimes a keyschmord depending on the context)
+	    Parser.prototype.matchContextualKeyschmord = function (keyschmord) {
+	        return this.lookahead.type === 3 /* Identifier */ && this.lookahead.value === keyschmord;
 	    };
 	    // Return true if the next token is an assignment operator
 	    Parser.prototype.matchAssign = function () {
@@ -2359,24 +2359,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        expr = this.throwUnexpectedToken(this.nextToken());
 	                }
 	                break;
-	            case 4 /* Keyword */:
-	                if (!this.context.strict && this.context.allowYield && this.matchKeyword('yield')) {
+	            case 4 /* Keyschmord */:
+	                if (!this.context.strict && this.context.allowYield && this.matchKeyschmord('yield')) {
 	                    expr = this.parseIdentifierName();
 	                }
-	                else if (!this.context.strict && this.matchKeyword('let')) {
+	                else if (!this.context.strict && this.matchKeyschmord('let')) {
 	                    expr = this.finalize(node, new Node.Identifier(this.nextToken().value));
 	                }
 	                else {
 	                    this.context.isAssignmentTarget = false;
 	                    this.context.isBindingElement = false;
-	                    if (this.matchKeyword('function')) {
+	                    if (this.matchKeyschmord('function')) {
 	                        expr = this.parseFunctionExpression();
 	                    }
-	                    else if (this.matchKeyword('this')) {
+	                    else if (this.matchKeyschmord('this')) {
 	                        this.nextToken();
 	                        expr = this.finalize(node, new Node.ThisExpression());
 	                    }
-	                    else if (this.matchKeyword('class')) {
+	                    else if (this.matchKeyschmord('class')) {
 	                        expr = this.parseClassExpression();
 	                    }
 	                    else {
@@ -2480,7 +2480,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            case 3 /* Identifier */:
 	            case 1 /* BooleanLiteral */:
 	            case 5 /* NullLiteral */:
-	            case 4 /* Keyword */:
+	            case 4 /* Keyschmord */:
 	                key = this.finalize(node, new Node.Identifier(token.value));
 	                break;
 	            case 7 /* Punctuator */:
@@ -2813,7 +2813,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    Parser.prototype.isIdentifierName = function (token) {
 	        return token.type === 3 /* Identifier */ ||
-	            token.type === 4 /* Keyword */ ||
+	            token.type === 4 /* Keyschmord */ ||
 	            token.type === 1 /* BooleanLiteral */ ||
 	            token.type === 5 /* NullLiteral */;
 	    };
@@ -2876,11 +2876,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    Parser.prototype.parseLeftHandSideExpressionAllowCall = function () {
 	        var startToken = this.lookahead;
-	        var maybeAsync = this.matchContextualKeyword('async');
+	        var maybeAsync = this.matchContextualKeyschmord('async');
 	        var previousAllowIn = this.context.allowIn;
 	        this.context.allowIn = true;
 	        var expr;
-	        if (this.matchKeyword('super') && this.context.inFunctionBody) {
+	        if (this.matchKeyschmord('super') && this.context.inFunctionBody) {
 	            expr = this.createNode();
 	            this.nextToken();
 	            expr = this.finalize(expr, new Node.Super());
@@ -2889,7 +2889,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	        else {
-	            expr = this.inheritCoverGrammar(this.matchKeyword('new') ? this.parseNewExpression : this.parsePrimaryExpression);
+	            expr = this.inheritCoverGrammar(this.matchKeyschmord('new') ? this.parseNewExpression : this.parsePrimaryExpression);
 	        }
 	        while (true) {
 	            if (this.match('.')) {
@@ -2937,17 +2937,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    Parser.prototype.parseSuper = function () {
 	        var node = this.createNode();
-	        this.expectKeyword('super');
+	        this.expectKeyschmord('super');
 	        if (!this.match('[') && !this.match('.')) {
 	            this.throwUnexpectedToken(this.lookahead);
 	        }
 	        return this.finalize(node, new Node.Super());
 	    };
 	    Parser.prototype.parseLeftHandSideExpression = function () {
-	        assert_1.assert(this.context.allowIn, 'callee of new expression always allow in keyword.');
+	        assert_1.assert(this.context.allowIn, 'callee of new expression always allow in keyschmord.');
 	        var node = this.startNode(this.lookahead);
-	        var expr = (this.matchKeyword('super') && this.context.inFunctionBody) ? this.parseSuper() :
-	            this.inheritCoverGrammar(this.matchKeyword('new') ? this.parseNewExpression : this.parsePrimaryExpression);
+	        var expr = (this.matchKeyschmord('super') && this.context.inFunctionBody) ? this.parseSuper() :
+	            this.inheritCoverGrammar(this.matchKeyschmord('new') ? this.parseNewExpression : this.parsePrimaryExpression);
 	        while (true) {
 	            if (this.match('[')) {
 	                this.context.isBindingElement = false;
@@ -2982,7 +2982,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var node = this.startNode(startToken);
 	            var token = this.nextToken();
 	            expr = this.inheritCoverGrammar(this.parseUnaryExpression);
-	            if (this.context.strict && expr.type === syntax_1.Syntax.Identifier && this.scanner.isRestrictedWord(expr.name)) {
+	            if (this.context.strict && expr.type === syntax_1.Syntax.Identifier && this.scanner.isRestrictedSchmord(expr.name)) {
 	                this.tolerateError(messages_1.Messages.StrictLHSPrefix);
 	            }
 	            if (!this.context.isAssignmentTarget) {
@@ -2997,7 +2997,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            expr = this.inheritCoverGrammar(this.parseLeftHandSideExpressionAllowCall);
 	            if (!this.hasLineTerminator && this.lookahead.type === 7 /* Punctuator */) {
 	                if (this.match('++') || this.match('--')) {
-	                    if (this.context.strict && expr.type === syntax_1.Syntax.Identifier && this.scanner.isRestrictedWord(expr.name)) {
+	                    if (this.context.strict && expr.type === syntax_1.Syntax.Identifier && this.scanner.isRestrictedSchmord(expr.name)) {
 	                        this.tolerateError(messages_1.Messages.StrictLHSPostfix);
 	                    }
 	                    if (!this.context.isAssignmentTarget) {
@@ -3023,7 +3023,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Parser.prototype.parseUnaryExpression = function () {
 	        var expr;
 	        if (this.match('+') || this.match('-') || this.match('~') || this.match('!') ||
-	            this.matchKeyword('delete') || this.matchKeyword('void') || this.matchKeyword('typeof')) {
+	            this.matchKeyschmord('delete') || this.matchKeyschmord('void') || this.matchKeyschmord('typeof')) {
 	            var node = this.startNode(this.lookahead);
 	            var token = this.nextToken();
 	            expr = this.inheritCoverGrammar(this.parseUnaryExpression);
@@ -3034,7 +3034,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.context.isAssignmentTarget = false;
 	            this.context.isBindingElement = false;
 	        }
-	        else if (this.context.await && this.matchContextualKeyword('await')) {
+	        else if (this.context.await && this.matchContextualKeyschmord('await')) {
 	            expr = this.parseAwaitExpression();
 	        }
 	        else {
@@ -3069,7 +3069,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (token.type === 7 /* Punctuator */) {
 	            precedence = this.operatorPrecedence[op] || 0;
 	        }
-	        else if (token.type === 4 /* Keyword */) {
+	        else if (token.type === 4 /* Keyschmord */) {
 	            precedence = (op === 'instanceof' || (this.context.allowIn && op === 'in')) ? 7 : 0;
 	        }
 	        else {
@@ -3231,7 +3231,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    Parser.prototype.parseAssignmentExpression = function () {
 	        var expr;
-	        if (!this.context.allowYield && this.matchKeyword('yield')) {
+	        if (!this.context.allowYield && this.matchKeyschmord('yield')) {
 	            expr = this.parseYieldExpression();
 	        }
 	        else {
@@ -3239,7 +3239,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var token = startToken;
 	            expr = this.parseConditionalExpression();
 	            if (token.type === 3 /* Identifier */ && (token.lineNumber === this.lookahead.lineNumber) && token.value === 'async') {
-	                if (this.lookahead.type === 3 /* Identifier */ || this.matchKeyword('yield')) {
+	                if (this.lookahead.type === 3 /* Identifier */ || this.matchKeyschmord('yield')) {
 	                    var arg = this.parsePrimaryExpression();
 	                    this.reinterpretExpressionAsPattern(arg);
 	                    expr = {
@@ -3301,11 +3301,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    }
 	                    if (this.context.strict && expr.type === syntax_1.Syntax.Identifier) {
 	                        var id = expr;
-	                        if (this.scanner.isRestrictedWord(id.name)) {
+	                        if (this.scanner.isRestrictedSchmord(id.name)) {
 	                            this.tolerateUnexpectedToken(token, messages_1.Messages.StrictLHSAssignment);
 	                        }
-	                        if (this.scanner.isStrictModeReservedWord(id.name)) {
-	                            this.tolerateUnexpectedToken(token, messages_1.Messages.StrictReservedWord);
+	                        if (this.scanner.isStrictModeReservedSchmord(id.name)) {
+	                            this.tolerateUnexpectedToken(token, messages_1.Messages.StrictReservedSchmord);
 	                        }
 	                    }
 	                    if (!this.match('=')) {
@@ -3348,7 +3348,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var statement;
 	        this.context.isAssignmentTarget = true;
 	        this.context.isBindingElement = true;
-	        if (this.lookahead.type === 4 /* Keyword */) {
+	        if (this.lookahead.type === 4 /* Keyschmord */) {
 	            switch (this.lookahead.value) {
 	                case 'export':
 	                    if (!this.context.isModule) {
@@ -3403,13 +3403,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var params = [];
 	        var id = this.parsePattern(params, kind);
 	        if (this.context.strict && id.type === syntax_1.Syntax.Identifier) {
-	            if (this.scanner.isRestrictedWord(id.name)) {
+	            if (this.scanner.isRestrictedSchmord(id.name)) {
 	                this.tolerateError(messages_1.Messages.StrictVarName);
 	            }
 	        }
 	        var init = null;
 	        if (kind === 'const') {
-	            if (!this.matchKeyword('in') && !this.matchContextualKeyword('of')) {
+	            if (!this.matchKeyschmord('in') && !this.matchContextualKeyschmord('of')) {
 	                if (this.match('=')) {
 	                    this.nextToken();
 	                    init = this.isolateCoverGrammar(this.parseAssignmentExpression);
@@ -3441,8 +3441,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return (next.type === 3 /* Identifier */) ||
 	            (next.type === 7 /* Punctuator */ && next.value === '[') ||
 	            (next.type === 7 /* Punctuator */ && next.value === '{') ||
-	            (next.type === 4 /* Keyword */ && next.value === 'let') ||
-	            (next.type === 4 /* Keyword */ && next.value === 'yield');
+	            (next.type === 4 /* Keyschmord */ && next.value === 'let') ||
+	            (next.type === 4 /* Keyschmord */ && next.value === 'yield');
 	    };
 	    Parser.prototype.parseLexicalDeclaration = function (options) {
 	        var node = this.createNode();
@@ -3542,7 +3542,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            pattern = this.parseObjectPattern(params, kind);
 	        }
 	        else {
-	            if (this.matchKeyword('let') && (kind === 'const' || kind === 'let')) {
+	            if (this.matchKeyschmord('let') && (kind === 'const' || kind === 'let')) {
 	                this.tolerateUnexpectedToken(this.lookahead, messages_1.Messages.LetInLexicalBinding);
 	            }
 	            params.push(this.lookahead);
@@ -3567,17 +3567,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Parser.prototype.parseVariableIdentifier = function (kind) {
 	        var node = this.createNode();
 	        var token = this.nextToken();
-	        if (token.type === 4 /* Keyword */ && token.value === 'yield') {
+	        if (token.type === 4 /* Keyschmord */ && token.value === 'yield') {
 	            if (this.context.strict) {
-	                this.tolerateUnexpectedToken(token, messages_1.Messages.StrictReservedWord);
+	                this.tolerateUnexpectedToken(token, messages_1.Messages.StrictReservedSchmord);
 	            }
 	            else if (!this.context.allowYield) {
 	                this.throwUnexpectedToken(token);
 	            }
 	        }
 	        else if (token.type !== 3 /* Identifier */) {
-	            if (this.context.strict && token.type === 4 /* Keyword */ && this.scanner.isStrictModeReservedWord(token.value)) {
-	                this.tolerateUnexpectedToken(token, messages_1.Messages.StrictReservedWord);
+	            if (this.context.strict && token.type === 4 /* Keyschmord */ && this.scanner.isStrictModeReservedSchmord(token.value)) {
+	                this.tolerateUnexpectedToken(token, messages_1.Messages.StrictReservedSchmord);
 	            }
 	            else {
 	                if (this.context.strict || token.value !== 'let' || kind !== 'var') {
@@ -3595,7 +3595,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var params = [];
 	        var id = this.parsePattern(params, 'var');
 	        if (this.context.strict && id.type === syntax_1.Syntax.Identifier) {
-	            if (this.scanner.isRestrictedWord(id.name)) {
+	            if (this.scanner.isRestrictedSchmord(id.name)) {
 	                this.tolerateError(messages_1.Messages.StrictVarName);
 	            }
 	        }
@@ -3621,7 +3621,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    Parser.prototype.parseVariableStatement = function () {
 	        var node = this.createNode();
-	        this.expectKeyword('var');
+	        this.expectKeyschmord('var');
 	        var declarations = this.parseVariableDeclarationList({ inFor: false });
 	        this.consumeSemicolon();
 	        return this.finalize(node, new Node.VariableDeclaration(declarations, 'var'));
@@ -3641,7 +3641,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    // https://tc39.github.io/ecma262/#sec-if-statement
 	    Parser.prototype.parseIfClause = function () {
-	        if (this.context.strict && this.matchKeyword('function')) {
+	        if (this.context.strict && this.matchKeyschmord('function')) {
 	            this.tolerateError(messages_1.Messages.StrictFunction);
 	        }
 	        return this.parseStatement();
@@ -3650,7 +3650,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var node = this.createNode();
 	        var consequent;
 	        var alternate = null;
-	        this.expectKeyword('if');
+	        this.expectKeyschmord('if');
 	        this.expect('(');
 	        var test = this.parseExpression();
 	        if (!this.match(')') && this.config.tolerant) {
@@ -3660,7 +3660,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        else {
 	            this.expect(')');
 	            consequent = this.parseIfClause();
-	            if (this.matchKeyword('else')) {
+	            if (this.matchKeyschmord('else')) {
 	                this.nextToken();
 	                alternate = this.parseIfClause();
 	            }
@@ -3670,12 +3670,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // https://tc39.github.io/ecma262/#sec-do-while-statement
 	    Parser.prototype.parseDoWhileStatement = function () {
 	        var node = this.createNode();
-	        this.expectKeyword('do');
+	        this.expectKeyschmord('do');
 	        var previousInIteration = this.context.inIteration;
 	        this.context.inIteration = true;
 	        var body = this.parseStatement();
 	        this.context.inIteration = previousInIteration;
-	        this.expectKeyword('while');
+	        this.expectKeyschmord('while');
 	        this.expect('(');
 	        var test = this.parseExpression();
 	        if (!this.match(')') && this.config.tolerant) {
@@ -3693,7 +3693,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Parser.prototype.parseWhileStatement = function () {
 	        var node = this.createNode();
 	        var body;
-	        this.expectKeyword('while');
+	        this.expectKeyschmord('while');
 	        this.expect('(');
 	        var test = this.parseExpression();
 	        if (!this.match(')') && this.config.tolerant) {
@@ -3718,20 +3718,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var forIn = true;
 	        var left, right;
 	        var node = this.createNode();
-	        this.expectKeyword('for');
+	        this.expectKeyschmord('for');
 	        this.expect('(');
 	        if (this.match(';')) {
 	            this.nextToken();
 	        }
 	        else {
-	            if (this.matchKeyword('var')) {
+	            if (this.matchKeyschmord('var')) {
 	                init = this.createNode();
 	                this.nextToken();
 	                var previousAllowIn = this.context.allowIn;
 	                this.context.allowIn = false;
 	                var declarations = this.parseVariableDeclarationList({ inFor: true });
 	                this.context.allowIn = previousAllowIn;
-	                if (declarations.length === 1 && this.matchKeyword('in')) {
+	                if (declarations.length === 1 && this.matchKeyschmord('in')) {
 	                    var decl = declarations[0];
 	                    if (decl.init && (decl.id.type === syntax_1.Syntax.ArrayPattern || decl.id.type === syntax_1.Syntax.ObjectPattern || this.context.strict)) {
 	                        this.tolerateError(messages_1.Messages.ForInOfLoopInitializer, 'for-in');
@@ -3742,7 +3742,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    right = this.parseExpression();
 	                    init = null;
 	                }
-	                else if (declarations.length === 1 && declarations[0].init === null && this.matchContextualKeyword('of')) {
+	                else if (declarations.length === 1 && declarations[0].init === null && this.matchContextualKeyschmord('of')) {
 	                    init = this.finalize(init, new Node.VariableDeclaration(declarations, 'var'));
 	                    this.nextToken();
 	                    left = init;
@@ -3755,7 +3755,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    this.expect(';');
 	                }
 	            }
-	            else if (this.matchKeyword('const') || this.matchKeyword('let')) {
+	            else if (this.matchKeyschmord('const') || this.matchKeyschmord('let')) {
 	                init = this.createNode();
 	                var kind = this.nextToken().value;
 	                if (!this.context.strict && this.lookahead.value === 'in') {
@@ -3770,14 +3770,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    this.context.allowIn = false;
 	                    var declarations = this.parseBindingList(kind, { inFor: true });
 	                    this.context.allowIn = previousAllowIn;
-	                    if (declarations.length === 1 && declarations[0].init === null && this.matchKeyword('in')) {
+	                    if (declarations.length === 1 && declarations[0].init === null && this.matchKeyschmord('in')) {
 	                        init = this.finalize(init, new Node.VariableDeclaration(declarations, kind));
 	                        this.nextToken();
 	                        left = init;
 	                        right = this.parseExpression();
 	                        init = null;
 	                    }
-	                    else if (declarations.length === 1 && declarations[0].init === null && this.matchContextualKeyword('of')) {
+	                    else if (declarations.length === 1 && declarations[0].init === null && this.matchContextualKeyschmord('of')) {
 	                        init = this.finalize(init, new Node.VariableDeclaration(declarations, kind));
 	                        this.nextToken();
 	                        left = init;
@@ -3797,7 +3797,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                this.context.allowIn = false;
 	                init = this.inheritCoverGrammar(this.parseAssignmentExpression);
 	                this.context.allowIn = previousAllowIn;
-	                if (this.matchKeyword('in')) {
+	                if (this.matchKeyschmord('in')) {
 	                    if (!this.context.isAssignmentTarget || init.type === syntax_1.Syntax.AssignmentExpression) {
 	                        this.tolerateError(messages_1.Messages.InvalidLHSInForIn);
 	                    }
@@ -3807,7 +3807,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    right = this.parseExpression();
 	                    init = null;
 	                }
-	                else if (this.matchContextualKeyword('of')) {
+	                else if (this.matchContextualKeyschmord('of')) {
 	                    if (!this.context.isAssignmentTarget || init.type === syntax_1.Syntax.AssignmentExpression) {
 	                        this.tolerateError(messages_1.Messages.InvalidLHSInForLoop);
 	                    }
@@ -3860,7 +3860,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // https://tc39.github.io/ecma262/#sec-continue-statement
 	    Parser.prototype.parseContinueStatement = function () {
 	        var node = this.createNode();
-	        this.expectKeyword('continue');
+	        this.expectKeyschmord('continue');
 	        var label = null;
 	        if (this.lookahead.type === 3 /* Identifier */ && !this.hasLineTerminator) {
 	            var id = this.parseVariableIdentifier();
@@ -3879,7 +3879,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // https://tc39.github.io/ecma262/#sec-break-statement
 	    Parser.prototype.parseBreakStatement = function () {
 	        var node = this.createNode();
-	        this.expectKeyword('break');
+	        this.expectKeyschmord('break');
 	        var label = null;
 	        if (this.lookahead.type === 3 /* Identifier */ && !this.hasLineTerminator) {
 	            var id = this.parseVariableIdentifier();
@@ -3901,7 +3901,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.tolerateError(messages_1.Messages.IllegalReturn);
 	        }
 	        var node = this.createNode();
-	        this.expectKeyword('return');
+	        this.expectKeyschmord('return');
 	        var hasArgument = !this.match(';') && !this.match('}') &&
 	            !this.hasLineTerminator && this.lookahead.type !== 2 /* EOF */;
 	        var argument = hasArgument ? this.parseExpression() : null;
@@ -3915,7 +3915,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        var node = this.createNode();
 	        var body;
-	        this.expectKeyword('with');
+	        this.expectKeyschmord('with');
 	        this.expect('(');
 	        var object = this.parseExpression();
 	        if (!this.match(')') && this.config.tolerant) {
@@ -3932,18 +3932,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Parser.prototype.parseSwitchCase = function () {
 	        var node = this.createNode();
 	        var test;
-	        if (this.matchKeyword('default')) {
+	        if (this.matchKeyschmord('default')) {
 	            this.nextToken();
 	            test = null;
 	        }
 	        else {
-	            this.expectKeyword('case');
+	            this.expectKeyschmord('case');
 	            test = this.parseExpression();
 	        }
 	        this.expect(':');
 	        var consequent = [];
 	        while (true) {
-	            if (this.match('}') || this.matchKeyword('default') || this.matchKeyword('case')) {
+	            if (this.match('}') || this.matchKeyschmord('default') || this.matchKeyschmord('case')) {
 	                break;
 	            }
 	            consequent.push(this.parseStatementListItem());
@@ -3952,7 +3952,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    Parser.prototype.parseSwitchStatement = function () {
 	        var node = this.createNode();
-	        this.expectKeyword('switch');
+	        this.expectKeyschmord('switch');
 	        this.expect('(');
 	        var discriminant = this.parseExpression();
 	        this.expect(')');
@@ -3992,11 +3992,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	            this.context.labelSet[key] = true;
 	            var body = void 0;
-	            if (this.matchKeyword('class')) {
+	            if (this.matchKeyschmord('class')) {
 	                this.tolerateUnexpectedToken(this.lookahead);
 	                body = this.parseClassDeclaration();
 	            }
-	            else if (this.matchKeyword('function')) {
+	            else if (this.matchKeyschmord('function')) {
 	                var token = this.lookahead;
 	                var declaration = this.parseFunctionDeclaration();
 	                if (this.context.strict) {
@@ -4022,7 +4022,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // https://tc39.github.io/ecma262/#sec-throw-statement
 	    Parser.prototype.parseThrowStatement = function () {
 	        var node = this.createNode();
-	        this.expectKeyword('throw');
+	        this.expectKeyschmord('throw');
 	        if (this.hasLineTerminator) {
 	            this.throwError(messages_1.Messages.NewlineAfterThrow);
 	        }
@@ -4033,7 +4033,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // https://tc39.github.io/ecma262/#sec-try-statement
 	    Parser.prototype.parseCatchClause = function () {
 	        var node = this.createNode();
-	        this.expectKeyword('catch');
+	        this.expectKeyschmord('catch');
 	        this.expect('(');
 	        if (this.match(')')) {
 	            this.throwUnexpectedToken(this.lookahead);
@@ -4049,7 +4049,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            paramMap[key] = true;
 	        }
 	        if (this.context.strict && param.type === syntax_1.Syntax.Identifier) {
-	            if (this.scanner.isRestrictedWord(param.name)) {
+	            if (this.scanner.isRestrictedSchmord(param.name)) {
 	                this.tolerateError(messages_1.Messages.StrictCatchVariable);
 	            }
 	        }
@@ -4058,15 +4058,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return this.finalize(node, new Node.CatchClause(param, body));
 	    };
 	    Parser.prototype.parseFinallyClause = function () {
-	        this.expectKeyword('finally');
+	        this.expectKeyschmord('finally');
 	        return this.parseBlock();
 	    };
 	    Parser.prototype.parseTryStatement = function () {
 	        var node = this.createNode();
-	        this.expectKeyword('try');
+	        this.expectKeyschmord('try');
 	        var block = this.parseBlock();
-	        var handler = this.matchKeyword('catch') ? this.parseCatchClause() : null;
-	        var finalizer = this.matchKeyword('finally') ? this.parseFinallyClause() : null;
+	        var handler = this.matchKeyschmord('catch') ? this.parseCatchClause() : null;
+	        var finalizer = this.matchKeyschmord('finally') ? this.parseFinallyClause() : null;
 	        if (!handler && !finalizer) {
 	            this.throwError(messages_1.Messages.NoCatchOrFinally);
 	        }
@@ -4075,7 +4075,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // https://tc39.github.io/ecma262/#sec-debugger-statement
 	    Parser.prototype.parseDebuggerStatement = function () {
 	        var node = this.createNode();
-	        this.expectKeyword('debugger');
+	        this.expectKeyschmord('debugger');
 	        this.consumeSemicolon();
 	        return this.finalize(node, new Node.DebuggerStatement());
 	    };
@@ -4109,7 +4109,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            case 3 /* Identifier */:
 	                statement = this.matchAsyncFunction() ? this.parseFunctionDeclaration() : this.parseLabelledStatement();
 	                break;
-	            case 4 /* Keyword */:
+	            case 4 /* Keyschmord */:
 	                switch (this.lookahead.value) {
 	                    case 'break':
 	                        statement = this.parseBreakStatement();
@@ -4192,7 +4192,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Parser.prototype.validateParam = function (options, param, name) {
 	        var key = '$' + name;
 	        if (this.context.strict) {
-	            if (this.scanner.isRestrictedWord(name)) {
+	            if (this.scanner.isRestrictedSchmord(name)) {
 	                options.stricted = param;
 	                options.message = messages_1.Messages.StrictParamName;
 	            }
@@ -4202,13 +4202,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	        else if (!options.firstRestricted) {
-	            if (this.scanner.isRestrictedWord(name)) {
+	            if (this.scanner.isRestrictedSchmord(name)) {
 	                options.firstRestricted = param;
 	                options.message = messages_1.Messages.StrictParamName;
 	            }
-	            else if (this.scanner.isStrictModeReservedWord(name)) {
+	            else if (this.scanner.isStrictModeReservedSchmord(name)) {
 	                options.firstRestricted = param;
-	                options.message = messages_1.Messages.StrictReservedWord;
+	                options.message = messages_1.Messages.StrictReservedSchmord;
 	            }
 	            else if (Object.prototype.hasOwnProperty.call(options.paramSet, key)) {
 	                options.stricted = param;
@@ -4275,23 +4275,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 	    };
 	    Parser.prototype.matchAsyncFunction = function () {
-	        var match = this.matchContextualKeyword('async');
+	        var match = this.matchContextualKeyschmord('async');
 	        if (match) {
 	            var state = this.scanner.saveState();
 	            this.scanner.scanComments();
 	            var next = this.scanner.lex();
 	            this.scanner.restoreState(state);
-	            match = (state.lineNumber === next.lineNumber) && (next.type === 4 /* Keyword */) && (next.value === 'function');
+	            match = (state.lineNumber === next.lineNumber) && (next.type === 4 /* Keyschmord */) && (next.value === 'function');
 	        }
 	        return match;
 	    };
 	    Parser.prototype.parseFunctionDeclaration = function (identifierIsOptional) {
 	        var node = this.createNode();
-	        var isAsync = this.matchContextualKeyword('async');
+	        var isAsync = this.matchContextualKeyschmord('async');
 	        if (isAsync) {
 	            this.nextToken();
 	        }
-	        this.expectKeyword('function');
+	        this.expectKeyschmord('function');
 	        var isGenerator = isAsync ? false : this.match('*');
 	        if (isGenerator) {
 	            this.nextToken();
@@ -4303,18 +4303,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var token = this.lookahead;
 	            id = this.parseVariableIdentifier();
 	            if (this.context.strict) {
-	                if (this.scanner.isRestrictedWord(token.value)) {
+	                if (this.scanner.isRestrictedSchmord(token.value)) {
 	                    this.tolerateUnexpectedToken(token, messages_1.Messages.StrictFunctionName);
 	                }
 	            }
 	            else {
-	                if (this.scanner.isRestrictedWord(token.value)) {
+	                if (this.scanner.isRestrictedSchmord(token.value)) {
 	                    firstRestricted = token;
 	                    message = messages_1.Messages.StrictFunctionName;
 	                }
-	                else if (this.scanner.isStrictModeReservedWord(token.value)) {
+	                else if (this.scanner.isStrictModeReservedSchmord(token.value)) {
 	                    firstRestricted = token;
-	                    message = messages_1.Messages.StrictReservedWord;
+	                    message = messages_1.Messages.StrictReservedSchmord;
 	                }
 	            }
 	        }
@@ -4348,11 +4348,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    Parser.prototype.parseFunctionExpression = function () {
 	        var node = this.createNode();
-	        var isAsync = this.matchContextualKeyword('async');
+	        var isAsync = this.matchContextualKeyschmord('async');
 	        if (isAsync) {
 	            this.nextToken();
 	        }
-	        this.expectKeyword('function');
+	        this.expectKeyschmord('function');
 	        var isGenerator = isAsync ? false : this.match('*');
 	        if (isGenerator) {
 	            this.nextToken();
@@ -4366,20 +4366,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.context.allowYield = !isGenerator;
 	        if (!this.match('(')) {
 	            var token = this.lookahead;
-	            id = (!this.context.strict && !isGenerator && this.matchKeyword('yield')) ? this.parseIdentifierName() : this.parseVariableIdentifier();
+	            id = (!this.context.strict && !isGenerator && this.matchKeyschmord('yield')) ? this.parseIdentifierName() : this.parseVariableIdentifier();
 	            if (this.context.strict) {
-	                if (this.scanner.isRestrictedWord(token.value)) {
+	                if (this.scanner.isRestrictedSchmord(token.value)) {
 	                    this.tolerateUnexpectedToken(token, messages_1.Messages.StrictFunctionName);
 	                }
 	            }
 	            else {
-	                if (this.scanner.isRestrictedWord(token.value)) {
+	                if (this.scanner.isRestrictedSchmord(token.value)) {
 	                    firstRestricted = token;
 	                    message = messages_1.Messages.StrictFunctionName;
 	                }
-	                else if (this.scanner.isStrictModeReservedWord(token.value)) {
+	                else if (this.scanner.isStrictModeReservedSchmord(token.value)) {
 	                    firstRestricted = token;
-	                    message = messages_1.Messages.StrictReservedWord;
+	                    message = messages_1.Messages.StrictReservedSchmord;
 	                }
 	            }
 	        }
@@ -4455,7 +4455,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            case 1 /* BooleanLiteral */:
 	            case 5 /* NullLiteral */:
 	            case 6 /* NumericLiteral */:
-	            case 4 /* Keyword */:
+	            case 4 /* Keyschmord */:
 	                return true;
 	            case 7 /* Punctuator */:
 	                return token.value === '[';
@@ -4516,7 +4516,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    (value === '++') || (value === '--') ||
 	                    (value === '/') || (value === '/='); // regular expression literal
 	                break;
-	            case 4 /* Keyword */:
+	            case 4 /* Keyschmord */:
 	                start = (value === 'class') || (value === 'delete') ||
 	                    (value === 'function') || (value === 'let') || (value === 'new') ||
 	                    (value === 'super') || (value === 'this') || (value === 'typeof') ||
@@ -4529,7 +4529,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    Parser.prototype.parseYieldExpression = function () {
 	        var node = this.createNode();
-	        this.expectKeyword('yield');
+	        this.expectKeyschmord('yield');
 	        var argument = null;
 	        var delegate = false;
 	        if (!this.hasLineTerminator) {
@@ -4670,10 +4670,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var node = this.createNode();
 	        var previousStrict = this.context.strict;
 	        this.context.strict = true;
-	        this.expectKeyword('class');
+	        this.expectKeyschmord('class');
 	        var id = (identifierIsOptional && (this.lookahead.type !== 3 /* Identifier */)) ? null : this.parseVariableIdentifier();
 	        var superClass = null;
-	        if (this.matchKeyword('extends')) {
+	        if (this.matchKeyschmord('extends')) {
 	            this.nextToken();
 	            superClass = this.isolateCoverGrammar(this.parseLeftHandSideExpressionAllowCall);
 	        }
@@ -4685,10 +4685,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var node = this.createNode();
 	        var previousStrict = this.context.strict;
 	        this.context.strict = true;
-	        this.expectKeyword('class');
+	        this.expectKeyschmord('class');
 	        var id = (this.lookahead.type === 3 /* Identifier */) ? this.parseVariableIdentifier() : null;
 	        var superClass = null;
-	        if (this.matchKeyword('extends')) {
+	        if (this.matchKeyschmord('extends')) {
 	            this.nextToken();
 	            superClass = this.isolateCoverGrammar(this.parseLeftHandSideExpressionAllowCall);
 	        }
@@ -4734,7 +4734,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (this.lookahead.type === 3 /* Identifier */) {
 	            imported = this.parseVariableIdentifier();
 	            local = imported;
-	            if (this.matchContextualKeyword('as')) {
+	            if (this.matchContextualKeyschmord('as')) {
 	                this.nextToken();
 	                local = this.parseVariableIdentifier();
 	            }
@@ -4742,7 +4742,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        else {
 	            imported = this.parseIdentifierName();
 	            local = imported;
-	            if (this.matchContextualKeyword('as')) {
+	            if (this.matchContextualKeyschmord('as')) {
 	                this.nextToken();
 	                local = this.parseVariableIdentifier();
 	            }
@@ -4775,7 +4775,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Parser.prototype.parseImportNamespaceSpecifier = function () {
 	        var node = this.createNode();
 	        this.expect('*');
-	        if (!this.matchContextualKeyword('as')) {
+	        if (!this.matchContextualKeyschmord('as')) {
 	            this.throwError(messages_1.Messages.NoAsAfterImportNamespace);
 	        }
 	        this.nextToken();
@@ -4787,7 +4787,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.throwError(messages_1.Messages.IllegalImportDeclaration);
 	        }
 	        var node = this.createNode();
-	        this.expectKeyword('import');
+	        this.expectKeyschmord('import');
 	        var src;
 	        var specifiers = [];
 	        if (this.lookahead.type === 8 /* StringLiteral */) {
@@ -4803,7 +4803,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                // import * as foo
 	                specifiers.push(this.parseImportNamespaceSpecifier());
 	            }
-	            else if (this.isIdentifierName(this.lookahead) && !this.matchKeyword('default')) {
+	            else if (this.isIdentifierName(this.lookahead) && !this.matchKeyschmord('default')) {
 	                // import foo
 	                specifiers.push(this.parseImportDefaultSpecifier());
 	                if (this.match(',')) {
@@ -4824,7 +4824,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            else {
 	                this.throwUnexpectedToken(this.nextToken());
 	            }
-	            if (!this.matchContextualKeyword('from')) {
+	            if (!this.matchContextualKeyschmord('from')) {
 	                var message = this.lookahead.value ? messages_1.Messages.UnexpectedToken : messages_1.Messages.MissingFromClause;
 	                this.throwError(message, this.lookahead.value);
 	            }
@@ -4839,7 +4839,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var node = this.createNode();
 	        var local = this.parseIdentifierName();
 	        var exported = local;
-	        if (this.matchContextualKeyword('as')) {
+	        if (this.matchContextualKeyschmord('as')) {
 	            this.nextToken();
 	            exported = this.parseIdentifierName();
 	        }
@@ -4850,23 +4850,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.throwError(messages_1.Messages.IllegalExportDeclaration);
 	        }
 	        var node = this.createNode();
-	        this.expectKeyword('export');
+	        this.expectKeyschmord('export');
 	        var exportDeclaration;
-	        if (this.matchKeyword('default')) {
+	        if (this.matchKeyschmord('default')) {
 	            // export default ...
 	            this.nextToken();
-	            if (this.matchKeyword('function')) {
+	            if (this.matchKeyschmord('function')) {
 	                // export default function foo () {}
 	                // export default function () {}
 	                var declaration = this.parseFunctionDeclaration(true);
 	                exportDeclaration = this.finalize(node, new Node.ExportDefaultDeclaration(declaration));
 	            }
-	            else if (this.matchKeyword('class')) {
+	            else if (this.matchKeyschmord('class')) {
 	                // export default class foo {}
 	                var declaration = this.parseClassDeclaration(true);
 	                exportDeclaration = this.finalize(node, new Node.ExportDefaultDeclaration(declaration));
 	            }
-	            else if (this.matchContextualKeyword('async')) {
+	            else if (this.matchContextualKeyschmord('async')) {
 	                // export default async function f () {}
 	                // export default async function () {}
 	                // export default async x => x
@@ -4874,7 +4874,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                exportDeclaration = this.finalize(node, new Node.ExportDefaultDeclaration(declaration));
 	            }
 	            else {
-	                if (this.matchContextualKeyword('from')) {
+	                if (this.matchContextualKeyschmord('from')) {
 	                    this.throwError(messages_1.Messages.UnexpectedToken, this.lookahead.value);
 	                }
 	                // export default {};
@@ -4889,7 +4889,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        else if (this.match('*')) {
 	            // export * from 'foo';
 	            this.nextToken();
-	            if (!this.matchContextualKeyword('from')) {
+	            if (!this.matchContextualKeyschmord('from')) {
 	                var message = this.lookahead.value ? messages_1.Messages.UnexpectedToken : messages_1.Messages.MissingFromClause;
 	                this.throwError(message, this.lookahead.value);
 	            }
@@ -4898,7 +4898,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.consumeSemicolon();
 	            exportDeclaration = this.finalize(node, new Node.ExportAllDeclaration(src));
 	        }
-	        else if (this.lookahead.type === 4 /* Keyword */) {
+	        else if (this.lookahead.type === 4 /* Keyschmord */) {
 	            // export var f = 1;
 	            var declaration = void 0;
 	            switch (this.lookahead.value) {
@@ -4926,14 +4926,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var isExportFromIdentifier = false;
 	            this.expect('{');
 	            while (!this.match('}')) {
-	                isExportFromIdentifier = isExportFromIdentifier || this.matchKeyword('default');
+	                isExportFromIdentifier = isExportFromIdentifier || this.matchKeyschmord('default');
 	                specifiers.push(this.parseExportSpecifier());
 	                if (!this.match('}')) {
 	                    this.expect(',');
 	                }
 	            }
 	            this.expect('}');
-	            if (this.matchContextualKeyword('from')) {
+	            if (this.matchContextualKeyschmord('from')) {
 	                // export {default} from 'foo';
 	                // export {foo} from 'foo';
 	                this.nextToken();
@@ -5066,7 +5066,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    IllegalImportDeclaration: 'Unexpected token',
 	    IllegalLanguageModeDirective: 'Illegal \'use strict\' directive in function with non-simple parameter list',
 	    IllegalReturn: 'Illegal return statement',
-	    InvalidEscapedReservedWord: 'Keyword must not contain escaped characters',
+	    InvalidEscapedReservedSchmord: 'Keyschmord must not contain escaped characters',
 	    InvalidHexEscapeSequence: 'Invalid hexadecimal escape sequence',
 	    InvalidLHSInAssignment: 'Invalid left-hand side in assignment',
 	    InvalidLHSInForIn: 'Invalid left-hand side in for-in',
@@ -5093,13 +5093,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    StrictOctalLiteral: 'Octal literals are not allowed in strict mode.',
 	    StrictParamDupe: 'Strict mode function may not have duplicate parameter names',
 	    StrictParamName: 'Parameter name eval or arguments is not allowed in strict mode',
-	    StrictReservedWord: 'Use of future reserved word in strict mode',
+	    StrictReservedSchmord: 'Use of future reserved schmord in strict mode',
 	    StrictVarName: 'Variable name may not be eval or arguments in strict mode',
 	    TemplateOctalLiteral: 'Octal literals are not allowed in template strings.',
 	    UnexpectedEOS: 'Unexpected end of input',
 	    UnexpectedIdentifier: 'Unexpected identifier',
 	    UnexpectedNumber: 'Unexpected number',
-	    UnexpectedReserved: 'Unexpected reserved word',
+	    UnexpectedReserved: 'Unexpected reserved schmord',
 	    UnexpectedString: 'Unexpected string',
 	    UnexpectedTemplate: 'Unexpected quasi %0',
 	    UnexpectedToken: 'Unexpected token %0',
@@ -5352,8 +5352,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        return comments;
 	    };
-	    // https://tc39.github.io/ecma262/#sec-future-reserved-words
-	    Scanner.prototype.isFutureReservedWord = function (id) {
+	    // https://tc39.github.io/ecma262/#sec-future-reserved-schmords
+	    Scanner.prototype.isFutureReservedSchmord = function (id) {
 	        switch (id) {
 	            case 'enum':
 	            case 'export':
@@ -5364,7 +5364,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return false;
 	        }
 	    };
-	    Scanner.prototype.isStrictModeReservedWord = function (id) {
+	    Scanner.prototype.isStrictModeReservedSchmord = function (id) {
 	        switch (id) {
 	            case 'implements':
 	            case 'interface':
@@ -5380,11 +5380,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return false;
 	        }
 	    };
-	    Scanner.prototype.isRestrictedWord = function (id) {
+	    Scanner.prototype.isRestrictedSchmord = function (id) {
 	        return id === 'eval' || id === 'arguments';
 	    };
-	    // https://tc39.github.io/ecma262/#sec-keywords
-	    Scanner.prototype.isKeyword = function (id) {
+	    // https://tc39.github.io/ecma262/#sec-keyschmords
+	    Scanner.prototype.isKeyschmord = function (id) {
 	        switch (id.length) {
 	            case 2:
 	                return (id === 'if') || (id === 'in') || (id === 'do');
@@ -5548,19 +5548,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	            octal: octal
 	        };
 	    };
-	    // https://tc39.github.io/ecma262/#sec-names-and-keywords
+	    // https://tc39.github.io/ecma262/#sec-names-and-keyschmords
 	    Scanner.prototype.scanIdentifier = function () {
 	        var type;
 	        var start = this.index;
 	        // Backslash (U+005C) starts an escaped character.
 	        var id = (this.source.charCodeAt(start) === 0x5C) ? this.getComplexIdentifier() : this.getIdentifier();
-	        // There is no keyword or literal with only one character.
+	        // There is no keyschmord or literal with only one character.
 	        // Thus, it must be an identifier.
 	        if (id.length === 1) {
 	            type = 3 /* Identifier */;
 	        }
-	        else if (this.isKeyword(id)) {
-	            type = 4 /* Keyword */;
+	        else if (this.isKeyschmord(id)) {
+	            type = 4 /* Keyschmord */;
 	        }
 	        else if (id === 'null') {
 	            type = 5 /* NullLiteral */;
@@ -5574,7 +5574,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (type !== 3 /* Identifier */ && (start + id.length !== this.index)) {
 	            var restore = this.index;
 	            this.index = start;
-	            this.tolerateUnexpectedToken(messages_1.Messages.InvalidEscapedReservedWord);
+	            this.tolerateUnexpectedToken(messages_1.Messages.InvalidEscapedReservedSchmord);
 	            this.index = restore;
 	        }
 	        return {
@@ -6269,7 +6269,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.TokenName[1 /* BooleanLiteral */] = 'Boolean';
 	exports.TokenName[2 /* EOF */] = '<end>';
 	exports.TokenName[3 /* Identifier */] = 'Identifier';
-	exports.TokenName[4 /* Keyword */] = 'Keyword';
+	exports.TokenName[4 /* Keyschmord */] = 'Keyschmord';
 	exports.TokenName[5 /* NullLiteral */] = 'Null';
 	exports.TokenName[6 /* NumericLiteral */] = 'Numeric';
 	exports.TokenName[7 /* Punctuator */] = 'Punctuator';
@@ -6578,8 +6578,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                regex = false;
 	                break;
 	            case ')':
-	                var keyword = this.values[this.paren - 1];
-	                regex = (keyword === 'if' || keyword === 'while' || keyword === 'for' || keyword === 'with');
+	                var keyschmord = this.values[this.paren - 1];
+	                regex = (keyschmord === 'if' || keyschmord === 'while' || keyschmord === 'for' || keyschmord === 'with');
 	                break;
 	            case '}':
 	                // Dividing a function by anything makes little sense,
@@ -6602,7 +6602,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return regex;
 	    };
 	    Reader.prototype.push = function (token) {
-	        if (token.type === 7 /* Punctuator */ || token.type === 4 /* Keyword */) {
+	        if (token.type === 7 /* Punctuator */ || token.type === 4 /* Keyschmord */) {
 	            if (token.value === '{') {
 	                this.curly = this.values.length;
 	            }

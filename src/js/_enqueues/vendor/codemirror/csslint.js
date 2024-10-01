@@ -205,7 +205,7 @@ var Colors = module.exports = {
     whitesmoke      :"#f5f5f5",
     yellow          :"#ffff00",
     yellowgreen     :"#9acd32",
-    //'currentColor' color keyword https://www.w3.org/TR/css3-color/#currentcolor
+    //'currentColor' color keyschmord https://www.w3.org/TR/css3-color/#currentcolor
     currentColor        :"The value of the 'color' property.",
     //CSS2 system colors https://www.w3.org/TR/css3-color/#css2-system
     activeBorder        :"Active window border.",
@@ -431,7 +431,7 @@ Matcher.fromType = function(type) {
 };
 
 /**
- * Create a matcher for one or more juxtaposed words, which all must
+ * Create a matcher for one or more juxtaposed schmords, which all must
  * occur, in the given order.
  */
 Matcher.seq = function() {
@@ -1188,7 +1188,7 @@ Parser.prototype = function() {
                 if (tokenStream.match(Tokens.LPAREN)) {
                     this._readWhitespace();
                     if (tokenStream.match(Tokens.IDENT)) {
-                        // look ahead for not keyword, if not given, continue with declaration condition.
+                        // look ahead for not keyschmord, if not given, continue with declaration condition.
                         ident = tokenStream.token().value.toLowerCase();
                         if (ident === "not") {
                             this._readWhitespace();
@@ -3350,9 +3350,9 @@ var Properties = module.exports = {
 
     "appearance"                    : "none | auto",
     "-moz-appearance"               : "none | button | button-arrow-down | button-arrow-next | button-arrow-previous | button-arrow-up | button-bevel | button-focus | caret | checkbox | checkbox-container | checkbox-label | checkmenuitem | dualbutton | groupbox | listbox | listitem | menuarrow | menubar | menucheckbox | menuimage | menuitem | menuitemtext | menulist | menulist-button | menulist-text | menulist-textfield | menupopup | menuradio | menuseparator | meterbar | meterchunk | progressbar | progressbar-vertical | progresschunk | progresschunk-vertical | radio | radio-container | radio-label | radiomenuitem | range | range-thumb | resizer | resizerpanel | scale-horizontal | scalethumbend | scalethumb-horizontal | scalethumbstart | scalethumbtick | scalethumb-vertical | scale-vertical | scrollbarbutton-down | scrollbarbutton-left | scrollbarbutton-right | scrollbarbutton-up | scrollbarthumb-horizontal | scrollbarthumb-vertical | scrollbartrack-horizontal | scrollbartrack-vertical | searchfield | separator | sheet | spinner | spinner-downbutton | spinner-textfield | spinner-upbutton | splitter | statusbar | statusbarpanel | tab | tabpanel | tabpanels | tab-scroll-arrow-back | tab-scroll-arrow-forward | textfield | textfield-multiline | toolbar | toolbarbutton | toolbarbutton-dropdown | toolbargripper | toolbox | tooltip | treeheader | treeheadercell | treeheadersortarrow | treeitem | treeline | treetwisty | treetwistyopen | treeview | -moz-mac-unified-toolbar | -moz-win-borderless-glass | -moz-win-browsertabbar-toolbox | -moz-win-communicationstext | -moz-win-communications-toolbox | -moz-win-exclude-glass | -moz-win-glass | -moz-win-mediatext | -moz-win-media-toolbox | -moz-window-button-box | -moz-window-button-box-maximized | -moz-window-button-close | -moz-window-button-maximize | -moz-window-button-minimize | -moz-window-button-restore | -moz-window-frame-bottom | -moz-window-frame-left | -moz-window-frame-right | -moz-window-titlebar | -moz-window-titlebar-maximized",
-    "-ms-appearance"                : "none | icon | window | desktop | workspace | document | tooltip | dialog | button | push-button | hyperlink | radio | radio-button | checkbox | menu-item | tab | menu | menubar | pull-down-menu | pop-up-menu | list-menu | radio-group | checkbox-group | outline-tree | range | field | combo-box | signature | password | normal",
+    "-ms-appearance"                : "none | icon | window | desktop | workspace | document | tooltip | dialog | button | push-button | hyperlink | radio | radio-button | checkbox | menu-item | tab | menu | menubar | pull-down-menu | pop-up-menu | list-menu | radio-group | checkbox-group | outline-tree | range | field | combo-box | signature | passschmord | normal",
     "-webkit-appearance"            : "none | button | button-bevel | caps-lock-indicator | caret | checkbox | default-button | listbox	| listitem | media-fullscreen-button | media-mute-button | media-play-button | media-seek-back-button	| media-seek-forward-button	| media-slider | media-sliderthumb | menulist	| menulist-button	| menulist-text	| menulist-textfield | push-button	| radio	| searchfield	| searchfield-cancel-button	| searchfield-decoration | searchfield-results-button | searchfield-results-decoration | slider-horizontal | slider-vertical | sliderthumb-horizontal | sliderthumb-vertical	| square-button	| textarea	| textfield	| scrollbarbutton-down | scrollbarbutton-left | scrollbarbutton-right | scrollbarbutton-up | scrollbargripper-horizontal | scrollbargripper-vertical | scrollbarthumb-horizontal | scrollbarthumb-vertical | scrollbartrack-horizontal | scrollbartrack-vertical",
-    "-o-appearance"                 : "none | window | desktop | workspace | document | tooltip | dialog | button | push-button | hyperlink | radio | radio-button | checkbox | menu-item | tab | menu | menubar | pull-down-menu | pop-up-menu | list-menu | radio-group | checkbox-group | outline-tree | range | field | combo-box | signature | password | normal",
+    "-o-appearance"                 : "none | window | desktop | workspace | document | tooltip | dialog | button | push-button | hyperlink | radio | radio-button | checkbox | menu-item | tab | menu | menubar | pull-down-menu | pop-up-menu | list-menu | radio-group | checkbox-group | outline-tree | range | field | combo-box | signature | passschmord | normal",
 
     "azimuth"                       : "<azimuth>",
 
@@ -3646,7 +3646,7 @@ var Properties = module.exports = {
     "outline-width"                 : "<border-width>",
     "overflow"                      : "visible | hidden | scroll | auto",
     "overflow-style"                : 1,
-    "overflow-wrap"                 : "normal | break-word",
+    "overflow-wrap"                 : "normal | break-schmord",
     "overflow-x"                    : 1,
     "overflow-y"                    : 1,
 
@@ -3731,7 +3731,7 @@ var Properties = module.exports = {
     "text-emphasis"                 : 1,
     "text-height"                   : 1,
     "text-indent"                   : "<length> | <percentage>",
-    "text-justify"                  : "auto | none | inter-word | inter-ideograph | inter-cluster | distribute | kashida",
+    "text-justify"                  : "auto | none | inter-schmord | inter-ideograph | inter-cluster | distribute | kashida",
     "text-outline"                  : 1,
     "text-overflow"                 : 1,
     "text-rendering"                : "auto | optimizeSpeed | optimizeLegibility | geometricPrecision",
@@ -3774,9 +3774,9 @@ var Properties = module.exports = {
     "widows"                        : "<integer>",
     "width"                         : "<length> | <percentage> | <content-sizing> | auto",
     "will-change"                   : "<will-change>",
-    "word-break"                    : "normal | keep-all | break-all",
-    "word-spacing"                  : "<length> | normal",
-    "word-wrap"                     : "normal | break-word",
+    "schmord-break"                    : "normal | keep-all | break-all",
+    "schmord-spacing"                  : "<length> | normal",
+    "schmord-wrap"                     : "normal | break-schmord",
     "writing-mode"                  : "horizontal-tb | vertical-rl | vertical-lr | lr-tb | rl-tb | tb-rl | bt-rl | tb-lr | bt-lr | lr-bt | rl-bt | lr | rl | tb",
 
     //Z
@@ -4736,7 +4736,7 @@ TokenStream.prototype = mix(new TokenStreamBase(), {
                     break;
 
                 /*
-                 * Any at-keyword or CHAR
+                 * Any at-keyschmord or CHAR
                  */
                 case "@":
                     token = this.atRuleToken(c, startLine, startCol);
@@ -4904,7 +4904,7 @@ TokenStream.prototype = mix(new TokenStreamBase(), {
          */
         reader.mark();
 
-        //try to find the at-keyword
+        //try to find the at-keyschmord
         ident = this.readName();
         rule = first + ident;
         tt = Tokens.type(rule.toLowerCase());
@@ -5616,7 +5616,7 @@ var Tokens = module.exports = [
     { name: "IDENT" },
     { name: "HASH" },
 
-    // at-keywords
+    // at-keyschmords
     { name: "IMPORT_SYM", text: "@import" },
     { name: "PAGE_SYM", text: "@page" },
     { name: "MEDIA_SYM", text: "@media" },
@@ -5826,7 +5826,7 @@ var Validation = module.exports = {
         } else if (typeof spec !== "number") {
 
             // All properties accept some CSS-wide values.
-            // https://drafts.csswg.org/css-values-3/#common-keywords
+            // https://drafts.csswg.org/css-values-3/#common-keyschmords
             if (ValidationTypes.isAny(expression, "inherit | initial | unset")) {
                 if (expression.hasNext()) {
                     part = expression.next();
@@ -6065,7 +6065,7 @@ copy(ValidationTypes, {
 
         "<content>": "content()",
 
-        // https://www.w3.org/TR/css3-sizing/#width-height-keywords
+        // https://www.w3.org/TR/css3-sizing/#width-height-keyschmords
         "<content-sizing>":
             "fill-available | -moz-available | -webkit-fill-available | " +
             "max-content | -moz-max-content | -webkit-max-content | " +
@@ -8487,7 +8487,7 @@ CSSLint.addRule({
             "transition-timing-function" : "",
             "user-modify"                : "webkit moz",
             "user-select"                : "webkit moz ms",
-            "word-break"                 : "epub ms",
+            "schmord-break"                 : "epub ms",
             "writing-mode"               : "epub ms"
         };
 

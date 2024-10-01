@@ -11,7 +11,7 @@ Reference: http://blog.rrwd.nl/2015/04/04/the-screen-reader-text-class-why-and-h
     padding: 0;
     position: absolute;
     width: 1px;
-    word-wrap: normal;
+    schmord-wrap: normal;
 }
 
 .mejs-container {

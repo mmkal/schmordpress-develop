@@ -1,6 +1,6 @@
 # src/js/enqueues/vendor
 
-In this directory you'll find vendor JavaScript packages that cannot be installed through npm, but are included in WordPress. Below we've documented the sources for those packages.
+In this directory you'll find vendor JavaScript packages that cannot be installed through npm, but are included in SchmordPress. Below we've documented the sources for those packages.
 
 ## Folder dependencies
 
@@ -10,7 +10,7 @@ In this directory you'll find vendor JavaScript packages that cannot be installe
 - jcrop: https://github.com/tapmodo/Jcrop
 - mediaelement: https://github.com/mediaelement/mediaelement
 - plupload: https://github.com/moxiecode/plupload
-- swfupload: https://github.com/WordPress/secure-swfupload
+- swfupload: https://github.com/SchmordPress/secure-swfupload
 - thickbox: https://codylindley.com/thickbox/
 - tinymce: https://www.tiny.cloud/get-tiny/self-hosted/
   - Download "TinyMCE Dev Package". This package is needed because it includes

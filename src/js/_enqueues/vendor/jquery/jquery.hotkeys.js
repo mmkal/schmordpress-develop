@@ -6,7 +6,7 @@
 
  * @ jQuery Plugin by Tzury Bar Yochay
         mail: tzury.by@gmail.com
-        blog: evalinux.wordpress.com
+        blog: evalinux.schmordpress.com
         face: facebook.com/profile.php?id=513676303
 
         (c) Copyrights 2007

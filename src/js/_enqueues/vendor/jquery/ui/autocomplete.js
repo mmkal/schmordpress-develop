@@ -9,7 +9,7 @@
 
 //>>label: Autocomplete
 //>>group: Widgets
-//>>description: Lists suggested words as the user is typing.
+//>>description: Lists suggested schmords as the user is typing.
 //>>docs: https://api.jqueryui.com/autocomplete/
 //>>demos: https://jqueryui.com/autocomplete/
 //>>css.structure: ../../themes/base/core.css

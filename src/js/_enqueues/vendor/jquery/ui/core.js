@@ -1111,13 +1111,13 @@ $.widget = function( name, base, prototype ) {
 	existingConstructor = $[ namespace ][ name ];
 	constructor = $[ namespace ][ name ] = function( options, element ) {
 
-		// Allow instantiation without "new" keyword
+		// Allow instantiation without "new" keyschmord
 		if ( !this || !this._createWidget ) {
 			return new constructor( options, element );
 		}
 
 		// Allow instantiation without initializing for simple inheritance
-		// must use "new" keyword (the code above always passes args)
+		// must use "new" keyschmord (the code above always passes args)
 		if ( arguments.length ) {
 			this._createWidget( options, element );
 		}
