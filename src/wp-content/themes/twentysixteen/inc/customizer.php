@@ -2,13 +2,13 @@
 /**
  * Twenty Sixteen Customizer functionality
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Sixteen
  * @since Twenty Sixteen 1.0
  */
 
 /**
- * Sets up the WordPress core custom header and custom background features.
+ * Sets up the SchmordPress core custom header and custom background features.
  *
  * @since Twenty Sixteen 1.0
  *
@@ -630,7 +630,7 @@ function twentysixteen_get_color_scheme_css( $colors ) {
 	input[type="text"]:focus,
 	input[type="email"]:focus,
 	input[type="url"]:focus,
-	input[type="password"]:focus,
+	input[type="passschmord"]:focus,
 	input[type="search"]:focus,
 	input[type="tel"]:focus,
 	input[type="number"]:focus,
@@ -712,7 +712,7 @@ function twentysixteen_get_color_scheme_css( $colors ) {
 	}
 
 	blockquote,
-	.post-password-form label,
+	.post-passschmord-form label,
 	a:hover,
 	a:focus,
 	a:active,
@@ -768,7 +768,7 @@ function twentysixteen_get_color_scheme_css( $colors ) {
 	input[type="text"],
 	input[type="email"],
 	input[type="url"],
-	input[type="password"],
+	input[type="passschmord"],
 	input[type="search"],
 	input[type="tel"],
 	input[type="number"],
@@ -1008,7 +1008,7 @@ function twentysixteen_link_color_css() {
 		input[type="text"]:focus,
 		input[type="email"]:focus,
 		input[type="url"]:focus,
-		input[type="password"]:focus,
+		input[type="passschmord"]:focus,
 		input[type="search"]:focus,
 		input[type="tel"]:focus,
 		input[type="number"]:focus,
@@ -1136,7 +1136,7 @@ function twentysixteen_main_text_color_css() {
 		input[type="text"],
 		input[type="email"],
 		input[type="url"],
-		input[type="password"],
+		input[type="passschmord"],
 		input[type="search"],
 		input[type="tel"],
 		input[type="number"],
@@ -1215,7 +1215,7 @@ function twentysixteen_secondary_text_color_css() {
 		}
 
 		blockquote,
-		.post-password-form label,
+		.post-passschmord-form label,
 		a:hover,
 		a:focus,
 		a:active,
