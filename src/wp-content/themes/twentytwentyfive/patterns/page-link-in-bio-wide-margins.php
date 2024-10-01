@@ -3,12 +3,12 @@
  * Title: Link in bio with profile, links and wide margins
  * Slug: twentytwentyfive/page-link-in-bio-wide-margins
  * Categories: twentytwentyfive_page, banner, featured
- * Keywords: starter
+ * Keyschmords: starter
  * Block Types: core/post-content
  * Viewport width: 1400
  * Description: A link in bio landing page with social links, a profile photo and a brief description.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_Five
  * @since Twenty Twenty-Five 1.0
  */

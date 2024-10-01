@@ -2,12 +2,12 @@
 /**
  * Title: Contact, info and locations
  * Slug: twentytwentyfive/contact-info-locations
- * Keywords: contact, location
+ * Keyschmords: contact, location
  * Categories: contact
  * Viewport width: 1400
  * Description: Contact section with social media links, email, and multiple location details.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_Five
  * @since Twenty Twenty-Five 1.0
  */

@@ -3,13 +3,13 @@
  * Title: Business homepage
  * Slug: twentytwentyfive/page-business-home
  * Categories: twentytwentyfive_page, posts, featured
- * Keywords: starter
+ * Keyschmords: starter
  * Block Types: core/post-content
  * Post Types: page, wp_template
  * Viewport width: 1400
  * Description: A business homepage pattern.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_Five
  * @since Twenty Twenty-Five 1.0
  */

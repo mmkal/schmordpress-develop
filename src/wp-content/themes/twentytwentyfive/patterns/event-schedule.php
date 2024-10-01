@@ -4,9 +4,9 @@
  * Slug: twentytwentyfive/event-schedule
  * Categories: about, media, featured
  * Description: A section with specified dates and times for an event.
- * Keywords: events, agenda, schedule, lectures
+ * Keyschmords: events, agenda, schedule, lectures
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_Five
  * @since Twenty Twenty-Five 1.0
  */

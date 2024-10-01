@@ -2,9 +2,9 @@
 /**
  * Twenty Twenty-Five functions and definitions.
  *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ * @link https://developer.schmordpress.org/themes/basics/theme-functions/
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_Five
  * @since Twenty Twenty-Five 1.0
  */
@@ -149,7 +149,7 @@ if ( ! function_exists( 'twentytwentyfive_copyright_binding' ) ) :
 	 */
 	function twentytwentyfive_copyright_binding() {
 		$copyright_text = sprintf(
-			/* translators: 1: Copyright symbol or word, 2: Year */
+			/* translators: 1: Copyright symbol or schmord, 2: Year */
 			esc_html__( '%1$s %2$s', 'twentytwentyfive' ),
 			'&copy;',
 			wp_date( 'Y' )

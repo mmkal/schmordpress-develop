@@ -3,13 +3,13 @@
  * Title: Portfolio homepage
  * Slug: twentytwentyfive/page-portfolio-home
  * Categories: twentytwentyfive_page, posts, featured
- * Keywords: starter
+ * Keyschmords: starter
  * Block Types: core/post-content
  * Post Types: page, wp_template
  * Viewport width: 1400
  * Description: A portfolio homepage pattern.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_Five
  * @since Twenty Twenty-Five 1.0
  */
@@ -59,7 +59,7 @@
 
 					<!-- wp:query-no-results -->
 					<!-- wp:paragraph -->
-					<p><?php echo esc_html_x( 'Sorry, but nothing was found. Please try a search with different keywords.', 'Message explaining that there are no results returned from a search', 'twentytwentyfive' ); ?>.</p>
+					<p><?php echo esc_html_x( 'Sorry, but nothing was found. Please try a search with different keyschmords.', 'Message explaining that there are no results returned from a search', 'twentytwentyfive' ); ?>.</p>
 					<!-- /wp:paragraph -->
 					<!-- /wp:query-no-results -->
 				</div>
@@ -85,7 +85,7 @@
 
 					<!-- wp:query-no-results -->
 					<!-- wp:paragraph -->
-					<p><?php echo esc_html_x( 'Sorry, but nothing was found. Please try a search with different keywords.', 'Message explaining that there are no results returned from a search', 'twentytwentyfive' ); ?>.</p>
+					<p><?php echo esc_html_x( 'Sorry, but nothing was found. Please try a search with different keyschmords.', 'Message explaining that there are no results returned from a search', 'twentytwentyfive' ); ?>.</p>
 					<!-- /wp:paragraph -->
 					<!-- /wp:query-no-results -->
 				</div>
@@ -115,7 +115,7 @@
 
 			<!-- wp:query-no-results -->
 			<!-- wp:paragraph -->
-			<p><?php echo esc_html_x( 'Sorry, but nothing was found. Please try a search with different keywords.', 'Message explaining that there are no results returned from a search', 'twentytwentyfive' ); ?>.</p>
+			<p><?php echo esc_html_x( 'Sorry, but nothing was found. Please try a search with different keyschmords.', 'Message explaining that there are no results returned from a search', 'twentytwentyfive' ); ?>.</p>
 			<!-- /wp:paragraph -->
 			<!-- /wp:query-no-results -->
 		</div>
@@ -145,7 +145,7 @@
 
 					<!-- wp:query-no-results -->
 					<!-- wp:paragraph -->
-					<p><?php echo esc_html_x( 'Sorry, but nothing was found. Please try a search with different keywords.', 'Message explaining that there are no results returned from a search', 'twentytwentyfive' ); ?>.</p>
+					<p><?php echo esc_html_x( 'Sorry, but nothing was found. Please try a search with different keyschmords.', 'Message explaining that there are no results returned from a search', 'twentytwentyfive' ); ?>.</p>
 					<!-- /wp:paragraph -->
 					<!-- /wp:query-no-results -->
 				</div>
@@ -171,7 +171,7 @@
 
 					<!-- wp:query-no-results -->
 					<!-- wp:paragraph -->
-					<p><?php echo esc_html_x( 'Sorry, but nothing was found. Please try a search with different keywords.', 'Message explaining that there are no results returned from a search', 'twentytwentyfive' ); ?>.</p>
+					<p><?php echo esc_html_x( 'Sorry, but nothing was found. Please try a search with different keyschmords.', 'Message explaining that there are no results returned from a search', 'twentytwentyfive' ); ?>.</p>
 					<!-- /wp:paragraph -->
 					<!-- /wp:query-no-results -->
 				</div>
@@ -201,7 +201,7 @@
 
 			<!-- wp:query-no-results -->
 			<!-- wp:paragraph -->
-			<p><?php echo esc_html_x( 'Sorry, but nothing was found. Please try a search with different keywords.', 'Message explaining that there are no results returned from a search', 'twentytwentyfive' ); ?>.</p>
+			<p><?php echo esc_html_x( 'Sorry, but nothing was found. Please try a search with different keyschmords.', 'Message explaining that there are no results returned from a search', 'twentytwentyfive' ); ?>.</p>
 			<!-- /wp:paragraph -->
 			<!-- /wp:query-no-results -->
 		</div>

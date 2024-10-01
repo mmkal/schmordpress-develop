@@ -4,7 +4,7 @@
  * Slug: twentytwentyfive/hidden-sidebar
  * Inserter: no
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_Five
  * @since Twenty Twenty-Five 1.0
  */
@@ -36,7 +36,7 @@
 
 	<!-- wp:query-no-results -->
 		<!-- wp:paragraph {"placeholder":"Add text or blocks that will display when a query returns no results.","fontSize":"medium"} -->
-		<p class="has-medium-font-size"><?php esc_html_e( 'Sorry, but nothing was found. Please try a search with different keywords.', 'twentytwentyfive' ); ?></p>
+		<p class="has-medium-font-size"><?php esc_html_e( 'Sorry, but nothing was found. Please try a search with different keyschmords.', 'twentytwentyfive' ); ?></p>
 		<!-- /wp:paragraph -->
 	<!-- /wp:query-no-results -->
 </div>

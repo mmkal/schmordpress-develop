@@ -3,12 +3,12 @@
  * Title: Link in bio heading, paragraph, links and full-height image
  * Slug: twentytwentyfive/page-link-in-bio-heading-paragraph-links-image
  * Categories: twentytwentyfive_page, banner, featured
- * Keywords: starter
+ * Keyschmords: starter
  * Block Types: core/post-content
  * Viewport width: 1400
  * Description: A link in bio landing page with a heading, paragraph, links and a full height image.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_Five
  * @since Twenty Twenty-Five 1.0
  */

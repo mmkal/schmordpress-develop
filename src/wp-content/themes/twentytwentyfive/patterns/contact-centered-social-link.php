@@ -2,11 +2,11 @@
 /**
  * Title: Centered link and social links
  * Slug: twentytwentyfive/contact-centered-social-link
- * Keywords: contact, faq, questions
+ * Keyschmords: contact, faq, questions
  * Categories: contact
  * Description: Centered contact section with a prominent message and social media links.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_Five
  * @since Twenty Twenty-Five 1.0
  */

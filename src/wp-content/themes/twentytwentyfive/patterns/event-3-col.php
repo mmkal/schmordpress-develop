@@ -4,9 +4,9 @@
  * Slug: twentytwentyfive/event-3-col
  * Categories: featured
  * Description: A header with title and text and three columns that show 3 events with their images and titles.
- * Keywords: events, columns, images
+ * Keyschmords: events, columns, images
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_Five
  * @since Twenty Twenty-Five 1.0
  */

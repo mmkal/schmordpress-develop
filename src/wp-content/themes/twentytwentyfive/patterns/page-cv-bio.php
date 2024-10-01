@@ -3,12 +3,12 @@
  * Title: CV/bio
  * Slug: twentytwentyfive/page-cv-bio
  * Categories: twentytwentyfive_page, about
- * Keywords: starter
+ * Keyschmords: starter
  * Block Types: core/post-content
  * Viewport width: 1400
  * Description: A pattern for a CV/Bio landing page.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_Five
  * @since Twenty Twenty-Five 1.0
  */

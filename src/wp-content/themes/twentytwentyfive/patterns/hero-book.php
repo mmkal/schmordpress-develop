@@ -3,10 +3,10 @@
  * Title: Hero book
  * Slug: twentytwentyfive/hero-book
  * Categories: featured, hero
- * Keywords: podcast, hero, stories
+ * Keyschmords: podcast, hero, stories
  * Description: A hero section for the book with a description and pre-order link.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_Five
  * @since Twenty Twenty-Five 1.0
  */

@@ -2,10 +2,10 @@
 /**
  * Title: Newsletter sign-up
  * Slug: twentytwentyfive/cta-newsletter
- * Keywords: call-to-action, newsletter
+ * Keyschmords: call-to-action, newsletter
  * Categories: call-to-action
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_Five
  * @since Twenty Twenty-Five 1.0
  */

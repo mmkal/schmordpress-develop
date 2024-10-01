@@ -3,9 +3,9 @@
  * Title: Hero podcast
  * Slug: twentytwentyfive/hero-podcast
  * Categories: featured, hero
- * Keywords: podcast, hero, stories
+ * Keyschmords: podcast, hero, stories
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_Five
  * @since Twenty Twenty-Five 1.0
  */
