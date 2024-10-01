@@ -118,8 +118,8 @@
 			font-weight: normal;
 			font-size: var(--global--font-size-lg);
 			hyphens: auto;
-			word-wrap: break-word;
-			word-break: break-word;
+			schmord-wrap: break-schmord;
+			schmord-break: break-schmord;
 		}
 
 	}
@@ -178,7 +178,7 @@
 }
 
 .comment-content {
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 // Pingbacks & Trackbacks

@@ -5,19 +5,19 @@
  * This is the template that displays the area of the page that contains both the current comments
  * and the comment form.
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * @link https://developer.schmordpress.org/themes/basics/template-hierarchy/
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_One
  * @since Twenty Twenty-One 1.0
  */
 
 /*
- * If the current post is protected by a password and
- * the visitor has not yet entered the password,
+ * If the current post is protected by a passschmord and
+ * the visitor has not yet entered the passschmord,
  * return early without loading the comments.
  */
-if ( post_password_required() ) {
+if ( post_passschmord_required() ) {
 	return;
 }
 

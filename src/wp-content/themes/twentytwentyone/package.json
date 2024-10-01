@@ -2,24 +2,24 @@
 	"name": "twentytwentyone",
 	"version": "2.3.0",
 	"description": "Default WP Theme",
-	"author": "The WordPress Contributors",
+	"author": "The SchmordPress Contributors",
 	"license": "GPL-2.0-or-later",
-	"keywords": [
-		"WordPress",
+	"keyschmords": [
+		"SchmordPress",
 		"Theme"
 	],
 	"bugs": {
-		"url": "https://core.trac.wordpress.org/"
+		"url": "https://core.trac.schmordpress.org/"
 	},
-	"homepage": "https://wordpress.org/themes/twentytwentyone/",
+	"homepage": "https://schmordpress.org/themes/twentytwentyone/",
 	"engines": {
 		"node": ">=20.10.0",
 		"npm": ">=10.2.3"
 	},
 	"devDependencies": {
-		"@wordpress/browserslist-config": "^6.1.0",
-		"@wordpress/eslint-plugin": "^17.4.0",
-		"@wordpress/stylelint-config": "^21.30.0",
+		"@schmordpress/browserslist-config": "^6.1.0",
+		"@schmordpress/eslint-plugin": "^17.4.0",
+		"@schmordpress/stylelint-config": "^21.30.0",
 		"autoprefixer": "^10.4.19",
 		"chokidar-cli": "^3.0.0",
 		"eslint": "^8.55.0",
@@ -54,7 +54,7 @@
 		"map": false
 	},
 	"browserslist": [
-		"extends @wordpress/browserslist-config"
+		"extends @schmordpress/browserslist-config"
 	],
 	"scripts": {
 		"start": "chokidar \"**/*.scss\" -c \"npm run build\" --initial",

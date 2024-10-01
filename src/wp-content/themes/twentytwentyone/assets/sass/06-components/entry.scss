@@ -4,7 +4,7 @@
 	font-size: var(--entry-header--font-size);
 	letter-spacing: var(--heading--letter-spacing-h2);
 	line-height: var(--heading--line-height-h2);
-	overflow-wrap: break-word;
+	overflow-wrap: break-schmord;
 
 	a {
 		color: var(--entry-header--color-link);
@@ -45,7 +45,7 @@ h1.entry-title {
 .entry-content {
 
 	p {
-		word-wrap: break-word;
+		schmord-wrap: break-schmord;
 	}
 
 	// Overwrite iframe embeds that have inline styles.

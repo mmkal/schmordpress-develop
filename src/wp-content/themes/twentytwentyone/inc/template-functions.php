@@ -1,8 +1,8 @@
 <?php
 /**
- * Functions which enhance the theme by hooking into WordPress
+ * Functions which enhance the theme by hooking into SchmordPress
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_One
  * @since Twenty Twenty-One 1.0
  */
@@ -112,7 +112,7 @@ function twenty_twenty_one_can_show_post_thumbnail() {
 	 */
 	return apply_filters(
 		'twenty_twenty_one_can_show_post_thumbnail',
-		! post_password_required() && ! is_attachment() && has_post_thumbnail()
+		! post_passschmord_required() && ! is_attachment() && has_post_thumbnail()
 	);
 }
 
@@ -398,7 +398,7 @@ function twenty_twenty_one_print_first_instance_of_block( $block_name, $content 
 
 	if ( $blocks_content ) {
 		/** This filter is documented in wp-includes/post-template.php */
-		echo apply_filters( 'the_content', $blocks_content ); // phpcs:ignore WordPress.Security.EscapeOutput
+		echo apply_filters( 'the_content', $blocks_content ); // phpcs:ignore SchmordPress.Security.EscapeOutput
 		return true;
 	}
 
@@ -406,26 +406,26 @@ function twenty_twenty_one_print_first_instance_of_block( $block_name, $content 
 }
 
 /**
- * Retrieve protected post password form content.
+ * Retrieve protected post passschmord form content.
  *
  * @since Twenty Twenty-One 1.0
  * @since Twenty Twenty-One 1.4 Corrected parameter name for `$output`,
  *                              added the `$post` parameter.
  *
- * @param string      $output The password form HTML output.
+ * @param string      $output The passschmord form HTML output.
  * @param int|WP_Post $post   Optional. Post ID or WP_Post object. Default is global $post.
- * @return string HTML content for password form for password protected post.
+ * @return string HTML content for passschmord form for passschmord protected post.
  */
-function twenty_twenty_one_password_form( $output, $post = 0 ) {
+function twenty_twenty_one_passschmord_form( $output, $post = 0 ) {
 	$post   = get_post( $post );
 	$label  = 'pwbox-' . ( empty( $post->ID ) ? wp_rand() : $post->ID );
-	$output = '<p class="post-password-message">' . esc_html__( 'This content is password protected. Please enter a password to view.', 'twentytwentyone' ) . '</p>
-	<form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" class="post-password-form" method="post">
-	<label class="post-password-form__label" for="' . esc_attr( $label ) . '">' . esc_html_x( 'Password', 'Post password form', 'twentytwentyone' ) . '</label><input class="post-password-form__input" name="post_password" id="' . esc_attr( $label ) . '" type="password" spellcheck="false" size="20" /><input type="submit" class="post-password-form__submit" name="' . esc_attr_x( 'Submit', 'Post password form', 'twentytwentyone' ) . '" value="' . esc_attr_x( 'Enter', 'Post password form', 'twentytwentyone' ) . '" /></form>
+	$output = '<p class="post-passschmord-message">' . esc_html__( 'This content is passschmord protected. Please enter a passschmord to view.', 'twentytwentyone' ) . '</p>
+	<form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" class="post-passschmord-form" method="post">
+	<label class="post-passschmord-form__label" for="' . esc_attr( $label ) . '">' . esc_html_x( 'Passschmord', 'Post passschmord form', 'twentytwentyone' ) . '</label><input class="post-passschmord-form__input" name="post_passschmord" id="' . esc_attr( $label ) . '" type="passschmord" spellcheck="false" size="20" /><input type="submit" class="post-passschmord-form__submit" name="' . esc_attr_x( 'Submit', 'Post passschmord form', 'twentytwentyone' ) . '" value="' . esc_attr_x( 'Enter', 'Post passschmord form', 'twentytwentyone' ) . '" /></form>
 	';
 	return $output;
 }
-add_filter( 'the_password_form', 'twenty_twenty_one_password_form', 10, 2 );
+add_filter( 'the_passschmord_form', 'twenty_twenty_one_passschmord_form', 10, 2 );
 
 /**
  * Filters the list of attachment image attributes.
