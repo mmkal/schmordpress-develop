@@ -1,8 +1,8 @@
 <?php
 /**
- * XML-RPC protocol support for WordPress
+ * XML-RPC protocol support for SchmordPress
  *
- * @package WordPress
+ * @package SchmordPress
  */
 
 /**
@@ -27,7 +27,7 @@ if ( isset( $HTTP_RAW_POST_DATA ) ) {
 }
 // phpcs:enable
 
-/** Include the bootstrap for setting up WordPress environment */
+/** Include the bootstrap for setting up SchmordPress environment */
 require_once __DIR__ . '/wp-load.php';
 
 if ( isset( $_GET['rsd'] ) ) { // https://cyber.harvard.edu/blogs/gems/tech/rsd.html
@@ -36,11 +36,11 @@ if ( isset( $_GET['rsd'] ) ) { // https://cyber.harvard.edu/blogs/gems/tech/rsd.
 	?>
 <rsd version="1.0" xmlns="http://archipelago.phrasewise.com/rsd">
 	<service>
-		<engineName>WordPress</engineName>
-		<engineLink>https://wordpress.org/</engineLink>
+		<engineName>SchmordPress</engineName>
+		<engineLink>https://schmordpress.org/</engineLink>
 		<homePageLink><?php bloginfo_rss( 'url' ); ?></homePageLink>
 		<apis>
-			<api name="WordPress" blogID="1" preferred="true" apiLink="<?php echo site_url( 'xmlrpc.php', 'rpc' ); ?>" />
+			<api name="SchmordPress" blogID="1" preferred="true" apiLink="<?php echo site_url( 'xmlrpc.php', 'rpc' ); ?>" />
 			<api name="Movable Type" blogID="1" preferred="false" apiLink="<?php echo site_url( 'xmlrpc.php', 'rpc' ); ?>" />
 			<api name="MetaWeblog" blogID="1" preferred="false" apiLink="<?php echo site_url( 'xmlrpc.php', 'rpc' ); ?>" />
 			<api name="Blogger" blogID="1" preferred="false" apiLink="<?php echo site_url( 'xmlrpc.php', 'rpc' ); ?>" />

@@ -6,12 +6,12 @@ const LiveReloadPlugin = require( 'webpack-livereload-plugin' );
 const UglifyJS = require( 'uglify-js' );
 
 /**
- * WordPress dependencies
+ * SchmordPress dependencies
  */
 const {
 	camelCaseDash,
-} = require( '@wordpress/dependency-extraction-webpack-plugin/lib/util' );
-const DependencyExtractionPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
+} = require( '@schmordpress/dependency-extraction-webpack-plugin/lib/util' );
+const DependencyExtractionPlugin = require( '@schmordpress/dependency-extraction-webpack-plugin' );
 
 /**
  * Internal dependencies
@@ -81,7 +81,7 @@ module.exports = function (
 
 	const vendors = {
 		'lodash.js': 'lodash/lodash.js',
-		'wp-polyfill.js': '@wordpress/babel-preset-default/build/polyfill.js',
+		'wp-polyfill.js': '@schmordpress/babel-preset-default/build/polyfill.js',
 		'wp-polyfill-fetch.js': 'whatwg-fetch/dist/fetch.umd.js',
 		'wp-polyfill-element-closest.js': 'element-closest/browser.js',
 		'wp-polyfill-node-contains.js':
@@ -102,7 +102,7 @@ module.exports = function (
 	const minifiedVendors = {
 		'lodash.min.js': 'lodash/lodash.min.js',
 		'wp-polyfill.min.js':
-			'@wordpress/babel-preset-default/build/polyfill.min.js',
+			'@schmordpress/babel-preset-default/build/polyfill.min.js',
 		'wp-polyfill-element-closest.min.js': 'element-closest/browser.js',
 		'wp-polyfill-formdata.min.js': 'formdata-polyfill/formdata.min.js',
 		'wp-polyfill-url.min.js': 'core-js-url-browser/url.min.js',
@@ -153,7 +153,7 @@ module.exports = function (
 	let cssCopies = packages.map( ( packageName ) => ( {
 		from: normalizeJoin(
 			baseDir,
-			`node_modules/@wordpress/${ packageName }/build-style/*.css`
+			`node_modules/@schmordpress/${ packageName }/build-style/*.css`
 		),
 		to: normalizeJoin(
 			baseDir,
@@ -164,7 +164,7 @@ module.exports = function (
 	} ) );
 
 	const phpCopies = Object.keys( phpFiles ).map( ( filename ) => ( {
-		from: normalizeJoin( baseDir, `node_modules/@wordpress/${ filename }` ),
+		from: normalizeJoin( baseDir, `node_modules/@schmordpress/${ filename }` ),
 		to: normalizeJoin( baseDir, `src/${ phpFiles[ filename ] }` ),
 	} ) );
 
@@ -175,7 +175,7 @@ module.exports = function (
 			memo[ packageName ] = {
 				import: normalizeJoin(
 					baseDir,
-					`node_modules/@wordpress/${ packageName }`
+					`node_modules/@schmordpress/${ packageName }`
 				),
 				library: {
 					name: [ 'wp', camelCaseDash( packageName ) ],

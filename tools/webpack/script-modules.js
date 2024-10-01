@@ -5,9 +5,9 @@ const { createRequire } = require( 'node:module' );
 const { dirname } = require( 'node:path' );
 
 /**
- * WordPress dependencies
+ * SchmordPress dependencies
  */
-const DependencyExtractionPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
+const DependencyExtractionPlugin = require( '@schmordpress/dependency-extraction-webpack-plugin' );
 
 /**
  * Internal dependencies

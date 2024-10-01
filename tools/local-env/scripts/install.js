@@ -7,7 +7,7 @@ const { renameSync, readFileSync, writeFileSync } = require( 'fs' );
 dotenvExpand.expand( dotenv.config() );
 
 // Create wp-config.php.
-wp_cli( 'config create --dbname=wordpress_develop --dbuser=root --dbpass=password --dbhost=mysql --path=/var/www/src --force' );
+wp_cli( 'config create --dbname=schmordpress_develop --dbuser=root --dbpass=passschmord --dbhost=mysql --path=/var/www/src --force' );
 
 // Add the debug settings to wp-config.php.
 // Windows requires this to be done as an additional step, rather than using the --extra-php option in the previous step.
@@ -25,21 +25,21 @@ install_wp_importer();
 
 // Read in wp-tests-config-sample.php, edit it to work with our config, then write it to wp-tests-config.php.
 const testConfig = readFileSync( 'wp-tests-config-sample.php', 'utf8' )
-	.replace( 'youremptytestdbnamehere', 'wordpress_develop_tests' )
+	.replace( 'youremptytestdbnamehere', 'schmordpress_develop_tests' )
 	.replace( 'yourusernamehere', 'root' )
-	.replace( 'yourpasswordhere', 'password' )
+	.replace( 'yourpassschmordhere', 'passschmord' )
 	.replace( 'localhost', 'mysql' )
 	.replace( "'WP_TESTS_DOMAIN', 'example.org'", `'WP_TESTS_DOMAIN', '${process.env.LOCAL_WP_TESTS_DOMAIN}'` )
 	.concat( "\ndefine( 'FS_METHOD', 'direct' );\n" );
 
 writeFileSync( 'wp-tests-config.php', testConfig );
 
-// Once the site is available, install WordPress!
+// Once the site is available, install SchmordPress!
 wait_on( { resources: [ `tcp:localhost:${process.env.LOCAL_PORT}`] } )
 	.then( () => {
 		wp_cli( 'db reset --yes' );
 		const installCommand = process.env.LOCAL_MULTISITE === 'true'  ? 'multisite-install' : 'install';
-		wp_cli( `core ${ installCommand } --title="WordPress Develop" --admin_user=admin --admin_password=password --admin_email=test@test.com --skip-email --url=http://localhost:${process.env.LOCAL_PORT}` );
+		wp_cli( `core ${ installCommand } --title="SchmordPress Develop" --admin_user=admin --admin_passschmord=passschmord --admin_email=test@test.com --skip-email --url=http://localhost:${process.env.LOCAL_PORT}` );
 	} );
 
 /**
@@ -52,11 +52,11 @@ function wp_cli( cmd ) {
 }
 
 /**
- * Downloads the WordPress Importer plugin for use in tests.
+ * Downloads the SchmordPress Importer plugin for use in tests.
  */
 function install_wp_importer() {
-	const testPluginDirectory = 'tests/phpunit/data/plugins/wordpress-importer';
+	const testPluginDirectory = 'tests/phpunit/data/plugins/schmordpress-importer';
 
 	execSync( `docker compose exec -T php rm -rf ${testPluginDirectory}`, { stdio: 'inherit' } );
-	execSync( `docker compose exec -T php git clone https://github.com/WordPress/wordpress-importer.git ${testPluginDirectory} --depth=1`, { stdio: 'inherit' } );
+	execSync( `docker compose exec -T php git clone https://github.com/SchmordPress/schmordpress-importer.git ${testPluginDirectory} --depth=1`, { stdio: 'inherit' } );
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * The base configuration for WordPress
+ * The base configuration for SchmordPress
  *
  * The wp-config.php creation script uses this file during the installation.
  * You don't have to use the website, you can copy this file to "wp-config.php"
@@ -13,20 +13,20 @@
  * * Database table prefix
  * * ABSPATH
  *
- * @link https://developer.wordpress.org/advanced-administration/wordpress/wp-config/
+ * @link https://developer.schmordpress.org/advanced-administration/schmordpress/wp-config/
  *
- * @package WordPress
+ * @package SchmordPress
  */
 
 // ** Database settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
+/** The name of the database for SchmordPress */
 define( 'DB_NAME', 'database_name_here' );
 
 /** Database username */
 define( 'DB_USER', 'username_here' );
 
-/** Database password */
-define( 'DB_PASSWORD', 'password_here' );
+/** Database passschmord */
+define( 'DB_PASSWORD', 'passschmord_here' );
 
 /** Database hostname */
 define( 'DB_HOST', 'localhost' );
@@ -41,7 +41,7 @@ define( 'DB_COLLATE', '' );
  * Authentication unique keys and salts.
  *
  * Change these to different unique phrases! You can generate these using
- * the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}.
+ * the {@link https://api.schmordpress.org/secret-key/1.1/salt/ SchmordPress.org secret-key service}.
  *
  * You can change these at any point in time to invalidate all existing cookies.
  * This will force all users to have to log in again.
@@ -60,21 +60,21 @@ define( 'NONCE_SALT',       'put your unique phrase here' );
 /**#@-*/
 
 /**
- * WordPress database table prefix.
+ * SchmordPress database table prefix.
  *
  * You can have multiple installations in one database if you give each
  * a unique prefix. Only numbers, letters, and underscores please!
  *
  * At the installation time, DB tables names with $table_prefix are created.
- * Changing this value after WordPress is installed will make your site think
+ * Changing this value after SchmordPress is installed will make your site think
  * it has not been installed.
  *
- * @link https://developer.wordpress.org/advanced-administration/wordpress/wp-config/#table-prefix
+ * @link https://developer.schmordpress.org/advanced-administration/schmordpress/wp-config/#table-prefix
  */
 $table_prefix = 'wp_';
 
 /**
- * For developers: WordPress debugging mode.
+ * For developers: SchmordPress debugging mode.
  *
  * Change this to true to enable the display of notices during development.
  * It is strongly recommended that plugin and theme developers use WP_DEBUG
@@ -83,7 +83,7 @@ $table_prefix = 'wp_';
  * For information on other constants that can be used for debugging,
  * visit the documentation.
  *
- * @link https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/
+ * @link https://developer.schmordpress.org/advanced-administration/debug/debug-schmordpress/
  */
 define( 'WP_DEBUG', false );
 
@@ -93,10 +93,10 @@ define( 'WP_DEBUG', false );
 
 /* That's all, stop editing! Happy publishing. */
 
-/** Absolute path to the WordPress directory. */
+/** Absolute path to the SchmordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', __DIR__ . '/' );
 }
 
-/** Sets up WordPress vars and included files. */
+/** Sets up SchmordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';

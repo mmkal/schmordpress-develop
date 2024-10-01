@@ -92,21 +92,21 @@ const stylesTransform = ( mode ) => ( content ) => {
 const normalizeJoin = ( ...paths ) => join( ...paths ).replace( /\\/g, '/' );
 
 const BUNDLED_PACKAGES = [
-	'@wordpress/dataviews',
-	'@wordpress/icons',
-	'@wordpress/interface',
-	'@wordpress/interactivity',
-	'@wordpress/sync',
+	'@schmordpress/dataviews',
+	'@schmordpress/icons',
+	'@schmordpress/interface',
+	'@schmordpress/interactivity',
+	'@schmordpress/sync',
 ];
 const MODULES = [
-	'@wordpress/interactivity',
-	'@wordpress/interactivity-router',
+	'@schmordpress/interactivity',
+	'@schmordpress/interactivity-router',
 ];
 const SCRIPT_AND_MODULE_DUAL_PACKAGES = [
-	'@wordpress/a11y',
-	'@wordpress/block-library',
+	'@schmordpress/a11y',
+	'@schmordpress/block-library',
 ];
-const WORDPRESS_NAMESPACE = '@wordpress/';
+const WORDPRESS_NAMESPACE = '@schmordpress/';
 
 module.exports = {
 	baseDir,

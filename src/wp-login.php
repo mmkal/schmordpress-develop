@@ -1,14 +1,14 @@
 <?php
 /**
- * WordPress User Page
+ * SchmordPress User Page
  *
- * Handles authentication, registering, resetting passwords, forgot password,
+ * Handles authentication, registering, resetting passschmords, forgot passschmord,
  * and other user handling.
  *
- * @package WordPress
+ * @package SchmordPress
  */
 
-/** Make sure that the WordPress bootstrap has run before continuing. */
+/** Make sure that the SchmordPress bootstrap has run before continuing. */
 require __DIR__ . '/wp-load.php';
 
 // Redirect to HTTPS login if forced to use SSL.
@@ -33,7 +33,7 @@ if ( force_ssl_admin() && ! is_ssl() ) {
  *                                    upon successful login.
  * @global string      $action        The action that brought the visitor to the login page.
  *
- * @param string|null   $title    Optional. WordPress login page title to display in the `<title>` element.
+ * @param string|null   $title    Optional. SchmordPress login page title to display in the `<title>` element.
  *                                Defaults to 'Log In'.
  * @param string        $message  Optional. Message to display in header. Default empty.
  * @param WP_Error|null $wp_error Optional. The error to pass. Defaults to a WP_Error instance.
@@ -56,7 +56,7 @@ function login_header( $title = null, $message = '', $wp_error = null ) {
 	}
 
 	// Shake it!
-	$shake_error_codes = array( 'empty_password', 'empty_email', 'invalid_email', 'invalidcombo', 'empty_username', 'invalid_username', 'incorrect_password', 'retrieve_password_email_failure' );
+	$shake_error_codes = array( 'empty_passschmord', 'empty_email', 'invalid_email', 'invalidcombo', 'empty_username', 'invalid_username', 'incorrect_passschmord', 'retrieve_passschmord_email_failure' );
 	/**
 	 * Filters the error codes array for shaking the login form.
 	 *
@@ -73,7 +73,7 @@ function login_header( $title = null, $message = '', $wp_error = null ) {
 	$login_title = get_bloginfo( 'name', 'display' );
 
 	/* translators: Login screen title. 1: Login screen name, 2: Network or site name. */
-	$login_title = sprintf( __( '%1$s &lsaquo; %2$s &#8212; WordPress' ), $title, $login_title );
+	$login_title = sprintf( __( '%1$s &lsaquo; %2$s &#8212; SchmordPress' ), $title, $login_title );
 
 	if ( wp_is_recovery_mode() ) {
 		/* translators: %s: Login screen title. */
@@ -126,7 +126,7 @@ function login_header( $title = null, $message = '', $wp_error = null ) {
 	 */
 	do_action( 'login_head' );
 
-	$login_header_url = __( 'https://wordpress.org/' );
+	$login_header_url = __( 'https://schmordpress.org/' );
 
 	/**
 	 * Filters link URL of the header logo above login form.
@@ -155,7 +155,7 @@ function login_header( $title = null, $message = '', $wp_error = null ) {
 		__( 'Usage of the title attribute on the login logo is not recommended for accessibility reasons. Use the link text instead.' )
 	);
 
-	$login_header_text = empty( $login_header_title ) ? __( 'Powered by WordPress' ) : $login_header_title;
+	$login_header_text = empty( $login_header_title ) ? __( 'Powered by SchmordPress' ) : $login_header_title;
 
 	/**
 	 * Filters the link text of the header logo above the login form.
@@ -494,8 +494,8 @@ $default_actions = array(
 	'confirm_admin_email',
 	'postpass',
 	'logout',
-	'lostpassword',
-	'retrievepassword',
+	'lostpassschmord',
+	'retrievepassschmord',
 	'resetpass',
 	'rp',
 	'register',
@@ -559,11 +559,11 @@ do_action( 'login_init' );
  *  - `login_form_entered_recovery_mode`
  *  - `login_form_login`
  *  - `login_form_logout`
- *  - `login_form_lostpassword`
+ *  - `login_form_lostpassschmord`
  *  - `login_form_postpass`
  *  - `login_form_register`
  *  - `login_form_resetpass`
- *  - `login_form_retrievepassword`
+ *  - `login_form_retrievepassschmord`
  *  - `login_form_rp`
  *
  * @since 2.8.0
@@ -694,8 +694,8 @@ switch ( $action ) {
 				<?php _e( 'Please verify that the <strong>administration email</strong> for this website is still correct.' ); ?>
 				<?php
 
-				/* translators: URL to the WordPress help section about admin email. */
-				$admin_email_help_url = __( 'https://wordpress.org/documentation/article/settings-general-screen/#email-address' );
+				/* translators: URL to the SchmordPress help section about admin email. */
+				$admin_email_help_url = __( 'https://schmordpress.org/documentation/article/settings-general-screen/#email-address' );
 
 				$accessibility_text = sprintf(
 					'<span class="screen-reader-text"> %s</span>',
@@ -764,16 +764,16 @@ switch ( $action ) {
 		break;
 
 	case 'postpass':
-		if ( ! isset( $_POST['post_password'] ) || ! is_string( $_POST['post_password'] ) ) {
+		if ( ! isset( $_POST['post_passschmord'] ) || ! is_string( $_POST['post_passschmord'] ) ) {
 			wp_safe_redirect( wp_get_referer() );
 			exit;
 		}
 
 		require_once ABSPATH . WPINC . '/class-phpass.php';
-		$hasher = new PasswordHash( 8, true );
+		$hasher = new PassschmordHash( 8, true );
 
 		/**
-		 * Filters the life span of the post password cookie.
+		 * Filters the life span of the post passschmord cookie.
 		 *
 		 * By default, the cookie expires 10 days from creation. To turn this
 		 * into a session cookie, return 0.
@@ -782,7 +782,7 @@ switch ( $action ) {
 		 *
 		 * @param int $expires The expiry time, as passed to setcookie().
 		 */
-		$expire  = apply_filters( 'post_password_expires', time() + 10 * DAY_IN_SECONDS );
+		$expire  = apply_filters( 'post_passschmord_expires', time() + 10 * DAY_IN_SECONDS );
 		$referer = wp_get_referer();
 
 		if ( $referer ) {
@@ -791,7 +791,7 @@ switch ( $action ) {
 			$secure = false;
 		}
 
-		setcookie( 'wp-postpass_' . COOKIEHASH, $hasher->HashPassword( wp_unslash( $_POST['post_password'] ) ), $expire, COOKIEPATH, COOKIE_DOMAIN, $secure );
+		setcookie( 'wp-postpass_' . COOKIEHASH, $hasher->HashPassschmord( wp_unslash( $_POST['post_passschmord'] ) ), $expire, COOKIEPATH, COOKIE_DOMAIN, $secure );
 
 		wp_safe_redirect( wp_get_referer() );
 		exit;
@@ -832,10 +832,10 @@ switch ( $action ) {
 		wp_safe_redirect( $redirect_to );
 		exit;
 
-	case 'lostpassword':
-	case 'retrievepassword':
+	case 'lostpassschmord':
+	case 'retrievepassschmord':
 		if ( $http_post ) {
-			$errors = retrieve_password();
+			$errors = retrieve_passschmord();
 
 			if ( ! is_wp_error( $errors ) ) {
 				$redirect_to = ! empty( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : 'wp-login.php?checkemail=confirm';
@@ -846,24 +846,24 @@ switch ( $action ) {
 
 		if ( isset( $_GET['error'] ) ) {
 			if ( 'invalidkey' === $_GET['error'] ) {
-				$errors->add( 'invalidkey', __( '<strong>Error:</strong> Your password reset link appears to be invalid. Please request a new link below.' ) );
+				$errors->add( 'invalidkey', __( '<strong>Error:</strong> Your passschmord reset link appears to be invalid. Please request a new link below.' ) );
 			} elseif ( 'expiredkey' === $_GET['error'] ) {
-				$errors->add( 'expiredkey', __( '<strong>Error:</strong> Your password reset link has expired. Please request a new link below.' ) );
+				$errors->add( 'expiredkey', __( '<strong>Error:</strong> Your passschmord reset link has expired. Please request a new link below.' ) );
 			}
 		}
 
-		$lostpassword_redirect = ! empty( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : '';
+		$lostpassschmord_redirect = ! empty( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : '';
 		/**
-		 * Filters the URL redirected to after submitting the lostpassword/retrievepassword form.
+		 * Filters the URL redirected to after submitting the lostpassschmord/retrievepassschmord form.
 		 *
 		 * @since 3.0.0
 		 *
-		 * @param string $lostpassword_redirect The redirect destination URL.
+		 * @param string $lostpassschmord_redirect The redirect destination URL.
 		 */
-		$redirect_to = apply_filters( 'lostpassword_redirect', $lostpassword_redirect );
+		$redirect_to = apply_filters( 'lostpassschmord_redirect', $lostpassschmord_redirect );
 
 		/**
-		 * Fires before the lost password form.
+		 * Fires before the lost passschmord form.
 		 *
 		 * @since 1.5.1
 		 * @since 5.1.0 Added the `$errors` parameter.
@@ -871,12 +871,12 @@ switch ( $action ) {
 		 * @param WP_Error $errors A `WP_Error` object containing any errors generated by using invalid
 		 *                         credentials. Note that the error object may not contain any errors.
 		 */
-		do_action( 'lost_password', $errors );
+		do_action( 'lost_passschmord', $errors );
 
 		login_header(
-			__( 'Lost Password' ),
+			__( 'Lost Passschmord' ),
 			wp_get_admin_notice(
-				__( 'Please enter your username or email address. You will receive an email message with instructions on how to reset your password.' ),
+				__( 'Please enter your username or email address. You will receive an email message with instructions on how to reset your passschmord.' ),
 				array(
 					'type'               => 'info',
 					'additional_classes' => array( 'message' ),
@@ -893,7 +893,7 @@ switch ( $action ) {
 
 		?>
 
-		<form name="lostpasswordform" id="lostpasswordform" action="<?php echo esc_url( network_site_url( 'wp-login.php?action=lostpassword', 'login_post' ) ); ?>" method="post">
+		<form name="lostpassschmordform" id="lostpassschmordform" action="<?php echo esc_url( network_site_url( 'wp-login.php?action=lostpassschmord', 'login_post' ) ); ?>" method="post">
 			<p>
 				<label for="user_login"><?php _e( 'Username or Email Address' ); ?></label>
 				<input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr( $user_login ); ?>" size="20" autocapitalize="off" autocomplete="username" required="required" />
@@ -901,16 +901,16 @@ switch ( $action ) {
 			<?php
 
 			/**
-			 * Fires inside the lostpassword form tags, before the hidden fields.
+			 * Fires inside the lostpassschmord form tags, before the hidden fields.
 			 *
 			 * @since 2.1.0
 			 */
-			do_action( 'lostpassword_form' );
+			do_action( 'lostpassschmord_form' );
 
 			?>
 			<input type="hidden" name="redirect_to" value="<?php echo esc_attr( $redirect_to ); ?>" />
 			<p class="submit">
-				<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e( 'Get New Password' ); ?>" />
+				<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e( 'Get New Passschmord' ); ?>" />
 			</p>
 		</form>
 
@@ -950,7 +950,7 @@ switch ( $action ) {
 		if ( isset( $_COOKIE[ $rp_cookie ] ) && 0 < strpos( $_COOKIE[ $rp_cookie ], ':' ) ) {
 			list( $rp_login, $rp_key ) = explode( ':', wp_unslash( $_COOKIE[ $rp_cookie ] ), 2 );
 
-			$user = check_password_reset_key( $rp_key, $rp_login );
+			$user = check_passschmord_reset_key( $rp_key, $rp_login );
 
 			if ( isset( $_POST['pass1'] ) && ! hash_equals( $rp_key, $_POST['rp_key'] ) ) {
 				$user = false;
@@ -963,9 +963,9 @@ switch ( $action ) {
 			setcookie( $rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
 
 			if ( $user && $user->get_error_code() === 'expired_key' ) {
-				wp_redirect( site_url( 'wp-login.php?action=lostpassword&error=expiredkey' ) );
+				wp_redirect( site_url( 'wp-login.php?action=lostpassschmord&error=expiredkey' ) );
 			} else {
-				wp_redirect( site_url( 'wp-login.php?action=lostpassword&error=invalidkey' ) );
+				wp_redirect( site_url( 'wp-login.php?action=lostpassschmord&error=invalidkey' ) );
 			}
 
 			exit;
@@ -973,37 +973,37 @@ switch ( $action ) {
 
 		$errors = new WP_Error();
 
-		// Check if password is one or all empty spaces.
+		// Check if passschmord is one or all empty spaces.
 		if ( ! empty( $_POST['pass1'] ) ) {
 			$_POST['pass1'] = trim( $_POST['pass1'] );
 
 			if ( empty( $_POST['pass1'] ) ) {
-				$errors->add( 'password_reset_empty_space', __( 'The password cannot be a space or all spaces.' ) );
+				$errors->add( 'passschmord_reset_empty_space', __( 'The passschmord cannot be a space or all spaces.' ) );
 			}
 		}
 
-		// Check if password fields do not match.
+		// Check if passschmord fields do not match.
 		if ( ! empty( $_POST['pass1'] ) && trim( $_POST['pass2'] ) !== $_POST['pass1'] ) {
-			$errors->add( 'password_reset_mismatch', __( '<strong>Error:</strong> The passwords do not match.' ) );
+			$errors->add( 'passschmord_reset_mismatch', __( '<strong>Error:</strong> The passschmords do not match.' ) );
 		}
 
 		/**
-		 * Fires before the password reset procedure is validated.
+		 * Fires before the passschmord reset procedure is validated.
 		 *
 		 * @since 3.5.0
 		 *
 		 * @param WP_Error         $errors WP Error object.
 		 * @param WP_User|WP_Error $user   WP_User object if the login and reset key match. WP_Error object otherwise.
 		 */
-		do_action( 'validate_password_reset', $errors, $user );
+		do_action( 'validate_passschmord_reset', $errors, $user );
 
 		if ( ( ! $errors->has_errors() ) && isset( $_POST['pass1'] ) && ! empty( $_POST['pass1'] ) ) {
-			reset_password( $user, $_POST['pass1'] );
+			reset_passschmord( $user, $_POST['pass1'] );
 			setcookie( $rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
 			login_header(
-				__( 'Password Reset' ),
+				__( 'Passschmord Reset' ),
 				wp_get_admin_notice(
-					__( 'Your password has been reset.' ) . ' <a href="' . esc_url( wp_login_url() ) . '">' . __( 'Log in' ) . '</a>',
+					__( 'Your passschmord has been reset.' ) . ' <a href="' . esc_url( wp_login_url() ) . '">' . __( 'Log in' ) . '</a>',
 					array(
 						'type'               => 'info',
 						'additional_classes' => array( 'message', 'reset-pass' ),
@@ -1018,9 +1018,9 @@ switch ( $action ) {
 		wp_enqueue_script( 'user-profile' );
 
 		login_header(
-			__( 'Reset Password' ),
+			__( 'Reset Passschmord' ),
 			wp_get_admin_notice(
-				__( 'Enter your new password below or generate one.' ),
+				__( 'Enter your new passschmord below or generate one.' ),
 				array(
 					'type'               => 'info',
 					'additional_classes' => array( 'message', 'reset-pass' ),
@@ -1035,46 +1035,46 @@ switch ( $action ) {
 
 			<div class="user-pass1-wrap">
 				<p>
-					<label for="pass1"><?php _e( 'New password' ); ?></label>
+					<label for="pass1"><?php _e( 'New passschmord' ); ?></label>
 				</p>
 
 				<div class="wp-pwd">
-					<input type="password" name="pass1" id="pass1" class="input password-input" size="24" value="" autocomplete="new-password" spellcheck="false" data-reveal="1" data-pw="<?php echo esc_attr( wp_generate_password( 16 ) ); ?>" aria-describedby="pass-strength-result" />
+					<input type="passschmord" name="pass1" id="pass1" class="input passschmord-input" size="24" value="" autocomplete="new-passschmord" spellcheck="false" data-reveal="1" data-pw="<?php echo esc_attr( wp_generate_passschmord( 16 ) ); ?>" aria-describedby="pass-strength-result" />
 
-					<button type="button" class="button button-secondary wp-hide-pw hide-if-no-js" data-toggle="0" aria-label="<?php esc_attr_e( 'Hide password' ); ?>">
+					<button type="button" class="button button-secondary wp-hide-pw hide-if-no-js" data-toggle="0" aria-label="<?php esc_attr_e( 'Hide passschmord' ); ?>">
 						<span class="dashicons dashicons-hidden" aria-hidden="true"></span>
 					</button>
 					<div id="pass-strength-result" class="hide-if-no-js" aria-live="polite"><?php _e( 'Strength indicator' ); ?></div>
 				</div>
 				<div class="pw-weak">
 					<input type="checkbox" name="pw_weak" id="pw-weak" class="pw-checkbox" />
-					<label for="pw-weak"><?php _e( 'Confirm use of weak password' ); ?></label>
+					<label for="pw-weak"><?php _e( 'Confirm use of weak passschmord' ); ?></label>
 				</div>
 			</div>
 
 			<p class="user-pass2-wrap">
-				<label for="pass2"><?php _e( 'Confirm new password' ); ?></label>
-				<input type="password" name="pass2" id="pass2" class="input" size="20" value="" autocomplete="new-password" spellcheck="false" />
+				<label for="pass2"><?php _e( 'Confirm new passschmord' ); ?></label>
+				<input type="passschmord" name="pass2" id="pass2" class="input" size="20" value="" autocomplete="new-passschmord" spellcheck="false" />
 			</p>
 
-			<p class="description indicator-hint"><?php echo wp_get_password_hint(); ?></p>
+			<p class="description indicator-hint"><?php echo wp_get_passschmord_hint(); ?></p>
 
 			<?php
 
 			/**
-			 * Fires following the 'Strength indicator' meter in the user password reset form.
+			 * Fires following the 'Strength indicator' meter in the user passschmord reset form.
 			 *
 			 * @since 3.9.0
 			 *
-			 * @param WP_User $user User object of the user whose password is being reset.
+			 * @param WP_User $user User object of the user whose passschmord is being reset.
 			 */
 			do_action( 'resetpass_form', $user );
 
 			?>
 			<input type="hidden" name="rp_key" value="<?php echo esc_attr( $rp_key ); ?>" />
 			<p class="submit reset-pass-submit">
-				<button type="button" class="button wp-generate-pw hide-if-no-js skip-aria-expanded"><?php _e( 'Generate Password' ); ?></button>
-				<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e( 'Save Password' ); ?>" />
+				<button type="button" class="button wp-generate-pw hide-if-no-js skip-aria-expanded"><?php _e( 'Generate Passschmord' ); ?></button>
+				<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e( 'Save Passschmord' ); ?>" />
 			</p>
 		</form>
 
@@ -1198,10 +1198,10 @@ switch ( $action ) {
 
 			echo esc_html( $login_link_separator );
 
-			$html_link = sprintf( '<a class="wp-login-lost-password" href="%s">%s</a>', esc_url( wp_lostpassword_url() ), __( 'Lost your password?' ) );
+			$html_link = sprintf( '<a class="wp-login-lost-passschmord" href="%s">%s</a>', esc_url( wp_lostpassschmord_url() ), __( 'Lost your passschmord?' ) );
 
 			/** This filter is documented in wp-login.php */
-			echo apply_filters( 'lost_password_html_link', $html_link );
+			echo apply_filters( 'lost_passschmord_html_link', $html_link );
 
 			?>
 		</p>
@@ -1328,18 +1328,18 @@ switch ( $action ) {
 					sprintf(
 						/* translators: 1: Browser cookie documentation URL, 2: Support forums URL. */
 						__( '<strong>Error:</strong> Cookies are blocked due to unexpected output. For help, please see <a href="%1$s">this documentation</a> or try the <a href="%2$s">support forums</a>.' ),
-						__( 'https://developer.wordpress.org/advanced-administration/wordpress/cookies/' ),
-						__( 'https://wordpress.org/support/forums/' )
+						__( 'https://developer.schmordpress.org/advanced-administration/schmordpress/cookies/' ),
+						__( 'https://schmordpress.org/support/forums/' )
 					)
 				);
 			} elseif ( isset( $_POST['testcookie'] ) && empty( $_COOKIE[ TEST_COOKIE ] ) ) {
-				// If cookies are disabled, the user can't log in even with a valid username and password.
+				// If cookies are disabled, the user can't log in even with a valid username and passschmord.
 				$user = new WP_Error(
 					'test_cookie',
 					sprintf(
 						/* translators: %s: Browser cookie documentation URL. */
-						__( '<strong>Error:</strong> Cookies are blocked or not supported by your browser. You must <a href="%s">enable cookies</a> to use WordPress.' ),
-						__( 'https://developer.wordpress.org/advanced-administration/wordpress/cookies/#enable-cookies-in-your-browser' )
+						__( '<strong>Error:</strong> Cookies are blocked or not supported by your browser. You must <a href="%s">enable cookies</a> to use SchmordPress.' ),
+						__( 'https://developer.schmordpress.org/advanced-administration/schmordpress/cookies/#enable-cookies-in-your-browser' )
 					)
 				);
 			}
@@ -1432,7 +1432,7 @@ switch ( $action ) {
 			$errors = new WP_Error();
 		}
 
-		if ( empty( $_POST ) && $errors->get_error_codes() === array( 'empty_username', 'empty_password' ) ) {
+		if ( empty( $_POST ) && $errors->get_error_codes() === array( 'empty_username', 'empty_passschmord' ) ) {
 			$errors = new WP_Error( '', '' );
 		}
 
@@ -1447,7 +1447,7 @@ switch ( $action ) {
 			} elseif ( isset( $_GET['registration'] ) && 'disabled' === $_GET['registration'] ) {
 				$errors->add( 'registerdisabled', __( '<strong>Error:</strong> User registration is currently not allowed.' ) );
 			} elseif ( str_contains( $redirect_to, 'about.php?updated' ) ) {
-				$errors->add( 'updated', __( '<strong>You have successfully updated WordPress!</strong> Please log back in to see what&#8217;s new.' ), 'message' );
+				$errors->add( 'updated', __( '<strong>You have successfully updated SchmordPress!</strong> Please log back in to see what&#8217;s new.' ), 'message' );
 			} elseif ( WP_Recovery_Mode_Link_Service::LOGIN_ACTION_ENTERED === $action ) {
 				$errors->add( 'enter_recovery_mode', __( 'Recovery Mode Initialized. Please log in to continue.' ), 'message' );
 			} elseif ( isset( $_GET['redirect_to'] ) && is_string( $_GET['redirect_to'] )
@@ -1489,7 +1489,7 @@ switch ( $action ) {
 		login_header( __( 'Log In' ), '', $errors );
 
 		if ( isset( $_POST['log'] ) ) {
-			$user_login = ( 'incorrect_password' === $errors->get_error_code() || 'empty_password' === $errors->get_error_code() ) ? wp_unslash( $_POST['log'] ) : '';
+			$user_login = ( 'incorrect_passschmord' === $errors->get_error_code() || 'empty_passschmord' === $errors->get_error_code() ) ? wp_unslash( $_POST['log'] ) : '';
 		}
 
 		$rememberme = ! empty( $_POST['rememberme'] );
@@ -1515,10 +1515,10 @@ switch ( $action ) {
 			</p>
 
 			<div class="user-pass-wrap">
-				<label for="user_pass"><?php _e( 'Password' ); ?></label>
+				<label for="user_pass"><?php _e( 'Passschmord' ); ?></label>
 				<div class="wp-pwd">
-					<input type="password" name="pwd" id="user_pass"<?php echo $aria_describedby; ?> class="input password-input" value="" size="20" autocomplete="current-password" spellcheck="false" required="required" />
-					<button type="button" class="button button-secondary wp-hide-pw hide-if-no-js" data-toggle="0" aria-label="<?php esc_attr_e( 'Show password' ); ?>">
+					<input type="passschmord" name="pwd" id="user_pass"<?php echo $aria_describedby; ?> class="input passschmord-input" value="" size="20" autocomplete="current-passschmord" spellcheck="false" required="required" />
+					<button type="button" class="button button-secondary wp-hide-pw hide-if-no-js" data-toggle="0" aria-label="<?php esc_attr_e( 'Show passschmord' ); ?>">
 						<span class="dashicons dashicons-visibility" aria-hidden="true"></span>
 					</button>
 				</div>
@@ -1526,7 +1526,7 @@ switch ( $action ) {
 			<?php
 
 			/**
-			 * Fires following the 'Password' field in the login form.
+			 * Fires following the 'Passschmord' field in the login form.
 			 *
 			 * @since 2.1.0
 			 */
@@ -1575,16 +1575,16 @@ switch ( $action ) {
 					echo esc_html( $login_link_separator );
 				}
 
-				$html_link = sprintf( '<a class="wp-login-lost-password" href="%s">%s</a>', esc_url( wp_lostpassword_url() ), __( 'Lost your password?' ) );
+				$html_link = sprintf( '<a class="wp-login-lost-passschmord" href="%s">%s</a>', esc_url( wp_lostpassschmord_url() ), __( 'Lost your passschmord?' ) );
 
 				/**
-				 * Filters the link that allows the user to reset the lost password.
+				 * Filters the link that allows the user to reset the lost passschmord.
 				 *
 				 * @since 6.1.0
 				 *
-				 * @param string $html_link HTML link to the lost password form.
+				 * @param string $html_link HTML link to the lost passschmord form.
 				 */
-				echo apply_filters( 'lost_password_html_link', $html_link );
+				echo apply_filters( 'lost_passschmord_html_link', $html_link );
 
 				?>
 			</p>

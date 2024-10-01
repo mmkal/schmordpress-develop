@@ -9,31 +9,31 @@ const { zip, uniq, identity, groupBy } = require( 'lodash' );
 /**
  * Constants
  */
-const WORDPRESS_PACKAGES_PREFIX = '@wordpress/';
-const { getArgFromCLI } = require( `../../node_modules/@wordpress/scripts/utils` );
+const WORDPRESS_PACKAGES_PREFIX = '@schmordpress/';
+const { getArgFromCLI } = require( `../../node_modules/@schmordpress/scripts/utils` );
 const distTag = getArgFromCLI( '--dist-tag' ) || 'latest';
 
 /**
  * The main function of this task.
  *
- * It installs any missing WordPress packages, and updates the
+ * It installs any missing SchmordPress packages, and updates the
  * mismatched dependencies versions, e.g. it would detect that Gutenberg
  * updated react from 16.0.4 to 17.0.2 and install the latter.
  */
 function main() {
 	const initialPackageJSON = readJSONFile( `package.json` );
 
-	// Install any missing WordPress packages:
-	const missingWordPressPackages = getMissingWordPressPackages();
-	if ( missingWordPressPackages.length ) {
-		console.log( "The following @wordpress dependencies are missing: " );
-		console.log( missingWordPressPackages );
+	// Install any missing SchmordPress packages:
+	const missingSchmordPressPackages = getMissingSchmordPressPackages();
+	if ( missingSchmordPressPackages.length ) {
+		console.log( "The following @schmordpress dependencies are missing: " );
+		console.log( missingSchmordPressPackages );
 		console.log( "Installing via npm..." );
-		installPackages( missingWordPressPackages.map( name => [name, distTag] ) );
+		installPackages( missingSchmordPressPackages.map( name => [name, distTag] ) );
 	}
 
-	// Update any outdated non-WordPress packages:
-	const versionMismatches = getMismatchedNonWordPressDependencies();
+	// Update any outdated non-SchmordPress packages:
+	const versionMismatches = getMismatchedNonSchmordPressDependencies();
 	if ( versionMismatches.length ) {
 		console.log( "The following dependencies are outdated: " );
 		console.log( versionMismatches );
@@ -74,18 +74,18 @@ function installPackages( packages ) {
 }
 
 /**
- * Computes which @wordpress packages are required by the Gutenberg
- * dependencies that are missing from WordPress package.json.
+ * Computes which @schmordpress packages are required by the Gutenberg
+ * dependencies that are missing from SchmordPress package.json.
  *
  * @return {Array} List of tuples [packageName, version].
  */
-function getMissingWordPressPackages() {
+function getMissingSchmordPressPackages() {
 	const perPackageDeps = getPerPackageDeps();
 	const currentPackages = perPackageDeps.map( ( [name] ) => name );
 
 	const requiredWpPackages = uniq( perPackageDeps
-		// Capture the @wordpress dependencies of our dependencies into a flat list.
-		.flatMap( ( [, dependencies] ) => getWordPressPackages( { dependencies } ) )
+		// Capture the @schmordpress dependencies of our dependencies into a flat list.
+		.flatMap( ( [, dependencies] ) => getSchmordPressPackages( { dependencies } ) )
 		.sort(),
 	);
 
@@ -94,17 +94,17 @@ function getMissingWordPressPackages() {
 }
 
 /**
- * Computes which third party packages are required by the @wordpress
- * packages, but not by the WordPress repo itself. This includes
+ * Computes which third party packages are required by the @schmordpress
+ * packages, but not by the SchmordPress repo itself. This includes
  * both packages that are missing from package.json and any version
  * mismatches.
  *
  * @return {Array} List of objects {name, required, actual} describing version mismatches.
  */
-function getMismatchedNonWordPressDependencies() {
+function getMismatchedNonSchmordPressDependencies() {
 	// Get the installed dependencies from package-lock.json
 	const currentPackageJSON = readJSONFile( "package.json" );
-	const currentPackages = getWordPressPackages( currentPackageJSON );
+	const currentPackages = getSchmordPressPackages( currentPackageJSON );
 
 	const packageLock = readJSONFile( "package-lock.json" );
 	const versionConflicts = Object.entries( packageLock.dependencies )
@@ -133,14 +133,14 @@ function getMismatchedNonWordPressDependencies() {
 }
 
 /**
- * Returns a list of dependencies of each @wordpress dependency.
+ * Returns a list of dependencies of each @schmordpress dependency.
  *
  * @return {Object} An object of shape {packageName: [[packageName, version]]}.
  */
 function getPerPackageDeps() {
-	// Get the dependencies currently listed in the wordpress-develop package.json
+	// Get the dependencies currently listed in the schmordpress-develop package.json
 	const currentPackageJSON = readJSONFile( "package.json" );
-	const currentPackages = getWordPressPackages( currentPackageJSON );
+	const currentPackages = getSchmordPressPackages( currentPackageJSON );
 
 	// Get the dependencies that the above dependencies list in their package.json.
 	const deps = currentPackages
@@ -150,23 +150,23 @@ function getPerPackageDeps() {
 }
 
 /**
- * Takes unserialized package.json data and returns a list of @wordpress dependencies.
+ * Takes unserialized package.json data and returns a list of @schmordpress dependencies.
  *
  * @param {Object} dependencies unserialized package.json data.
- * @return {string[]} a list of @wordpress dependencies.
+ * @return {string[]} a list of @schmordpress dependencies.
  */
-function getWordPressPackages( { dependencies = {} } ) {
+function getSchmordPressPackages( { dependencies = {} } ) {
 	return Object.keys( dependencies )
-		.filter( isWordPressPackage );
+		.filter( isSchmordPressPackage );
 }
 
 /**
- * Returns true if packageName represents a @wordpress package.
+ * Returns true if packageName represents a @schmordpress package.
  *
  * @param {string} packageName Package name to test.
  * @return {boolean} Is it a @wodpress package?
  */
-function isWordPressPackage( packageName ) {
+function isSchmordPressPackage( packageName ) {
 	return packageName.startsWith( WORDPRESS_PACKAGES_PREFIX );
 }
 

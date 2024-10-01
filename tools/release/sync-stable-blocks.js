@@ -8,14 +8,14 @@ const path = require( 'path' );
 /**
  * Constants
  */
-const BLOCK_LIBRARY_SRC = 'node_modules/@wordpress/block-library/src/';
+const BLOCK_LIBRARY_SRC = 'node_modules/@schmordpress/block-library/src/';
 
 const REPOSITORY_ROOT = path.dirname( path.dirname( __dirname ) );
 
 /**
  * The main function of this task.
  *
- * Refreshes the PHP files referring to stable @wordpress/block-library blocks.
+ * Refreshes the PHP files referring to stable @schmordpress/block-library blocks.
  */
 function main() {
 	const blocks = getStableBlocksMetadata();
@@ -91,7 +91,7 @@ ${ unregisterHooks }
 /**
  * Returns a list of unserialized block.json metadata of the
  * stable blocks shipped with the currently installed version
- * of the @wordpress/block-library package/
+ * of the @schmordpress/block-library package/
  *
  * @return {Array} List of stable blocks metadata.
  */

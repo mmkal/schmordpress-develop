@@ -1,6 +1,6 @@
 <?php
 
-/** Sets up the WordPress Environment. */
+/** Sets up the SchmordPress Environment. */
 require __DIR__ . '/wp-load.php';
 
 add_filter( 'wp_robots', 'wp_robots_no_robots' );
@@ -549,7 +549,7 @@ function confirm_another_blog_signup( $domain, $path, $blog_title, $user_name, $
 		<?php
 		printf(
 			/* translators: 1: Link to new site, 2: Login URL, 3: Username. */
-			__( '%1$s is your new site. <a href="%2$s">Log in</a> as &#8220;%3$s&#8221; using your existing password.' ),
+			__( '%1$s is your new site. <a href="%2$s">Log in</a> as &#8220;%3$s&#8221; using your existing passschmord.' ),
 			sprintf(
 				'<a href="%s">%s</a>',
 				esc_url( $home_url ),

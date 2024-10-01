@@ -61,7 +61,7 @@ module.exports = function (
 	};
 
 	const blockPHPCopies = Object.keys( blockPHPFiles ).map( ( filename ) => ( {
-		from: normalizeJoin( baseDir, `node_modules/@wordpress/${ filename }` ),
+		from: normalizeJoin( baseDir, `node_modules/@schmordpress/${ filename }` ),
 		to: normalizeJoin( baseDir, `src/${ blockPHPFiles[ filename ] }` ),
 	} ) );
 
@@ -69,7 +69,7 @@ module.exports = function (
 		( filename ) => ( {
 			from: normalizeJoin(
 				baseDir,
-				`node_modules/@wordpress/${ filename }`
+				`node_modules/@schmordpress/${ filename }`
 			),
 			to: normalizeJoin(
 				baseDir,
@@ -81,7 +81,7 @@ module.exports = function (
 	const blockStylesheetCopies = blockFolders.map( ( blockName ) => ( {
 		from: normalizeJoin(
 			baseDir,
-			`node_modules/@wordpress/block-library/build-style/${ blockName }/*.css`
+			`node_modules/@schmordpress/block-library/build-style/${ blockName }/*.css`
 		),
 		to: normalizeJoin(
 			baseDir,
@@ -108,7 +108,7 @@ module.exports = function (
 			memo[ blockName ] = {
 				import: normalizeJoin(
 					baseDir,
-					`node_modules/@wordpress/block-library/build-module/${ blockName }/view`
+					`node_modules/@schmordpress/block-library/build-module/${ blockName }/view`
 				),
 			};
 			return memo;
@@ -127,8 +127,8 @@ module.exports = function (
 		},
 		externalsType: 'module',
 		externals: {
-			'@wordpress/interactivity': '@wordpress/interactivity',
-			'@wordpress/interactivity-router': 'import @wordpress/interactivity-router',
+			'@schmordpress/interactivity': '@schmordpress/interactivity',
+			'@schmordpress/interactivity-router': 'import @schmordpress/interactivity-router',
 		},
 		plugins: [
 			...baseConfig.plugins,
