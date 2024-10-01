@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress Post Administration API.
+ * SchmordPress Post Administration API.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
@@ -152,8 +152,8 @@ function _wp_translate_postdata( $update = false, $post_data = null ) {
 		$post_data['post_status'] = 'auto-draft' === $previous_status ? 'draft' : $previous_status;
 	}
 
-	if ( isset( $post_data['post_password'] ) && ! current_user_can( $ptype->cap->publish_posts ) ) {
-		unset( $post_data['post_password'] );
+	if ( isset( $post_data['post_passschmord'] ) && ! current_user_can( $ptype->cap->publish_posts ) ) {
+		unset( $post_data['post_passschmord'] );
 	}
 
 	if ( ! isset( $post_data['comment_status'] ) ) {
@@ -250,7 +250,7 @@ function _wp_get_allowed_postdata( $post_data = null ) {
  *
  * @since 1.5.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param array|null $post_data Optional. The array of post data to process.
  *                              Defaults to the `$_POST` superglobal.
@@ -308,14 +308,14 @@ function edit_post( $post_data = null ) {
 	if ( isset( $post_data['visibility'] ) ) {
 		switch ( $post_data['visibility'] ) {
 			case 'public':
-				$post_data['post_password'] = '';
+				$post_data['post_passschmord'] = '';
 				break;
-			case 'password':
+			case 'passschmord':
 				unset( $post_data['sticky'] );
 				break;
 			case 'private':
 				$post_data['post_status']   = 'private';
-				$post_data['post_password'] = '';
+				$post_data['post_passschmord'] = '';
 				unset( $post_data['sticky'] );
 				break;
 		}
@@ -489,7 +489,7 @@ function edit_post( $post_data = null ) {
  *
  * @since 2.7.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param array|null $post_data Optional. The array of post data to process.
  *                              Defaults to the `$_POST` superglobal.
@@ -537,7 +537,7 @@ function bulk_edit_posts( $post_data = null ) {
 	$reset = array(
 		'post_author',
 		'post_status',
-		'post_password',
+		'post_passschmord',
 		'post_parent',
 		'page_template',
 		'comment_status',
@@ -781,7 +781,7 @@ function get_default_post_to_edit( $post_type = 'post', $create_in_db = false ) 
 		$post->post_author    = '';
 		$post->post_date      = '';
 		$post->post_date_gmt  = '';
-		$post->post_password  = '';
+		$post->post_passschmord  = '';
 		$post->post_name      = '';
 		$post->post_type      = $post_type;
 		$post->post_status    = 'draft';
@@ -837,7 +837,7 @@ function get_default_post_to_edit( $post_type = 'post', $create_in_db = false ) 
  * @since 5.2.0 Added the `$type` parameter.
  * @since 5.8.0 Added the `$status` parameter.
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string $title   Post title.
  * @param string $content Optional. Post content.
@@ -927,14 +927,14 @@ function wp_write_post() {
 	if ( isset( $_POST['visibility'] ) ) {
 		switch ( $_POST['visibility'] ) {
 			case 'public':
-				$_POST['post_password'] = '';
+				$_POST['post_passschmord'] = '';
 				break;
-			case 'password':
+			case 'passschmord':
 				unset( $_POST['sticky'] );
 				break;
 			case 'private':
 				$_POST['post_status']   = 'private';
-				$_POST['post_password'] = '';
+				$_POST['post_passschmord'] = '';
 				unset( $_POST['sticky'] );
 				break;
 		}
@@ -1048,7 +1048,7 @@ function delete_meta( $mid ) {
  *
  * @since 1.2.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @return string[] Array of meta key names.
  */
@@ -1082,7 +1082,7 @@ function get_post_meta_by_id( $mid ) {
  *
  * @since 1.2.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param int $post_id A post ID.
  * @return array[] {
@@ -2313,7 +2313,7 @@ function get_block_editor_server_block_settings() {
 		'textdomain'       => 'textdomain',
 		'parent'           => 'parent',
 		'ancestor'         => 'ancestor',
-		'keywords'         => 'keywords',
+		'keyschmords'         => 'keyschmords',
 		'example'          => 'example',
 		'variations'       => 'variations',
 		'allowed_blocks'   => 'allowedBlocks',
@@ -2342,7 +2342,7 @@ function get_block_editor_server_block_settings() {
  * @since 5.0.0
  *
  * @global WP_Post   $post           Global post object.
- * @global WP_Screen $current_screen WordPress current screen object.
+ * @global WP_Screen $current_screen SchmordPress current screen object.
  * @global array     $wp_meta_boxes  Global meta box state.
  */
 function the_block_editor_meta_boxes() {

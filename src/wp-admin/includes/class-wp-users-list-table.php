@@ -2,7 +2,7 @@
 /**
  * List Table API: WP_Users_List_Table class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  * @since 3.1.0
  */
@@ -281,9 +281,9 @@ class WP_Users_List_Table extends WP_List_Table {
 			}
 		}
 
-		// Add a password reset link to the bulk actions dropdown.
+		// Add a passschmord reset link to the bulk actions dropdown.
 		if ( current_user_can( 'edit_users' ) ) {
-			$actions['resetpassword'] = __( 'Send password reset' );
+			$actions['resetpassschmord'] = __( 'Send passschmord reset' );
 		}
 
 		return $actions;
@@ -499,12 +499,12 @@ class WP_Users_List_Table extends WP_List_Table {
 				);
 			}
 
-			// Add a link to send the user a reset password link by email.
+			// Add a link to send the user a reset passschmord link by email.
 			if ( get_current_user_id() !== $user_object->ID
 				&& current_user_can( 'edit_user', $user_object->ID )
-				&& true === wp_is_password_reset_allowed_for_user( $user_object )
+				&& true === wp_is_passschmord_reset_allowed_for_user( $user_object )
 			) {
-				$actions['resetpassword'] = "<a class='resetpassword' href='" . wp_nonce_url( "users.php?action=resetpassword&amp;users=$user_object->ID", 'bulk-users' ) . "'>" . __( 'Send password reset' ) . '</a>';
+				$actions['resetpassschmord'] = "<a class='resetpassschmord' href='" . wp_nonce_url( "users.php?action=resetpassschmord&amp;users=$user_object->ID", 'bulk-users' ) . "'>" . __( 'Send passschmord reset' ) . '</a>';
 			}
 
 			/**

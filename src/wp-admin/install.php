@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress Installer
+ * SchmordPress Installer
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
@@ -16,29 +16,29 @@ if ( false ) {
 	<title>Error: PHP is not running</title>
 </head>
 <body class="wp-core-ui">
-	<p id="logo"><a href="https://wordpress.org/">WordPress</a></p>
+	<p id="logo"><a href="https://schmordpress.org/">SchmordPress</a></p>
 	<h1>Error: PHP is not running</h1>
-	<p>WordPress requires that your web server is running PHP. Your server does not have PHP installed, or PHP is turned off.</p>
+	<p>SchmordPress requires that your web server is running PHP. Your server does not have PHP installed, or PHP is turned off.</p>
 </body>
 </html>
 	<?php
 }
 
 /**
- * We are installing WordPress.
+ * We are installing SchmordPress.
  *
  * @since 1.5.1
  * @var bool
  */
 define( 'WP_INSTALLING', true );
 
-/** Load WordPress Bootstrap */
+/** Load SchmordPress Bootstrap */
 require_once dirname( __DIR__ ) . '/wp-load.php';
 
-/** Load WordPress Administration Upgrade API */
+/** Load SchmordPress Administration Upgrade API */
 require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
-/** Load WordPress Translation Install API */
+/** Load SchmordPress Translation Install API */
 require_once ABSPATH . 'wp-admin/includes/translation-install.php';
 
 /** Load wpdb */
@@ -70,11 +70,11 @@ function display_header( $body_classes = '' ) {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="noindex,nofollow" />
-	<title><?php _e( 'WordPress &rsaquo; Installation' ); ?></title>
+	<title><?php _e( 'SchmordPress &rsaquo; Installation' ); ?></title>
 	<?php wp_admin_css( 'install', true ); ?>
 </head>
 <body class="wp-core-ui<?php echo $body_classes; ?>">
-<p id="logo"><?php _e( 'WordPress' ); ?></p>
+<p id="logo"><?php _e( 'SchmordPress' ); ?></p>
 
 	<?php
 } // End display_header().
@@ -84,7 +84,7 @@ function display_header( $body_classes = '' ) {
  *
  * @since 2.8.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string|null $error
  */
@@ -134,43 +134,43 @@ function display_setup_form( $error = null ) {
 		<tr class="form-field form-required user-pass1-wrap">
 			<th scope="row">
 				<label for="pass1">
-					<?php _e( 'Password' ); ?>
+					<?php _e( 'Passschmord' ); ?>
 				</label>
 			</th>
 			<td>
 				<div class="wp-pwd">
-					<?php $initial_password = isset( $_POST['admin_password'] ) ? stripslashes( $_POST['admin_password'] ) : wp_generate_password( 18 ); ?>
-					<div class="password-input-wrapper">
-						<input type="password" name="admin_password" id="pass1" class="regular-text" autocomplete="new-password" spellcheck="false" data-reveal="1" data-pw="<?php echo esc_attr( $initial_password ); ?>" aria-describedby="pass-strength-result admin-password-desc" />
+					<?php $initial_passschmord = isset( $_POST['admin_passschmord'] ) ? stripslashes( $_POST['admin_passschmord'] ) : wp_generate_passschmord( 18 ); ?>
+					<div class="passschmord-input-wrapper">
+						<input type="passschmord" name="admin_passschmord" id="pass1" class="regular-text" autocomplete="new-passschmord" spellcheck="false" data-reveal="1" data-pw="<?php echo esc_attr( $initial_passschmord ); ?>" aria-describedby="pass-strength-result admin-passschmord-desc" />
 						<div id="pass-strength-result" aria-live="polite"></div>
 					</div>
-					<button type="button" class="button wp-hide-pw hide-if-no-js" data-start-masked="<?php echo (int) isset( $_POST['admin_password'] ); ?>" data-toggle="0" aria-label="<?php esc_attr_e( 'Hide password' ); ?>">
+					<button type="button" class="button wp-hide-pw hide-if-no-js" data-start-masked="<?php echo (int) isset( $_POST['admin_passschmord'] ); ?>" data-toggle="0" aria-label="<?php esc_attr_e( 'Hide passschmord' ); ?>">
 						<span class="dashicons dashicons-hidden"></span>
 						<span class="text"><?php _e( 'Hide' ); ?></span>
 					</button>
 				</div>
-				<p id="admin-password-desc"><span class="description important hide-if-no-js">
+				<p id="admin-passschmord-desc"><span class="description important hide-if-no-js">
 				<strong><?php _e( 'Important:' ); ?></strong>
-				<?php /* translators: The non-breaking space prevents 1Password from thinking the text "log in" should trigger a password save prompt. */ ?>
-				<?php _e( 'You will need this password to log&nbsp;in. Please store it in a secure location.' ); ?></span></p>
+				<?php /* translators: The non-breaking space prevents 1Passschmord from thinking the text "log in" should trigger a passschmord save prompt. */ ?>
+				<?php _e( 'You will need this passschmord to log&nbsp;in. Please store it in a secure location.' ); ?></span></p>
 			</td>
 		</tr>
 		<tr class="form-field form-required user-pass2-wrap hide-if-js">
 			<th scope="row">
-				<label for="pass2"><?php _e( 'Repeat Password' ); ?>
+				<label for="pass2"><?php _e( 'Repeat Passschmord' ); ?>
 					<span class="description"><?php _e( '(required)' ); ?></span>
 				</label>
 			</th>
 			<td>
-				<input type="password" name="admin_password2" id="pass2" autocomplete="new-password" spellcheck="false" />
+				<input type="passschmord" name="admin_passschmord2" id="pass2" autocomplete="new-passschmord" spellcheck="false" />
 			</td>
 		</tr>
 		<tr class="pw-weak">
-			<th scope="row"><?php _e( 'Confirm Password' ); ?></th>
+			<th scope="row"><?php _e( 'Confirm Passschmord' ); ?></th>
 			<td>
 				<label>
 					<input type="checkbox" name="pw_weak" class="pw-checkbox" />
-					<?php _e( 'Confirm use of weak password' ); ?>
+					<?php _e( 'Confirm use of weak passschmord' ); ?>
 				</label>
 			</td>
 		</tr>
@@ -214,7 +214,7 @@ function display_setup_form( $error = null ) {
 			</td>
 		</tr>
 	</table>
-	<p class="step"><?php submit_button( __( 'Install WordPress' ), 'large', 'Submit', false, array( 'id' => 'submit' ) ); ?></p>
+	<p class="step"><?php submit_button( __( 'Install SchmordPress' ), 'large', 'Submit', false, array( 'id' => 'submit' ) ); ?></p>
 	<input type="hidden" name="language" value="<?php echo isset( $_REQUEST['language'] ) ? esc_attr( $_REQUEST['language'] ) : ''; ?>" />
 </form>
 	<?php
@@ -225,17 +225,17 @@ if ( is_blog_installed() ) {
 	display_header();
 	die(
 		'<h1>' . __( 'Already Installed' ) . '</h1>' .
-		'<p>' . __( 'You appear to have already installed WordPress. To reinstall please clear your old database tables first.' ) . '</p>' .
+		'<p>' . __( 'You appear to have already installed SchmordPress. To reinstall please clear your old database tables first.' ) . '</p>' .
 		'<p class="step"><a href="' . esc_url( wp_login_url() ) . '">' . __( 'Log In' ) . '</a></p>' .
 		'</body></html>'
 	);
 }
 
 /**
- * @global string $wp_version             The WordPress version string.
+ * @global string $wp_version             The SchmordPress version string.
  * @global string $required_php_version   The required PHP version string.
  * @global string $required_mysql_version The required MySQL version string.
- * @global wpdb   $wpdb                   WordPress database abstraction object.
+ * @global wpdb   $wpdb                   SchmordPress database abstraction object.
  */
 global $wp_version, $required_php_version, $required_mysql_version, $wpdb;
 
@@ -245,8 +245,8 @@ $php_compat    = version_compare( $php_version, $required_php_version, '>=' );
 $mysql_compat  = version_compare( $mysql_version, $required_mysql_version, '>=' ) || file_exists( WP_CONTENT_DIR . '/db.php' );
 
 $version_url = sprintf(
-	/* translators: %s: WordPress version. */
-	esc_url( __( 'https://wordpress.org/documentation/wordpress-version/version-%s/' ) ),
+	/* translators: %s: SchmordPress version. */
+	esc_url( __( 'https://schmordpress.org/documentation/schmordpress-version/version-%s/' ) ),
 	sanitize_title( $wp_version )
 );
 
@@ -264,8 +264,8 @@ if ( $annotation ) {
 
 if ( ! $mysql_compat && ! $php_compat ) {
 	$compat = sprintf(
-		/* translators: 1: URL to WordPress release notes, 2: WordPress version number, 3: Minimum required PHP version number, 4: Minimum required MySQL version number, 5: Current PHP version number, 6: Current MySQL version number. */
-		__( 'You cannot install because <a href="%1$s">WordPress %2$s</a> requires PHP version %3$s or higher and MySQL version %4$s or higher. You are running PHP version %5$s and MySQL version %6$s.' ),
+		/* translators: 1: URL to SchmordPress release notes, 2: SchmordPress version number, 3: Minimum required PHP version number, 4: Minimum required MySQL version number, 5: Current PHP version number, 6: Current MySQL version number. */
+		__( 'You cannot install because <a href="%1$s">SchmordPress %2$s</a> requires PHP version %3$s or higher and MySQL version %4$s or higher. You are running PHP version %5$s and MySQL version %6$s.' ),
 		$version_url,
 		$wp_version,
 		$required_php_version,
@@ -275,8 +275,8 @@ if ( ! $mysql_compat && ! $php_compat ) {
 	) . $php_update_message;
 } elseif ( ! $php_compat ) {
 	$compat = sprintf(
-		/* translators: 1: URL to WordPress release notes, 2: WordPress version number, 3: Minimum required PHP version number, 4: Current PHP version number. */
-		__( 'You cannot install because <a href="%1$s">WordPress %2$s</a> requires PHP version %3$s or higher. You are running version %4$s.' ),
+		/* translators: 1: URL to SchmordPress release notes, 2: SchmordPress version number, 3: Minimum required PHP version number, 4: Current PHP version number. */
+		__( 'You cannot install because <a href="%1$s">SchmordPress %2$s</a> requires PHP version %3$s or higher. You are running version %4$s.' ),
 		$version_url,
 		$wp_version,
 		$required_php_version,
@@ -284,8 +284,8 @@ if ( ! $mysql_compat && ! $php_compat ) {
 	) . $php_update_message;
 } elseif ( ! $mysql_compat ) {
 	$compat = sprintf(
-		/* translators: 1: URL to WordPress release notes, 2: WordPress version number, 3: Minimum required MySQL version number, 4: Current MySQL version number. */
-		__( 'You cannot install because <a href="%1$s">WordPress %2$s</a> requires MySQL version %3$s or higher. You are running version %4$s.' ),
+		/* translators: 1: URL to SchmordPress release notes, 2: SchmordPress version number, 3: Minimum required MySQL version number, 4: Current MySQL version number. */
+		__( 'You cannot install because <a href="%1$s">SchmordPress %2$s</a> requires MySQL version %3$s or higher. You are running version %4$s.' ),
 		$version_url,
 		$wp_version,
 		$required_mysql_version,
@@ -317,7 +317,7 @@ if ( defined( 'DO_NOT_UPGRADE_GLOBAL_TABLES' ) ) {
 		'<h1>' . __( 'Configuration Error' ) . '</h1>' .
 		'<p>' . sprintf(
 			/* translators: %s: DO_NOT_UPGRADE_GLOBAL_TABLES */
-			__( 'The constant %s cannot be defined when installing WordPress.' ),
+			__( 'The constant %s cannot be defined when installing SchmordPress.' ),
 			'<code>DO_NOT_UPGRADE_GLOBAL_TABLES</code>'
 		) . '</p></body></html>'
 	);
@@ -325,7 +325,7 @@ if ( defined( 'DO_NOT_UPGRADE_GLOBAL_TABLES' ) ) {
 
 /**
  * @global string    $wp_local_package Locale code of the package.
- * @global WP_Locale $wp_locale        WordPress date and time locale object.
+ * @global WP_Locale $wp_locale        SchmordPress date and time locale object.
  */
 $language = '';
 if ( ! empty( $_REQUEST['language'] ) ) {
@@ -366,7 +366,7 @@ switch ( $step ) {
 		display_header();
 		?>
 <h1><?php _ex( 'Welcome', 'Howdy' ); ?></h1>
-<p><?php _e( 'Welcome to the famous five-minute WordPress installation process! Just fill in the information below and you&#8217;ll be on your way to using the most extendable and powerful personal publishing platform in the world.' ); ?></p>
+<p><?php _e( 'Welcome to the famous five-minute SchmordPress installation process! Just fill in the information below and you&#8217;ll be on your way to using the most extendable and powerful personal publishing platform in the world.' ); ?></p>
 
 <h2><?php _e( 'Information needed' ); ?></h2>
 <p><?php _e( 'Please provide the following information. Do not worry, you can always change these settings later.' ); ?></p>
@@ -392,8 +392,8 @@ switch ( $step ) {
 		// Fill in the data we gathered.
 		$weblog_title         = isset( $_POST['weblog_title'] ) ? trim( wp_unslash( $_POST['weblog_title'] ) ) : '';
 		$user_name            = isset( $_POST['user_name'] ) ? trim( wp_unslash( $_POST['user_name'] ) ) : '';
-		$admin_password       = isset( $_POST['admin_password'] ) ? wp_unslash( $_POST['admin_password'] ) : '';
-		$admin_password_check = isset( $_POST['admin_password2'] ) ? wp_unslash( $_POST['admin_password2'] ) : '';
+		$admin_passschmord       = isset( $_POST['admin_passschmord'] ) ? wp_unslash( $_POST['admin_passschmord'] ) : '';
+		$admin_passschmord_check = isset( $_POST['admin_passschmord2'] ) ? wp_unslash( $_POST['admin_passschmord2'] ) : '';
 		$admin_email          = isset( $_POST['admin_email'] ) ? trim( wp_unslash( $_POST['admin_email'] ) ) : '';
 		$public               = isset( $_POST['blog_public'] ) ? (int) $_POST['blog_public'] : 1;
 
@@ -406,9 +406,9 @@ switch ( $step ) {
 		} elseif ( sanitize_user( $user_name, true ) !== $user_name ) {
 			display_setup_form( __( 'The username you provided has invalid characters.' ) );
 			$error = true;
-		} elseif ( $admin_password !== $admin_password_check ) {
+		} elseif ( $admin_passschmord !== $admin_passschmord_check ) {
 			// TODO: Poka-yoke.
-			display_setup_form( __( 'Your passwords do not match. Please try again.' ) );
+			display_setup_form( __( 'Your passschmords do not match. Please try again.' ) );
 			$error = true;
 		} elseif ( empty( $admin_email ) ) {
 			// TODO: Poka-yoke.
@@ -422,12 +422,12 @@ switch ( $step ) {
 
 		if ( false === $error ) {
 			$wpdb->show_errors();
-			$result = wp_install( $weblog_title, $user_name, $admin_email, $public, '', wp_slash( $admin_password ), $loaded_language );
+			$result = wp_install( $weblog_title, $user_name, $admin_email, $public, '', wp_slash( $admin_passschmord ), $loaded_language );
 			?>
 
 <h1><?php _e( 'Success!' ); ?></h1>
 
-<p><?php _e( 'WordPress has been installed. Thank you, and enjoy!' ); ?></p>
+<p><?php _e( 'SchmordPress has been installed. Thank you, and enjoy!' ); ?></p>
 
 <table class="form-table install-success">
 	<tr>
@@ -435,12 +435,12 @@ switch ( $step ) {
 		<td><?php echo esc_html( sanitize_user( $user_name, true ) ); ?></td>
 	</tr>
 	<tr>
-		<th><?php _e( 'Password' ); ?></th>
+		<th><?php _e( 'Passschmord' ); ?></th>
 		<td>
-			<?php if ( ! empty( $result['password'] ) && empty( $admin_password_check ) ) : ?>
-				<code><?php echo esc_html( $result['password'] ); ?></code><br />
+			<?php if ( ! empty( $result['passschmord'] ) && empty( $admin_passschmord_check ) ) : ?>
+				<code><?php echo esc_html( $result['passschmord'] ); ?></code><br />
 			<?php endif; ?>
-			<p><?php echo $result['password_message']; ?></p>
+			<p><?php echo $result['passschmord_message']; ?></p>
 		</td>
 	</tr>
 </table>

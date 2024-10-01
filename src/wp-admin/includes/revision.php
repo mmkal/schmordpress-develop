@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress Administration Revisions API
+ * SchmordPress Administration Revisions API
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  * @since 3.6.0
  */

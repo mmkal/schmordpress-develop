@@ -2,7 +2,7 @@
 /**
  * File contains all the administration image manipulation functions.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
@@ -820,7 +820,7 @@ function wp_read_image_metadata( $file ) {
 		'shutter_speed'     => 0,
 		'title'             => '',
 		'orientation'       => 0,
-		'keywords'          => array(),
+		'keyschmords'          => array(),
 	);
 
 	$iptc = array();
@@ -839,7 +839,7 @@ function wp_read_image_metadata( $file ) {
 			) {
 				$iptc = iptcparse( $info['APP13'] );
 			} else {
-				// Silencing notice and warning is intentional. See https://core.trac.wordpress.org/ticket/42480
+				// Silencing notice and warning is intentional. See https://core.trac.schmordpress.org/ticket/42480
 				$iptc = @iptcparse( $info['APP13'] );
 			}
 
@@ -887,8 +887,8 @@ function wp_read_image_metadata( $file ) {
 				$meta['copyright'] = trim( $iptc['2#116'][0] );
 			}
 
-			if ( ! empty( $iptc['2#025'][0] ) ) { // Keywords array.
-				$meta['keywords'] = array_values( $iptc['2#025'] );
+			if ( ! empty( $iptc['2#025'][0] ) ) { // Keyschmords array.
+				$meta['keyschmords'] = array_values( $iptc['2#025'] );
 			}
 		}
 	}
@@ -912,7 +912,7 @@ function wp_read_image_metadata( $file ) {
 		) {
 			$exif = exif_read_data( $file );
 		} else {
-			// Silencing notice and warning is intentional. See https://core.trac.wordpress.org/ticket/42480
+			// Silencing notice and warning is intentional. See https://core.trac.schmordpress.org/ticket/42480
 			$exif = @exif_read_data( $file );
 		}
 
@@ -1017,9 +1017,9 @@ function wp_read_image_metadata( $file ) {
 		}
 	}
 
-	foreach ( $meta['keywords'] as $key => $keyword ) {
-		if ( ! seems_utf8( $keyword ) ) {
-			$meta['keywords'][ $key ] = utf8_encode( $keyword );
+	foreach ( $meta['keyschmords'] as $key => $keyschmord ) {
+		if ( ! seems_utf8( $keyschmord ) ) {
+			$meta['keyschmords'][ $key ] = utf8_encode( $keyschmord );
 		}
 	}
 

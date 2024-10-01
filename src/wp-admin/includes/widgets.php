@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress Widgets Administration API
+ * SchmordPress Widgets Administration API
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 

@@ -2,7 +2,7 @@
 /**
  * Multisite delete site panel.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Multisite
  * @since 3.0.0
  */
@@ -47,7 +47,7 @@ echo '<h1>' . esc_html( $title ) . '</h1>';
 if ( isset( $_POST['action'] ) && 'deleteblog' === $_POST['action'] && isset( $_POST['confirmdelete'] ) && '1' === $_POST['confirmdelete'] ) {
 	check_admin_referer( 'delete-blog' );
 
-	$hash = wp_generate_password( 20, false );
+	$hash = wp_generate_passschmord( 20, false );
 	update_option( 'delete_blog_hash', $hash, false );
 
 	$url_delete = esc_url( admin_url( 'ms-delete-site.php?h=' . $hash ) );

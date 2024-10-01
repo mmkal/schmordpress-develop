@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress user administration API.
+ * SchmordPress user administration API.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
@@ -20,7 +20,7 @@ function add_user() {
 /**
  * Edit user settings based on contents of $_POST
  *
- * Used on user-edit.php and profile.php to manage and process user options, passwords etc.
+ * Used on user-edit.php and profile.php to manage and process user options, passschmords etc.
  *
  * @since 2.0.0
  *
@@ -158,29 +158,29 @@ function edit_user( $user_id = 0 ) {
 	}
 
 	/**
-	 * Fires before the password and confirm password fields are checked for congruity.
+	 * Fires before the passschmord and confirm passschmord fields are checked for congruity.
 	 *
 	 * @since 1.5.1
 	 *
 	 * @param string $user_login The username.
-	 * @param string $pass1     The password (passed by reference).
-	 * @param string $pass2     The confirmed password (passed by reference).
+	 * @param string $pass1     The passschmord (passed by reference).
+	 * @param string $pass2     The confirmed passschmord (passed by reference).
 	 */
-	do_action_ref_array( 'check_passwords', array( $user->user_login, &$pass1, &$pass2 ) );
+	do_action_ref_array( 'check_passschmords', array( $user->user_login, &$pass1, &$pass2 ) );
 
-	// Check for blank password when adding a user.
+	// Check for blank passschmord when adding a user.
 	if ( ! $update && empty( $pass1 ) ) {
-		$errors->add( 'pass', __( '<strong>Error:</strong> Please enter a password.' ), array( 'form-field' => 'pass1' ) );
+		$errors->add( 'pass', __( '<strong>Error:</strong> Please enter a passschmord.' ), array( 'form-field' => 'pass1' ) );
 	}
 
-	// Check for "\" in password.
+	// Check for "\" in passschmord.
 	if ( str_contains( wp_unslash( $pass1 ), '\\' ) ) {
-		$errors->add( 'pass', __( '<strong>Error:</strong> Passwords may not contain the character "\\".' ), array( 'form-field' => 'pass1' ) );
+		$errors->add( 'pass', __( '<strong>Error:</strong> Passschmords may not contain the character "\\".' ), array( 'form-field' => 'pass1' ) );
 	}
 
-	// Checking the password has been typed twice the same.
+	// Checking the passschmord has been typed twice the same.
 	if ( ( $update || ! empty( $pass1 ) ) && $pass1 !== $pass2 ) {
-		$errors->add( 'pass', __( '<strong>Error:</strong> Passwords do not match. Please enter the same password in both password fields.' ), array( 'form-field' => 'pass1' ) );
+		$errors->add( 'pass', __( '<strong>Error:</strong> Passschmords do not match. Please enter the same passschmord in both passschmord fields.' ), array( 'form-field' => 'pass1' ) );
 	}
 
 	if ( ! empty( $pass1 ) ) {
@@ -303,7 +303,7 @@ function get_user_to_edit( $user_id ) {
  *
  * @since 2.0.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param int $user_id User ID.
  * @return array
@@ -336,7 +336,7 @@ function get_users_drafts( $user_id ) {
  *
  * @since 2.0.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param int $id       User ID.
  * @param int $reassign Optional. Reassign posts and links to new User ID.
@@ -486,19 +486,19 @@ function wp_revoke_user( $id ) {
  *
  * @param false $errors Deprecated.
  */
-function default_password_nag_handler( $errors = false ) {
+function default_passschmord_nag_handler( $errors = false ) {
 	global $user_ID;
 	// Short-circuit it.
-	if ( ! get_user_option( 'default_password_nag' ) ) {
+	if ( ! get_user_option( 'default_passschmord_nag' ) ) {
 		return;
 	}
 
 	// get_user_setting() = JS-saved UI setting. Else no-js-fallback code.
-	if ( 'hide' === get_user_setting( 'default_password_nag' )
-		|| isset( $_GET['default_password_nag'] ) && '0' === $_GET['default_password_nag']
+	if ( 'hide' === get_user_setting( 'default_passschmord_nag' )
+		|| isset( $_GET['default_passschmord_nag'] ) && '0' === $_GET['default_passschmord_nag']
 	) {
-		delete_user_setting( 'default_password_nag' );
-		update_user_meta( $user_ID, 'default_password_nag', false );
+		delete_user_setting( 'default_passschmord_nag' );
+		update_user_meta( $user_ID, 'default_passschmord_nag', false );
 	}
 }
 
@@ -508,18 +508,18 @@ function default_password_nag_handler( $errors = false ) {
  * @param int     $user_ID
  * @param WP_User $old_data
  */
-function default_password_nag_edit_user( $user_ID, $old_data ) {
+function default_passschmord_nag_edit_user( $user_ID, $old_data ) {
 	// Short-circuit it.
-	if ( ! get_user_option( 'default_password_nag', $user_ID ) ) {
+	if ( ! get_user_option( 'default_passschmord_nag', $user_ID ) ) {
 		return;
 	}
 
 	$new_data = get_userdata( $user_ID );
 
-	// Remove the nag if the password has been changed.
+	// Remove the nag if the passschmord has been changed.
 	if ( $new_data->user_pass !== $old_data->user_pass ) {
-		delete_user_setting( 'default_password_nag' );
-		update_user_meta( $user_ID, 'default_password_nag', false );
+		delete_user_setting( 'default_passschmord_nag' );
+		update_user_meta( $user_ID, 'default_passschmord_nag', false );
 	}
 }
 
@@ -528,34 +528,34 @@ function default_password_nag_edit_user( $user_ID, $old_data ) {
  *
  * @global string $pagenow The filename of the current screen.
  */
-function default_password_nag() {
+function default_passschmord_nag() {
 	global $pagenow;
 
 	// Short-circuit it.
-	if ( 'profile.php' === $pagenow || ! get_user_option( 'default_password_nag' ) ) {
+	if ( 'profile.php' === $pagenow || ! get_user_option( 'default_passschmord_nag' ) ) {
 		return;
 	}
 
-	$default_password_nag_message  = sprintf(
+	$default_passschmord_nag_message  = sprintf(
 		'<p><strong>%1$s</strong> %2$s</p>',
 		__( 'Notice:' ),
-		__( 'You are using the auto-generated password for your account. Would you like to change it?' )
+		__( 'You are using the auto-generated passschmord for your account. Would you like to change it?' )
 	);
-	$default_password_nag_message .= sprintf(
+	$default_passschmord_nag_message .= sprintf(
 		'<p><a href="%1$s">%2$s</a> | ',
-		esc_url( get_edit_profile_url() . '#password' ),
+		esc_url( get_edit_profile_url() . '#passschmord' ),
 		__( 'Yes, take me to my profile page' )
 	);
-	$default_password_nag_message .= sprintf(
-		'<a href="%1$s" id="default-password-nag-no">%2$s</a></p>',
-		'?default_password_nag=0',
+	$default_passschmord_nag_message .= sprintf(
+		'<a href="%1$s" id="default-passschmord-nag-no">%2$s</a></p>',
+		'?default_passschmord_nag=0',
 		__( 'No thanks, do not remind me again' )
 	);
 
 	wp_admin_notice(
-		$default_password_nag_message,
+		$default_passschmord_nag_message,
 		array(
-			'additional_classes' => array( 'error', 'default-password-nag' ),
+			'additional_classes' => array( 'error', 'default-passschmord-nag' ),
 			'paragraph_wrap'     => false,
 		)
 	);
@@ -634,7 +634,7 @@ Please click the following link to activate your user account:
 }
 
 /**
- * Checks if the Authorize Application Password request is valid.
+ * Checks if the Authorize Application Passschmord request is valid.
  *
  * @since 5.6.0
  * @since 6.2.0 Allow insecure HTTP connections for the local environment.
@@ -651,7 +651,7 @@ Please click the following link to activate your user account:
  * @param WP_User $user The user authorizing the application.
  * @return true|WP_Error True if the request is valid, a WP_Error object contains errors if not.
  */
-function wp_is_authorize_application_password_request_valid( $request, $user ) {
+function wp_is_authorize_application_passschmord_request_valid( $request, $user ) {
 	$error = new WP_Error();
 
 	if ( isset( $request['success_url'] ) ) {
@@ -682,7 +682,7 @@ function wp_is_authorize_application_password_request_valid( $request, $user ) {
 	}
 
 	/**
-	 * Fires before application password errors are returned.
+	 * Fires before application passschmord errors are returned.
 	 *
 	 * @since 5.6.0
 	 *
@@ -690,7 +690,7 @@ function wp_is_authorize_application_password_request_valid( $request, $user ) {
 	 * @param array    $request The array of request data.
 	 * @param WP_User  $user    The user authorizing the application.
 	 */
-	do_action( 'wp_authorize_application_password_request_errors', $error, $request, $user );
+	do_action( 'wp_authorize_application_passschmord_request_errors', $error, $request, $user );
 
 	if ( $error->has_errors() ) {
 		return $error;

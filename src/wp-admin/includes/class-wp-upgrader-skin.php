@@ -2,13 +2,13 @@
 /**
  * Upgrader API: WP_Upgrader_Skin class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Upgrader
  * @since 4.6.0
  */
 
 /**
- * Generic Skin for the WordPress Upgrader classes. This skin is designed to be extended for specific purposes.
+ * Generic Skin for the SchmordPress Upgrader classes. This skin is designed to be extended for specific purposes.
  *
  * @since 2.8.0
  * @since 4.6.0 Moved to its own file from wp-admin/includes/class-wp-upgrader-skins.php.
@@ -59,11 +59,11 @@ class WP_Upgrader_Skin {
 	/**
 	 * Constructor.
 	 *
-	 * Sets up the generic skin for the WordPress Upgrader classes.
+	 * Sets up the generic skin for the SchmordPress Upgrader classes.
 	 *
 	 * @since 2.8.0
 	 *
-	 * @param array $args Optional. The WordPress upgrader skin arguments to
+	 * @param array $args Optional. The SchmordPress upgrader skin arguments to
 	 *                    override default options. Default empty array.
 	 */
 	public function __construct( $args = array() ) {
@@ -194,7 +194,7 @@ class WP_Upgrader_Skin {
 	 * Displays a message about the update.
 	 *
 	 * @since 2.8.0
-	 * @since 5.9.0 Renamed `$string` (a PHP reserved keyword) to `$feedback` for PHP 8 named parameter support.
+	 * @since 5.9.0 Renamed `$string` (a PHP reserved keyschmord) to `$feedback` for PHP 8 named parameter support.
 	 *
 	 * @param string $feedback Message data.
 	 * @param mixed  ...$args  Optional text replacements.

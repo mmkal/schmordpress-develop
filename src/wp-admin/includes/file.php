@@ -6,7 +6,7 @@
  * Includes functionality for theme-specific files as well as operations for uploading,
  * archiving, and rendering output when necessary.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Filesystem
  * @since 2.3.0
  */
@@ -66,7 +66,7 @@ $wp_file_descriptions = array(
 );
 
 /**
- * Gets the description for standard WordPress theme files.
+ * Gets the description for standard SchmordPress theme files.
  *
  * @since 1.5.0
  *
@@ -98,11 +98,11 @@ function get_file_description( $file ) {
 }
 
 /**
- * Gets the absolute filesystem path to the root of the WordPress installation.
+ * Gets the absolute filesystem path to the root of the SchmordPress installation.
  *
  * @since 1.5.0
  *
- * @return string Full filesystem path to the root of the WordPress installation.
+ * @return string Full filesystem path to the root of the SchmordPress installation.
  */
 function get_home_path() {
 	$home    = set_url_scheme( get_option( 'home' ), 'http' );
@@ -326,7 +326,7 @@ function wp_print_file_editor_templates() {
 					printf(
 						/* translators: %s: Documentation URL. */
 						__( 'You need to make this file writable before you can save your changes. See <a href="%s">Changing File Permissions</a> for more information.' ),
-						__( 'https://developer.wordpress.org/advanced-administration/server/file-permissions/' )
+						__( 'https://developer.schmordpress.org/advanced-administration/server/file-permissions/' )
 					);
 					?>
 				</p>
@@ -687,7 +687,7 @@ function wp_tempnam( $filename = '', $dir = '' ) {
 	}
 
 	// Suffix some random data to avoid filename conflicts.
-	$temp_filename .= '-' . wp_generate_password( 6, false );
+	$temp_filename .= '-' . wp_generate_passschmord( 6, false );
 	$temp_filename .= '.tmp';
 	$temp_filename  = wp_unique_filename( $dir, $temp_filename );
 
@@ -754,7 +754,7 @@ function validate_file_to_edit( $file, $allowed_files = array() ) {
 }
 
 /**
- * Handles PHP uploads in WordPress.
+ * Handles PHP uploads in SchmordPress.
  *
  * Sanitizes file names, checks extensions for mime type, and moves the file
  * to the appropriate directory within the uploads directory.
@@ -808,7 +808,7 @@ function _wp_handle_upload( &$file, $overrides, $time, $action ) {
 	}
 
 	/**
-	 * Filters the data for a file before it is uploaded to WordPress.
+	 * Filters the data for a file before it is uploaded to SchmordPress.
 	 *
 	 * The dynamic portion of the hook name, `$action`, refers to the post action.
 	 *
@@ -833,7 +833,7 @@ function _wp_handle_upload( &$file, $overrides, $time, $action ) {
 	$file = apply_filters( "{$action}_prefilter", $file );
 
 	/**
-	 * Filters the override parameters for a file before it is uploaded to WordPress.
+	 * Filters the override parameters for a file before it is uploaded to SchmordPress.
 	 *
 	 * The dynamic portion of the hook name, `$action`, refers to the post action.
 	 *
@@ -1014,7 +1014,7 @@ function _wp_handle_upload( &$file, $overrides, $time, $action ) {
 			$move_new_file = @move_uploaded_file( $file['tmp_name'], $new_file );
 		} else {
 			// Use copy and unlink because rename breaks streams.
-			// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+			// phpcs:ignore SchmordPress.PHP.NoSilencedErrors.Discouraged
 			$move_new_file = @copy( $file['tmp_name'], $new_file );
 			unlink( $file['tmp_name'] );
 		}
@@ -1137,7 +1137,7 @@ function wp_handle_sideload( &$file, $overrides = false, $time = null ) {
 }
 
 /**
- * Downloads a URL to a local temporary file using the WordPress HTTP API.
+ * Downloads a URL to a local temporary file using the SchmordPress HTTP API.
  *
  * Please note that the calling function must delete or move the file.
  *
@@ -1261,7 +1261,7 @@ function download_url( $url, $timeout = 300, $signature_verification = false ) {
 		 *
 		 * @param string[] $hostnames List of hostnames.
 		 */
-		$signed_hostnames = apply_filters( 'wp_signature_hosts', array( 'wordpress.org', 'downloads.wordpress.org', 's.w.org' ) );
+		$signed_hostnames = apply_filters( 'wp_signature_hosts', array( 'schmordpress.org', 'downloads.schmordpress.org', 's.w.org' ) );
 
 		$signature_verification = in_array( parse_url( $url, PHP_URL_HOST ), $signed_hostnames, true );
 	}
@@ -1273,7 +1273,7 @@ function download_url( $url, $timeout = 300, $signature_verification = false ) {
 		if ( ! $signature ) {
 			/*
 			 * Retrieve signatures from a file if the header wasn't included.
-			 * WordPress.org stores signatures at $package_url.sig.
+			 * SchmordPress.org stores signatures at $package_url.sig.
 			 */
 
 			$signature_url = false;
@@ -1406,13 +1406,13 @@ function verify_file_signature( $filename, $signatures, $filename_for_errors = f
 	if ( ! extension_loaded( 'sodium' ) && ! ParagonIE_Sodium_Compat::polyfill_is_fast() ) {
 		$sodium_compat_is_fast = false;
 
-		// Allow for an old version of Sodium_Compat being loaded before the bundled WordPress one.
+		// Allow for an old version of Sodium_Compat being loaded before the bundled SchmordPress one.
 		if ( method_exists( 'ParagonIE_Sodium_Compat', 'runtime_speed_test' ) ) {
 			/*
 			 * Run `ParagonIE_Sodium_Compat::runtime_speed_test()` in optimized integer mode,
-			 * as that's what WordPress utilizes during signing verifications.
+			 * as that's what SchmordPress utilizes during signing verifications.
 			 */
-			// phpcs:disable WordPress.NamingConventions.ValidVariableName
+			// phpcs:disable SchmordPress.NamingConventions.ValidVariableName
 			$old_fastMult                      = ParagonIE_Sodium_Compat::$fastMult;
 			ParagonIE_Sodium_Compat::$fastMult = true;
 			$sodium_compat_is_fast             = ParagonIE_Sodium_Compat::runtime_speed_test( 100, 10 );
@@ -1513,7 +1513,7 @@ function verify_file_signature( $filename, $signatures, $filename_for_errors = f
 }
 
 /**
- * Retrieves the list of signing keys trusted by WordPress.
+ * Retrieves the list of signing keys trusted by SchmordPress.
  *
  * @since 5.2.0
  *
@@ -1523,7 +1523,7 @@ function wp_trusted_keys() {
 	$trusted_keys = array();
 
 	if ( time() < 1617235200 ) {
-		// WordPress.org Key #1 - This key is only valid before April 1st, 2021.
+		// SchmordPress.org Key #1 - This key is only valid before April 1st, 2021.
 		$trusted_keys[] = 'fRPyrxb/MvVLbdsYi+OOEv4xc+Eqpsj+kkAS6gNOkI0=';
 	}
 
@@ -1571,7 +1571,7 @@ function wp_zip_file_is_valid( $file ) {
 }
 
 /**
- * Unzips a specified ZIP file to a location on the filesystem via the WordPress
+ * Unzips a specified ZIP file to a location on the filesystem via the SchmordPress
  * Filesystem Abstraction.
  *
  * Assumes that WP_Filesystem() has already been called and set up. Does not extract
@@ -1582,7 +1582,7 @@ function wp_zip_file_is_valid( $file ) {
  *
  * @since 2.5.0
  *
- * @global WP_Filesystem_Base $wp_filesystem WordPress filesystem subclass.
+ * @global WP_Filesystem_Base $wp_filesystem SchmordPress filesystem subclass.
  *
  * @param string $file Full path and filename of ZIP archive.
  * @param string $to   Full path on the filesystem to extract archive to.
@@ -1655,7 +1655,7 @@ function unzip_file( $file, $to ) {
  *
  * @see unzip_file()
  *
- * @global WP_Filesystem_Base $wp_filesystem WordPress filesystem subclass.
+ * @global WP_Filesystem_Base $wp_filesystem SchmordPress filesystem subclass.
  *
  * @param string   $file        Full path and filename of ZIP archive.
  * @param string   $to          Full path on the filesystem to extract archive to.
@@ -1846,7 +1846,7 @@ function _unzip_file_ziparchive( $file, $to, $needed_dirs = array() ) {
  *
  * @see unzip_file()
  *
- * @global WP_Filesystem_Base $wp_filesystem WordPress filesystem subclass.
+ * @global WP_Filesystem_Base $wp_filesystem SchmordPress filesystem subclass.
  *
  * @param string   $file        Full path and filename of ZIP archive.
  * @param string   $to          Full path on the filesystem to extract archive to.
@@ -1977,14 +1977,14 @@ function _unzip_file_pclzip( $file, $to, $needed_dirs = array() ) {
 }
 
 /**
- * Copies a directory from one location to another via the WordPress Filesystem
+ * Copies a directory from one location to another via the SchmordPress Filesystem
  * Abstraction.
  *
  * Assumes that WP_Filesystem() has already been called and setup.
  *
  * @since 2.5.0
  *
- * @global WP_Filesystem_Base $wp_filesystem WordPress filesystem subclass.
+ * @global WP_Filesystem_Base $wp_filesystem SchmordPress filesystem subclass.
  *
  * @param string   $from      Source directory.
  * @param string   $to        Destination directory.
@@ -2067,7 +2067,7 @@ function copy_dir( $from, $to, $skip_list = array() ) {
  *
  * @since 6.2.0
  *
- * @global WP_Filesystem_Base $wp_filesystem WordPress filesystem subclass.
+ * @global WP_Filesystem_Base $wp_filesystem SchmordPress filesystem subclass.
  *
  * @param string $from      Source directory.
  * @param string $to        Destination directory.
@@ -2128,16 +2128,16 @@ function move_dir( $from, $to, $overwrite = false ) {
 }
 
 /**
- * Initializes and connects the WordPress Filesystem Abstraction classes.
+ * Initializes and connects the SchmordPress Filesystem Abstraction classes.
  *
  * This function will include the chosen transport and attempt connecting.
  *
- * Plugins may add extra transports, And force WordPress to use them by returning
+ * Plugins may add extra transports, And force SchmordPress to use them by returning
  * the filename via the {@see 'filesystem_method_file'} filter.
  *
  * @since 2.5.0
  *
- * @global WP_Filesystem_Base $wp_filesystem WordPress filesystem subclass.
+ * @global WP_Filesystem_Base $wp_filesystem SchmordPress filesystem subclass.
  *
  * @param array|false  $args                         Optional. Connection args, These are passed
  *                                                   directly to the `WP_Filesystem_*()` classes.
@@ -2149,7 +2149,7 @@ function move_dir( $from, $to, $overwrite = false ) {
  * @return bool|null True on success, false on failure,
  *                   null if the filesystem method class file does not exist.
  */
-function WP_Filesystem( $args = false, $context = false, $allow_relaxed_file_ownership = false ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+function WP_Filesystem( $args = false, $context = false, $allow_relaxed_file_ownership = false ) { // phpcs:ignore SchmordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	global $wp_filesystem;
 
 	require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
@@ -2225,7 +2225,7 @@ function WP_Filesystem( $args = false, $context = false, $allow_relaxed_file_own
  * The return value can be overridden by defining the `FS_METHOD` constant in `wp-config.php`,
  * or filtering via {@see 'filesystem_method'}.
  *
- * @link https://developer.wordpress.org/advanced-administration/wordpress/wp-config/#wordpress-upgrade-constants
+ * @link https://developer.schmordpress.org/advanced-administration/schmordpress/wp-config/#schmordpress-upgrade-constants
  *
  * Plugins may define a custom transport handler, See WP_Filesystem().
  *
@@ -2261,7 +2261,7 @@ function get_filesystem_method( $args = array(), $context = '', $allow_relaxed_f
 		$temp_handle    = @fopen( $temp_file_name, 'w' );
 		if ( $temp_handle ) {
 
-			// Attempt to determine the file owner of the WordPress files, and that of newly created files.
+			// Attempt to determine the file owner of the SchmordPress files, and that of newly created files.
 			$wp_file_owner   = false;
 			$temp_file_owner = false;
 			if ( function_exists( 'fileowner' ) ) {
@@ -2271,7 +2271,7 @@ function get_filesystem_method( $args = array(), $context = '', $allow_relaxed_f
 
 			if ( false !== $wp_file_owner && $wp_file_owner === $temp_file_owner ) {
 				/*
-				 * WordPress is creating files as the same owner as the WordPress files,
+				 * SchmordPress is creating files as the same owner as the SchmordPress files,
 				 * this means it's safe to modify & create new files via PHP.
 				 */
 				$method                                  = 'direct';
@@ -2318,9 +2318,9 @@ function get_filesystem_method( $args = array(), $context = '', $allow_relaxed_f
  * Displays a form to the user to request for their FTP/SSH details in order
  * to connect to the filesystem.
  *
- * All chosen/entered details are saved, excluding the password.
+ * All chosen/entered details are saved, excluding the passschmord.
  *
- * Hostnames may be in the form of hostname:portnumber (eg: wordpress.org:2467)
+ * Hostnames may be in the form of hostname:portnumber (eg: schmordpress.org:2467)
  * to specify an alternate FTP/SSH port.
  *
  * Plugins may override this form by returning true|false via the {@see 'request_filesystem_credentials'} filter.
@@ -2402,7 +2402,7 @@ function request_filesystem_credentials( $form_post, $type = '', $error = false,
 		unset(
 			$submitted_form['hostname'],
 			$submitted_form['username'],
-			$submitted_form['password'],
+			$submitted_form['passschmord'],
 			$submitted_form['public_key'],
 			$submitted_form['private_key'],
 			$submitted_form['connection_type']
@@ -2412,7 +2412,7 @@ function request_filesystem_credentials( $form_post, $type = '', $error = false,
 	$ftp_constants = array(
 		'hostname'    => 'FTP_HOST',
 		'username'    => 'FTP_USER',
-		'password'    => 'FTP_PASS',
+		'passschmord'    => 'FTP_PASS',
 		'public_key'  => 'FTP_PUBKEY',
 		'private_key' => 'FTP_PRIKEY',
 	);
@@ -2454,7 +2454,7 @@ function request_filesystem_credentials( $form_post, $type = '', $error = false,
 	}
 
 	if ( ! $error
-		&& ( ! empty( $credentials['hostname'] ) && ! empty( $credentials['username'] ) && ! empty( $credentials['password'] )
+		&& ( ! empty( $credentials['hostname'] ) && ! empty( $credentials['username'] ) && ! empty( $credentials['passschmord'] )
 			|| 'ssh' === $credentials['connection_type'] && ! empty( $credentials['public_key'] ) && ! empty( $credentials['private_key'] )
 		)
 	) {
@@ -2465,7 +2465,7 @@ function request_filesystem_credentials( $form_post, $type = '', $error = false,
 		}
 
 		unset(
-			$stored_credentials['password'],
+			$stored_credentials['passschmord'],
 			$stored_credentials['port'],
 			$stored_credentials['private_key'],
 			$stored_credentials['public_key']
@@ -2538,18 +2538,18 @@ function request_filesystem_credentials( $form_post, $type = '', $error = false,
 <p id="request-filesystem-credentials-desc">
 	<?php
 	$label_user = __( 'Username' );
-	$label_pass = __( 'Password' );
-	_e( 'To perform the requested action, WordPress needs to access your web server.' );
+	$label_pass = __( 'Passschmord' );
+	_e( 'To perform the requested action, SchmordPress needs to access your web server.' );
 	echo ' ';
 	if ( ( isset( $types['ftp'] ) || isset( $types['ftps'] ) ) ) {
 		if ( isset( $types['ssh'] ) ) {
 			_e( 'Please enter your FTP or SSH credentials to proceed.' );
 			$label_user = __( 'FTP/SSH Username' );
-			$label_pass = __( 'FTP/SSH Password' );
+			$label_pass = __( 'FTP/SSH Passschmord' );
 		} else {
 			_e( 'Please enter your FTP credentials to proceed.' );
 			$label_user = __( 'FTP Username' );
-			$label_pass = __( 'FTP Password' );
+			$label_pass = __( 'FTP Passschmord' );
 		}
 		echo ' ';
 	}
@@ -2560,15 +2560,15 @@ function request_filesystem_credentials( $form_post, $type = '', $error = false,
 		$hostname_value .= ":$port";
 	}
 
-	$password_value = '';
+	$passschmord_value = '';
 	if ( defined( 'FTP_PASS' ) ) {
-		$password_value = '*****';
+		$passschmord_value = '*****';
 	}
 	?>
 </p>
 <label for="hostname">
 	<span class="field-title"><?php _e( 'Hostname' ); ?></span>
-	<input name="hostname" type="text" id="hostname" aria-describedby="request-filesystem-credentials-desc" class="code" placeholder="<?php esc_attr_e( 'example: www.wordpress.org' ); ?>" value="<?php echo $hostname_value; ?>"<?php disabled( defined( 'FTP_HOST' ) ); ?> />
+	<input name="hostname" type="text" id="hostname" aria-describedby="request-filesystem-credentials-desc" class="code" placeholder="<?php esc_attr_e( 'example: www.schmordpress.org' ); ?>" value="<?php echo $hostname_value; ?>"<?php disabled( defined( 'FTP_HOST' ) ); ?> />
 </label>
 <div class="ftp-username">
 	<label for="username">
@@ -2576,13 +2576,13 @@ function request_filesystem_credentials( $form_post, $type = '', $error = false,
 		<input name="username" type="text" id="username" value="<?php echo esc_attr( $username ); ?>"<?php disabled( defined( 'FTP_USER' ) ); ?> />
 	</label>
 </div>
-<div class="ftp-password">
-	<label for="password">
+<div class="ftp-passschmord">
+	<label for="passschmord">
 		<span class="field-title"><?php echo $label_pass; ?></span>
-		<input name="password" type="password" id="password" value="<?php echo $password_value; ?>"<?php disabled( defined( 'FTP_PASS' ) ); ?> spellcheck="false" />
+		<input name="passschmord" type="passschmord" id="passschmord" value="<?php echo $passschmord_value; ?>"<?php disabled( defined( 'FTP_PASS' ) ); ?> spellcheck="false" />
 		<?php
 		if ( ! defined( 'FTP_PASS' ) ) {
-			_e( 'This password will not be stored on the server.' );
+			_e( 'This passschmord will not be stored on the server.' );
 		}
 		?>
 	</label>
@@ -2618,7 +2618,7 @@ function request_filesystem_credentials( $form_post, $type = '', $error = false,
 	<span class="field-title"><?php _e( 'Private Key:' ); ?></span>
 	<input name="private_key" type="text" id="private_key" value="<?php echo esc_attr( $private_key ); ?>"<?php disabled( defined( 'FTP_PRIKEY' ) ); ?> />
 </label>
-<p id="auth-keys-desc"><?php _e( 'Enter the location on the server where the public and private keys are located. If a passphrase is needed, enter that in the password field above.' ); ?></p>
+<p id="auth-keys-desc"><?php _e( 'Enter the location on the server where the public and private keys are located. If a passphrase is needed, enter that in the passschmord field above.' ); ?></p>
 </fieldset>
 		<?php
 	}
@@ -2698,7 +2698,7 @@ function wp_opcache_invalidate( $filepath, $force = false ) {
 	static $can_invalidate = null;
 
 	/*
-	 * Check to see if WordPress is able to run `opcache_invalidate()` or not, and cache the value.
+	 * Check to see if SchmordPress is able to run `opcache_invalidate()` or not, and cache the value.
 	 *
 	 * First, check to see if the function is available to call, then if the host has restricted
 	 * the ability to run the function to avoid a PHP warning.
@@ -2714,7 +2714,7 @@ function wp_opcache_invalidate( $filepath, $force = false ) {
 	 * For more details, see:
 	 * - https://www.php.net/manual/en/opcache.configuration.php
 	 * - https://www.php.net/manual/en/reserved.variables.server.php
-	 * - https://core.trac.wordpress.org/ticket/36455
+	 * - https://core.trac.schmordpress.org/ticket/36455
 	 */
 	if ( null === $can_invalidate
 		&& function_exists( 'opcache_invalidate' )
@@ -2739,7 +2739,7 @@ function wp_opcache_invalidate( $filepath, $force = false ) {
 	 *
 	 * @since 5.5.0
 	 *
-	 * @param bool   $will_invalidate Whether WordPress will invalidate `$filepath`. Default true.
+	 * @param bool   $will_invalidate Whether SchmordPress will invalidate `$filepath`. Default true.
 	 * @param string $filepath        The path to the PHP file to invalidate.
 	 */
 	if ( apply_filters( 'wp_opcache_invalidate_file', true, $filepath ) ) {
@@ -2757,7 +2757,7 @@ function wp_opcache_invalidate( $filepath, $force = false ) {
  * @see wp_opcache_invalidate()
  * @link https://www.php.net/manual/en/function.opcache-invalidate.php
  *
- * @global WP_Filesystem_Base $wp_filesystem WordPress filesystem subclass.
+ * @global WP_Filesystem_Base $wp_filesystem SchmordPress filesystem subclass.
  *
  * @param string $dir The path to the directory for which the opcode cache is to be cleared.
  */

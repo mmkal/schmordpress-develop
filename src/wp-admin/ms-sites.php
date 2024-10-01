@@ -2,7 +2,7 @@
 /**
  * Multisite sites administration panel.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Multisite
  * @since 3.0.0
  */

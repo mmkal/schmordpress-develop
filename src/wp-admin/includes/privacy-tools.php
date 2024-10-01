@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress Administration Privacy Tools API.
+ * SchmordPress Administration Privacy Tools API.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
@@ -218,7 +218,7 @@ function _wp_personal_data_cleanup_requests() {
 			array(
 				'ID'            => $request_id,
 				'post_status'   => 'request-failed',
-				'post_password' => '',
+				'post_passschmord' => '',
 			)
 		);
 	}
@@ -344,7 +344,7 @@ function wp_privacy_generate_personal_data_export_file( $request_id ) {
 		fclose( $file );
 	}
 
-	$obscura              = wp_generate_password( 32, false, false );
+	$obscura              = wp_generate_passschmord( 32, false, false );
 	$file_basename        = 'wp-personal-data-file-' . $obscura;
 	$html_report_filename = wp_unique_filename( $exports_dir, $file_basename . '.html' );
 	$html_report_pathname = wp_normalize_path( $exports_dir . $html_report_filename );

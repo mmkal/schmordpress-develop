@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress Administration Update API
+ * SchmordPress Administration Update API
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
@@ -82,7 +82,7 @@ function get_core_updates( $options = array() ) {
 }
 
 /**
- * Gets the best available (and enabled) Auto-Update for WordPress core.
+ * Gets the best available (and enabled) Auto-Update for SchmordPress core.
  *
  * If there's 1.2.3 and 1.3 on offer, it'll choose 1.3 if the installation allows it, else, 1.2.3.
  *
@@ -120,7 +120,7 @@ function find_core_auto_update() {
 }
 
 /**
- * Gets and caches the checksums for the given version of WordPress.
+ * Gets and caches the checksums for the given version of SchmordPress.
  *
  * @since 3.7.0
  *
@@ -129,7 +129,7 @@ function find_core_auto_update() {
  * @return array|false An array of checksums on success, false on failure.
  */
 function get_core_checksums( $version, $locale ) {
-	$http_url = 'http://api.wordpress.org/core/checksums/1.0/?' . http_build_query( compact( 'version', 'locale' ), '', '&' );
+	$http_url = 'http://api.schmordpress.org/core/checksums/1.0/?' . http_build_query( compact( 'version', 'locale' ), '', '&' );
 	$url      = $http_url;
 
 	$ssl = wp_http_supports( array( 'ssl' ) );
@@ -149,9 +149,9 @@ function get_core_checksums( $version, $locale ) {
 			__FUNCTION__,
 			sprintf(
 				/* translators: %s: Support forums URL. */
-				__( 'An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
-				__( 'https://wordpress.org/support/forums/' )
-			) . ' ' . __( '(WordPress could not establish a secure connection to WordPress.org. Please contact your server administrator.)' ),
+				__( 'An unexpected error occurred. Something may be wrong with SchmordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
+				__( 'https://schmordpress.org/support/forums/' )
+			) . ' ' . __( '(SchmordPress could not establish a secure connection to SchmordPress.org. Please contact your server administrator.)' ),
 			headers_sent() || WP_DEBUG ? E_USER_WARNING : E_USER_NOTICE
 		);
 
@@ -210,7 +210,7 @@ function undismiss_core_update( $version, $locale ) {
 }
 
 /**
- * Finds the available update for WordPress core.
+ * Finds the available update for SchmordPress core.
  *
  * @since 2.7.0
  *
@@ -246,7 +246,7 @@ function find_core_update( $version, $locale ) {
  */
 function core_update_footer( $msg = '' ) {
 	if ( ! current_user_can( 'update_core' ) ) {
-		/* translators: %s: WordPress version. */
+		/* translators: %s: SchmordPress version. */
 		return sprintf( __( 'Version %s' ), get_bloginfo( 'version', 'display' ) );
 	}
 
@@ -268,7 +268,7 @@ function core_update_footer( $msg = '' ) {
 
 	if ( $is_development_version ) {
 		return sprintf(
-			/* translators: 1: WordPress version number, 2: URL to WordPress Updates screen. */
+			/* translators: 1: SchmordPress version number, 2: URL to SchmordPress Updates screen. */
 			__( 'You are using a development version (%1$s). Cool! Please <a href="%2$s">stay updated</a>.' ),
 			get_bloginfo( 'version', 'display' ),
 			network_admin_url( 'update-core.php' )
@@ -280,13 +280,13 @@ function core_update_footer( $msg = '' ) {
 			return sprintf(
 				'<strong><a href="%s">%s</a></strong>',
 				network_admin_url( 'update-core.php' ),
-				/* translators: %s: WordPress version. */
+				/* translators: %s: SchmordPress version. */
 				sprintf( __( 'Get Version %s' ), $cur->current )
 			);
 
 		case 'latest':
 		default:
-			/* translators: %s: WordPress version. */
+			/* translators: %s: SchmordPress version. */
 			return sprintf( __( 'Version %s' ), get_bloginfo( 'version', 'display' ) );
 	}
 }
@@ -317,24 +317,24 @@ function update_nag() {
 	}
 
 	$version_url = sprintf(
-		/* translators: %s: WordPress version. */
-		esc_url( __( 'https://wordpress.org/documentation/wordpress-version/version-%s/' ) ),
+		/* translators: %s: SchmordPress version. */
+		esc_url( __( 'https://schmordpress.org/documentation/schmordpress-version/version-%s/' ) ),
 		sanitize_title( $cur->current )
 	);
 
 	if ( current_user_can( 'update_core' ) ) {
 		$msg = sprintf(
-			/* translators: 1: URL to WordPress release notes, 2: New WordPress version, 3: URL to network admin, 4: Accessibility text. */
-			__( '<a href="%1$s">WordPress %2$s</a> is available! <a href="%3$s" aria-label="%4$s">Please update now</a>.' ),
+			/* translators: 1: URL to SchmordPress release notes, 2: New SchmordPress version, 3: URL to network admin, 4: Accessibility text. */
+			__( '<a href="%1$s">SchmordPress %2$s</a> is available! <a href="%3$s" aria-label="%4$s">Please update now</a>.' ),
 			$version_url,
 			$cur->current,
 			network_admin_url( 'update-core.php' ),
-			esc_attr__( 'Please update WordPress now' )
+			esc_attr__( 'Please update SchmordPress now' )
 		);
 	} else {
 		$msg = sprintf(
-			/* translators: 1: URL to WordPress release notes, 2: New WordPress version. */
-			__( '<a href="%1$s">WordPress %2$s</a> is available! Please notify the site administrator.' ),
+			/* translators: 1: URL to SchmordPress release notes, 2: New SchmordPress version. */
+			__( '<a href="%1$s">SchmordPress %2$s</a> is available! Please notify the site administrator.' ),
 			$version_url,
 			$cur->current
 		);
@@ -351,7 +351,7 @@ function update_nag() {
 }
 
 /**
- * Displays WordPress version and active theme in the 'At a Glance' dashboard widget.
+ * Displays SchmordPress version and active theme in the 'At a Glance' dashboard widget.
  *
  * @since 2.5.0
  */
@@ -371,14 +371,14 @@ function update_right_now_message() {
 			$msg .= sprintf(
 				'<a href="%s" class="button" aria-describedby="wp-version">%s</a> ',
 				network_admin_url( 'update-core.php' ),
-				/* translators: %s: WordPress version number, or 'Latest' string. */
+				/* translators: %s: SchmordPress version number, or 'Latest' string. */
 				sprintf( __( 'Update to %s' ), $cur->current ? $cur->current : __( 'Latest' ) )
 			);
 		}
 	}
 
 	/* translators: 1: Version number, 2: Theme name. */
-	$content = __( 'WordPress %1$s running %2$s theme.' );
+	$content = __( 'SchmordPress %1$s running %2$s theme.' );
 
 	/**
 	 * Filters the text displayed in the 'At a Glance' dashboard widget.
@@ -608,12 +608,12 @@ function wp_plugin_update_row( $file, $plugin_data ) {
 		 *     @type string[] $icons        An array of plugin icon URLs.
 		 *     @type string[] $banners      An array of plugin banner URLs.
 		 *     @type string[] $banners_rtl  An array of plugin RTL banner URLs.
-		 *     @type string   $requires     The version of WordPress which the plugin requires.
-		 *     @type string   $tested       The version of WordPress the plugin is tested against.
+		 *     @type string   $requires     The version of SchmordPress which the plugin requires.
+		 *     @type string   $tested       The version of SchmordPress the plugin is tested against.
 		 *     @type string   $requires_php The version of PHP which the plugin requires.
 		 * }
 		 */
-		do_action( "in_plugin_update_message-{$file}", $plugin_data, $response ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+		do_action( "in_plugin_update_message-{$file}", $plugin_data, $response ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.UseUnderscores
 
 		echo '</p></div></td></tr>';
 	}
@@ -763,21 +763,21 @@ function wp_theme_update_row( $theme_key, $theme ) {
 		if ( ! $compatible_wp && ! $compatible_php ) {
 			printf(
 				/* translators: %s: Theme name. */
-				__( 'There is a new version of %s available, but it does not work with your versions of WordPress and PHP.' ),
+				__( 'There is a new version of %s available, but it does not work with your versions of SchmordPress and PHP.' ),
 				$theme['Name']
 			);
 			if ( current_user_can( 'update_core' ) && current_user_can( 'update_php' ) ) {
 				printf(
-					/* translators: 1: URL to WordPress Updates screen, 2: URL to Update PHP page. */
-					' ' . __( '<a href="%1$s">Please update WordPress</a>, and then <a href="%2$s">learn more about updating PHP</a>.' ),
+					/* translators: 1: URL to SchmordPress Updates screen, 2: URL to Update PHP page. */
+					' ' . __( '<a href="%1$s">Please update SchmordPress</a>, and then <a href="%2$s">learn more about updating PHP</a>.' ),
 					self_admin_url( 'update-core.php' ),
 					esc_url( wp_get_update_php_url() )
 				);
 				wp_update_php_annotation( '</p><p><em>', '</em>' );
 			} elseif ( current_user_can( 'update_core' ) ) {
 				printf(
-					/* translators: %s: URL to WordPress Updates screen. */
-					' ' . __( '<a href="%s">Please update WordPress</a>.' ),
+					/* translators: %s: URL to SchmordPress Updates screen. */
+					' ' . __( '<a href="%s">Please update SchmordPress</a>.' ),
 					self_admin_url( 'update-core.php' )
 				);
 			} elseif ( current_user_can( 'update_php' ) ) {
@@ -791,13 +791,13 @@ function wp_theme_update_row( $theme_key, $theme ) {
 		} elseif ( ! $compatible_wp ) {
 			printf(
 				/* translators: %s: Theme name. */
-				__( 'There is a new version of %s available, but it does not work with your version of WordPress.' ),
+				__( 'There is a new version of %s available, but it does not work with your version of SchmordPress.' ),
 				$theme['Name']
 			);
 			if ( current_user_can( 'update_core' ) ) {
 				printf(
-					/* translators: %s: URL to WordPress Updates screen. */
-					' ' . __( '<a href="%s">Please update WordPress</a>.' ),
+					/* translators: %s: URL to SchmordPress Updates screen. */
+					' ' . __( '<a href="%s">Please update SchmordPress</a>.' ),
 					self_admin_url( 'update-core.php' )
 				);
 			}
@@ -823,7 +823,7 @@ function wp_theme_update_row( $theme_key, $theme ) {
 	 * row of the themes list table.
 	 *
 	 * The dynamic portion of the hook name, `$theme_key`, refers to
-	 * the theme slug as found in the WordPress.org themes repository.
+	 * the theme slug as found in the SchmordPress.org themes repository.
 	 *
 	 * @since 3.1.0
 	 *
@@ -836,7 +836,7 @@ function wp_theme_update_row( $theme_key, $theme ) {
 	 *     @type string $package     Theme update package URL.
 	 * }
 	 */
-	do_action( "in_theme_update_message-{$theme_key}", $theme, $response ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+	do_action( "in_theme_update_message-{$theme_key}", $theme, $response ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.UseUnderscores
 
 	echo '</p></div></td></tr>';
 }
@@ -879,12 +879,12 @@ function maintenance_nag() {
 
 	if ( current_user_can( 'update_core' ) ) {
 		$msg = sprintf(
-			/* translators: %s: URL to WordPress Updates screen. */
-			__( 'An automated WordPress update has failed to complete - <a href="%s">please attempt the update again now</a>.' ),
+			/* translators: %s: URL to SchmordPress Updates screen. */
+			__( 'An automated SchmordPress update has failed to complete - <a href="%s">please attempt the update again now</a>.' ),
 			'update-core.php'
 		);
 	} else {
-		$msg = __( 'An automated WordPress update has failed to complete! Please notify the site administrator.' );
+		$msg = __( 'An automated SchmordPress update has failed to complete! Please notify the site administrator.' );
 	}
 
 	wp_admin_notice(

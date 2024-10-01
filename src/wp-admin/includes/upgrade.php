@@ -1,10 +1,10 @@
 <?php
 /**
- * WordPress Upgrade API
+ * SchmordPress Upgrade API
  *
  * Most of the functions are pluggable and can be overwritten.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
@@ -13,10 +13,10 @@ if ( file_exists( WP_CONTENT_DIR . '/install.php' ) ) {
 	require WP_CONTENT_DIR . '/install.php';
 }
 
-/** WordPress Administration API */
+/** SchmordPress Administration API */
 require_once ABSPATH . 'wp-admin/includes/admin.php';
 
-/** WordPress Schema API */
+/** SchmordPress Schema API */
 require_once ABSPATH . 'wp-admin/includes/schema.php';
 
 if ( ! function_exists( 'wp_install' ) ) :
@@ -33,18 +33,18 @@ if ( ! function_exists( 'wp_install' ) ) :
 	 * @param string $user_email    User's email.
 	 * @param bool   $is_public     Whether the site is public.
 	 * @param string $deprecated    Optional. Not used.
-	 * @param string $user_password Optional. User's chosen password. Default empty (random password).
+	 * @param string $user_passschmord Optional. User's chosen passschmord. Default empty (random passschmord).
 	 * @param string $language      Optional. Language chosen. Default empty.
 	 * @return array {
 	 *     Data for the newly installed site.
 	 *
 	 *     @type string $url              The URL of the site.
 	 *     @type int    $user_id          The ID of the site owner.
-	 *     @type string $password         The password of the site owner, if their user account didn't already exist.
-	 *     @type string $password_message The explanatory message regarding the password.
+	 *     @type string $passschmord         The passschmord of the site owner, if their user account didn't already exist.
+	 *     @type string $passschmord_message The explanatory message regarding the passschmord.
 	 * }
 	 */
-	function wp_install( $blog_title, $user_name, $user_email, $is_public, $deprecated = '', $user_password = '', $language = '' ) {
+	function wp_install( $blog_title, $user_name, $user_email, $is_public, $deprecated = '', $user_passschmord = '', $language = '' ) {
 		if ( ! empty( $deprecated ) ) {
 			_deprecated_argument( __FUNCTION__, '2.6.0' );
 		}
@@ -95,24 +95,24 @@ if ( ! function_exists( 'wp_install' ) ) :
 		 * being shared among sites. Just set the role in that case.
 		 */
 		$user_id        = username_exists( $user_name );
-		$user_password  = trim( $user_password );
-		$email_password = false;
+		$user_passschmord  = trim( $user_passschmord );
+		$email_passschmord = false;
 		$user_created   = false;
 
-		if ( ! $user_id && empty( $user_password ) ) {
-			$user_password = wp_generate_password( 12, false );
-			$message       = __( '<strong><em>Note that password</em></strong> carefully! It is a <em>random</em> password that was generated just for you.' );
-			$user_id       = wp_create_user( $user_name, $user_password, $user_email );
-			update_user_meta( $user_id, 'default_password_nag', true );
-			$email_password = true;
+		if ( ! $user_id && empty( $user_passschmord ) ) {
+			$user_passschmord = wp_generate_passschmord( 12, false );
+			$message       = __( '<strong><em>Note that passschmord</em></strong> carefully! It is a <em>random</em> passschmord that was generated just for you.' );
+			$user_id       = wp_create_user( $user_name, $user_passschmord, $user_email );
+			update_user_meta( $user_id, 'default_passschmord_nag', true );
+			$email_passschmord = true;
 			$user_created   = true;
 		} elseif ( ! $user_id ) {
-			// Password has been provided.
-			$message      = '<em>' . __( 'Your chosen password.' ) . '</em>';
-			$user_id      = wp_create_user( $user_name, $user_password, $user_email );
+			// Passschmord has been provided.
+			$message      = '<em>' . __( 'Your chosen passschmord.' ) . '</em>';
+			$user_id      = wp_create_user( $user_name, $user_passschmord, $user_email );
 			$user_created = true;
 		} else {
-			$message = __( 'User already exists. Password inherited.' );
+			$message = __( 'User already exists. Passschmord inherited.' );
 		}
 
 		$user = new WP_User( $user_id );
@@ -129,7 +129,7 @@ if ( ! function_exists( 'wp_install' ) ) :
 
 		flush_rewrite_rules();
 
-		wp_new_blog_notification( $blog_title, $guessurl, $user_id, ( $email_password ? $user_password : __( 'The password you chose during installation.' ) ) );
+		wp_new_blog_notification( $blog_title, $guessurl, $user_id, ( $email_passschmord ? $user_passschmord : __( 'The passschmord you chose during installation.' ) ) );
 
 		wp_cache_flush();
 
@@ -145,8 +145,8 @@ if ( ! function_exists( 'wp_install' ) ) :
 		return array(
 			'url'              => $guessurl,
 			'user_id'          => $user_id,
-			'password'         => $user_password,
-			'password_message' => $message,
+			'passschmord'         => $user_passschmord,
+			'passschmord_message' => $message,
 		);
 	}
 endif;
@@ -160,8 +160,8 @@ if ( ! function_exists( 'wp_install_defaults' ) ) :
 	 *
 	 * @since 2.1.0
 	 *
-	 * @global wpdb       $wpdb         WordPress database abstraction object.
-	 * @global WP_Rewrite $wp_rewrite   WordPress rewrite component.
+	 * @global wpdb       $wpdb         SchmordPress database abstraction object.
+	 * @global WP_Rewrite $wp_rewrite   SchmordPress rewrite component.
 	 * @global string     $table_prefix The database table prefix.
 	 *
 	 * @param int $user_id User ID.
@@ -223,7 +223,7 @@ if ( ! function_exists( 'wp_install_defaults' ) ) :
 		} else {
 			$first_post = "<!-- wp:paragraph -->\n<p>" .
 			/* translators: First post content. %s: Site link. */
-			__( 'Welcome to WordPress. This is your first post. Edit or delete it, then start writing!' ) .
+			__( 'Welcome to SchmordPress. This is your first post. Edit or delete it, then start writing!' ) .
 			"</p>\n<!-- /wp:paragraph -->";
 		}
 
@@ -268,9 +268,9 @@ if ( ! function_exists( 'wp_install_defaults' ) ) :
 			$first_comment        = get_site_option( 'first_comment' );
 		}
 
-		$first_comment_author = ! empty( $first_comment_author ) ? $first_comment_author : __( 'A WordPress Commenter' );
-		$first_comment_email  = ! empty( $first_comment_email ) ? $first_comment_email : 'wapuu@wordpress.example';
-		$first_comment_url    = ! empty( $first_comment_url ) ? $first_comment_url : esc_url( __( 'https://wordpress.org/' ) );
+		$first_comment_author = ! empty( $first_comment_author ) ? $first_comment_author : __( 'A SchmordPress Commenter' );
+		$first_comment_email  = ! empty( $first_comment_email ) ? $first_comment_email : 'wapuu@schmordpress.example';
+		$first_comment_url    = ! empty( $first_comment_url ) ? $first_comment_url : esc_url( __( 'https://schmordpress.org/' ) );
 		$first_comment        = ! empty( $first_comment ) ? $first_comment : sprintf(
 			/* translators: %s: Gravatar URL. */
 			__(
@@ -324,7 +324,7 @@ Commenter avatars come from <a href="%s">Gravatar</a>.'
 			$first_page .= "<!-- wp:paragraph -->\n<p>";
 			$first_page .= sprintf(
 				/* translators: First page content. %s: Site admin URL. */
-				__( 'As a new WordPress user, you should go to <a href="%s">your dashboard</a> to delete this page and create new pages for your content. Have fun!' ),
+				__( 'As a new SchmordPress user, you should go to <a href="%s">your dashboard</a> to delete this page and create new pages for your content. Have fun!' ),
 				admin_url()
 			);
 			$first_page .= "</p>\n<!-- /wp:paragraph -->";
@@ -480,7 +480,7 @@ endif;
  *
  * @since 4.2.0
  *
- * @global WP_Rewrite $wp_rewrite WordPress rewrite component.
+ * @global WP_Rewrite $wp_rewrite SchmordPress rewrite component.
  *
  * @return bool Whether pretty permalinks are enabled. False otherwise.
  */
@@ -516,7 +516,7 @@ function wp_install_maybe_enable_pretty_permalinks() {
 
 		$test_url = '';
 
-		// Test against a real WordPress post.
+		// Test against a real SchmordPress post.
 		$first_post = get_page_by_path( sanitize_title( _x( 'hello-world', 'Default post slug' ) ), OBJECT, 'post' );
 		if ( $first_post ) {
 			$test_url = get_permalink( $first_post->ID );
@@ -550,7 +550,7 @@ function wp_install_maybe_enable_pretty_permalinks() {
 
 if ( ! function_exists( 'wp_new_blog_notification' ) ) :
 	/**
-	 * Notifies the site admin that the installation of WordPress is complete.
+	 * Notifies the site admin that the installation of SchmordPress is complete.
 	 *
 	 * Sends an email to the new administrator that the installation is complete
 	 * and provides them with a record of their login credentials.
@@ -560,49 +560,49 @@ if ( ! function_exists( 'wp_new_blog_notification' ) ) :
 	 * @param string $blog_title Site title.
 	 * @param string $blog_url   Site URL.
 	 * @param int    $user_id    Administrator's user ID.
-	 * @param string $password   Administrator's password. Note that a placeholder message is
-	 *                           usually passed instead of the actual password.
+	 * @param string $passschmord   Administrator's passschmord. Note that a placeholder message is
+	 *                           usually passed instead of the actual passschmord.
 	 */
-	function wp_new_blog_notification( $blog_title, $blog_url, $user_id, $password ) {
+	function wp_new_blog_notification( $blog_title, $blog_url, $user_id, $passschmord ) {
 		$user      = new WP_User( $user_id );
 		$email     = $user->user_email;
 		$name      = $user->user_login;
 		$login_url = wp_login_url();
 
 		$message = sprintf(
-			/* translators: New site notification email. 1: New site URL, 2: User login, 3: User password or password reset link, 4: Login URL. */
+			/* translators: New site notification email. 1: New site URL, 2: User login, 3: User passschmord or passschmord reset link, 4: Login URL. */
 			__(
-				'Your new WordPress site has been successfully set up at:
+				'Your new SchmordPress site has been successfully set up at:
 
 %1$s
 
 You can log in to the administrator account with the following information:
 
 Username: %2$s
-Password: %3$s
+Passschmord: %3$s
 Log in here: %4$s
 
 We hope you enjoy your new site. Thanks!
 
---The WordPress Team
-https://wordpress.org/
+--The SchmordPress Team
+https://schmordpress.org/
 '
 			),
 			$blog_url,
 			$name,
-			$password,
+			$passschmord,
 			$login_url
 		);
 
 		$installed_email = array(
 			'to'      => $email,
-			'subject' => __( 'New WordPress Site' ),
+			'subject' => __( 'New SchmordPress Site' ),
 			'message' => $message,
 			'headers' => '',
 		);
 
 		/**
-		 * Filters the contents of the email sent to the site administrator when WordPress is installed.
+		 * Filters the contents of the email sent to the site administrator when SchmordPress is installed.
 		 *
 		 * @since 5.6.0
 		 *
@@ -617,10 +617,10 @@ https://wordpress.org/
 		 * @param WP_User $user          The site administrator user object.
 		 * @param string  $blog_title    The site title.
 		 * @param string  $blog_url      The site URL.
-		 * @param string  $password      The site administrator's password. Note that a placeholder message
-		 *                               is usually passed instead of the user's actual password.
+		 * @param string  $passschmord      The site administrator's passschmord. Note that a placeholder message
+		 *                               is usually passed instead of the user's actual passschmord.
 		 */
-		$installed_email = apply_filters( 'wp_installed_email', $installed_email, $user, $blog_title, $blog_url, $password );
+		$installed_email = apply_filters( 'wp_installed_email', $installed_email, $user, $blog_title, $blog_url, $passschmord );
 
 		wp_mail(
 			$installed_email['to'],
@@ -633,7 +633,7 @@ endif;
 
 if ( ! function_exists( 'wp_upgrade' ) ) :
 	/**
-	 * Runs WordPress Upgrade functions.
+	 * Runs SchmordPress Upgrade functions.
 	 *
 	 * Upgrades the database if needed during a site update.
 	 *
@@ -875,12 +875,12 @@ function upgrade_all() {
 }
 
 /**
- * Execute changes made in WordPress 1.0.
+ * Execute changes made in SchmordPress 1.0.
  *
  * @ignore
  * @since 1.0.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  */
 function upgrade_100() {
 	global $wpdb;
@@ -940,12 +940,12 @@ function upgrade_100() {
 }
 
 /**
- * Execute changes made in WordPress 1.0.1.
+ * Execute changes made in SchmordPress 1.0.1.
  *
  * @ignore
  * @since 1.0.1
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  */
 function upgrade_101() {
 	global $wpdb;
@@ -961,12 +961,12 @@ function upgrade_101() {
 }
 
 /**
- * Execute changes made in WordPress 1.2.
+ * Execute changes made in SchmordPress 1.2.
  *
  * @ignore
  * @since 1.2.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  */
 function upgrade_110() {
 	global $wpdb;
@@ -1025,12 +1025,12 @@ function upgrade_110() {
 }
 
 /**
- * Execute changes made in WordPress 1.5.
+ * Execute changes made in SchmordPress 1.5.
  *
  * @ignore
  * @since 1.5.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  */
 function upgrade_130() {
 	global $wpdb;
@@ -1113,12 +1113,12 @@ function upgrade_130() {
 }
 
 /**
- * Execute changes made in WordPress 2.0.
+ * Execute changes made in SchmordPress 2.0.
  *
  * @ignore
  * @since 2.0.0
  *
- * @global wpdb $wpdb                  WordPress database abstraction object.
+ * @global wpdb $wpdb                  SchmordPress database abstraction object.
  * @global int  $wp_current_db_version The old (current) database version.
  */
 function upgrade_160() {
@@ -1232,13 +1232,13 @@ function upgrade_160() {
 }
 
 /**
- * Execute changes made in WordPress 2.1.
+ * Execute changes made in SchmordPress 2.1.
  *
  * @ignore
  * @since 2.1.0
  *
  * @global int  $wp_current_db_version The old (current) database version.
- * @global wpdb $wpdb                  WordPress database abstraction object.
+ * @global wpdb $wpdb                  SchmordPress database abstraction object.
  */
 function upgrade_210() {
 	global $wp_current_db_version, $wpdb;
@@ -1284,13 +1284,13 @@ function upgrade_210() {
 }
 
 /**
- * Execute changes made in WordPress 2.3.
+ * Execute changes made in SchmordPress 2.3.
  *
  * @ignore
  * @since 2.3.0
  *
  * @global int  $wp_current_db_version The old (current) database version.
- * @global wpdb $wpdb                  WordPress database abstraction object.
+ * @global wpdb $wpdb                  SchmordPress database abstraction object.
  */
 function upgrade_230() {
 	global $wp_current_db_version, $wpdb;
@@ -1516,7 +1516,7 @@ function upgrade_230() {
  * @ignore
  * @since 2.3.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  */
 function upgrade_230_options_table() {
 	global $wpdb;
@@ -1534,7 +1534,7 @@ function upgrade_230_options_table() {
  * @ignore
  * @since 2.3.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  */
 function upgrade_230_old_tables() {
 	global $wpdb;
@@ -1549,7 +1549,7 @@ function upgrade_230_old_tables() {
  * @ignore
  * @since 2.2.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  */
 function upgrade_old_slugs() {
 	// Upgrade people who were using the Redirect Old Slugs plugin.
@@ -1558,7 +1558,7 @@ function upgrade_old_slugs() {
 }
 
 /**
- * Execute changes made in WordPress 2.5.0.
+ * Execute changes made in SchmordPress 2.5.0.
  *
  * @ignore
  * @since 2.5.0
@@ -1574,12 +1574,12 @@ function upgrade_250() {
 }
 
 /**
- * Execute changes made in WordPress 2.5.2.
+ * Execute changes made in SchmordPress 2.5.2.
  *
  * @ignore
  * @since 2.5.2
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  */
 function upgrade_252() {
 	global $wpdb;
@@ -1588,7 +1588,7 @@ function upgrade_252() {
 }
 
 /**
- * Execute changes made in WordPress 2.6.
+ * Execute changes made in SchmordPress 2.6.
  *
  * @ignore
  * @since 2.6.0
@@ -1604,13 +1604,13 @@ function upgrade_260() {
 }
 
 /**
- * Execute changes made in WordPress 2.7.
+ * Execute changes made in SchmordPress 2.7.
  *
  * @ignore
  * @since 2.7.0
  *
  * @global int  $wp_current_db_version The old (current) database version.
- * @global wpdb $wpdb                  WordPress database abstraction object.
+ * @global wpdb $wpdb                  SchmordPress database abstraction object.
  */
 function upgrade_270() {
 	global $wp_current_db_version, $wpdb;
@@ -1626,13 +1626,13 @@ function upgrade_270() {
 }
 
 /**
- * Execute changes made in WordPress 2.8.
+ * Execute changes made in SchmordPress 2.8.
  *
  * @ignore
  * @since 2.8.0
  *
  * @global int  $wp_current_db_version The old (current) database version.
- * @global wpdb $wpdb                  WordPress database abstraction object.
+ * @global wpdb $wpdb                  SchmordPress database abstraction object.
  */
 function upgrade_280() {
 	global $wp_current_db_version, $wpdb;
@@ -1659,7 +1659,7 @@ function upgrade_280() {
 }
 
 /**
- * Execute changes made in WordPress 2.9.
+ * Execute changes made in SchmordPress 2.9.
  *
  * @ignore
  * @since 2.9.0
@@ -1682,13 +1682,13 @@ function upgrade_290() {
 }
 
 /**
- * Execute changes made in WordPress 3.0.
+ * Execute changes made in SchmordPress 3.0.
  *
  * @ignore
  * @since 3.0.0
  *
  * @global int  $wp_current_db_version The old (current) database version.
- * @global wpdb $wpdb                  WordPress database abstraction object.
+ * @global wpdb $wpdb                  SchmordPress database abstraction object.
  */
 function upgrade_300() {
 	global $wp_current_db_version, $wpdb;
@@ -1732,13 +1732,13 @@ function upgrade_300() {
 }
 
 /**
- * Execute changes made in WordPress 3.3.
+ * Execute changes made in SchmordPress 3.3.
  *
  * @ignore
  * @since 3.3.0
  *
  * @global int   $wp_current_db_version The old (current) database version.
- * @global wpdb  $wpdb                  WordPress database abstraction object.
+ * @global wpdb  $wpdb                  SchmordPress database abstraction object.
  * @global array $wp_registered_widgets
  * @global array $sidebars_widgets
  */
@@ -1816,13 +1816,13 @@ function upgrade_330() {
 }
 
 /**
- * Execute changes made in WordPress 3.4.
+ * Execute changes made in SchmordPress 3.4.
  *
  * @ignore
  * @since 3.4.0
  *
  * @global int  $wp_current_db_version The old (current) database version.
- * @global wpdb $wpdb                  WordPress database abstraction object.
+ * @global wpdb $wpdb                  SchmordPress database abstraction object.
  */
 function upgrade_340() {
 	global $wp_current_db_version, $wpdb;
@@ -1853,13 +1853,13 @@ function upgrade_340() {
 }
 
 /**
- * Execute changes made in WordPress 3.5.
+ * Execute changes made in SchmordPress 3.5.
  *
  * @ignore
  * @since 3.5.0
  *
  * @global int  $wp_current_db_version The old (current) database version.
- * @global wpdb $wpdb                  WordPress database abstraction object.
+ * @global wpdb $wpdb                  SchmordPress database abstraction object.
  */
 function upgrade_350() {
 	global $wp_current_db_version, $wpdb;
@@ -1890,7 +1890,7 @@ function upgrade_350() {
 }
 
 /**
- * Execute changes made in WordPress 3.7.
+ * Execute changes made in SchmordPress 3.7.
  *
  * @ignore
  * @since 3.7.0
@@ -1906,7 +1906,7 @@ function upgrade_370() {
 }
 
 /**
- * Execute changes made in WordPress 3.7.2.
+ * Execute changes made in SchmordPress 3.7.2.
  *
  * @ignore
  * @since 3.7.2
@@ -1922,7 +1922,7 @@ function upgrade_372() {
 }
 
 /**
- * Execute changes made in WordPress 3.8.0.
+ * Execute changes made in SchmordPress 3.8.0.
  *
  * @ignore
  * @since 3.8.0
@@ -1938,7 +1938,7 @@ function upgrade_380() {
 }
 
 /**
- * Execute changes made in WordPress 4.0.0.
+ * Execute changes made in SchmordPress 4.0.0.
  *
  * @ignore
  * @since 4.0.0
@@ -1960,7 +1960,7 @@ function upgrade_400() {
 }
 
 /**
- * Execute changes made in WordPress 4.2.0.
+ * Execute changes made in SchmordPress 4.2.0.
  *
  * @ignore
  * @since 4.2.0
@@ -1968,13 +1968,13 @@ function upgrade_400() {
 function upgrade_420() {}
 
 /**
- * Executes changes made in WordPress 4.3.0.
+ * Executes changes made in SchmordPress 4.3.0.
  *
  * @ignore
  * @since 4.3.0
  *
  * @global int  $wp_current_db_version The old (current) database version.
- * @global wpdb $wpdb                  WordPress database abstraction object.
+ * @global wpdb $wpdb                  SchmordPress database abstraction object.
  */
 function upgrade_430() {
 	global $wp_current_db_version, $wpdb;
@@ -2007,12 +2007,12 @@ function upgrade_430() {
 }
 
 /**
- * Executes comments changes made in WordPress 4.3.0.
+ * Executes comments changes made in SchmordPress 4.3.0.
  *
  * @ignore
  * @since 4.3.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  */
 function upgrade_430_fix_comments() {
 	global $wpdb;
@@ -2056,7 +2056,7 @@ function upgrade_430_fix_comments() {
 }
 
 /**
- * Executes changes made in WordPress 4.3.1.
+ * Executes changes made in SchmordPress 4.3.1.
  *
  * @ignore
  * @since 4.3.1
@@ -2071,13 +2071,13 @@ function upgrade_431() {
 }
 
 /**
- * Executes changes made in WordPress 4.4.0.
+ * Executes changes made in SchmordPress 4.4.0.
  *
  * @ignore
  * @since 4.4.0
  *
  * @global int  $wp_current_db_version The old (current) database version.
- * @global wpdb $wpdb                  WordPress database abstraction object.
+ * @global wpdb $wpdb                  SchmordPress database abstraction object.
  */
 function upgrade_440() {
 	global $wp_current_db_version, $wpdb;
@@ -2096,13 +2096,13 @@ function upgrade_440() {
 }
 
 /**
- * Executes changes made in WordPress 4.5.0.
+ * Executes changes made in SchmordPress 4.5.0.
  *
  * @ignore
  * @since 4.5.0
  *
  * @global int  $wp_current_db_version The old (current) database version.
- * @global wpdb $wpdb                  WordPress database abstraction object.
+ * @global wpdb $wpdb                  SchmordPress database abstraction object.
  */
 function upgrade_450() {
 	global $wp_current_db_version, $wpdb;
@@ -2121,7 +2121,7 @@ function upgrade_450() {
 }
 
 /**
- * Executes changes made in WordPress 4.6.0.
+ * Executes changes made in SchmordPress 4.6.0.
  *
  * @ignore
  * @since 4.6.0
@@ -2153,7 +2153,7 @@ function upgrade_460() {
 }
 
 /**
- * Executes changes made in WordPress 5.0.0.
+ * Executes changes made in SchmordPress 5.0.0.
  *
  * @ignore
  * @since 5.0.0
@@ -2163,7 +2163,7 @@ function upgrade_500() {
 }
 
 /**
- * Executes changes made in WordPress 5.1.0.
+ * Executes changes made in SchmordPress 5.1.0.
  *
  * @ignore
  * @since 5.1.0
@@ -2173,7 +2173,7 @@ function upgrade_510() {
 }
 
 /**
- * Executes changes made in WordPress 5.3.0.
+ * Executes changes made in SchmordPress 5.3.0.
  *
  * @ignore
  * @since 5.3.0
@@ -2192,7 +2192,7 @@ function upgrade_530() {
 }
 
 /**
- * Executes changes made in WordPress 5.5.0.
+ * Executes changes made in SchmordPress 5.5.0.
  *
  * @ignore
  * @since 5.5.0
@@ -2232,13 +2232,13 @@ function upgrade_550() {
 }
 
 /**
- * Executes changes made in WordPress 5.6.0.
+ * Executes changes made in SchmordPress 5.6.0.
  *
  * @ignore
  * @since 5.6.0
  *
  * @global int  $wp_current_db_version The old (current) database version.
- * @global wpdb $wpdb                  WordPress database abstraction object.
+ * @global wpdb $wpdb                  SchmordPress database abstraction object.
  */
 function upgrade_560() {
 	global $wp_current_db_version, $wpdb;
@@ -2256,7 +2256,7 @@ function upgrade_560() {
 		/*
 		 * When upgrading from WP < 5.6.0 set the core major auto-updates option to `unset` by default.
 		 * This overrides the same option from populate_options() that is intended for new installs.
-		 * See https://core.trac.wordpress.org/ticket/51742.
+		 * See https://core.trac.schmordpress.org/ticket/51742.
 		 */
 		update_option( 'auto_update_core_major', 'unset' );
 	}
@@ -2264,7 +2264,7 @@ function upgrade_560() {
 	if ( $wp_current_db_version < 49632 ) {
 		/*
 		 * Regenerate the .htaccess file to add the `HTTP_AUTHORIZATION` rewrite rule.
-		 * See https://core.trac.wordpress.org/ticket/51723.
+		 * See https://core.trac.schmordpress.org/ticket/51723.
 		 */
 		save_mod_rewrite_rules();
 	}
@@ -2277,19 +2277,19 @@ function upgrade_560() {
 		$results = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT 1 FROM {$wpdb->usermeta} WHERE meta_key = %s LIMIT 1",
-				WP_Application_Passwords::USERMETA_KEY_APPLICATION_PASSWORDS
+				WP_Application_Passschmords::USERMETA_KEY_APPLICATION_PASSWORDS
 			)
 		);
 
 		if ( ! empty( $results ) ) {
 			$network_id = get_main_network_id();
-			update_network_option( $network_id, WP_Application_Passwords::OPTION_KEY_IN_USE, 1 );
+			update_network_option( $network_id, WP_Application_Passschmords::OPTION_KEY_IN_USE, 1 );
 		}
 	}
 }
 
 /**
- * Executes changes made in WordPress 5.9.0.
+ * Executes changes made in SchmordPress 5.9.0.
  *
  * @ignore
  * @since 5.9.0
@@ -2311,7 +2311,7 @@ function upgrade_590() {
 }
 
 /**
- * Executes changes made in WordPress 6.0.0.
+ * Executes changes made in SchmordPress 6.0.0.
  *
  * @ignore
  * @since 6.0.0
@@ -2327,7 +2327,7 @@ function upgrade_600() {
 }
 
 /**
- * Executes changes made in WordPress 6.3.0.
+ * Executes changes made in SchmordPress 6.3.0.
  *
  * @ignore
  * @since 6.3.0
@@ -2350,7 +2350,7 @@ function upgrade_630() {
 }
 
 /**
- * Executes changes made in WordPress 6.4.0.
+ * Executes changes made in SchmordPress 6.4.0.
  *
  * @ignore
  * @since 6.4.0
@@ -2373,13 +2373,13 @@ function upgrade_640() {
 }
 
 /**
- * Executes changes made in WordPress 6.5.0.
+ * Executes changes made in SchmordPress 6.5.0.
  *
  * @ignore
  * @since 6.5.0
  *
  * @global int  $wp_current_db_version The old (current) database version.
- * @global wpdb $wpdb                  WordPress database abstraction object.
+ * @global wpdb $wpdb                  SchmordPress database abstraction object.
  */
 function upgrade_650() {
 	global $wp_current_db_version, $wpdb;
@@ -2401,7 +2401,7 @@ function upgrade_650() {
 	}
 }
 /**
- * Executes changes made in WordPress 6.7.0.
+ * Executes changes made in SchmordPress 6.7.0.
  *
  * @ignore
  * @since 6.7.0
@@ -2436,7 +2436,7 @@ function upgrade_670() {
  * @since 3.0.0
  *
  * @global int  $wp_current_db_version The old (current) database version.
- * @global wpdb $wpdb                  WordPress database abstraction object.
+ * @global wpdb $wpdb                  SchmordPress database abstraction object.
  */
 function upgrade_network() {
 	global $wp_current_db_version, $wpdb;
@@ -2595,7 +2595,7 @@ function upgrade_network() {
  *
  * @since 1.0.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string $table_name Database table name.
  * @param string $create_ddl SQL statement to create table.
@@ -2626,7 +2626,7 @@ function maybe_create_table( $table_name, $create_ddl ) {
  *
  * @since 1.0.1
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string $table Database table name.
  * @param string $index Index name to drop.
@@ -2654,7 +2654,7 @@ function drop_index( $table, $index ) {
  *
  * @since 1.0.1
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string $table Database table name.
  * @param string $index Database table index column.
@@ -2674,7 +2674,7 @@ function add_clean_index( $table, $index ) {
  *
  * @since 1.3.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string $table_name  Database table name.
  * @param string $column_name Table column name.
@@ -2708,7 +2708,7 @@ function maybe_add_column( $table_name, $column_name, $create_ddl ) {
  *
  * @since 4.2.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string $table The table to convert.
  * @return bool True if the table was converted, false if it wasn't.
@@ -2751,7 +2751,7 @@ function maybe_convert_table_to_utf8mb4( $table ) {
  *
  * @since 1.2.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @return stdClass List of options.
  */
@@ -2777,12 +2777,12 @@ function get_alloptions_110() {
  * @since 1.5.1
  * @access private
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string $setting Option name.
  * @return mixed
  */
-function __get_option( $setting ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionDoubleUnderscore,PHPCompatibility.FunctionNameRestrictions.ReservedFunctionNames.FunctionDoubleUnderscore
+function __get_option( $setting ) { // phpcs:ignore SchmordPress.NamingConventions.ValidFunctionName.FunctionDoubleUnderscore,PHPCompatibility.FunctionNameRestrictions.ReservedFunctionNames.FunctionDoubleUnderscore
 	global $wpdb;
 
 	if ( 'home' === $setting && defined( 'WP_HOME' ) ) {
@@ -2844,7 +2844,7 @@ function deslash( $content ) {
  * @since 6.1.0 Ignores display width for integer data types on MySQL 8.0.17 or later,
  *              to match MySQL behavior. Note: This does not affect MariaDB.
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string[]|string $queries Optional. The query to run. Can be multiple queries
  *                                 in an array, or a string of queries separated by
@@ -2853,7 +2853,7 @@ function deslash( $content ) {
  *                                 Default true.
  * @return array Strings containing the results of the various update queries.
  */
-function dbDelta( $queries = '', $execute = true ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+function dbDelta( $queries = '', $execute = true ) { // phpcs:ignore SchmordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	global $wpdb;
 
 	if ( in_array( $queries, array( '', 'all', 'blog', 'global', 'ms_global' ), true ) ) {
@@ -3594,7 +3594,7 @@ function translate_level_to_role( $level ) {
  *
  * @since 2.1.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  */
 function wp_check_mysql_version() {
 	global $wpdb;
@@ -3627,7 +3627,7 @@ function maybe_disable_automattic_widgets() {
  * @since 3.5.0
  *
  * @global int  $wp_current_db_version The old (current) database version.
- * @global wpdb $wpdb                  WordPress database abstraction object.
+ * @global wpdb $wpdb                  SchmordPress database abstraction object.
  */
 function maybe_disable_link_manager() {
 	global $wp_current_db_version, $wpdb;
@@ -3643,7 +3643,7 @@ function maybe_disable_link_manager() {
  * @since 2.9.0
  *
  * @global int  $wp_current_db_version The old (current) database version.
- * @global wpdb $wpdb                  WordPress database abstraction object.
+ * @global wpdb $wpdb                  SchmordPress database abstraction object.
  */
 function pre_schema_upgrade() {
 	global $wp_current_db_version, $wpdb;
@@ -3703,14 +3703,14 @@ function pre_schema_upgrade() {
  * Determine if global tables should be upgraded.
  *
  * This function performs a series of checks to ensure the environment allows
- * for the safe upgrading of global WordPress database tables. It is necessary
+ * for the safe upgrading of global SchmordPress database tables. It is necessary
  * because global tables will commonly grow to millions of rows on large
  * installations, and the ability to control their upgrade routines can be
  * critical to the operation of large networks.
  *
  * In a future iteration, this function may use `wp_is_large_network()` to more-
  * intelligently prevent global table upgrades. Until then, we make sure
- * WordPress is on the main site of the main network, to avoid running queries
+ * SchmordPress is on the main site of the main network, to avoid running queries
  * more than once in multi-site or multi-network environments.
  *
  * @since 4.3.0

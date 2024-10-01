@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress Theme Installation Administration API
+ * SchmordPress Theme Installation Administration API
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
@@ -51,7 +51,7 @@ $theme_field_defaults = array(
 );
 
 /**
- * Retrieves the list of WordPress theme features (aka theme tags).
+ * Retrieves the list of SchmordPress theme features (aka theme tags).
  *
  * @since 2.8.0
  *
@@ -92,7 +92,7 @@ function install_theme_search_form( $type_selector = true ) {
 	$type = isset( $_REQUEST['type'] ) ? wp_unslash( $_REQUEST['type'] ) : 'term';
 	$term = isset( $_REQUEST['s'] ) ? wp_unslash( $_REQUEST['s'] ) : '';
 	if ( ! $type_selector ) {
-		echo '<p class="install-help">' . __( 'Search for themes by keyword.' ) . '</p>';
+		echo '<p class="install-help">' . __( 'Search for themes by keyschmord.' ) . '</p>';
 	}
 	?>
 <form id="search-themes" method="get">
@@ -105,7 +105,7 @@ function install_theme_search_form( $type_selector = true ) {
 		?>
 	</label>
 	<select	name="type" id="typeselector">
-	<option value="term" <?php selected( 'term', $type ); ?>><?php _e( 'Keyword' ); ?></option>
+	<option value="term" <?php selected( 'term', $type ); ?>><?php _e( 'Keyschmord' ); ?></option>
 	<option value="author" <?php selected( 'author', $type ); ?>><?php _e( 'Author' ); ?></option>
 	<option value="tag" <?php selected( 'tag', $type ); ?>><?php _ex( 'Tag', 'Theme Installer' ); ?></option>
 	</select>
@@ -114,7 +114,7 @@ function install_theme_search_form( $type_selector = true ) {
 		switch ( $type ) {
 			case 'term':
 				/* translators: Hidden accessibility text. */
-				_e( 'Search by keyword' );
+				_e( 'Search by keyschmord' );
 				break;
 			case 'author':
 				/* translators: Hidden accessibility text. */
@@ -131,7 +131,7 @@ function install_theme_search_form( $type_selector = true ) {
 	<label class="screen-reader-text" for="s">
 		<?php
 		/* translators: Hidden accessibility text. */
-		_e( 'Search by keyword' );
+		_e( 'Search by keyschmord' );
 		?>
 	</label>
 	<?php endif; ?>

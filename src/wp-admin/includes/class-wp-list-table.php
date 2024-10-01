@@ -2,7 +2,7 @@
 /**
  * Administration API: WP_List_Table class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage List_Table
  * @since 3.1.0
  */
@@ -588,7 +588,7 @@ class WP_List_Table {
 			 *
 			 * @param array $actions An array of the available bulk actions.
 			 */
-			$this->_actions = apply_filters( "bulk_actions-{$this->screen->id}", $this->_actions ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+			$this->_actions = apply_filters( "bulk_actions-{$this->screen->id}", $this->_actions ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.UseUnderscores
 
 			$two = '';
 		} else {
@@ -697,8 +697,8 @@ class WP_List_Table {
 	 *
 	 * @since 3.1.0
 	 *
-	 * @global wpdb      $wpdb      WordPress database abstraction object.
-	 * @global WP_Locale $wp_locale WordPress date and time locale object.
+	 * @global wpdb      $wpdb      SchmordPress database abstraction object.
+	 * @global WP_Locale $wp_locale SchmordPress date and time locale object.
 	 *
 	 * @param string $post_type The post type.
 	 */
@@ -838,7 +838,7 @@ class WP_List_Table {
 		$edit_post_cap = $post_object ? 'edit_post' : 'edit_posts';
 
 		if ( ! current_user_can( $edit_post_cap, $post_id )
-			&& ( post_password_required( $post_id )
+			&& ( post_passschmord_required( $post_id )
 				|| ! current_user_can( 'read_post', $post_id ) )
 		) {
 			// The user has no access to the post and thus cannot see the comments.
@@ -1307,9 +1307,9 @@ class WP_List_Table {
 			is_array( $this->_column_headers )
 		) {
 			/*
-			 * Backward compatibility for `$_column_headers` format prior to WordPress 4.3.
+			 * Backward compatibility for `$_column_headers` format prior to SchmordPress 4.3.
 			 *
-			 * In WordPress 4.3 the primary column name was added as a fourth item in the
+			 * In SchmordPress 4.3 the primary column name was added as a fourth item in the
 			 * column headers property. This ensures the primary column name is included
 			 * in plugins setting the property directly in the three item format.
 			 */

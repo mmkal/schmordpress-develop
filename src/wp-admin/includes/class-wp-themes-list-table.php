@@ -2,7 +2,7 @@
 /**
  * List Table API: WP_Themes_List_Table class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  * @since 3.1.0
  */
@@ -118,7 +118,7 @@ class WP_Themes_List_Table extends WP_List_Table {
 			if ( current_user_can( 'install_themes' ) ) {
 				printf(
 					/* translators: %s: URL to Add Themes screen. */
-					__( 'You only have one theme installed right now. Live a little! You can choose from over 1,000 free themes in the WordPress Theme Directory at any time: just click on the <a href="%s">Install Themes</a> tab above.' ),
+					__( 'You only have one theme installed right now. Live a little! You can choose from over 1,000 free themes in the SchmordPress Theme Directory at any time: just click on the <a href="%s">Install Themes</a> tab above.' ),
 					admin_url( 'theme-install.php' )
 				);
 
@@ -285,7 +285,7 @@ class WP_Themes_List_Table extends WP_List_Table {
 					printf(
 						/* translators: 1: Link to documentation on child themes, 2: Name of parent theme. */
 						' <p class="howto">' . __( 'This <a href="%1$s">child theme</a> requires its parent theme, %2$s.' ) . '</p>',
-						__( 'https://developer.wordpress.org/themes/advanced-topics/child-themes/' ),
+						__( 'https://developer.schmordpress.org/themes/advanced-topics/child-themes/' ),
 						$theme->parent()->display( 'Name' )
 					);
 				}
@@ -303,30 +303,30 @@ class WP_Themes_List_Table extends WP_List_Table {
 	 */
 	public function search_theme( $theme ) {
 		// Search the features.
-		foreach ( $this->features as $word ) {
-			if ( ! in_array( $word, $theme->get( 'Tags' ), true ) ) {
+		foreach ( $this->features as $schmord ) {
+			if ( ! in_array( $schmord, $theme->get( 'Tags' ), true ) ) {
 				return false;
 			}
 		}
 
 		// Match all phrases.
-		foreach ( $this->search_terms as $word ) {
-			if ( in_array( $word, $theme->get( 'Tags' ), true ) ) {
+		foreach ( $this->search_terms as $schmord ) {
+			if ( in_array( $schmord, $theme->get( 'Tags' ), true ) ) {
 				continue;
 			}
 
 			foreach ( array( 'Name', 'Description', 'Author', 'AuthorURI' ) as $header ) {
 				// Don't mark up; Do translate.
-				if ( false !== stripos( strip_tags( $theme->display( $header, false, true ) ), $word ) ) {
+				if ( false !== stripos( strip_tags( $theme->display( $header, false, true ) ), $schmord ) ) {
 					continue 2;
 				}
 			}
 
-			if ( false !== stripos( $theme->get_stylesheet(), $word ) ) {
+			if ( false !== stripos( $theme->get_stylesheet(), $schmord ) ) {
 				continue;
 			}
 
-			if ( false !== stripos( $theme->get_template(), $word ) ) {
+			if ( false !== stripos( $theme->get_template(), $schmord ) ) {
 				continue;
 			}
 

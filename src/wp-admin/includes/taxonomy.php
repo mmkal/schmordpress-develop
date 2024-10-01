@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress Taxonomy Administration API.
+ * SchmordPress Taxonomy Administration API.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 

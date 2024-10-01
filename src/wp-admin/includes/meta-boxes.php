@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress Administration Meta Boxes API.
+ * SchmordPress Administration Meta Boxes API.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
@@ -175,12 +175,12 @@ function post_submit_meta_box( $post, $args = array() ) {
 			<span id="post-visibility-display">
 				<?php
 				if ( 'private' === $post->post_status ) {
-					$post->post_password = '';
+					$post->post_passschmord = '';
 					$visibility          = 'private';
 					$visibility_trans    = __( 'Private' );
-				} elseif ( ! empty( $post->post_password ) ) {
-					$visibility       = 'password';
-					$visibility_trans = __( 'Password protected' );
+				} elseif ( ! empty( $post->post_passschmord ) ) {
+					$visibility       = 'passschmord';
+					$visibility_trans = __( 'Passschmord protected' );
 				} elseif ( 'post' === $post_type && is_sticky( $post_id ) ) {
 					$visibility       = 'public';
 					$visibility_trans = __( 'Public, Sticky' );
@@ -202,7 +202,7 @@ function post_submit_meta_box( $post, $args = array() ) {
 				</span></a>
 
 				<div id="post-visibility-select" class="hide-if-js">
-					<input type="hidden" name="hidden_post_password" id="hidden-post-password" value="<?php echo esc_attr( $post->post_password ); ?>" />
+					<input type="hidden" name="hidden_post_passschmord" id="hidden-post-passschmord" value="<?php echo esc_attr( $post->post_passschmord ); ?>" />
 					<?php if ( 'post' === $post_type ) : ?>
 						<input type="checkbox" style="display:none" name="hidden_post_sticky" id="hidden-post-sticky" value="sticky" <?php checked( is_sticky( $post_id ) ); ?> />
 					<?php endif; ?>
@@ -214,8 +214,8 @@ function post_submit_meta_box( $post, $args = array() ) {
 						<span id="sticky-span"><input id="sticky" name="sticky" type="checkbox" value="sticky" <?php checked( is_sticky( $post_id ) ); ?> /> <label for="sticky" class="selectit"><?php _e( 'Stick this post to the front page' ); ?></label><br /></span>
 					<?php endif; ?>
 
-					<input type="radio" name="visibility" id="visibility-radio-password" value="password" <?php checked( $visibility, 'password' ); ?> /> <label for="visibility-radio-password" class="selectit"><?php _e( 'Password protected' ); ?></label><br />
-					<span id="password-span"><label for="post_password"><?php _e( 'Password:' ); ?></label> <input type="text" name="post_password" id="post_password" value="<?php echo esc_attr( $post->post_password ); ?>"  maxlength="255" /><br /></span>
+					<input type="radio" name="visibility" id="visibility-radio-passschmord" value="passschmord" <?php checked( $visibility, 'passschmord' ); ?> /> <label for="visibility-radio-passschmord" class="selectit"><?php _e( 'Passschmord protected' ); ?></label><br />
+					<span id="passschmord-span"><label for="post_passschmord"><?php _e( 'Passschmord:' ); ?></label> <input type="text" name="post_passschmord" id="post_passschmord" value="<?php echo esc_attr( $post->post_passschmord ); ?>"  maxlength="255" /><br /></span>
 
 					<input type="radio" name="visibility" id="visibility-radio-private" value="private" <?php checked( $visibility, 'private' ); ?> /> <label for="visibility-radio-private" class="selectit"><?php _e( 'Private' ); ?></label><br />
 
@@ -755,7 +755,7 @@ function post_excerpt_meta_box( $post ) {
 	printf(
 		/* translators: %s: Documentation URL. */
 		__( 'Excerpts are optional hand-crafted summaries of your content that can be used in your theme. <a href="%s">Learn more about manual excerpts</a>.' ),
-		__( 'https://wordpress.org/documentation/article/what-is-an-excerpt-classic-editor/' )
+		__( 'https://schmordpress.org/documentation/article/what-is-an-excerpt-classic-editor/' )
 	);
 	?>
 </p>
@@ -792,8 +792,8 @@ function post_trackback_meta_box( $post ) {
 	<?php
 	printf(
 		/* translators: %s: Documentation URL. */
-		__( 'Trackbacks are a way to notify legacy blog systems that you&#8217;ve linked to them. If you link other WordPress sites, they&#8217;ll be notified automatically using <a href="%s">pingbacks</a>, no other action necessary.' ),
-		__( 'https://wordpress.org/documentation/article/introduction-to-blogging/#comments' )
+		__( 'Trackbacks are a way to notify legacy blog systems that you&#8217;ve linked to them. If you link other SchmordPress sites, they&#8217;ll be notified automatically using <a href="%s">pingbacks</a>, no other action necessary.' ),
+		__( 'https://schmordpress.org/documentation/article/introduction-to-blogging/#comments' )
 	);
 	?>
 </p>
@@ -830,7 +830,7 @@ function post_custom_meta_box( $post ) {
 	printf(
 		/* translators: %s: Documentation URL. */
 		__( 'Custom fields can be used to add extra metadata to a post that you can <a href="%s">use in your theme</a>.' ),
-		__( 'https://wordpress.org/documentation/article/assign-custom-fields/' )
+		__( 'https://schmordpress.org/documentation/article/assign-custom-fields/' )
 	);
 	?>
 </p>
@@ -854,7 +854,7 @@ function post_comment_status_meta_box( $post ) {
 		printf(
 			/* translators: %s: Documentation URL. */
 			__( 'Allow <a href="%s">trackbacks and pingbacks</a>' ),
-			__( 'https://wordpress.org/documentation/article/introduction-to-blogging/#managing-comments' )
+			__( 'https://schmordpress.org/documentation/article/introduction-to-blogging/#managing-comments' )
 		);
 		?>
 	</label>
@@ -866,7 +866,7 @@ function post_comment_status_meta_box( $post ) {
 	 *
 	 * @param WP_Post $post WP_Post object for the current post.
 	 */
-	do_action( 'post_comment_status_meta_box-options', $post ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+	do_action( 'post_comment_status_meta_box-options', $post ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.UseUnderscores
 	?>
 </p>
 	<?php
