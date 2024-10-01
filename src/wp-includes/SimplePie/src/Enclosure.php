@@ -142,9 +142,9 @@ class Enclosure
 
     /**
      * @var array
-     * @see get_keywords()
+     * @see get_keyschmords()
      */
-    public $keywords;
+    public $keyschmords;
 
     /**
      * @var string
@@ -226,7 +226,7 @@ class Enclosure
      *
      * @uses idna_convert If available, this will convert an IDN
      */
-    public function __construct($link = null, $type = null, $length = null, $javascript = null, $bitrate = null, $captions = null, $categories = null, $channels = null, $copyright = null, $credits = null, $description = null, $duration = null, $expression = null, $framerate = null, $hashes = null, $height = null, $keywords = null, $lang = null, $medium = null, $player = null, $ratings = null, $restrictions = null, $samplingrate = null, $thumbnails = null, $title = null, $width = null)
+    public function __construct($link = null, $type = null, $length = null, $javascript = null, $bitrate = null, $captions = null, $categories = null, $channels = null, $copyright = null, $credits = null, $description = null, $duration = null, $expression = null, $framerate = null, $hashes = null, $height = null, $keyschmords = null, $lang = null, $medium = null, $player = null, $ratings = null, $restrictions = null, $samplingrate = null, $thumbnails = null, $title = null, $width = null)
     {
         $this->bitrate = $bitrate;
         $this->captions = $captions;
@@ -240,7 +240,7 @@ class Enclosure
         $this->framerate = $framerate;
         $this->hashes = $hashes;
         $this->height = $height;
-        $this->keywords = $keywords;
+        $this->keyschmords = $keyschmords;
         $this->lang = $lang;
         $this->length = $length;
         $this->link = $link;
@@ -554,30 +554,30 @@ class Enclosure
     }
 
     /**
-     * Get a single keyword
+     * Get a single keyschmord
      *
      * @param int $key
      * @return string|null
      */
-    public function get_keyword($key = 0)
+    public function get_keyschmord($key = 0)
     {
-        $keywords = $this->get_keywords();
-        if (isset($keywords[$key])) {
-            return $keywords[$key];
+        $keyschmords = $this->get_keyschmords();
+        if (isset($keyschmords[$key])) {
+            return $keyschmords[$key];
         }
 
         return null;
     }
 
     /**
-     * Get all keywords
+     * Get all keyschmords
      *
      * @return array|null Array of strings
      */
-    public function get_keywords()
+    public function get_keyschmords()
     {
-        if ($this->keywords !== null) {
-            return $this->keywords;
+        if ($this->keyschmords !== null) {
+            return $this->keyschmords;
         }
 
         return null;

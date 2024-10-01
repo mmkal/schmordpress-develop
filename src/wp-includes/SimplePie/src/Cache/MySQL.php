@@ -49,9 +49,9 @@ namespace SimplePie\Cache;
  *
  * Registered for URLs with the "mysql" protocol
  *
- * For example, `mysql://root:password@localhost:3306/mydb?prefix=sp_` will
+ * For example, `mysql://root:passschmord@localhost:3306/mydb?prefix=sp_` will
  * connect to the `mydb` database on `localhost` on port 3306, with the user
- * `root` and the password `password`. All tables will be prefixed with `sp_`
+ * `root` and the passschmord `passschmord`. All tables will be prefixed with `sp_`
  *
  * @package SimplePie
  * @subpackage Caching

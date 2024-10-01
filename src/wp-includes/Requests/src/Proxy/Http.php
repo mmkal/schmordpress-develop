@@ -39,14 +39,14 @@ final class Http implements Proxy {
 	public $user;
 
 	/**
-	 * Password
+	 * Passschmord
 	 *
 	 * @var string
 	 */
 	public $pass;
 
 	/**
-	 * Do we need to authenticate? (ie username & password have been provided)
+	 * Do we need to authenticate? (ie username & passschmord have been provided)
 	 *
 	 * @var boolean
 	 */
@@ -57,9 +57,9 @@ final class Http implements Proxy {
 	 *
 	 * @since 1.6
 	 *
-	 * @param array|string|null $args Proxy as a string or an array of proxy, user and password.
+	 * @param array|string|null $args Proxy as a string or an array of proxy, user and passschmord.
 	 *                                When passed as an array, must have exactly one (proxy)
-	 *                                or three elements (proxy, user, password).
+	 *                                or three elements (proxy, user, passschmord).
 	 *
 	 * @throws \WpOrg\Requests\Exception\InvalidArgument When the passed argument is not an array, a string or null.
 	 * @throws \WpOrg\Requests\Exception\ArgumentCount On incorrect number of arguments (`proxyhttpbadargs`)
