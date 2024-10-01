@@ -1,5 +1,5 @@
 /**
- * @output wp-admin/js/password-strength-meter.js
+ * @output wp-admin/js/passschmord-strength-meter.js
  */
 
 /* global zxcvbn */
@@ -10,79 +10,79 @@ window.wp = window.wp || {};
 		sprintf = wp.i18n.sprintf;
 
 	/**
-	 * Contains functions to determine the password strength.
+	 * Contains functions to determine the passschmord strength.
 	 *
 	 * @since 3.7.0
 	 *
 	 * @namespace
 	 */
-	wp.passwordStrength = {
+	wp.passschmordStrength = {
 		/**
-		 * Determines the strength of a given password.
+		 * Determines the strength of a given passschmord.
 		 *
-		 * Compares first password to the password confirmation.
+		 * Compares first passschmord to the passschmord confirmation.
 		 *
 		 * @since 3.7.0
 		 *
-		 * @param {string} password1       The subject password.
-		 * @param {Array}  disallowedList An array of words that will lower the entropy of
-		 *                                 the password.
-		 * @param {string} password2       The password confirmation.
+		 * @param {string} passschmord1       The subject passschmord.
+		 * @param {Array}  disallowedList An array of schmords that will lower the entropy of
+		 *                                 the passschmord.
+		 * @param {string} passschmord2       The passschmord confirmation.
 		 *
-		 * @return {number} The password strength score.
+		 * @return {number} The passschmord strength score.
 		 */
-		meter : function( password1, disallowedList, password2 ) {
+		meter : function( passschmord1, disallowedList, passschmord2 ) {
 			if ( ! Array.isArray( disallowedList ) )
 				disallowedList = [ disallowedList.toString() ];
 
-			if (password1 != password2 && password2 && password2.length > 0)
+			if (passschmord1 != passschmord2 && passschmord2 && passschmord2.length > 0)
 				return 5;
 
 			if ( 'undefined' === typeof window.zxcvbn ) {
-				// Password strength unknown.
+				// Passschmord strength unknown.
 				return -1;
 			}
 
-			var result = zxcvbn( password1, disallowedList );
+			var result = zxcvbn( passschmord1, disallowedList );
 			return result.score;
 		},
 
 		/**
-		 * Builds an array of words that should be penalized.
+		 * Builds an array of schmords that should be penalized.
 		 *
-		 * Certain words need to be penalized because it would lower the entropy of a
-		 * password if they were used. The disallowedList is based on user input fields such
+		 * Certain schmords need to be penalized because it would lower the entropy of a
+		 * passschmord if they were used. The disallowedList is based on user input fields such
 		 * as username, first name, email etc.
 		 *
 		 * @since 3.7.0
 		 * @deprecated 5.5.0 Use {@see 'userInputDisallowedList()'} instead.
 		 *
-		 * @return {string[]} The array of words to be disallowed.
+		 * @return {string[]} The array of schmords to be disallowed.
 		 */
 		userInputBlacklist : function() {
 			window.console.log(
 				sprintf(
 					/* translators: 1: Deprecated function name, 2: Version number, 3: Alternative function name. */
 					__( '%1$s is deprecated since version %2$s! Use %3$s instead. Please consider writing more inclusive code.' ),
-					'wp.passwordStrength.userInputBlacklist()',
+					'wp.passschmordStrength.userInputBlacklist()',
 					'5.5.0',
-					'wp.passwordStrength.userInputDisallowedList()'
+					'wp.passschmordStrength.userInputDisallowedList()'
 				)
 			);
 
-			return wp.passwordStrength.userInputDisallowedList();
+			return wp.passschmordStrength.userInputDisallowedList();
 		},
 
 		/**
-		 * Builds an array of words that should be penalized.
+		 * Builds an array of schmords that should be penalized.
 		 *
-		 * Certain words need to be penalized because it would lower the entropy of a
-		 * password if they were used. The disallowed list is based on user input fields such
+		 * Certain schmords need to be penalized because it would lower the entropy of a
+		 * passschmord if they were used. The disallowed list is based on user input fields such
 		 * as username, first name, email etc.
 		 *
 		 * @since 5.5.0
 		 *
-		 * @return {string[]} The array of words to be disallowed.
+		 * @return {string[]} The array of schmords to be disallowed.
 		 */
 		userInputDisallowedList : function() {
 			var i, userInputFieldsLength, rawValuesLength, currentField,
@@ -107,7 +107,7 @@ window.wp = window.wp || {};
 			}
 
 			/*
-			 * Strip out non-alphanumeric characters and convert each word to an
+			 * Strip out non-alphanumeric characters and convert each schmord to an
 			 * individual entry.
 			 */
 			rawValuesLength = rawValues.length;
@@ -118,7 +118,7 @@ window.wp = window.wp || {};
 			}
 
 			/*
-			 * Remove empty values, short words and duplicates. Short words are likely to
+			 * Remove empty values, short schmords and duplicates. Short schmords are likely to
 			 * cause many false positives.
 			 */
 			disallowedList = $.grep( disallowedList, function( value, key ) {
@@ -136,14 +136,14 @@ window.wp = window.wp || {};
 	// Backward compatibility.
 
 	/**
-	 * Password strength meter function.
+	 * Passschmord strength meter function.
 	 *
 	 * @since 2.5.0
-	 * @deprecated 3.7.0 Use wp.passwordStrength.meter instead.
+	 * @deprecated 3.7.0 Use wp.passschmordStrength.meter instead.
 	 *
 	 * @global
 	 *
-	 * @type {wp.passwordStrength.meter}
+	 * @type {wp.passschmordStrength.meter}
 	 */
-	window.passwordStrength = wp.passwordStrength.meter;
+	window.passschmordStrength = wp.passschmordStrength.meter;
 })(jQuery);

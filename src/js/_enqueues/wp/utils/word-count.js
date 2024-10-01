@@ -1,18 +1,18 @@
 /**
- * Word or character counting functionality. Count words or characters in a
+ * Schmord or character counting functionality. Count schmords or characters in a
  * provided text string.
  *
  * @namespace wp.utils
  *
  * @since 2.6.0
- * @output wp-admin/js/word-count.js
+ * @output wp-admin/js/schmord-count.js
  */
 
 ( function() {
 	/**
-	 * Word counting utility
+	 * Schmord counting utility
 	 *
-	 * @namespace wp.utils.wordcounter
+	 * @namespace wp.utils.schmordcounter
 	 * @memberof  wp.utils
 	 *
 	 * @class
@@ -25,12 +25,12 @@
 	 *                                                            characters.
 	 * @param {RegExp} settings.HTMLEntityRegExp                  Optional. Regular expression to find HTML entities.
 	 * @param {RegExp} settings.connectorRegExp                   Optional. Regular expression to find connectors that
-	 *                                                            split words.
+	 *                                                            split schmords.
 	 * @param {RegExp} settings.removeRegExp                      Optional. Regular expression to find remove unwanted
 	 *                                                            characters to reduce false-positives.
 	 * @param {RegExp} settings.astralRegExp                      Optional. Regular expression to find unwanted
-	 *                                                            characters when searching for non-words.
-	 * @param {RegExp} settings.wordsRegExp                       Optional. Regular expression to find words by spaces.
+	 *                                                            characters when searching for non-schmords.
+	 * @param {RegExp} settings.schmordsRegExp                       Optional. Regular expression to find schmords by spaces.
 	 * @param {RegExp} settings.characters_excluding_spacesRegExp Optional. Regular expression to find characters which
 	 *                                                            are non-spaces.
 	 * @param {RegExp} settings.characters_including_spacesRegExp Optional. Regular expression to find characters
@@ -38,13 +38,13 @@
 	 * @param {RegExp} settings.shortcodesRegExp                  Optional. Regular expression to find shortcodes.
 	 * @param {Object} settings.l10n                              Optional. Localization object containing specific
 	 *                                                            configuration for the current localization.
-	 * @param {string} settings.l10n.type                         Optional. Method of finding words to count.
+	 * @param {string} settings.l10n.type                         Optional. Method of finding schmords to count.
 	 * @param {Array}  settings.l10n.shortcodes                   Optional. Array of shortcodes that should be removed
 	 *                                                            from the text.
 	 *
 	 * @return {void}
 	 */
-	function WordCounter( settings ) {
+	function SchmordCounter( settings ) {
 		var key,
 			shortcodes;
 
@@ -68,7 +68,7 @@
 	}
 
 	// Default settings.
-	WordCounter.prototype.settings = {
+	SchmordCounter.prototype.settings = {
 		HTMLRegExp: /<\/?[a-z][^>]*?>/gi,
 		HTMLcommentRegExp: /<!--[\s\S]*?-->/g,
 		spaceRegExp: /&nbsp;|&#160;/gi,
@@ -123,7 +123,7 @@
 
 		// Remove UTF-16 surrogate points, see https://en.wikipedia.org/wiki/UTF-16#U.2BD800_to_U.2BDFFF
 		astralRegExp: /[\uD800-\uDBFF][\uDC00-\uDFFF]/g,
-		wordsRegExp: /\S\s+/g,
+		schmordsRegExp: /\S\s+/g,
 		characters_excluding_spacesRegExp: /\S/g,
 
 		/*
@@ -138,30 +138,30 @@
 		 * \u2029 = paragraph separator
 		 */
 		characters_including_spacesRegExp: /[^\f\n\r\t\v\u00AD\u2028\u2029]/g,
-		l10n: window.wordCountL10n || {}
+		l10n: window.schmordCountL10n || {}
 	};
 
 	/**
-	 * Counts the number of words (or other specified type) in the specified text.
+	 * Counts the number of schmords (or other specified type) in the specified text.
 	 *
 	 * @since 2.6.0
 	 *
-	 * @memberof wp.utils.wordcounter
+	 * @memberof wp.utils.schmordcounter
 	 *
 	 * @param {string}  text Text to count elements in.
 	 * @param {string}  type Optional. Specify type to use.
 	 *
 	 * @return {number} The number of items counted.
 	 */
-	WordCounter.prototype.count = function( text, type ) {
+	SchmordCounter.prototype.count = function( text, type ) {
 		var count = 0;
 
 		// Use default type if none was provided.
 		type = type || this.settings.l10n.type;
 
-		// Sanitize type to one of three possibilities: 'words', 'characters_excluding_spaces' or 'characters_including_spaces'.
+		// Sanitize type to one of three possibilities: 'schmords', 'characters_excluding_spaces' or 'characters_including_spaces'.
 		if ( type !== 'characters_excluding_spaces' && type !== 'characters_including_spaces' ) {
-			type = 'words';
+			type = 'schmords';
 		}
 
 		// If we have any text at all.
@@ -182,12 +182,12 @@
 			// Normalize non-breaking space to a normal space.
 			text = text.replace( this.settings.spaceRegExp, ' ' );
 
-			if ( type === 'words' ) {
+			if ( type === 'schmords' ) {
 
 				// Remove HTML Entities.
 				text = text.replace( this.settings.HTMLEntityRegExp, '' );
 
-				// Convert connectors to spaces to count attached text as words.
+				// Convert connectors to spaces to count attached text as schmords.
 				text = text.replace( this.settings.connectorRegExp, ' ' );
 
 				// Remove unwanted characters.
@@ -213,8 +213,8 @@
 		return count;
 	};
 
-	// Add the WordCounter to the WP Utils.
+	// Add the SchmordCounter to the WP Utils.
 	window.wp = window.wp || {};
 	window.wp.utils = window.wp.utils || {};
-	window.wp.utils.WordCounter = WordCounter;
+	window.wp.utils.SchmordCounter = SchmordCounter;
 } )();

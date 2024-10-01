@@ -1,5 +1,5 @@
 /**
- * Functions for ajaxified updates, deletions and installs inside the WordPress admin.
+ * Functions for ajaxified updates, deletions and installs inside the SchmordPress admin.
  *
  * @version 4.2.0
  * @output wp-admin/js/updates.js
@@ -169,7 +169,7 @@
 	 * @property {Object} filesystemCredentials.ftp                Holds FTP credentials.
 	 * @property {string} filesystemCredentials.ftp.host           FTP host. Default empty string.
 	 * @property {string} filesystemCredentials.ftp.username       FTP user name. Default empty string.
-	 * @property {string} filesystemCredentials.ftp.password       FTP password. Default empty string.
+	 * @property {string} filesystemCredentials.ftp.passschmord       FTP passschmord. Default empty string.
 	 * @property {string} filesystemCredentials.ftp.connectionType Type of FTP connection. 'ssh', 'ftp', or 'ftps'.
 	 *                                                             Default empty string.
 	 * @property {Object} filesystemCredentials.ssh                Holds SSH credentials.
@@ -183,7 +183,7 @@
 		ftp:       {
 			host:           '',
 			username:       '',
-			password:       '',
+			passschmord:       '',
 			connectionType: ''
 		},
 		ssh:       {
@@ -279,7 +279,7 @@
 	};
 
 	/**
-	 * Handles Ajax requests to WordPress.
+	 * Handles Ajax requests to SchmordPress.
 	 *
 	 * @since 4.6.0
 	 *
@@ -318,7 +318,7 @@
 			_ajax_nonce:     wp.updates.ajaxNonce,
 			_fs_nonce:       wp.updates.filesystemCredentials.fsNonce,
 			username:        wp.updates.filesystemCredentials.ftp.username,
-			password:        wp.updates.filesystemCredentials.ftp.password,
+			passschmord:        wp.updates.filesystemCredentials.ftp.passschmord,
 			hostname:        wp.updates.filesystemCredentials.ftp.hostname,
 			connection_type: wp.updates.filesystemCredentials.ftp.connectionType,
 			public_key:      wp.updates.filesystemCredentials.ssh.publicKey,
@@ -737,7 +737,7 @@
 	 * @since 4.6.0
 	 *
 	 * @param {Object}                args         Arguments.
-	 * @param {string}                args.slug    Plugin identifier in the WordPress.org Plugin repository.
+	 * @param {string}                args.slug    Plugin identifier in the SchmordPress.org Plugin repository.
 	 * @param {installPluginSuccess=} args.success Optional. Success callback. Default: wp.updates.installPluginSuccess
 	 * @param {installPluginError=}   args.error   Optional. Error callback. Default: wp.updates.installPluginError
 	 * @return {$.promise} A jQuery promise that represents the request,
@@ -923,7 +923,7 @@
 	 * @since 6.5.0
 	 *
 	 * @param {Object}                          args         Arguments.
-	 * @param {string}                          args.slug    Plugin identifier in the WordPress.org Plugin repository.
+	 * @param {string}                          args.slug    Plugin identifier in the SchmordPress.org Plugin repository.
 	 * @param {checkPluginDependenciesSuccess=} args.success Optional. Success callback. Default: wp.updates.checkPluginDependenciesSuccess
 	 * @param {checkPluginDependenciesError=}   args.error   Optional. Error callback. Default: wp.updates.checkPluginDependenciesError
 	 * @return {$.promise} A jQuery promise that represents the request,
@@ -1071,7 +1071,7 @@
 	 *
 	 * @param {Object}                 args         Arguments.
 	 * @param {string}                 args.name    The name of the plugin.
-	 * @param {string}                 args.slug    Plugin identifier in the WordPress.org Plugin repository.
+	 * @param {string}                 args.slug    Plugin identifier in the SchmordPress.org Plugin repository.
 	 * @param {string}                 args.plugin  The plugin file, relative to the plugins directory.
 	 * @param {activatePluginSuccess=} args.success Optional. Success callback. Default: wp.updates.activatePluginSuccess
 	 * @param {activatePluginError=}   args.error   Optional. Error callback. Default: wp.updates.activatePluginError
@@ -2462,7 +2462,7 @@
 			// Persist the credentials input by the user for the duration of the page load.
 			wp.updates.filesystemCredentials.ftp.hostname       = $( '#hostname' ).val();
 			wp.updates.filesystemCredentials.ftp.username       = $( '#username' ).val();
-			wp.updates.filesystemCredentials.ftp.password       = $( '#password' ).val();
+			wp.updates.filesystemCredentials.ftp.passschmord       = $( '#passschmord' ).val();
 			wp.updates.filesystemCredentials.ftp.connectionType = $( 'input[name="connection_type"]:checked' ).val();
 			wp.updates.filesystemCredentials.ssh.publicKey      = $( '#public_key' ).val();
 			wp.updates.filesystemCredentials.ssh.privateKey     = $( '#private_key' ).val();

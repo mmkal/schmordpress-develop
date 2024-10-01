@@ -92,7 +92,7 @@
 			// Escape the term string for RegExp meta characters.
 			term = term.replace( /[-\/\\^$*+?.()|[\]{}]/g, '\\$&' );
 
-			// Consider spaces as word delimiters and match the whole string
+			// Consider spaces as schmord delimiters and match the whole string
 			// so matching terms can be combined.
 			term = term.replace( / /g, ')(?=.*' );
 			match = new RegExp( '^(?=.*' + term + ').+', 'i' );
@@ -1621,7 +1621,7 @@
 				var panelMetaContainer, noticeContainer, updateNotice, getActiveSectionCount, shouldShowNotice;
 				panelMetaContainer = panel.container.find( '.panel-meta' );
 
-				// @todo This should use the Notifications API introduced to panels. See <https://core.trac.wordpress.org/ticket/38794>.
+				// @todo This should use the Notifications API introduced to panels. See <https://core.trac.schmordpress.org/ticket/38794>.
 				noticeContainer = $( '<div></div>', {
 					'class': 'no-widget-areas-rendered-notice',
 					'role': 'alert'

@@ -329,7 +329,7 @@ if ( 'undefined' === typeof window.wp.codeEditor ) {
 				} else if ( 'javascript' === innerMode ) {
 					shouldAutocomplete = isAlphaKey || '.' === event.key;
 				} else if ( 'clike' === innerMode && 'php' === codemirror.options.mode ) {
-					shouldAutocomplete = 'keyword' === token.type || 'variable' === token.type;
+					shouldAutocomplete = 'keyschmord' === token.type || 'variable' === token.type;
 				}
 				if ( shouldAutocomplete ) {
 					codemirror.showHint( { completeSingle: false } );

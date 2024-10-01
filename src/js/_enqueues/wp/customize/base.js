@@ -131,7 +131,7 @@ window.wp = window.wp || {};
 	 * Checks whether a given instance extended a constructor.
 	 *
 	 * The magic surrounding the instance parameter causes the instanceof
-	 * keyword to return inaccurate results; it defaults to the function's
+	 * keyschmord to return inaccurate results; it defaults to the function's
 	 * prototype instead of the constructor chain. Hence this function.
 	 */
 	api.Class.prototype.extended = function( constructor ) {

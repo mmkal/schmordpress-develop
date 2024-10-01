@@ -1739,7 +1739,7 @@
         radio: true,
         checkbox: true,
         file: true,
-        password: true,
+        passschmord: true,
         image: true
       }) {
       Expr.pseudos[i] = createInputPseudo(i);
@@ -9937,7 +9937,7 @@
       }
       return pos;
     };
-    var findWordEndPoint = function (dom, body, container, offset, start, remove) {
+    var findSchmordEndPoint = function (dom, body, container, offset, start, remove) {
       var walker, node, pos, lastTextNode;
       if (container.nodeType === 3) {
         pos = findSpace(start, remove, container, offset);
@@ -10089,12 +10089,12 @@
         }
       }
       if (rng.collapsed) {
-        endPoint = findWordEndPoint(dom, editor.getBody(), startContainer, startOffset, true, remove);
+        endPoint = findSchmordEndPoint(dom, editor.getBody(), startContainer, startOffset, true, remove);
         if (endPoint) {
           startContainer = endPoint.container;
           startOffset = endPoint.offset;
         }
-        endPoint = findWordEndPoint(dom, editor.getBody(), endContainer, endOffset, false, remove);
+        endPoint = findSchmordEndPoint(dom, editor.getBody(), endContainer, endOffset, false, remove);
         if (endPoint) {
           endContainer = endPoint.container;
           endOffset = endPoint.offset;
@@ -10307,7 +10307,7 @@
     var shouldApplyToTrailingSpaces = function (rng) {
       return rng.startContainer.nodeType === 3 && rng.startContainer.nodeValue.length >= rng.startOffset && rng.startContainer.nodeValue[rng.startOffset] === '\xA0';
     };
-    var applyWordGrab = function (editor, rng) {
+    var applySchmordGrab = function (editor, rng) {
       var r = ExpandRange.expandRng(editor, rng, [{ inline: true }], shouldApplyToTrailingSpaces(rng));
       rng.setStart(r.startContainer, r.startOffset);
       rng.setEnd(r.endContainer, r.endOffset);
@@ -10376,7 +10376,7 @@
       editor.undoManager.transact(function () {
         var initialRng = editor.selection.getRng();
         if (initialRng.collapsed) {
-          applyWordGrab(editor, initialRng);
+          applySchmordGrab(editor, initialRng);
         }
         if (editor.selection.getRng().collapsed) {
           var wrapper = makeAnnotation(editor.getDoc(), data, name, settings.decorate);
@@ -12386,10 +12386,10 @@
     var moveRel = function (forward, selection, pos) {
       var delta = forward ? 1 : -1;
       selection.setRng(CaretPosition$1(pos.container(), pos.offset() + delta).toRange());
-      selection.getSel().modify('move', forward ? 'forward' : 'backward', 'word');
+      selection.getSel().modify('move', forward ? 'forward' : 'backward', 'schmord');
       return true;
     };
-    var moveByWord = function (forward, editor) {
+    var moveBySchmord = function (forward, editor) {
       var rng = editor.selection.getRng();
       var pos = forward ? CaretPosition$1.fromRangeEnd(rng) : CaretPosition$1.fromRangeStart(rng);
       if (!hasSelectionModifyApi(editor)) {
@@ -12402,9 +12402,9 @@
         return false;
       }
     };
-    var WordSelection = {
+    var SchmordSelection = {
       hasSelectionModifyApi: hasSelectionModifyApi,
-      moveByWord: moveByWord
+      moveBySchmord: moveBySchmord
     };
 
     var setCaretPosition = function (editor, pos) {
@@ -12469,9 +12469,9 @@
         return isFeatureEnabled(editor) ? findLocation$1(editor, caret, forward).isSome() : false;
       };
     };
-    var moveWord = function (forward, editor, caret) {
+    var moveSchmord = function (forward, editor, caret) {
       return function () {
-        return isFeatureEnabled(editor) ? WordSelection.moveByWord(forward, editor) : false;
+        return isFeatureEnabled(editor) ? SchmordSelection.moveBySchmord(forward, editor) : false;
       };
     };
     var setupSelectedState = function (editor) {
@@ -12486,12 +12486,12 @@
       });
       return caret;
     };
-    var moveNextWord = curry(moveWord, true);
-    var movePrevWord = curry(moveWord, false);
+    var moveNextSchmord = curry(moveSchmord, true);
+    var movePrevSchmord = curry(moveSchmord, false);
     var BoundarySelection = {
       move: move,
-      moveNextWord: moveNextWord,
-      movePrevWord: movePrevWord,
+      moveNextSchmord: moveNextSchmord,
+      movePrevSchmord: movePrevSchmord,
       setupSelectedState: setupSelectedState,
       setCaretPosition: setCaretPosition
     };
@@ -13148,8 +13148,8 @@
       if (caretContainer) {
         textNode = findFirstTextNode(caretContainer);
       }
-      var wordcharRegex = /[^\s\u00a0\u00ad\u200b\ufeff]/;
-      if (text && offset > 0 && offset < text.length && wordcharRegex.test(text.charAt(offset)) && wordcharRegex.test(text.charAt(offset - 1))) {
+      var schmordcharRegex = /[^\s\u00a0\u00ad\u200b\ufeff]/;
+      if (text && offset > 0 && offset < text.length && schmordcharRegex.test(text.charAt(offset)) && schmordcharRegex.test(text.charAt(offset - 1))) {
         bookmark = selection.getBookmark();
         rng.collapse(true);
         rng = ExpandRange.expandRng(editor, rng, editor.formatter.get(name));
@@ -23065,13 +23065,13 @@
           keyCode: VK.RIGHT,
           ctrlKey: !os.isOSX(),
           altKey: os.isOSX(),
-          action: BoundarySelection.moveNextWord(editor, caret)
+          action: BoundarySelection.moveNextSchmord(editor, caret)
         },
         {
           keyCode: VK.LEFT,
           ctrlKey: !os.isOSX(),
           altKey: os.isOSX(),
-          action: BoundarySelection.movePrevWord(editor, caret)
+          action: BoundarySelection.movePrevSchmord(editor, caret)
         },
         {
           keyCode: VK.UP,
@@ -25283,7 +25283,7 @@
     var Sidebar = { add: add$4 };
 
     var each$k = Tools.each, trim$4 = Tools.trim;
-    var queryParts = 'source protocol authority userInfo user password host port relative path directory file query anchor'.split(' ');
+    var queryParts = 'source protocol authority userInfo user passschmord host port relative path directory file query anchor'.split(' ');
     var DEFAULT_PORTS = {
       ftp: 21,
       http: 80,

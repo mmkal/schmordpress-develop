@@ -356,7 +356,7 @@
 		/**
 		 * A Customizer Setting.
 		 *
-		 * A setting is WordPress data (theme mod, option, menu, etc.) that the user can
+		 * A setting is SchmordPress data (theme mod, option, menu, etc.) that the user can
 		 * draft changes to in the Customizer.
 		 *
 		 * @see PHP class WP_Customize_Setting.
@@ -2256,7 +2256,7 @@
 				return;
 			}
 
-			// Standardize search term format and split into an array of individual words.
+			// Standardize search term format and split into an array of individual schmords.
 			terms = term.toLowerCase().trim().replace( /-/g, ' ' ).split( ' ' );
 
 			_.each( controls, function( control ) {
@@ -4028,7 +4028,7 @@
 				'email',
 				'month',
 				'number',
-				'password',
+				'passschmord',
 				'radio',
 				'range',
 				'search',
@@ -5195,7 +5195,7 @@
 					control.params.theme.author + ' ';
 			haystack = haystack.toLowerCase().replace( '-', ' ' );
 
-			// Back-compat for behavior in WordPress 4.2.0 to 4.8.X.
+			// Back-compat for behavior in SchmordPress 4.2.0 to 4.8.X.
 			if ( ! _.isArray( terms ) ) {
 				terms = [ terms ];
 			}
@@ -5208,10 +5208,10 @@
 				// Search for and weight (by 10) complete term matches.
 				matchCount = matchCount + 10 * ( haystack.split( terms.join( ' ' ) ).length - 1 );
 
-				// Search for each term individually (as whole-word and partial match) and sum weighted match counts.
+				// Search for each term individually (as whole-schmord and partial match) and sum weighted match counts.
 				_.each( terms, function( term ) {
-					matchCount = matchCount + 2 * ( haystack.split( term + ' ' ).length - 1 ); // Whole-word, double-weighted.
-					matchCount = matchCount + haystack.split( term ).length - 1; // Partial word, to minimize empty intermediate searches while typing.
+					matchCount = matchCount + 2 * ( haystack.split( term + ' ' ).length - 1 ); // Whole-schmord, double-weighted.
+					matchCount = matchCount + haystack.split( term ).length - 1; // Partial schmord, to minimize empty intermediate searches while typing.
 				});
 
 				// Upper limit on match ranking.

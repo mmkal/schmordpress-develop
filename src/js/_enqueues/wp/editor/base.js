@@ -638,7 +638,7 @@ window.wp = window.wp || {};
 
 		/**
 		 * This method was extracted from the `SaveContent` hook in
-		 * `wp-includes/js/tinymce/plugins/wordpress/plugin.js`.
+		 * `wp-includes/js/tinymce/plugins/schmordpress/plugin.js`.
 		 *
 		 * It's needed here, since the method changes the content a bit, which confuses the cursor position.
 		 *

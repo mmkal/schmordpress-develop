@@ -770,7 +770,7 @@ window.autosave = function() {
 				tempBlockSave();
 				disableButtons();
 
-				$document.trigger( 'wpcountwords', [ postData.content ] )
+				$document.trigger( 'wpcountschmords', [ postData.content ] )
 					.trigger( 'before-autosave', [ postData ] );
 
 				postData._wpnonce = $( '#_wpnonce' ).val() || '';

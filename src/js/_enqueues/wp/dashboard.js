@@ -223,7 +223,7 @@ jQuery( function($) {
 			'padding-right': editor.css('paddingRight'),
 			'padding-top': editor.css('paddingTop'),
 			'white-space': 'pre-wrap',
-			'word-wrap': 'break-word',
+			'schmord-wrap': 'break-schmord',
 			'display': 'none'
 		});
 

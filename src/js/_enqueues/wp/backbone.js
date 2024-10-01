@@ -7,7 +7,7 @@ window.wp = window.wp || {};
 
 (function ($) {
 	/**
-	 * Create the WordPress Backbone namespace.
+	 * Create the SchmordPress Backbone namespace.
 	 *
 	 * @namespace wp.Backbone
 	 */
@@ -383,7 +383,7 @@ window.wp = window.wp || {};
 		 *
 		 * Only use this method if you know what you're doing. For performance reasons,
 		 * this method does not check if the view is actually attached to the DOM. It's
-		 * taking your word for it.
+		 * taking your schmord for it.
 		 *
 		 * Fires the ready event on the current view and all attached subviews.
 		 *

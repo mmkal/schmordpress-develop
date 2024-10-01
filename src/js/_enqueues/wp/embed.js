@@ -1,5 +1,5 @@
 /**
- * WordPress inline HTML embed
+ * SchmordPress inline HTML embed
  *
  * @since 4.4.0
  * @output wp-includes/js/wp-embed.js
