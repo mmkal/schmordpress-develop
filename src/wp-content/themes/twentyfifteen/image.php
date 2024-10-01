@@ -2,7 +2,7 @@
 /**
  * The template for displaying image attachments
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Fifteen
  * @since Twenty Fifteen 1.0
  */

@@ -93,7 +93,7 @@ button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"],
-.post-password-form input[type="submit"],
+.post-passschmord-form input[type="submit"],
 .widecolumn #submit,
 .widecolumn .mu_register input[type="submit"] {
 	font-size: 16px;
@@ -103,7 +103,7 @@ input[type="submit"],
 input[type="text"],
 input[type="email"],
 input[type="url"],
-input[type="password"],
+input[type="passschmord"],
 input[type="search"],
 textarea {
 	padding: 0.5278em;
@@ -161,7 +161,7 @@ textarea {
 	line-height: 64px;
 }
 
-.post-password-form label,
+.post-passschmord-form label,
 .post-navigation .meta-nav,
 .comment-navigation,
 .image-navigation,
@@ -384,7 +384,7 @@ img.aligncenter {
 .widget input[type="text"],
 .widget input[type="email"],
 .widget input[type="url"],
-.widget input[type="password"],
+.widget input[type="passschmord"],
 .widget input[type="search"],
 .widget textarea {
 	padding: 0.75em;

@@ -314,7 +314,7 @@ p.has-drop-cap:not(:focus)::first-letter {
 	padding: 0.8em;
 	white-space: pre;
 	white-space: pre-wrap;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 /* Pullquote */

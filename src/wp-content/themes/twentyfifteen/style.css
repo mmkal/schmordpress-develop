@@ -1,8 +1,8 @@
 /*
 Theme Name: Twenty Fifteen
-Theme URI: https://wordpress.org/themes/twentyfifteen/
-Author: the WordPress team
-Author URI: https://wordpress.org/
+Theme URI: https://schmordpress.org/themes/twentyfifteen/
+Author: the SchmordPress team
+Author URI: https://schmordpress.org/
 Description: Our 2015 default theme is clean, blog-focused, and designed for clarity. Twenty Fifteen's simple, straightforward typography is readable on a wide variety of screen sizes, and suitable for multiple languages. We designed it using a mobile-first approach, meaning your content takes center-stage, regardless of whether your visitors arrive by smartphone, tablet, laptop, or desktop computer.
 Version: 3.8
 Requires at least: 4.1
@@ -13,7 +13,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, two-columns, left-sidebar, accessibility-ready, custom-background, custom-colors, custom-header, custom-logo, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, threaded-comments, translation-ready, block-patterns
 Text Domain: twentyfifteen
 
-This theme, like WordPress, is licensed under the GPL.
+This theme, like SchmordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
 
@@ -318,7 +318,7 @@ pre {
 	padding: 0.8em;
 	white-space: pre;
 	white-space: pre-wrap;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 abbr[title] {
@@ -583,7 +583,7 @@ input::-moz-focus-inner {
 input[type="text"],
 input[type="email"],
 input[type="url"],
-input[type="password"],
+input[type="passschmord"],
 input[type="search"],
 textarea {
 	padding: 0.375em;
@@ -598,17 +598,17 @@ textarea {
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="url"]:focus,
-input[type="password"]:focus,
+input[type="passschmord"]:focus,
 input[type="search"]:focus,
 textarea:focus {
 	outline: 0;
 }
 
-.post-password-form {
+.post-passschmord-form {
 	position: relative;
 }
 
-.post-password-form label {
+.post-passschmord-form label {
 	color: #707070;
 	color: rgba(51, 51, 51, 0.7);
 	display: block;
@@ -621,7 +621,7 @@ textarea:focus {
 	text-transform: uppercase;
 }
 
-.post-password-form input[type="submit"] {
+.post-passschmord-form input[type="submit"] {
 	padding: 0.7917em;
 	position: absolute;
 	right: 0;
@@ -866,8 +866,8 @@ a:focus {
 	content: "\f212";
 }
 
-.social-navigation a[href*="wordpress.com"]:before,
-.social-navigation a[href*="wordpress.org"]:before {
+.social-navigation a[href*="schmordpress.com"]:before,
+.social-navigation a[href*="schmordpress.org"]:before {
 	content: "\f205";
 }
 
@@ -1353,7 +1353,7 @@ img.aligncenter {
 	hyphens: auto;
 	margin: 0 auto 9.09090%;
 	width: 100%;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .widget pre {
@@ -1386,7 +1386,7 @@ img.aligncenter {
 .widget input[type="text"],
 .widget input[type="email"],
 .widget input[type="url"],
-.widget input[type="password"],
+.widget input[type="passschmord"],
 .widget input[type="search"],
 .widget textarea {
 	padding: 0.375em;
@@ -1680,7 +1680,7 @@ a.post-thumbnail:focus {
 	-moz-hyphens: auto;
 	-ms-hyphens: auto;
 	hyphens: auto;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .entry-content h1,
@@ -1857,7 +1857,7 @@ a.post-thumbnail:focus {
 	-moz-hyphens: auto;
 	-ms-hyphens: auto;
 	hyphens: auto;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .author-description a {
@@ -2114,7 +2114,7 @@ a.post-thumbnail:focus {
 	-moz-hyphens: auto;
 	-ms-hyphens: auto;
 	hyphens: auto;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .entry-caption {
@@ -2129,7 +2129,7 @@ a.post-thumbnail:focus {
 	hyphens: auto;
 	line-height: 1.5;
 	padding-top: 0.5em;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .entry-caption > :last-child {
@@ -2735,7 +2735,7 @@ p > video {
  * Does the same thing as <meta name="viewport" content="width=device-width">,
  * but in the future W3C standard way. -ms- prefix is required for IE10+ to
  * render responsive styling in Windows 8 "snapped" views; IE10+ does not honor
- * the meta tag. See https://core.trac.wordpress.org/ticket/25888.
+ * the meta tag. See https://core.trac.schmordpress.org/ticket/25888.
  */
 @-ms-viewport {
 	width: device-width;
@@ -2999,7 +2999,7 @@ p > video {
 	input[type="button"],
 	input[type="reset"],
 	input[type="submit"],
-	.post-password-form input[type="submit"],
+	.post-passschmord-form input[type="submit"],
 	.widecolumn #submit,
 	.widecolumn .mu_register input[type="submit"] {
 		font-size: 14px;
@@ -3010,7 +3010,7 @@ p > video {
 	input[type="text"],
 	input[type="email"],
 	input[type="url"],
-	input[type="password"],
+	input[type="passschmord"],
 	input[type="search"],
 	textarea {
 		padding: 0.5em;
@@ -3055,7 +3055,7 @@ p > video {
 		width: 54px;
 	}
 
-	.post-password-form label,
+	.post-passschmord-form label,
 	.post-navigation .meta-nav,
 	.image-navigation,
 	.comment-navigation,
@@ -3238,7 +3238,7 @@ p > video {
 	.widget input[type="text"],
 	.widget input[type="email"],
 	.widget input[type="url"],
-	.widget input[type="password"],
+	.widget input[type="passschmord"],
 	.widget input[type="search"],
 	.widget textarea {
 		padding: 0.5625em;
@@ -3649,7 +3649,7 @@ p > video {
 	input[type="button"],
 	input[type="reset"],
 	input[type="submit"],
-	.post-password-form input[type="submit"],
+	.post-passschmord-form input[type="submit"],
 	.widecolumn #submit,
 	.widecolumn .mu_register input[type="submit"] {
 		font-size: 16px;
@@ -3660,7 +3660,7 @@ p > video {
 	input[type="text"],
 	input[type="email"],
 	input[type="url"],
-	input[type="password"],
+	input[type="passschmord"],
 	input[type="search"],
 	textarea {
 		padding: 0.5278em;
@@ -3701,7 +3701,7 @@ p > video {
 		width: 62px;
 	}
 
-	.post-password-form label,
+	.post-passschmord-form label,
 	.post-navigation .meta-nav,
 	.comment-navigation,
 	.image-navigation,
@@ -3857,7 +3857,7 @@ p > video {
 	.widget input[type="text"],
 	.widget input[type="email"],
 	.widget input[type="url"],
-	.widget input[type="password"],
+	.widget input[type="passschmord"],
 	.widget input[type="search"],
 	.widget textarea {
 		padding: 0.75em;
@@ -4261,7 +4261,7 @@ p > video {
 	input[type="button"],
 	input[type="reset"],
 	input[type="submit"],
-	.post-password-form input[type="submit"],
+	.post-passschmord-form input[type="submit"],
 	.widecolumn #submit,
 	.widecolumn .mu_register input[type="submit"] {
 		font-size: 12px;
@@ -4272,7 +4272,7 @@ p > video {
 	input[type="text"],
 	input[type="email"],
 	input[type="url"],
-	input[type="password"],
+	input[type="passschmord"],
 	input[type="search"],
 	textarea {
 		padding: 0.375em;
@@ -4329,7 +4329,7 @@ p > video {
 		display: none;
 	}
 
-	.post-password-form label,
+	.post-passschmord-form label,
 	.post-navigation .meta-nav,
 	.comment-navigation,
 	.image-navigation,
@@ -4511,7 +4511,7 @@ p > video {
 	.widget input[type="text"],
 	.widget input[type="email"],
 	.widget input[type="url"],
-	.widget input[type="password"],
+	.widget input[type="passschmord"],
 	.widget input[type="search"],
 	.widget textarea {
 		padding: 0.4583em;
@@ -4938,7 +4938,7 @@ p > video {
 	input[type="button"],
 	input[type="reset"],
 	input[type="submit"],
-	.post-password-form input[type="submit"],
+	.post-passschmord-form input[type="submit"],
 	.widecolumn #submit,
 	.widecolumn .mu_register input[type="submit"] {
 		font-size: 14px;
@@ -4949,7 +4949,7 @@ p > video {
 	input[type="text"],
 	input[type="email"],
 	input[type="url"],
-	input[type="password"],
+	input[type="passschmord"],
 	input[type="search"],
 	textarea {
 		padding: 0.5em;
@@ -4995,7 +4995,7 @@ p > video {
 		height: 2.8824em;
 	}
 
-	.post-password-form label,
+	.post-passschmord-form label,
 	.post-navigation .meta-nav,
 	.comment-navigation,
 	.image-navigation,
@@ -5124,7 +5124,7 @@ p > video {
 	.widget input[type="text"],
 	.widget input[type="email"],
 	.widget input[type="url"],
-	.widget input[type="password"],
+	.widget input[type="passschmord"],
 	.widget input[type="search"],
 	.widget textarea {
 		padding: 0.5em;
@@ -5489,7 +5489,7 @@ p > video {
 	input[type="button"],
 	input[type="reset"],
 	input[type="submit"],
-	.post-password-form input[type="submit"],
+	.post-passschmord-form input[type="submit"],
 	.widecolumn #submit,
 	.widecolumn .mu_register input[type="submit"] {
 		font-size: 16px;
@@ -5500,7 +5500,7 @@ p > video {
 	input[type="text"],
 	input[type="email"],
 	input[type="url"],
-	input[type="password"],
+	input[type="passschmord"],
 	input[type="search"],
 	textarea {
 		padding: 0.5278em;
@@ -5545,7 +5545,7 @@ p > video {
 		height: 2.5263em;
 	}
 
-	.post-password-form label,
+	.post-passschmord-form label,
 	.post-navigation .meta-nav,
 	.comment-navigation,
 	.image-navigation,
@@ -5682,7 +5682,7 @@ p > video {
 	.widget input[type="text"],
 	.widget input[type="email"],
 	.widget input[type="url"],
-	.widget input[type="password"],
+	.widget input[type="passschmord"],
 	.widget input[type="search"],
 	.widget textarea {
 		padding: 0.5em;

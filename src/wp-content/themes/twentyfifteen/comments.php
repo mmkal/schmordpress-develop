@@ -5,17 +5,17 @@
  * The area of the page that contains both current comments
  * and the comment form.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Fifteen
  * @since Twenty Fifteen 1.0
  */
 
 /*
- * If the current post is protected by a password and
- * the visitor has not yet entered the password we will
+ * If the current post is protected by a passschmord and
+ * the visitor has not yet entered the passschmord we will
  * return early without loading the comments.
  */
-if ( post_password_required() ) {
+if ( post_passschmord_required() ) {
 	return;
 }
 ?>

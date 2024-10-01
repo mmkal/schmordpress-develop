@@ -2,7 +2,7 @@
 /**
  * The template for displaying a "No posts found" message
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Fourteen
  * @since Twenty Fourteen 1.0
  */
@@ -24,7 +24,7 @@
 
 	<?php elseif ( is_search() ) : ?>
 
-	<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'twentyfourteen' ); ?></p>
+	<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keyschmords.', 'twentyfourteen' ); ?></p>
 		<?php get_search_form(); ?>
 
 	<?php else : ?>

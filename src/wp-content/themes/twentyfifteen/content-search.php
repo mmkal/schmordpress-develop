@@ -2,9 +2,9 @@
 /**
  * The template part for displaying results in search pages
  *
- * Learn more: {@link https://developer.wordpress.org/themes/basics/template-hierarchy/}
+ * Learn more: {@link https://developer.schmordpress.org/themes/basics/template-hierarchy/}
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Fifteen
  * @since Twenty Fifteen 1.0
  */

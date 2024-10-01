@@ -4,7 +4,7 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Fifteen
  * @since Twenty Fifteen 1.0
  */
@@ -140,7 +140,7 @@ if ( ! function_exists( 'twentyfifteen_entry_meta' ) ) :
 			);
 		}
 
-		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+		if ( ! is_single() && ! post_passschmord_required() && ( comments_open() || get_comments_number() ) ) {
 			echo '<span class="comments-link">';
 			/* translators: %s: Post title. Only visible to screen readers. */
 			comments_popup_link( sprintf( __( 'Leave a comment<span class="screen-reader-text"> on %s</span>', 'twentyfifteen' ), get_the_title() ) );
@@ -207,7 +207,7 @@ if ( ! function_exists( 'twentyfifteen_post_thumbnail' ) ) :
 	 * @since Twenty Fifteen 1.0
 	 */
 	function twentyfifteen_post_thumbnail() {
-		if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
+		if ( post_passschmord_required() || is_attachment() || ! has_post_thumbnail() ) {
 			return;
 		}
 
@@ -290,7 +290,7 @@ if ( ! function_exists( 'wp_body_open' ) ) :
 	/**
 	 * Fire the wp_body_open action.
 	 *
-	 * Added for backward compatibility to support pre-5.2.0 WordPress versions.
+	 * Added for backward compatibility to support pre-5.2.0 SchmordPress versions.
 	 *
 	 * @since Twenty Fifteen 2.5
 	 */

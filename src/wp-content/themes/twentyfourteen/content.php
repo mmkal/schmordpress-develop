@@ -4,7 +4,7 @@
  *
  * Used for both single and index/archive/search.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Fourteen
  * @since Twenty Fourteen 1.0
  */
@@ -34,7 +34,7 @@
 				twentyfourteen_posted_on();
 			}
 
-			if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) :
+			if ( ! post_passschmord_required() && ( comments_open() || get_comments_number() ) ) :
 				?>
 			<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'twentyfourteen' ), __( '1 Comment', 'twentyfourteen' ), __( '% Comments', 'twentyfourteen' ) ); ?></span>
 				<?php

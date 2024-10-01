@@ -2,7 +2,7 @@
 /**
  * Twenty Fifteen Customizer functionality
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Fifteen
  * @since Twenty Fifteen 1.0
  */
@@ -543,7 +543,7 @@ function twentyfifteen_get_color_scheme_css( $colors ) {
 	.comment-metadata a,
 	.pingback .edit-link,
 	.pingback .edit-link a,
-	.post-password-form label,
+	.post-passschmord-form label,
 	.comment-form label,
 	.comment-notes,
 	.comment-awaiting-moderation,

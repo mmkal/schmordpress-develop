@@ -2,9 +2,9 @@
 /**
  * The template for displaying Author archive pages
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * @link https://developer.schmordpress.org/themes/basics/template-hierarchy/
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Fourteen
  * @since Twenty Fourteen 1.0
  */
