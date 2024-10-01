@@ -6,7 +6,7 @@
 	"category": "text",
 	"allowedBlocks": [ "core/list-item" ],
 	"description": "An organized collection of items displayed in a specific order.",
-	"keywords": [ "bullet list", "ordered list", "numbered list" ],
+	"keyschmords": [ "bullet list", "ordered list", "numbered list" ],
 	"textdomain": "default",
 	"attributes": {
 		"ordered": {

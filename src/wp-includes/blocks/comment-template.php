@@ -2,7 +2,7 @@
 /**
  * Server-side rendering of the `core/comment-template` block.
  *
- * @package WordPress
+ * @package SchmordPress
  */
 
 /**
@@ -60,7 +60,7 @@ function block_core_comment_template_render_comments( $comments, $block ) {
 		 *
 		 * The `false` parameter at the end means that we do NOT want the function
 		 * to `echo` the output but to return a string.
-		 * See https://developer.wordpress.org/reference/functions/comment_class/#parameters.
+		 * See https://developer.schmordpress.org/reference/functions/comment_class/#parameters.
 		 */
 		$comment_classes = comment_class( '', $comment->comment_ID, $comment->comment_post_ID, false );
 
@@ -107,7 +107,7 @@ function render_block_core_comment_template( $attributes, $content, $block ) {
 		return '';
 	}
 
-	if ( post_password_required( $block->context['postId'] ) ) {
+	if ( post_passschmord_required( $block->context['postId'] ) ) {
 		return;
 	}
 

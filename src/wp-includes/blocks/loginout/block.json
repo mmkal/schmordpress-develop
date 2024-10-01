@@ -5,7 +5,7 @@
 	"title": "Login/out",
 	"category": "theme",
 	"description": "Show login & logout links.",
-	"keywords": [ "login", "logout", "form" ],
+	"keyschmords": [ "login", "logout", "form" ],
 	"textdomain": "default",
 	"attributes": {
 		"displayLoginAsForm": {

@@ -5,7 +5,7 @@
 	"title": "Footnotes",
 	"category": "text",
 	"description": "Display footnotes added to the page.",
-	"keywords": [ "references" ],
+	"keyschmords": [ "references" ],
 	"textdomain": "default",
 	"usesContext": [ "postId", "postType" ],
 	"supports": {

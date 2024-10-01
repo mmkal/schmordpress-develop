@@ -5,7 +5,7 @@
 	"title": "Custom HTML",
 	"category": "widgets",
 	"description": "Add custom HTML code and preview it as you edit.",
-	"keywords": [ "embed" ],
+	"keyschmords": [ "embed" ],
 	"textdomain": "default",
 	"attributes": {
 		"content": {

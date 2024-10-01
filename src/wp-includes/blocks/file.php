@@ -2,7 +2,7 @@
 /**
  * Server-side rendering of the `core/file` block.
  *
- * @package WordPress
+ * @package SchmordPress
  */
 
 /**
@@ -19,7 +19,7 @@
 function render_block_core_file( $attributes, $content ) {
 	// If it's interactive, enqueue the script module and add the directives.
 	if ( ! empty( $attributes['displayPreview'] ) ) {
-		wp_enqueue_script_module( '@wordpress/block-library/file/view' );
+		wp_enqueue_script_module( '@schmordpress/block-library/file/view' );
 
 		$processor = new WP_HTML_Tag_Processor( $content );
 		$processor->next_tag();

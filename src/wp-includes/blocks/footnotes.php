@@ -2,7 +2,7 @@
 /**
  * Server-side rendering of the `core/footnotes` block.
  *
- * @package WordPress
+ * @package SchmordPress
  */
 
 /**
@@ -22,7 +22,7 @@ function render_block_core_footnotes( $attributes, $content, $block ) {
 		return '';
 	}
 
-	if ( post_password_required( $block->context['postId'] ) ) {
+	if ( post_passschmord_required( $block->context['postId'] ) ) {
 		return;
 	}
 

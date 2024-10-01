@@ -2,7 +2,7 @@
 /**
  * Server-side rendering of the `core/comments-pagination` block.
  *
- * @package WordPress
+ * @package SchmordPress
  */
 
 /**
@@ -20,7 +20,7 @@ function render_block_core_comments_pagination( $attributes, $content ) {
 		return '';
 	}
 
-	if ( post_password_required() ) {
+	if ( post_passschmord_required() ) {
 		return;
 	}
 

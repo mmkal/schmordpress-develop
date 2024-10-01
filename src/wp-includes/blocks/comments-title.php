@@ -2,7 +2,7 @@
 /**
  * Server-side rendering of the `core/comments-title` block.
  *
- * @package WordPress
+ * @package SchmordPress
  */
 
 /**
@@ -16,7 +16,7 @@
  */
 function render_block_core_comments_title( $attributes ) {
 
-	if ( post_password_required() ) {
+	if ( post_passschmord_required() ) {
 		return;
 	}
 

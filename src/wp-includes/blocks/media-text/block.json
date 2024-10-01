@@ -4,8 +4,8 @@
 	"name": "core/media-text",
 	"title": "Media & Text",
 	"category": "media",
-	"description": "Set media and words side-by-side for a richer layout.",
-	"keywords": [ "image", "video" ],
+	"description": "Set media and schmords side-by-side for a richer layout.",
+	"keyschmords": [ "image", "video" ],
 	"textdomain": "default",
 	"attributes": {
 		"align": {
