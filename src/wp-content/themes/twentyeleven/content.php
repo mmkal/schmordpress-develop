@@ -2,7 +2,7 @@
 /**
  * Template for displaying content
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Eleven
  * @since Twenty Eleven 1.0
  */
@@ -25,7 +25,7 @@
 			</div><!-- .entry-meta -->
 			<?php endif; ?>
 
-			<?php if ( comments_open() && ! post_password_required() ) : ?>
+			<?php if ( comments_open() && ! post_passschmord_required() ) : ?>
 			<div class="comments-link">
 				<?php comments_popup_link( '<span class="leave-reply">' . __( 'Reply', 'twentyeleven' ) . '</span>', _x( '1', 'comments number', 'twentyeleven' ), _x( '%', 'comments number', 'twentyeleven' ) ); ?>
 			</div>

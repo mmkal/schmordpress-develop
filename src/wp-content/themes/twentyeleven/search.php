@@ -2,7 +2,7 @@
 /**
  * Template for displaying Search Results pages
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Eleven
  * @since Twenty Eleven 1.0
  */
@@ -53,7 +53,7 @@ get_header(); ?>
 					</header><!-- .entry-header -->
 
 					<div class="entry-content">
-						<p><?php _e( 'Sorry, but nothing matched your search criteria. Please try again with some different keywords.', 'twentyeleven' ); ?></p>
+						<p><?php _e( 'Sorry, but nothing matched your search criteria. Please try again with some different keyschmords.', 'twentyeleven' ); ?></p>
 						<?php get_search_form(); ?>
 					</div><!-- .entry-content -->
 				</article><!-- #post-0 -->
