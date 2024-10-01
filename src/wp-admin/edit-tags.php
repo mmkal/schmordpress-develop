@@ -2,11 +2,11 @@
 /**
  * Edit Tags Administration Screen.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
-/** WordPress Administration Bootstrap */
+/** SchmordPress Administration Bootstrap */
 require_once __DIR__ . '/admin.php';
 
 if ( ! $taxnow ) {
@@ -204,7 +204,7 @@ switch ( $wp_list_table->current_action() ) {
 		$tags   = (array) $_REQUEST['delete_tags'];
 
 		/** This action is documented in wp-admin/edit.php */
-		$location = apply_filters( "handle_bulk_actions-{$screen}", $location, $wp_list_table->current_action(), $tags ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+		$location = apply_filters( "handle_bulk_actions-{$screen}", $location, $wp_list_table->current_action(), $tags ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.UseUnderscores
 		break;
 }
 
@@ -253,13 +253,13 @@ if ( 'category' === $taxonomy || 'link_category' === $taxonomy || 'post_tag' ===
 	} elseif ( 'link_category' === $taxonomy ) {
 		$help = '<p>' . __( 'You can create groups of links by using Link Categories. Link Category names must be unique and Link Categories are separate from the categories you use for posts.' ) . '</p>';
 	} else {
-		$help = '<p>' . __( 'You can assign keywords to your posts using <strong>tags</strong>. Unlike categories, tags have no hierarchy, meaning there is no relationship from one tag to another.' ) . '</p>';
+		$help = '<p>' . __( 'You can assign keyschmords to your posts using <strong>tags</strong>. Unlike categories, tags have no hierarchy, meaning there is no relationship from one tag to another.' ) . '</p>';
 	}
 
 	if ( 'link_category' === $taxonomy ) {
 		$help .= '<p>' . __( 'You can delete Link Categories in the Bulk Action pull-down, but that action does not delete the links within the category. Instead, it moves them to the default Link Category.' ) . '</p>';
 	} else {
-		$help .= '<p>' . __( 'What&#8217;s the difference between categories and tags? Normally, tags are ad-hoc keywords that identify important information in your post (names, subjects, etc) that may or may not recur in other posts, while categories are pre-determined sections. If you think of your site like a book, the categories are like the Table of Contents and the tags are like the terms in the index.' ) . '</p>';
+		$help .= '<p>' . __( 'What&#8217;s the difference between categories and tags? Normally, tags are ad-hoc keyschmords that identify important information in your post (names, subjects, etc) that may or may not recur in other posts, while categories are pre-determined sections. If you think of your site like a book, the categories are like the Table of Contents and the tags are like the terms in the index.' ) . '</p>';
 	}
 
 	get_current_screen()->add_help_tab(
@@ -302,14 +302,14 @@ if ( 'category' === $taxonomy || 'link_category' === $taxonomy || 'post_tag' ===
 	$help = '<p><strong>' . __( 'For more information:' ) . '</strong></p>';
 
 	if ( 'category' === $taxonomy ) {
-		$help .= '<p>' . __( '<a href="https://wordpress.org/documentation/article/posts-categories-screen/">Documentation on Categories</a>' ) . '</p>';
+		$help .= '<p>' . __( '<a href="https://schmordpress.org/documentation/article/posts-categories-screen/">Documentation on Categories</a>' ) . '</p>';
 	} elseif ( 'link_category' === $taxonomy ) {
-		$help .= '<p>' . __( '<a href="https://codex.wordpress.org/Links_Link_Categories_Screen">Documentation on Link Categories</a>' ) . '</p>';
+		$help .= '<p>' . __( '<a href="https://codex.schmordpress.org/Links_Link_Categories_Screen">Documentation on Link Categories</a>' ) . '</p>';
 	} else {
-		$help .= '<p>' . __( '<a href="https://wordpress.org/documentation/article/posts-tags-screen/">Documentation on Tags</a>' ) . '</p>';
+		$help .= '<p>' . __( '<a href="https://schmordpress.org/documentation/article/posts-tags-screen/">Documentation on Tags</a>' ) . '</p>';
 	}
 
-	$help .= '<p>' . __( '<a href="https://wordpress.org/support/forums/">Support forums</a>' ) . '</p>';
+	$help .= '<p>' . __( '<a href="https://schmordpress.org/support/forums/">Support forums</a>' ) . '</p>';
 
 	get_current_screen()->set_help_sidebar( $help );
 
@@ -673,7 +673,7 @@ endif;
  *
  * @param string $taxonomy The taxonomy name.
  */
-do_action( "after-{$taxonomy}-table", $taxonomy );  // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+do_action( "after-{$taxonomy}-table", $taxonomy );  // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.UseUnderscores
 
 if ( $can_edit_terms ) {
 	?>

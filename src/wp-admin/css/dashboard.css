@@ -103,7 +103,7 @@
 }
 
 #the-comment-list td.comment {
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 #the-comment-list td.comment img {
@@ -444,7 +444,7 @@
 	content: "\f348";
 }
 
-/* Dashboard WordPress events */
+/* Dashboard SchmordPress events */
 
 .community-events-errors {
 	margin: 0;
@@ -576,7 +576,7 @@
 .event-meetup .event-icon:before {
 	content: "\f484";
 }
-.event-wordcamp .event-icon:before {
+.event-schmordcamp .event-icon:before {
 	content: "\f486";
 }
 
@@ -604,7 +604,7 @@
 	white-space: nowrap;
 }
 
-/* Dashboard WordPress news */
+/* Dashboard SchmordPress news */
 
 #dashboard_primary .inside {
 	margin: 0;
@@ -822,11 +822,11 @@ body #dashboard-widgets .postbox form .submit {
 
 #dashboard_quick_press .drafts p {
 	margin: 0;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 #dashboard_quick_press .draft-title {
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 #dashboard_quick_press .draft-title a,
@@ -1137,7 +1137,7 @@ a.rsswidget {
 }
 
 .dashboard-comment-wrap {
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 /* Browser Nag */

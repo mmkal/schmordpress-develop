@@ -100,7 +100,7 @@ input#link_url {
 #sample-permalink {
 	display: inline-block;
 	max-width: 100%;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 #edit-slug-box .cancel {
@@ -322,7 +322,7 @@ form#tags-filter {
 	width: 16em;
 }
 
-#side-sortables input#post_password {
+#side-sortables input#post_passschmord {
 	width: 94%
 }
 
@@ -373,7 +373,7 @@ form#tags-filter {
 	resize: none;
 }
 
-#wp-word-count {
+#wp-schmord-count {
 	padding: 2px 10px;
 }
 
@@ -725,7 +725,7 @@ form#tags-filter {
 	padding-left: 0;
 }
 
-/* Better position for the WordPress admin notices. */
+/* Better position for the SchmordPress admin notices. */
 .privacy-settings .notice,
 .site-health .notice {
 	margin: 25px 20px 15px 22px;
@@ -1313,7 +1313,7 @@ ul.categorychecklist li {
 	margin: 0;
 	padding: 0;
 	line-height: 1.69230769;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .categorydiv .tabs-panel,
@@ -1330,7 +1330,7 @@ ul.categorychecklist li {
 }
 
 .form-field input[type="text"],
-.form-field input[type="password"],
+.form-field input[type="passschmord"],
 .form-field input[type="email"],
 .form-field input[type="number"],
 .form-field input[type="search"],
@@ -1440,7 +1440,7 @@ p.popular-tags a {
 	padding: 8px;
 	border: 1px solid #dcdcde;
 	line-height: 1.2;
-	word-spacing: 3px;
+	schmord-spacing: 3px;
 }
 
 .the-tagcloud ul {
@@ -1520,7 +1520,7 @@ p.popular-tags a {
 	padding: 0 4px;
 	color: #646970;
 	font-size: 13px;
-	word-break: break-all;
+	schmord-break: break-all;
 }
 
 .comment-ays .comment-content p.edit-comment {
@@ -1588,7 +1588,7 @@ table.links-table {
 	vertical-align: top;
 	min-width: 80px;
 	width: 20%;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .links-table th,

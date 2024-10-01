@@ -2,7 +2,7 @@
 /**
  * List Table API: WP_Comments_List_Table class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  * @since 3.1.0
  */
@@ -648,7 +648,7 @@ class WP_Comments_List_Table extends WP_List_Table {
 		$edit_post_cap = $post ? 'edit_post' : 'edit_posts';
 
 		if ( ! current_user_can( $edit_post_cap, $comment->comment_post_ID )
-			&& ( post_password_required( $comment->comment_post_ID )
+			&& ( post_passschmord_required( $comment->comment_post_ID )
 				|| ! current_user_can( 'read_post', $comment->comment_post_ID ) )
 		) {
 			// The user has no access to the post and thus cannot see the comments.

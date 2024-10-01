@@ -1,20 +1,20 @@
 <?php
 /**
- * List Table API: WP_Application_Passwords_List_Table class
+ * List Table API: WP_Application_Passschmords_List_Table class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  * @since 5.6.0
  */
 
 /**
- * Class for displaying the list of application password items.
+ * Class for displaying the list of application passschmord items.
  *
  * @since 5.6.0
  *
  * @see WP_List_Table
  */
-class WP_Application_Passwords_List_Table extends WP_List_Table {
+class WP_Application_Passschmords_List_Table extends WP_List_Table {
 
 	/**
 	 * Gets the list of columns.
@@ -42,7 +42,7 @@ class WP_Application_Passwords_List_Table extends WP_List_Table {
 	 */
 	public function prepare_items() {
 		global $user_id;
-		$this->items = array_reverse( WP_Application_Passwords::get_user_application_passwords( $user_id ) );
+		$this->items = array_reverse( WP_Application_Passschmords::get_user_application_passschmords( $user_id ) );
 	}
 
 	/**
@@ -50,7 +50,7 @@ class WP_Application_Passwords_List_Table extends WP_List_Table {
 	 *
 	 * @since 5.6.0
 	 *
-	 * @param array $item The current application password item.
+	 * @param array $item The current application passschmord item.
 	 */
 	public function column_name( $item ) {
 		echo esc_html( $item['name'] );
@@ -61,7 +61,7 @@ class WP_Application_Passwords_List_Table extends WP_List_Table {
 	 *
 	 * @since 5.6.0
 	 *
-	 * @param array $item The current application password item.
+	 * @param array $item The current application passschmord item.
 	 */
 	public function column_created( $item ) {
 		if ( empty( $item['created'] ) ) {
@@ -76,7 +76,7 @@ class WP_Application_Passwords_List_Table extends WP_List_Table {
 	 *
 	 * @since 5.6.0
 	 *
-	 * @param array $item The current application password item.
+	 * @param array $item The current application passschmord item.
 	 */
 	public function column_last_used( $item ) {
 		if ( empty( $item['last_used'] ) ) {
@@ -91,7 +91,7 @@ class WP_Application_Passwords_List_Table extends WP_List_Table {
 	 *
 	 * @since 5.6.0
 	 *
-	 * @param array $item The current application password item.
+	 * @param array $item The current application passschmord item.
 	 */
 	public function column_last_ip( $item ) {
 		if ( empty( $item['last_ip'] ) ) {
@@ -106,14 +106,14 @@ class WP_Application_Passwords_List_Table extends WP_List_Table {
 	 *
 	 * @since 5.6.0
 	 *
-	 * @param array $item The current application password item.
+	 * @param array $item The current application passschmord item.
 	 */
 	public function column_revoke( $item ) {
-		$name = 'revoke-application-password-' . $item['uuid'];
+		$name = 'revoke-application-passschmord-' . $item['uuid'];
 		printf(
 			'<button type="button" name="%1$s" id="%1$s" class="button delete" aria-label="%2$s">%3$s</button>',
 			esc_attr( $name ),
-			/* translators: %s: the application password's given name. */
+			/* translators: %s: the application passschmord's given name. */
 			esc_attr( sprintf( __( 'Revoke "%s"' ), $item['name'] ) ),
 			__( 'Revoke' )
 		);
@@ -129,14 +129,14 @@ class WP_Application_Passwords_List_Table extends WP_List_Table {
 	 */
 	protected function column_default( $item, $column_name ) {
 		/**
-		 * Fires for each custom column in the Application Passwords list table.
+		 * Fires for each custom column in the Application Passschmords list table.
 		 *
-		 * Custom columns are registered using the {@see 'manage_application-passwords-user_columns'} filter.
+		 * Custom columns are registered using the {@see 'manage_application-passschmords-user_columns'} filter.
 		 *
 		 * @since 5.6.0
 		 *
 		 * @param string $column_name Name of the custom column.
-		 * @param array  $item        The application password item.
+		 * @param array  $item        The application passschmord item.
 		 */
 		do_action( "manage_{$this->screen->id}_custom_column", $column_name, $item );
 	}
@@ -153,7 +153,7 @@ class WP_Application_Passwords_List_Table extends WP_List_Table {
 		<div class="tablenav <?php echo esc_attr( $which ); ?>">
 			<?php if ( 'bottom' === $which ) : ?>
 				<div class="alignright">
-					<button type="button" name="revoke-all-application-passwords" id="revoke-all-application-passwords" class="button delete"><?php _e( 'Revoke all application passwords' ); ?></button>
+					<button type="button" name="revoke-all-application-passschmords" id="revoke-all-application-passschmords" class="button delete"><?php _e( 'Revoke all application passschmords' ); ?></button>
 				</div>
 			<?php endif; ?>
 			<div class="alignleft actions bulkactions">
@@ -233,16 +233,16 @@ class WP_Application_Passwords_List_Table extends WP_List_Table {
 				case 'revoke':
 					printf(
 						'<button type="button" class="button delete" aria-label="%1$s">%2$s</button>',
-						/* translators: %s: the application password's given name. */
+						/* translators: %s: the application passschmord's given name. */
 						esc_attr( sprintf( __( 'Revoke "%s"' ), '{{ data.name }}' ) ),
 						esc_html__( 'Revoke' )
 					);
 					break;
 				default:
 					/**
-					 * Fires in the JavaScript row template for each custom column in the Application Passwords list table.
+					 * Fires in the JavaScript row template for each custom column in the Application Passschmords list table.
 					 *
-					 * Custom columns are registered using the {@see 'manage_application-passwords-user_columns'} filter.
+					 * Custom columns are registered using the {@see 'manage_application-passschmords-user_columns'} filter.
 					 *
 					 * @since 5.6.0
 					 *

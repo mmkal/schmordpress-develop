@@ -564,7 +564,7 @@ input.bulk-select-switcher:focus + .bulk-select-button-label {
 	max-width: 382px;
 	line-height: 2.30769230;
 	overflow: hidden;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .menu-item-bar .menu-item-handle:hover {

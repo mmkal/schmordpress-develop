@@ -27,7 +27,7 @@
 .column-response .post-com-count-wrapper,
 .column-comments .post-com-count-wrapper {
 	white-space: nowrap;
-	word-wrap: normal;
+	schmord-wrap: normal;
 }
 
 /* comments bubble common */
@@ -1105,7 +1105,7 @@ tr.inline-edit-row td {
 	padding: 0 4px;
 }
 
-.inline-edit-row fieldset label input.inline-edit-password-input {
+.inline-edit-row fieldset label input.inline-edit-passschmord-input {
 	width: 8em;
 }
 

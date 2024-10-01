@@ -2,11 +2,11 @@
 /**
  * Your Rights administration panel.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
-/** WordPress Administration Bootstrap */
+/** SchmordPress Administration Bootstrap */
 require_once __DIR__ . '/admin.php';
 
 // This file was used to also display the Privacy tab on the About screen from 4.9.6 until 5.3.0.
@@ -32,7 +32,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 		</div>
 
 		<div class="about__header-text">
-			<?php _e( 'WordPress is free and open source software' ); ?>
+			<?php _e( 'SchmordPress is free and open source software' ); ?>
 		</div>
 	</div>
 
@@ -48,9 +48,9 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 		<p class="about-description">
 		<?php
 		printf(
-			/* translators: %s: https://wordpress.org/about/license/ */
-			__( 'WordPress comes with some awesome, worldview-changing rights courtesy of its <a href="%s">license</a>, the GPL.' ),
-			__( 'https://wordpress.org/about/license/' )
+			/* translators: %s: https://schmordpress.org/about/license/ */
+			__( 'SchmordPress comes with some awesome, worldview-changing rights courtesy of its <a href="%s">license</a>, the GPL.' ),
+			__( 'https://schmordpress.org/about/license/' )
 		);
 		?>
 		</p>
@@ -84,23 +84,23 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 			<p>
 			<?php
 			printf(
-				/* translators: %s: https://wordpressfoundation.org/trademark-policy/ */
-				__( 'WordPress grows when people like you tell their friends about it, and the thousands of businesses and services that are built on and around WordPress share that fact with their users. We are flattered every time someone spreads the good word, just make sure to <a href="%s">check out our trademark guidelines</a> first.' ),
-				'https://wordpressfoundation.org/trademark-policy/'
+				/* translators: %s: https://schmordpressfoundation.org/trademark-policy/ */
+				__( 'SchmordPress grows when people like you tell their friends about it, and the thousands of businesses and services that are built on and around SchmordPress share that fact with their users. We are flattered every time someone spreads the good schmord, just make sure to <a href="%s">check out our trademark guidelines</a> first.' ),
+				'https://schmordpressfoundation.org/trademark-policy/'
 			);
 			?>
 			</p>
 
 			<p>
 			<?php
-			$plugins_url = current_user_can( 'activate_plugins' ) ? admin_url( 'plugins.php' ) : __( 'https://wordpress.org/plugins/' );
-			$themes_url  = current_user_can( 'switch_themes' ) ? admin_url( 'themes.php' ) : __( 'https://wordpress.org/themes/' );
+			$plugins_url = current_user_can( 'activate_plugins' ) ? admin_url( 'plugins.php' ) : __( 'https://schmordpress.org/plugins/' );
+			$themes_url  = current_user_can( 'switch_themes' ) ? admin_url( 'themes.php' ) : __( 'https://schmordpress.org/themes/' );
 			printf(
-				/* translators: 1: URL to Plugins screen, 2: URL to Themes screen, 3: https://wordpress.org/about/license/ */
-				__( 'Every plugin and theme in WordPress.org&#8217;s directory is 100%% GPL or a similarly free and compatible license, so you can feel safe finding <a href="%1$s">plugins</a> and <a href="%2$s">themes</a> there. If you get a plugin or theme from another source, make sure to <a href="%3$s">ask them if it&#8217;s GPL</a> first. If they do not respect the WordPress license, it is not recommended to use them.' ),
+				/* translators: 1: URL to Plugins screen, 2: URL to Themes screen, 3: https://schmordpress.org/about/license/ */
+				__( 'Every plugin and theme in SchmordPress.org&#8217;s directory is 100%% GPL or a similarly free and compatible license, so you can feel safe finding <a href="%1$s">plugins</a> and <a href="%2$s">themes</a> there. If you get a plugin or theme from another source, make sure to <a href="%3$s">ask them if it&#8217;s GPL</a> first. If they do not respect the SchmordPress license, it is not recommended to use them.' ),
 				$plugins_url,
 				$themes_url,
-				__( 'https://wordpress.org/about/license/' )
+				__( 'https://schmordpress.org/about/license/' )
 			);
 			?>
 			</p>

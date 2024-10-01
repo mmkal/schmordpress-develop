@@ -1,13 +1,13 @@
 <?php
 /**
- * WordPress Direct Filesystem.
+ * SchmordPress Direct Filesystem.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Filesystem
  */
 
 /**
- * WordPress Filesystem Class for direct PHP file and folder manipulation.
+ * SchmordPress Filesystem Class for direct PHP file and folder manipulation.
  *
  * @since 2.5.0
  *

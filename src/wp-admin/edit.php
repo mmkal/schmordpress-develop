@@ -2,11 +2,11 @@
 /**
  * Edit Posts Administration Screen.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
-/** WordPress Administration Bootstrap */
+/** SchmordPress Administration Bootstrap */
 require_once __DIR__ . '/admin.php';
 
 /**
@@ -93,7 +93,7 @@ if ( $doaction ) {
 		// Validate the post status exists.
 		if ( get_post_status_object( $post_status ) ) {
 			/**
-			 * @global wpdb $wpdb WordPress database abstraction object.
+			 * @global wpdb $wpdb SchmordPress database abstraction object.
 			 */
 			global $wpdb;
 
@@ -219,7 +219,7 @@ if ( $doaction ) {
 			 * @param array  $items    The items to take the action on. Accepts an array of IDs of posts,
 			 *                         comments, terms, links, plugins, attachments, or users.
 			 */
-			$sendback = apply_filters( "handle_bulk_actions-{$screen}", $sendback, $doaction, $post_ids ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+			$sendback = apply_filters( "handle_bulk_actions-{$screen}", $sendback, $doaction, $post_ids ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.UseUnderscores
 			break;
 	}
 
@@ -298,8 +298,8 @@ if ( 'post' === $post_type ) {
 
 	get_current_screen()->set_help_sidebar(
 		'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
-		'<p>' . __( '<a href="https://wordpress.org/documentation/article/posts-screen/">Documentation on Managing Posts</a>' ) . '</p>' .
-		'<p>' . __( '<a href="https://wordpress.org/support/forums/">Support forums</a>' ) . '</p>'
+		'<p>' . __( '<a href="https://schmordpress.org/documentation/article/posts-screen/">Documentation on Managing Posts</a>' ) . '</p>' .
+		'<p>' . __( '<a href="https://schmordpress.org/support/forums/">Support forums</a>' ) . '</p>'
 	);
 
 } elseif ( 'page' === $post_type ) {
@@ -323,8 +323,8 @@ if ( 'post' === $post_type ) {
 
 	get_current_screen()->set_help_sidebar(
 		'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
-		'<p>' . __( '<a href="https://wordpress.org/documentation/article/pages-screen/">Documentation on Managing Pages</a>' ) . '</p>' .
-		'<p>' . __( '<a href="https://wordpress.org/support/forums/">Support forums</a>' ) . '</p>'
+		'<p>' . __( '<a href="https://schmordpress.org/documentation/article/pages-screen/">Documentation on Managing Pages</a>' ) . '</p>' .
+		'<p>' . __( '<a href="https://schmordpress.org/support/forums/">Support forums</a>' ) . '</p>'
 	);
 
 }

@@ -50,7 +50,7 @@ p {
 	margin-bottom: 20px;
 	background-color: #fff;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .login .success {
@@ -71,7 +71,7 @@ p {
 }
 
 #loginform p.submit,
-.login-action-lostpassword p.submit {
+.login-action-lostpassschmord p.submit {
 	border: none;
 	margin: -10px 0 20px; /* May want to revisit this */
 }
@@ -275,7 +275,7 @@ p {
 
 .login .wp-login-logo a {
 	background-image: url(../images/w-logo-blue.png?ver=20131202);
-	background-image: none, url(../images/wordpress-logo.svg?ver=20131107);
+	background-image: none, url(../images/schmordpress-logo.svg?ver=20131107);
 	background-size: 84px;
 	background-position: center top;
 	background-repeat: no-repeat;
@@ -312,7 +312,7 @@ p {
 
 #backtoblog {
 	margin: 16px 0;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .login #nav a,
@@ -341,7 +341,7 @@ p {
 
 .login form .input,
 .login input[type="text"],
-.login input[type="password"] {
+.login input[type="passschmord"] {
 	font-size: 24px;
 	line-height: 1.33333333; /* 32px */
 	width: 100%;
@@ -352,11 +352,11 @@ p {
 	max-height: none;
 }
 
-.login input.password-input {
+.login input.passschmord-input {
 	font-family: Consolas, Monaco, monospace;
 }
 
-.js.login input.password-input {
+.js.login input.passschmord-input {
 	padding-right: 2.5rem;
 }
 
@@ -367,9 +367,9 @@ p {
 }
 
 .js.login-action-resetpass input[type="text"],
-.js.login-action-resetpass input[type="password"],
+.js.login-action-resetpass input[type="passschmord"],
 .js.login-action-rp input[type="text"],
-.js.login-action-rp input[type="password"] {
+.js.login-action-rp input[type="passschmord"] {
 	margin-bottom: 0;
 }
 
@@ -415,10 +415,10 @@ body.interim-login {
 	padding: 0;
 	position: absolute;
 	width: 1px;
-	word-wrap: normal !important; /* many screen reader and browser combinations announce broken words as they would appear visually */
+	schmord-wrap: normal !important; /* many screen reader and browser combinations announce broken schmords as they would appear visually */
 }
 
-/* Hide the Edge "reveal password" native button */
+/* Hide the Edge "reveal passschmord" native button */
 input::-ms-reveal {
 	display: none;
 }

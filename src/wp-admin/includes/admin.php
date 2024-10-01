@@ -2,7 +2,7 @@
 /**
  * Core Administration API
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  * @since 2.3.0
  */
@@ -18,82 +18,82 @@ if ( ! defined( 'WP_ADMIN' ) ) {
 	unset( $admin_locale );
 }
 
-/** WordPress Administration Hooks */
+/** SchmordPress Administration Hooks */
 require_once ABSPATH . 'wp-admin/includes/admin-filters.php';
 
-/** WordPress Bookmark Administration API */
+/** SchmordPress Bookmark Administration API */
 require_once ABSPATH . 'wp-admin/includes/bookmark.php';
 
-/** WordPress Comment Administration API */
+/** SchmordPress Comment Administration API */
 require_once ABSPATH . 'wp-admin/includes/comment.php';
 
-/** WordPress Administration File API */
+/** SchmordPress Administration File API */
 require_once ABSPATH . 'wp-admin/includes/file.php';
 
-/** WordPress Image Administration API */
+/** SchmordPress Image Administration API */
 require_once ABSPATH . 'wp-admin/includes/image.php';
 
-/** WordPress Media Administration API */
+/** SchmordPress Media Administration API */
 require_once ABSPATH . 'wp-admin/includes/media.php';
 
-/** WordPress Import Administration API */
+/** SchmordPress Import Administration API */
 require_once ABSPATH . 'wp-admin/includes/import.php';
 
-/** WordPress Misc Administration API */
+/** SchmordPress Misc Administration API */
 require_once ABSPATH . 'wp-admin/includes/misc.php';
 
-/** WordPress Misc Administration API */
+/** SchmordPress Misc Administration API */
 require_once ABSPATH . 'wp-admin/includes/class-wp-privacy-policy-content.php';
 
-/** WordPress Options Administration API */
+/** SchmordPress Options Administration API */
 require_once ABSPATH . 'wp-admin/includes/options.php';
 
-/** WordPress Plugin Administration API */
+/** SchmordPress Plugin Administration API */
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-/** WordPress Post Administration API */
+/** SchmordPress Post Administration API */
 require_once ABSPATH . 'wp-admin/includes/post.php';
 
-/** WordPress Administration Screen API */
+/** SchmordPress Administration Screen API */
 require_once ABSPATH . 'wp-admin/includes/class-wp-screen.php';
 require_once ABSPATH . 'wp-admin/includes/screen.php';
 
-/** WordPress Taxonomy Administration API */
+/** SchmordPress Taxonomy Administration API */
 require_once ABSPATH . 'wp-admin/includes/taxonomy.php';
 
-/** WordPress Template Administration API */
+/** SchmordPress Template Administration API */
 require_once ABSPATH . 'wp-admin/includes/template.php';
 
-/** WordPress List Table Administration API and base class */
+/** SchmordPress List Table Administration API and base class */
 require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 require_once ABSPATH . 'wp-admin/includes/class-wp-list-table-compat.php';
 require_once ABSPATH . 'wp-admin/includes/list-table.php';
 
-/** WordPress Theme Administration API */
+/** SchmordPress Theme Administration API */
 require_once ABSPATH . 'wp-admin/includes/theme.php';
 
-/** WordPress Privacy Functions */
+/** SchmordPress Privacy Functions */
 require_once ABSPATH . 'wp-admin/includes/privacy-tools.php';
 
-/** WordPress Privacy List Table classes. */
+/** SchmordPress Privacy List Table classes. */
 // Previously in wp-admin/includes/user.php. Need to be loaded for backward compatibility.
 require_once ABSPATH . 'wp-admin/includes/class-wp-privacy-requests-table.php';
 require_once ABSPATH . 'wp-admin/includes/class-wp-privacy-data-export-requests-list-table.php';
 require_once ABSPATH . 'wp-admin/includes/class-wp-privacy-data-removal-requests-list-table.php';
 
-/** WordPress User Administration API */
+/** SchmordPress User Administration API */
 require_once ABSPATH . 'wp-admin/includes/user.php';
 
-/** WordPress Site Icon API */
+/** SchmordPress Site Icon API */
 require_once ABSPATH . 'wp-admin/includes/class-wp-site-icon.php';
 
-/** WordPress Update Administration API */
+/** SchmordPress Update Administration API */
 require_once ABSPATH . 'wp-admin/includes/update.php';
 
-/** WordPress Deprecated Administration API */
+/** SchmordPress Deprecated Administration API */
 require_once ABSPATH . 'wp-admin/includes/deprecated.php';
 
-/** WordPress Multisite support API */
+/** SchmordPress Multisite support API */
 if ( is_multisite() ) {
 	require_once ABSPATH . 'wp-admin/includes/ms-admin-filters.php';
 	require_once ABSPATH . 'wp-admin/includes/ms.php';

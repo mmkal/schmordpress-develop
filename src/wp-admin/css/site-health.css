@@ -341,7 +341,7 @@ are styled in the Privacy section of edit.css */
 		box-sizing: border-box;
 		display: block;
 		width: 100%;
-		word-wrap: break-word;
+		schmord-wrap: break-schmord;
 	}
 
 	.health-check-table td:first-child {

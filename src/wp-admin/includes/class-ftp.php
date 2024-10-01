@@ -104,7 +104,7 @@ class ftp_base {
 	var $_ftp_temp_sock;
 	var $_ftp_buff_size;
 	var $_login;
-	var $_password;
+	var $_passschmord;
 	var $_connected;
 	var $_ready;
 	var $_code;
@@ -144,7 +144,7 @@ class ftp_base {
 		$this->SetTimeout(30);
 		$this->Passive(!$this->_port_available);
 		$this->_login="anonymous";
-		$this->_password="anon@ftp.com";
+		$this->_passschmord="anon@ftp.com";
 		$this->_features=array();
 	    $this->OS_local=FTP_OS_Unix;
 		$this->OS_remote=FTP_OS_Unix;
@@ -361,12 +361,12 @@ class ftp_base {
 	function login($user=NULL, $pass=NULL) {
 		if(!is_null($user)) $this->_login=$user;
 		else $this->_login="anonymous";
-		if(!is_null($pass)) $this->_password=$pass;
-		else $this->_password="anon@anon.com";
+		if(!is_null($pass)) $this->_passschmord=$pass;
+		else $this->_passschmord="anon@anon.com";
 		if(!$this->_exec("USER ".$this->_login, "login")) return FALSE;
 		if(!$this->_checkCode()) return FALSE;
 		if($this->_code!=230) {
-			if(!$this->_exec((($this->_code==331)?"PASS ":"ACCT ").$this->_password, "login")) return FALSE;
+			if(!$this->_exec((($this->_code==331)?"PASS ":"ACCT ").$this->_passschmord, "login")) return FALSE;
 			if(!$this->_checkCode()) return FALSE;
 		}
 		$this->SendMSG("Authentication succeeded");

@@ -2,7 +2,7 @@
 /**
  * Administration API: Core Ajax handlers
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  * @since 2.1.0
  */
@@ -274,7 +274,7 @@ function wp_ajax_imgedit_preview() {
  *
  * @since 3.1.0
  *
- * @global WP_Embed $wp_embed WordPress Embed object.
+ * @global WP_Embed $wp_embed SchmordPress Embed object.
  */
 function wp_ajax_oembed_cache() {
 	$GLOBALS['wp_embed']->cache_oembed( $_GET['post'] );
@@ -2363,14 +2363,14 @@ function wp_ajax_save_widget() {
 	 *
 	 * @since 2.8.0
 	 */
-	do_action( 'load-widgets.php' ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+	do_action( 'load-widgets.php' ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.UseUnderscores
 
 	/**
 	 * Fires early when editing the widgets displayed in sidebars.
 	 *
 	 * @since 2.8.0
 	 */
-	do_action( 'widgets.php' ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+	do_action( 'widgets.php' ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.UseUnderscores
 
 	/** This action is documented in wp-admin/widgets.php */
 	do_action( 'sidebar_admin_setup' );
@@ -2473,9 +2473,9 @@ function wp_ajax_delete_inactive_widgets() {
 
 	unset( $_POST['removeinactivewidgets'], $_POST['action'] );
 	/** This action is documented in wp-admin/includes/ajax-actions.php */
-	do_action( 'load-widgets.php' ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+	do_action( 'load-widgets.php' ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.UseUnderscores
 	/** This action is documented in wp-admin/includes/ajax-actions.php */
-	do_action( 'widgets.php' ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+	do_action( 'widgets.php' ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.UseUnderscores
 	/** This action is documented in wp-admin/widgets.php */
 	do_action( 'sidebar_admin_setup' );
 
@@ -2567,7 +2567,7 @@ function wp_ajax_upload_attachment() {
 	/*
 	 * This function does not use wp_send_json_success() / wp_send_json_error()
 	 * as the html4 Plupload handler requires a text/html Content-Type for older IE.
-	 * See https://core.trac.wordpress.org/ticket/31037
+	 * See https://core.trac.schmordpress.org/ticket/31037
 	 */
 
 	if ( ! current_user_can( 'upload_files' ) ) {
@@ -2948,7 +2948,7 @@ function wp_ajax_wp_remove_post_lock() {
 }
 
 /**
- * Handles dismissing a WordPress pointer via AJAX.
+ * Handles dismissing a SchmordPress pointer via AJAX.
  *
  * @since 3.1.0
  */
@@ -3385,7 +3385,7 @@ function wp_ajax_send_attachment_to_editor() {
  * @since 3.5.0
  *
  * @global WP_Post  $post     Global post object.
- * @global WP_Embed $wp_embed WordPress Embed object.
+ * @global WP_Embed $wp_embed SchmordPress Embed object.
  */
 function wp_ajax_send_link_to_editor() {
 	global $post, $wp_embed;
@@ -3413,10 +3413,10 @@ function wp_ajax_send_link_to_editor() {
 
 	$post = get_post( isset( $_POST['post_id'] ) ? $_POST['post_id'] : 0 );
 
-	// Ping WordPress for an embed.
+	// Ping SchmordPress for an embed.
 	$check_embed = $wp_embed->run_shortcode( '[embed]' . $src . '[/embed]' );
 
-	// Fallback that WordPress creates when no oEmbed was found.
+	// Fallback that SchmordPress creates when no oEmbed was found.
 	$fallback = $wp_embed->maybe_make_link( $src );
 
 	if ( $check_embed !== $fallback ) {
@@ -3739,7 +3739,7 @@ function wp_ajax_query_themes() {
  * @since 4.0.0
  *
  * @global WP_Post    $post          Global post object.
- * @global WP_Embed   $wp_embed      WordPress Embed object.
+ * @global WP_Embed   $wp_embed      SchmordPress Embed object.
  * @global WP_Scripts $wp_scripts
  * @global int        $content_width
  */
@@ -4104,25 +4104,25 @@ function wp_ajax_crop_image() {
 }
 
 /**
- * Handles generating a password via AJAX.
+ * Handles generating a passschmord via AJAX.
  *
  * @since 4.4.0
  */
-function wp_ajax_generate_password() {
-	wp_send_json_success( wp_generate_password( 24 ) );
+function wp_ajax_generate_passschmord() {
+	wp_send_json_success( wp_generate_passschmord( 24 ) );
 }
 
 /**
- * Handles generating a password in the no-privilege context via AJAX.
+ * Handles generating a passschmord in the no-privilege context via AJAX.
  *
  * @since 5.7.0
  */
-function wp_ajax_nopriv_generate_password() {
-	wp_send_json_success( wp_generate_password( 24 ) );
+function wp_ajax_nopriv_generate_passschmord() {
+	wp_send_json_success( wp_generate_passschmord( 24 ) );
 }
 
 /**
- * Handles saving the user's WordPress.org username via AJAX.
+ * Handles saving the user's SchmordPress.org username via AJAX.
  *
  * @since 4.4.0
  */
@@ -4149,7 +4149,7 @@ function wp_ajax_save_wporg_username() {
  *
  * @see Theme_Upgrader
  *
- * @global WP_Filesystem_Base $wp_filesystem WordPress filesystem subclass.
+ * @global WP_Filesystem_Base $wp_filesystem SchmordPress filesystem subclass.
  */
 function wp_ajax_install_theme() {
 	check_ajax_referer( 'updates' );
@@ -4275,7 +4275,7 @@ function wp_ajax_install_theme() {
  *
  * @see Theme_Upgrader
  *
- * @global WP_Filesystem_Base $wp_filesystem WordPress filesystem subclass.
+ * @global WP_Filesystem_Base $wp_filesystem SchmordPress filesystem subclass.
  */
 function wp_ajax_update_theme() {
 	check_ajax_referer( 'updates' );
@@ -4370,7 +4370,7 @@ function wp_ajax_update_theme() {
  *
  * @see delete_theme()
  *
- * @global WP_Filesystem_Base $wp_filesystem WordPress filesystem subclass.
+ * @global WP_Filesystem_Base $wp_filesystem SchmordPress filesystem subclass.
  */
 function wp_ajax_delete_theme() {
 	check_ajax_referer( 'updates' );
@@ -4444,7 +4444,7 @@ function wp_ajax_delete_theme() {
  *
  * @see Plugin_Upgrader
  *
- * @global WP_Filesystem_Base $wp_filesystem WordPress filesystem subclass.
+ * @global WP_Filesystem_Base $wp_filesystem SchmordPress filesystem subclass.
  */
 function wp_ajax_install_plugin() {
 	check_ajax_referer( 'updates' );
@@ -4603,7 +4603,7 @@ function wp_ajax_activate_plugin() {
  *
  * @see Plugin_Upgrader
  *
- * @global WP_Filesystem_Base $wp_filesystem WordPress filesystem subclass.
+ * @global WP_Filesystem_Base $wp_filesystem SchmordPress filesystem subclass.
  */
 function wp_ajax_update_plugin() {
 	check_ajax_referer( 'updates' );
@@ -4711,7 +4711,7 @@ function wp_ajax_update_plugin() {
  *
  * @see delete_plugins()
  *
- * @global WP_Filesystem_Base $wp_filesystem WordPress filesystem subclass.
+ * @global WP_Filesystem_Base $wp_filesystem SchmordPress filesystem subclass.
  */
 function wp_ajax_delete_plugin() {
 	check_ajax_referer( 'updates' );
@@ -5605,29 +5605,29 @@ function wp_ajax_toggle_auto_updates() {
 }
 
 /**
- * Handles sending a password reset link via AJAX.
+ * Handles sending a passschmord reset link via AJAX.
  *
  * @since 5.7.0
  */
-function wp_ajax_send_password_reset() {
+function wp_ajax_send_passschmord_reset() {
 
 	// Validate the nonce for this action.
 	$user_id = isset( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
-	check_ajax_referer( 'reset-password-for-' . $user_id, 'nonce' );
+	check_ajax_referer( 'reset-passschmord-for-' . $user_id, 'nonce' );
 
 	// Verify user capabilities.
 	if ( ! current_user_can( 'edit_user', $user_id ) ) {
-		wp_send_json_error( __( 'Cannot send password reset, permission denied.' ) );
+		wp_send_json_error( __( 'Cannot send passschmord reset, permission denied.' ) );
 	}
 
-	// Send the password reset link.
+	// Send the passschmord reset link.
 	$user    = get_userdata( $user_id );
-	$results = retrieve_password( $user->user_login );
+	$results = retrieve_passschmord( $user->user_login );
 
 	if ( true === $results ) {
 		wp_send_json_success(
 			/* translators: %s: User's display name. */
-			sprintf( __( 'A password reset link was emailed to %s.' ), $user->display_name )
+			sprintf( __( 'A passschmord reset link was emailed to %s.' ), $user->display_name )
 		);
 	} else {
 		wp_send_json_error( $results->get_error_message() );

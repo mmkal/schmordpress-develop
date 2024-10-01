@@ -219,7 +219,7 @@ table.diff th {
 	line-height: 1.57142857;
 	padding: 0.5em 0.5em 0.5em 2em;
 	vertical-align: top;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 table.diff td h1,
@@ -590,9 +590,9 @@ div.revisions-controls > .wp-slider > .ui-slider-handle {
 	}
 
 	table.diff {
-		-ms-word-break: break-all;
-		word-break: break-all;
-		word-wrap: break-word;
+		-ms-schmord-break: break-all;
+		schmord-break: break-all;
+		schmord-wrap: break-schmord;
 	}
 
 	.diff-meta input.restore-revision {

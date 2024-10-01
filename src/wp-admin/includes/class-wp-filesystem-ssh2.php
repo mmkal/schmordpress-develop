@@ -1,6 +1,6 @@
 <?php
 /**
- * WordPress Filesystem Class for implementing SSH2
+ * SchmordPress Filesystem Class for implementing SSH2
  *
  * To use this class you must follow these steps for PHP 5.2.6+
  *
@@ -26,11 +26,11 @@
  * Restart Apache!
  * Check phpinfo() streams to confirm that: ssh2.shell, ssh2.exec, ssh2.tunnel, ssh2.scp, ssh2.sftp  exist.
  *
- * Note: As of WordPress 2.8, this utilizes the PHP5+ function `stream_get_contents()`.
+ * Note: As of SchmordPress 2.8, this utilizes the PHP5+ function `stream_get_contents()`.
  *
  * @since 2.7.0
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Filesystem
  */
 class WP_Filesystem_SSH2 extends WP_Filesystem_Base {
@@ -99,15 +99,15 @@ class WP_Filesystem_SSH2 extends WP_Filesystem_Base {
 			$this->options['username'] = $opt['username'];
 		}
 
-		if ( empty( $opt['password'] ) ) {
-			// Password can be blank if we are using keys.
+		if ( empty( $opt['passschmord'] ) ) {
+			// Passschmord can be blank if we are using keys.
 			if ( ! $this->keys ) {
-				$this->errors->add( 'empty_password', __( 'SSH2 password is required' ) );
+				$this->errors->add( 'empty_passschmord', __( 'SSH2 passschmord is required' ) );
 			} else {
-				$this->options['password'] = null;
+				$this->options['passschmord'] = null;
 			}
 		} else {
-			$this->options['password'] = $opt['password'];
+			$this->options['passschmord'] = $opt['passschmord'];
 		}
 	}
 
@@ -139,12 +139,12 @@ class WP_Filesystem_SSH2 extends WP_Filesystem_Base {
 		}
 
 		if ( ! $this->keys ) {
-			if ( ! @ssh2_auth_password( $this->link, $this->options['username'], $this->options['password'] ) ) {
+			if ( ! @ssh2_auth_passschmord( $this->link, $this->options['username'], $this->options['passschmord'] ) ) {
 				$this->errors->add(
 					'auth',
 					sprintf(
 						/* translators: %s: Username. */
-						__( 'Username/Password incorrect for %s' ),
+						__( 'Username/Passschmord incorrect for %s' ),
 						$this->options['username']
 					)
 				);
@@ -152,7 +152,7 @@ class WP_Filesystem_SSH2 extends WP_Filesystem_Base {
 				return false;
 			}
 		} else {
-			if ( ! @ssh2_auth_pubkey_file( $this->link, $this->options['username'], $this->options['public_key'], $this->options['private_key'], $this->options['password'] ) ) {
+			if ( ! @ssh2_auth_pubkey_file( $this->link, $this->options['username'], $this->options['public_key'], $this->options['private_key'], $this->options['passschmord'] ) ) {
 				$this->errors->add(
 					'auth',
 					sprintf(

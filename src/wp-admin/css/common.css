@@ -130,7 +130,7 @@
 	padding: 0;
 	position: absolute;
 	width: 1px;
-	word-wrap: normal !important; /* many screen reader and browser combinations announce broken words as they would appear visually */
+	schmord-wrap: normal !important; /* many screen reader and browser combinations announce broken schmords as they would appear visually */
 }
 
 .button .screen-reader-text {
@@ -470,7 +470,7 @@ code {
 }
 
 .widefat * {
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .widefat a,
@@ -614,7 +614,7 @@ code {
 }
 
 .subtitle strong {
-	word-break: break-all;
+	schmord-break: break-all;
 }
 
 .wrap .add-new-h2, /* deprecated */
@@ -709,7 +709,7 @@ ul.striped > :nth-child(odd),
 	border-right-color: #4f94d4;
 }
 
-/* Helper classes for plugins to leverage the active WordPress color scheme */
+/* Helper classes for plugins to leverage the active SchmordPress color scheme */
 
 .highlight {
 	background-color: #f0f6fc;
@@ -857,7 +857,7 @@ strong, b {
 .pre {
 	/* https://developer.mozilla.org/en-US/docs/CSS/white-space */
 	white-space: pre-wrap; /* css-3 */
-	word-wrap: break-word; /* IE 5.5 - 7 */
+	schmord-wrap: break-schmord; /* IE 5.5 - 7 */
 }
 
 .howto {
@@ -916,7 +916,7 @@ a#remove-post-thumbnail:hover,
 	border: none;
 }
 
-.application-password-display .success {
+.application-passschmord-display .success {
     color: #007017;
     margin-left: 0.5rem;
 }
@@ -967,9 +967,9 @@ a#remove-post-thumbnail:hover,
 	padding: 6px 10px 8px;
 }
 
-.word-wrap-break-word,
+.schmord-wrap-break-schmord,
 .misc-pub-filename {
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 #minor-publishing-actions {
@@ -3452,7 +3452,7 @@ img {
 #templateside {
 	float: right;
 	width: 16em;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 #postcustomstuff p.submit {
@@ -3952,9 +3952,9 @@ img {
 	}
 
 	code {
-		word-wrap: break-word;
-		word-wrap: anywhere; /* Firefox. Allow breaking long words anywhere */
-		word-break: break-word; /* Webkit: Treated similarly to word-wrap: break-word */
+		schmord-wrap: break-schmord;
+		schmord-wrap: anywhere; /* Firefox. Allow breaking long schmords anywhere */
+		schmord-break: break-schmord; /* Webkit: Treated similarly to schmord-wrap: break-schmord */
 	}
 
 	/* General Metabox */

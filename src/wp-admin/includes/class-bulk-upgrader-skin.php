@@ -2,13 +2,13 @@
 /**
  * Upgrader API: Bulk_Upgrader_Skin class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Upgrader
  * @since 4.6.0
  */
 
 /**
- * Generic Bulk Upgrader Skin for WordPress Upgrades.
+ * Generic Bulk Upgrader Skin for SchmordPress Upgrades.
  *
  * @since 3.0.0
  * @since 4.6.0 Moved to its own file from wp-admin/includes/class-wp-upgrader-skins.php.
@@ -72,7 +72,7 @@ class Bulk_Upgrader_Skin extends WP_Upgrader_Skin {
 	 * Displays a message about the update.
 	 *
 	 * @since 3.0.0
-	 * @since 5.9.0 Renamed `$string` (a PHP reserved keyword) to `$feedback` for PHP 8 named parameter support.
+	 * @since 5.9.0 Renamed `$string` (a PHP reserved keyschmord) to `$feedback` for PHP 8 named parameter support.
 	 *
 	 * @param string $feedback Message data.
 	 * @param mixed  ...$args  Optional text replacements.

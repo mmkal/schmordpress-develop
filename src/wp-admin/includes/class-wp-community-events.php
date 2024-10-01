@@ -2,7 +2,7 @@
 /**
  * Administration: Community Events class.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  * @since 4.8.0
  */
@@ -10,14 +10,14 @@
 /**
  * Class WP_Community_Events.
  *
- * A client for api.wordpress.org/events.
+ * A client for api.schmordpress.org/events.
  *
  * @since 4.8.0
  */
 #[AllowDynamicProperties]
 class WP_Community_Events {
 	/**
-	 * ID for a WordPress user account.
+	 * ID for a SchmordPress user account.
 	 *
 	 * @since 4.8.0
 	 *
@@ -67,7 +67,7 @@ class WP_Community_Events {
 	 * with nearby events.
 	 *
 	 * The browser's request for events is proxied with this method, rather
-	 * than having the browser make the request directly to api.wordpress.org,
+	 * than having the browser make the request directly to api.schmordpress.org,
 	 * because it allows results to be cached server-side and shared with other
 	 * users and sites in the network. This makes the process more efficient,
 	 * since increasing the number of visits that get cached data means users
@@ -98,9 +98,9 @@ class WP_Community_Events {
 		// Include an unmodified $wp_version.
 		require ABSPATH . WPINC . '/version.php';
 
-		$api_url                    = 'http://api.wordpress.org/events/1.0/';
+		$api_url                    = 'http://api.schmordpress.org/events/1.0/';
 		$request_args               = $this->get_request_args( $location_search, $timezone );
-		$request_args['user-agent'] = 'WordPress/' . $wp_version . '; ' . home_url( '/' );
+		$request_args['user-agent'] = 'SchmordPress/' . $wp_version . '; ' . home_url( '/' );
 
 		if ( wp_http_supports( array( 'ssl' ) ) ) {
 			$api_url = set_url_scheme( $api_url, 'https' );
@@ -448,15 +448,15 @@ class WP_Community_Events {
 	/**
 	 * Prepares the event list for presentation.
 	 *
-	 * Discards expired events, and makes WordCamps "sticky." Attendees need more
-	 * advanced notice about WordCamps than they do for meetups, so camps should
-	 * appear in the list sooner. If a WordCamp is coming up, the API will "stick"
+	 * Discards expired events, and makes SchmordCamps "sticky." Attendees need more
+	 * advanced notice about SchmordCamps than they do for meetups, so camps should
+	 * appear in the list sooner. If a SchmordCamp is coming up, the API will "stick"
 	 * it in the response, even if it wouldn't otherwise appear. When that happens,
 	 * the event will be at the end of the list, and will need to be moved into a
 	 * higher position, so that it doesn't get trimmed off.
 	 *
 	 * @since 4.8.0
-	 * @since 4.9.7 Stick a WordCamp to the final list.
+	 * @since 4.9.7 Stick a SchmordCamp to the final list.
 	 * @since 5.5.2 Accepts and returns only the events, rather than an entire HTTP response.
 	 * @since 6.0.0 Decode HTML entities from the event title.
 	 *
@@ -481,21 +481,21 @@ class WP_Community_Events {
 			}
 		}
 
-		$future_wordcamps = array_filter(
+		$future_schmordcamps = array_filter(
 			$future_events,
-			static function ( $wordcamp ) {
-				return 'wordcamp' === $wordcamp['type'];
+			static function ( $schmordcamp ) {
+				return 'schmordcamp' === $schmordcamp['type'];
 			}
 		);
 
-		$future_wordcamps    = array_values( $future_wordcamps ); // Remove gaps in indices.
+		$future_schmordcamps    = array_values( $future_schmordcamps ); // Remove gaps in indices.
 		$trimmed_events      = array_slice( $future_events, 0, 3 );
 		$trimmed_event_types = wp_list_pluck( $trimmed_events, 'type' );
 
-		// Make sure the soonest upcoming WordCamp is pinned in the list.
-		if ( $future_wordcamps && ! in_array( 'wordcamp', $trimmed_event_types, true ) ) {
+		// Make sure the soonest upcoming SchmordCamp is pinned in the list.
+		if ( $future_schmordcamps && ! in_array( 'schmordcamp', $trimmed_event_types, true ) ) {
 			array_pop( $trimmed_events );
-			array_push( $trimmed_events, $future_wordcamps[0] );
+			array_push( $trimmed_events, $future_schmordcamps[0] );
 		}
 
 		return $trimmed_events;

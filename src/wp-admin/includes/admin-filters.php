@@ -2,7 +2,7 @@
 /**
  * Administration API: Default admin hooks
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  * @since 4.3.0
  */
@@ -118,12 +118,12 @@ add_action( 'customize_controls_print_footer_scripts', 'customize_themes_print_t
 add_action( 'install_themes_pre_theme-information', 'install_theme_information' );
 
 // User hooks.
-add_action( 'admin_init', 'default_password_nag_handler' );
+add_action( 'admin_init', 'default_passschmord_nag_handler' );
 
-add_action( 'admin_notices', 'default_password_nag' );
+add_action( 'admin_notices', 'default_passschmord_nag' );
 add_action( 'admin_notices', 'new_user_email_admin_notice' );
 
-add_action( 'profile_update', 'default_password_nag_edit_user', 10, 2 );
+add_action( 'profile_update', 'default_passschmord_nag_edit_user', 10, 2 );
 
 add_action( 'personal_options_update', 'send_confirmation_on_profile_email' );
 
@@ -141,7 +141,7 @@ add_action( 'admin_notices', 'wp_recovery_mode_nag', 1 );
 add_filter( 'update_footer', 'core_update_footer' );
 
 // Update Core hooks.
-add_action( '_core_updated_successfully', '_redirect_to_about_wordpress' );
+add_action( '_core_updated_successfully', '_redirect_to_about_schmordpress' );
 
 // Upgrade hooks.
 add_action( 'upgrader_process_complete', array( 'Language_Pack_Upgrader', 'async_upgrade' ), 20 );
@@ -161,7 +161,7 @@ add_action( 'admin_init', array( 'WP_Privacy_Policy_Content', 'text_change_check
 // Show a "postbox" with the text suggestions for a privacy policy.
 add_action( 'admin_notices', array( 'WP_Privacy_Policy_Content', 'notice' ) );
 
-// Add the suggested policy text from WordPress.
+// Add the suggested policy text from SchmordPress.
 add_action( 'admin_init', array( 'WP_Privacy_Policy_Content', 'add_suggested_content' ), 1 );
 
 // Update the cached policy info when the policy page is updated.

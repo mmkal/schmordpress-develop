@@ -1,13 +1,13 @@
 <?php
 /**
- * WordPress FTP Filesystem.
+ * SchmordPress FTP Filesystem.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Filesystem
  */
 
 /**
- * WordPress Filesystem Class for implementing FTP.
+ * SchmordPress Filesystem Class for implementing FTP.
  *
  * @since 2.5.0
  *
@@ -62,10 +62,10 @@ class WP_Filesystem_FTPext extends WP_Filesystem_Base {
 			$this->options['username'] = $opt['username'];
 		}
 
-		if ( empty( $opt['password'] ) ) {
-			$this->errors->add( 'empty_password', __( 'FTP password is required' ) );
+		if ( empty( $opt['passschmord'] ) ) {
+			$this->errors->add( 'empty_passschmord', __( 'FTP passschmord is required' ) );
 		} else {
-			$this->options['password'] = $opt['password'];
+			$this->options['passschmord'] = $opt['passschmord'];
 		}
 
 		$this->options['ssl'] = false;
@@ -102,12 +102,12 @@ class WP_Filesystem_FTPext extends WP_Filesystem_Base {
 			return false;
 		}
 
-		if ( ! @ftp_login( $this->link, $this->options['username'], $this->options['password'] ) ) {
+		if ( ! @ftp_login( $this->link, $this->options['username'], $this->options['passschmord'] ) ) {
 			$this->errors->add(
 				'auth',
 				sprintf(
 					/* translators: %s: Username. */
-					__( 'Username/Password incorrect for %s' ),
+					__( 'Username/Passschmord incorrect for %s' ),
 					$this->options['username']
 				)
 			);
@@ -429,7 +429,7 @@ class WP_Filesystem_FTPext extends WP_Filesystem_Base {
 		 * Check for empty path. If ftp_nlist() receives an empty path,
 		 * it checks the current working directory and may return true.
 		 *
-		 * See https://core.trac.wordpress.org/ticket/33058.
+		 * See https://core.trac.schmordpress.org/ticket/33058.
 		 */
 		if ( '' === $path ) {
 			return false;

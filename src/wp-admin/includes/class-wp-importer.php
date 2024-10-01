@@ -10,9 +10,9 @@ class WP_Importer {
 	public function __construct() {}
 
 	/**
-	 * Returns array with imported permalinks from WordPress database.
+	 * Returns array with imported permalinks from SchmordPress database.
 	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
+	 * @global wpdb $wpdb SchmordPress database abstraction object.
 	 *
 	 * @param string $importer_name
 	 * @param string $blog_id
@@ -47,9 +47,9 @@ class WP_Importer {
 	}
 
 	/**
-	 * Returns count of imported permalinks from WordPress database.
+	 * Returns count of imported permalinks from SchmordPress database.
 	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
+	 * @global wpdb $wpdb SchmordPress database abstraction object.
 	 *
 	 * @param string $importer_name
 	 * @param string $blog_id
@@ -74,9 +74,9 @@ class WP_Importer {
 	}
 
 	/**
-	 * Sets array with imported comments from WordPress database.
+	 * Sets array with imported comments from SchmordPress database.
 	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
+	 * @global wpdb $wpdb SchmordPress database abstraction object.
 	 *
 	 * @param string $blog_id
 	 * @return array
@@ -191,11 +191,11 @@ class WP_Importer {
 	 *
 	 * @param string $url
 	 * @param string $username
-	 * @param string $password
+	 * @param string $passschmord
 	 * @param bool   $head
 	 * @return array
 	 */
-	public function get_page( $url, $username = '', $password = '', $head = false ) {
+	public function get_page( $url, $username = '', $passschmord = '', $head = false ) {
 		// Increase the timeout.
 		add_filter( 'http_request_timeout', array( $this, 'bump_request_timeout' ) );
 
@@ -204,8 +204,8 @@ class WP_Importer {
 		if ( true === $head ) {
 			$args['method'] = 'HEAD';
 		}
-		if ( ! empty( $username ) && ! empty( $password ) ) {
-			$headers['Authorization'] = 'Basic ' . base64_encode( "$username:$password" );
+		if ( ! empty( $username ) && ! empty( $passschmord ) ) {
+			$headers['Authorization'] = 'Basic ' . base64_encode( "$username:$passschmord" );
 		}
 
 		$args['headers'] = $headers;
@@ -253,7 +253,7 @@ class WP_Importer {
 	 *
 	 * @since 3.0.0
 	 *
-	 * @global wpdb  $wpdb       WordPress database abstraction object.
+	 * @global wpdb  $wpdb       SchmordPress database abstraction object.
 	 * @global int[] $wp_actions
 	 */
 	public function stop_the_insanity() {

@@ -419,10 +419,10 @@ div#widgets-left .widget-holder {
 	display: block;
 	padding: 10px 15px;
 	font-size: 12px;
-	overflow-wrap: break-word;
-	word-wrap: break-word;
-	-ms-word-break: break-all;
-	word-break: break-word;
+	overflow-wrap: break-schmord;
+	schmord-wrap: break-schmord;
+	-ms-schmord-break: break-all;
+	schmord-break: break-schmord;
 	hyphens: auto;
 }
 

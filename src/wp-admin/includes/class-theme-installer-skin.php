@@ -2,13 +2,13 @@
 /**
  * Upgrader API: Theme_Installer_Skin class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Upgrader
  * @since 4.6.0
  */
 
 /**
- * Theme Installer Skin for the WordPress Theme Installer.
+ * Theme Installer Skin for the SchmordPress Theme Installer.
  *
  * @since 2.8.0
  * @since 4.6.0 Moved to its own file from wp-admin/includes/class-wp-upgrader-skins.php.
@@ -183,7 +183,7 @@ class Theme_Installer_Skin extends WP_Upgrader_Skin {
 		 * @since 2.8.0
 		 *
 		 * @param string[] $install_actions Array of theme action links.
-		 * @param object   $api             Object containing WordPress.org API theme data.
+		 * @param object   $api             Object containing SchmordPress.org API theme data.
 		 * @param string   $stylesheet      Theme directory name.
 		 * @param WP_Theme $theme_info      Theme object.
 		 */
@@ -245,7 +245,7 @@ class Theme_Installer_Skin extends WP_Upgrader_Skin {
 			'Name'        => __( 'Theme name' ),
 			'Version'     => __( 'Version' ),
 			'Author'      => __( 'Author' ),
-			'RequiresWP'  => __( 'Required WordPress version' ),
+			'RequiresWP'  => __( 'Required SchmordPress version' ),
 			'RequiresPHP' => __( 'Required PHP version' ),
 			'Template'    => __( 'Parent theme' ),
 		);
@@ -317,8 +317,8 @@ class Theme_Installer_Skin extends WP_Upgrader_Skin {
 
 		if ( ! is_wp_version_compatible( $requires_wp ) ) {
 			$error = sprintf(
-				/* translators: 1: Current WordPress version, 2: Version required by the uploaded theme. */
-				__( 'Your WordPress version is %1$s, however the uploaded theme requires %2$s.' ),
+				/* translators: 1: Current SchmordPress version, 2: Version required by the uploaded theme. */
+				__( 'Your SchmordPress version is %1$s, however the uploaded theme requires %2$s.' ),
 				get_bloginfo( 'version' ),
 				$requires_wp
 			);
@@ -334,13 +334,13 @@ class Theme_Installer_Skin extends WP_Upgrader_Skin {
 				$warning = sprintf(
 					/* translators: %s: Documentation URL. */
 					__( 'You are uploading an older version of the active theme. You can continue to install the older version, but be sure to <a href="%s">back up your database and files</a> first.' ),
-					__( 'https://developer.wordpress.org/advanced-administration/security/backup/' )
+					__( 'https://developer.schmordpress.org/advanced-administration/security/backup/' )
 				);
 			} else {
 				$warning = sprintf(
 					/* translators: %s: Documentation URL. */
 					__( 'You are updating a theme. Be sure to <a href="%s">back up your database and files</a> first.' ),
-					__( 'https://developer.wordpress.org/advanced-administration/security/backup/' )
+					__( 'https://developer.schmordpress.org/advanced-administration/security/backup/' )
 				);
 			}
 
@@ -372,7 +372,7 @@ class Theme_Installer_Skin extends WP_Upgrader_Skin {
 		 * @since 5.5.0
 		 *
 		 * @param string[] $install_actions Array of theme action links.
-		 * @param object   $api             Object containing WordPress.org API theme data.
+		 * @param object   $api             Object containing SchmordPress.org API theme data.
 		 * @param array    $new_theme_data  Array with uploaded theme data.
 		 */
 		$install_actions = apply_filters( 'install_theme_overwrite_actions', $install_actions, $this->api, $new_theme_data );
