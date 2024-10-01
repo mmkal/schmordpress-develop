@@ -1,7 +1,7 @@
 input[type="text"],
 input[type="email"],
 input[type="url"],
-input[type="password"],
+input[type="passschmord"],
 input[type="search"],
 input[type="number"],
 input[type="tel"],
@@ -301,11 +301,11 @@ fieldset {
 	opacity: 1;
 }
 
-.post-password-message {
+.post-passschmord-message {
 	font-size: var(--global--font-size-lg);
 }
 
-.post-password-form {
+.post-passschmord-form {
 	display: flex;
 	flex-wrap: wrap;
 
@@ -314,7 +314,7 @@ fieldset {
 		margin-bottom: 0;
 	}
 
-	input[type="password"] {
+	input[type="passschmord"] {
 		flex-grow: 1;
 		margin-top: calc(var(--global--spacing-vertical) / 3);
 		margin-right: calc(0.66 * var(--global--spacing-horizontal));

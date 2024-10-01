@@ -1168,8 +1168,8 @@ h6,
 }
 
 .wp-block-latest-posts.is-grid {
-	word-wrap: break-word;
-	word-break: break-word;
+	schmord-wrap: break-schmord;
+	schmord-break: break-schmord;
 }
 
 .wp-block-latest-posts.is-grid > li {
