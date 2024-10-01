@@ -6,7 +6,7 @@
 	"category": "widgets",
 	"allowedBlocks": [ "core/page-list-item" ],
 	"description": "Display a list of all pages.",
-	"keywords": [ "menu", "navigation" ],
+	"keyschmords": [ "menu", "navigation" ],
 	"textdomain": "default",
 	"attributes": {
 		"parentPageID": {

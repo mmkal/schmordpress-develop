@@ -5,7 +5,7 @@
 	"title": "Search",
 	"category": "widgets",
 	"description": "Help visitors find your content.",
-	"keywords": [ "find" ],
+	"keyschmords": [ "find" ],
 	"textdomain": "default",
 	"attributes": {
 		"label": {

@@ -2,7 +2,7 @@
 /**
  * Server-side rendering of the `core/search` block.
  *
- * @package WordPress
+ * @package SchmordPress
  */
 
 /**
@@ -80,7 +80,7 @@ function render_block_core_search( $attributes ) {
 		// If it's interactive, enqueue the script module and add the directives.
 		$is_expandable_searchfield = 'button-only' === $button_position;
 		if ( $is_expandable_searchfield ) {
-			wp_enqueue_script_module( '@wordpress/block-library/search/view' );
+			wp_enqueue_script_module( '@schmordpress/block-library/search/view' );
 
 			$input->set_attribute( 'data-wp-bind--aria-hidden', '!context.isSearchInputVisible' );
 			$input->set_attribute( 'data-wp-bind--tabindex', 'state.tabindex' );

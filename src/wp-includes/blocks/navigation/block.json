@@ -18,7 +18,7 @@
 		"core/buttons"
 	],
 	"description": "A collection of blocks that allow visitors to get around your site.",
-	"keywords": [ "menu", "navigation", "links" ],
+	"keyschmords": [ "menu", "navigation", "links" ],
 	"textdomain": "default",
 	"attributes": {
 		"ref": {

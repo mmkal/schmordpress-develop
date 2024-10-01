@@ -5,7 +5,7 @@
 	"title": "Quote",
 	"category": "text",
 	"description": "Give quoted text visual emphasis. \"In quoting others, we cite ourselves.\" — Julio Cortázar",
-	"keywords": [ "blockquote", "cite" ],
+	"keyschmords": [ "blockquote", "cite" ],
 	"textdomain": "default",
 	"attributes": {
 		"value": {

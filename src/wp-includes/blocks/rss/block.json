@@ -5,7 +5,7 @@
 	"title": "RSS",
 	"category": "widgets",
 	"description": "Display entries from any RSS or Atom feed.",
-	"keywords": [ "atom", "feed" ],
+	"keyschmords": [ "atom", "feed" ],
 	"textdomain": "default",
 	"attributes": {
 		"columns": {

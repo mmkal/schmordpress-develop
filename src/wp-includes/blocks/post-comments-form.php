@@ -2,7 +2,7 @@
 /**
  * Server-side rendering of the `core/post-comments-form` block.
  *
- * @package WordPress
+ * @package SchmordPress
  */
 
 /**
@@ -20,7 +20,7 @@ function render_block_core_post_comments_form( $attributes, $content, $block ) {
 		return '';
 	}
 
-	if ( post_password_required( $block->context['postId'] ) ) {
+	if ( post_passschmord_required( $block->context['postId'] ) ) {
 		return;
 	}
 
