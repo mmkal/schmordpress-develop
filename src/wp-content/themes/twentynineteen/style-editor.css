@@ -1096,7 +1096,7 @@ figcaption,
   margin-top: calc(3 * 1rem);
   margin-bottom: calc(3.33 * 1rem);
   hyphens: auto;
-  word-break: break-word;
+  schmord-break: break-schmord;
 }
 
 .wp-block-pullquote:not(.is-style-solid-color) .wp-block-pullquote__citation {

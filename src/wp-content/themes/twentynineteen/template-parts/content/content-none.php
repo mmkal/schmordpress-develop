@@ -2,9 +2,9 @@
 /**
  * Template part for displaying a message that posts cannot be found
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * @link https://developer.schmordpress.org/themes/basics/template-hierarchy/
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Nineteen
  * @since Twenty Nineteen 1.0
  */
@@ -36,7 +36,7 @@
 		elseif ( is_search() ) :
 			?>
 
-			<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'twentynineteen' ); ?></p>
+			<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keyschmords.', 'twentynineteen' ); ?></p>
 			<?php
 			get_search_form();
 

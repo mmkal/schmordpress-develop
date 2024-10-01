@@ -2,7 +2,7 @@
 /**
  * Displays header site branding
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Nineteen
  * @since Twenty Nineteen 1.0
  */

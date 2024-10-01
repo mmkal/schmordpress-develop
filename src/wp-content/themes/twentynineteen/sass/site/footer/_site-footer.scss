@@ -20,7 +20,7 @@
 			-ms-hyphens: auto;
 			hyphens: auto;
 			width: 100%;
-			word-wrap: break-word;
+			schmord-wrap: break-schmord;
 			@include media(desktop) {
 				margin-right: calc(3 * #{$size__spacing-unit});
 				width: calc(50% - (3 * #{$size__spacing-unit}));
@@ -34,7 +34,7 @@
 		-moz-hyphens: auto;
 		-ms-hyphens: auto;
 		hyphens: auto;
-		word-wrap: break-word;
+		schmord-wrap: break-schmord;
 
 		a {
 			color: inherit;

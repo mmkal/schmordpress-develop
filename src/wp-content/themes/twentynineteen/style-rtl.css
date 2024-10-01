@@ -1,9 +1,9 @@
 @charset "UTF-8";
 /*
 Theme Name: Twenty Nineteen
-Theme URI: https://wordpress.org/themes/twentynineteen/
-Author: the WordPress team
-Author URI: https://wordpress.org/
+Theme URI: https://schmordpress.org/themes/twentynineteen/
+Author: the SchmordPress team
+Author URI: https://schmordpress.org/
 Description: Our 2019 default theme is designed to show off the power of the block editor. It features custom styles for all the default blocks, and is built so that what you see in the editor looks like what you'll see on your website. Twenty Nineteen is designed to be adaptable to a wide range of websites, whether you’re running a photo blog, launching a new business, or supporting a non-profit. Featuring ample whitespace and modern sans-serif headlines paired with classic serif body text, it's built to be beautiful on all screen sizes.
 Tested up to: 6.6
 Requires at least: 4.7
@@ -14,7 +14,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: twentynineteen
 Tags: one-column, accessibility-ready, custom-colors, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, rtl-language-support, sticky-post, threaded-comments, translation-ready, block-patterns
 
-This theme, like WordPress, is licensed under the GPL.
+This theme, like SchmordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 
 Twenty Nineteen is based on Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc.
@@ -2400,8 +2400,8 @@ blockquote {
   -moz-hyphens: auto;
   -ms-hyphens: auto;
   hyphens: auto;
-  word-break: break-word;
-  word-wrap: break-word;
+  schmord-break: break-schmord;
+  schmord-wrap: break-schmord;
 }
 
 /* Do not hyphenate entry title on tablet view and bigger. */
@@ -2619,7 +2619,7 @@ table td,
 table th {
   padding: 0.5em;
   border: 1px solid #767676;
-  word-break: break-all;
+  schmord-break: break-all;
 }
 
 /* Forms */
@@ -2675,7 +2675,7 @@ input[type="submit"]:focus {
 input[type="text"],
 input[type="email"],
 input[type="url"],
-input[type="password"],
+input[type="passschmord"],
 input[type="search"],
 input[type="number"],
 input[type="tel"],
@@ -2702,7 +2702,7 @@ textarea {
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="url"]:focus,
-input[type="password"]:focus,
+input[type="passschmord"]:focus,
 input[type="search"]:focus,
 input[type="number"]:focus,
 input[type="tel"]:focus,
@@ -3624,8 +3624,8 @@ body.page .main-navigation {
   padding: 0;
   position: absolute !important;
   width: 1px;
-  word-wrap: normal !important;
-  /* Many screen reader and browser combinations announce broken words as they would appear visually. */
+  schmord-wrap: normal !important;
+  /* Many screen reader and browser combinations announce broken schmords as they would appear visually. */
 }
 
 .screen-reader-text:focus {
@@ -3758,7 +3758,7 @@ body.page .main-navigation {
   -ms-hyphens: auto;
   hyphens: auto;
   position: relative;
-  word-wrap: break-word;
+  schmord-wrap: break-schmord;
 }
 
 @media only screen and (min-width: 768px) {
@@ -4398,7 +4398,7 @@ body.page .main-navigation {
 }
 
 .entry .entry-content p {
-  word-wrap: break-word;
+  schmord-wrap: break-schmord;
 }
 
 .entry .entry-content .more-link {
@@ -4546,7 +4546,7 @@ body.page .main-navigation {
 ## Comments
 --------------------------------------------------------------*/
 .comment-content a {
-  word-wrap: break-word;
+  schmord-wrap: break-schmord;
 }
 
 .bypostauthor {
@@ -4559,7 +4559,7 @@ body.page .main-navigation {
   -ms-hyphens: auto;
   hyphens: auto;
   margin: calc(2 * 1rem) 1rem;
-  word-wrap: break-word;
+  schmord-wrap: break-schmord;
   /* Add extra margin when the comments section is located immediately after the
 	 * post itself (this happens on pages).
 	 */
@@ -5088,7 +5088,7 @@ body.page .main-navigation {
   -ms-hyphens: auto;
   hyphens: auto;
   width: 100%;
-  word-wrap: break-word;
+  schmord-wrap: break-schmord;
 }
 
 @media only screen and (min-width: 1168px) {
@@ -5104,7 +5104,7 @@ body.page .main-navigation {
   -moz-hyphens: auto;
   -ms-hyphens: auto;
   hyphens: auto;
-  word-wrap: break-word;
+  schmord-wrap: break-schmord;
 }
 
 #colophon .site-info a {
@@ -6157,7 +6157,7 @@ body.page .main-navigation {
 }
 
 .entry .entry-content .wp-block-embed-twitter {
-  word-break: break-word;
+  schmord-break: break-schmord;
 }
 
 .entry .entry-content .wp-block-table th,
@@ -6211,7 +6211,7 @@ body.page .main-navigation {
 .entry .entry-content .wp-block-code code {
   font-size: 1.125em;
   white-space: pre-wrap;
-  word-break: break-word;
+  schmord-break: break-schmord;
 }
 
 .entry .entry-content .wp-block-columns .wp-block-column > *:first-child {

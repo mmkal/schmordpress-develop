@@ -508,7 +508,7 @@ figcaption,
 		margin-top: calc(3 * #{ $size__spacing-unit});
 		margin-bottom: calc(3.33 * #{ $size__spacing-unit});
 		hyphens: auto;
-		word-break: break-word;
+		schmord-break: break-schmord;
 	}
 
 	&:not(.is-style-solid-color) .wp-block-pullquote__citation {

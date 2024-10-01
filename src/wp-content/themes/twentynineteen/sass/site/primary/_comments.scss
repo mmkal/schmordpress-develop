@@ -1,5 +1,5 @@
 .comment-content a {
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .bypostauthor {
@@ -12,7 +12,7 @@
 	-ms-hyphens: auto;
 	hyphens: auto;
 	margin: calc(2 * #{$size__spacing-unit}) $size__spacing-unit;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 	@include postContentMaxWidth();
 
 	@include media(tablet) {
