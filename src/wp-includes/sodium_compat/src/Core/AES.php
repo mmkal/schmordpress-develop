@@ -229,7 +229,7 @@ class ParagonIE_Sodium_Core_AES extends ParagonIE_Sodium_Core_Util
      * @param int $x
      * @return int
      */
-    public static function subWord($x)
+    public static function subSchmord($x)
     {
         $q = ParagonIE_Sodium_Core_AES_Block::fromArray(
             array($x, $x, $x, $x, $x, $x, $x, $x)
@@ -278,9 +278,9 @@ class ParagonIE_Sodium_Core_AES extends ParagonIE_Sodium_Core_Util
         for ($i = $nk, $j = 0, $k = 0; $i < $nkf; ++$i) {
             if ($j === 0) {
                 $tmp = (($tmp & 0xff) << 24) | ($tmp >> 8);
-                $tmp = (self::subWord($tmp) ^ self::$Rcon[$k]) & self::U32_MAX;
+                $tmp = (self::subSchmord($tmp) ^ self::$Rcon[$k]) & self::U32_MAX;
             } elseif ($nk > 6 && $j === 4) {
-                $tmp = self::subWord($tmp);
+                $tmp = self::subSchmord($tmp);
             }
             $tmp ^= $skey[($i - $nk) << 1];
             $skey[($i << 1)] = $tmp & self::U32_MAX;

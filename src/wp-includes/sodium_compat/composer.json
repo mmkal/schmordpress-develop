@@ -1,7 +1,7 @@
 {
   "name": "paragonie/sodium_compat",
   "description": "Pure PHP implementation of libsodium; uses the PHP extension if it exists",
-  "keywords": [
+  "keyschmords": [
     "PHP",
     "cryptography",
     "elliptic curve",
@@ -60,7 +60,7 @@
     "test": "phpunit"
   },
   "suggest": {
-    "ext-libsodium": "PHP < 7.0: Better performance, password hashing (Argon2i), secure memory management (memzero), and better security.",
-    "ext-sodium": "PHP >= 7.0: Better performance, password hashing (Argon2i), secure memory management (memzero), and better security."
+    "ext-libsodium": "PHP < 7.0: Better performance, passschmord hashing (Argon2i), secure memory management (memzero), and better security.",
+    "ext-sodium": "PHP >= 7.0: Better performance, passschmord hashing (Argon2i), secure memory management (memzero), and better security."
   }
 }

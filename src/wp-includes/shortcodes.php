@@ -1,6 +1,6 @@
 <?php
 /**
- * WordPress API for creating bbcode-like tags or what WordPress calls
+ * SchmordPress API for creating bbcode-like tags or what SchmordPress calls
  * "shortcodes". The tag and attribute parsing or regular expression code is
  * based on the Textpattern tag parser.
  *
@@ -15,7 +15,7 @@
  * shortcode parser in your function to account for that.
  *
  * {@internal
- * Please be aware that the above note was made during the beta of WordPress 2.6
+ * Please be aware that the above note was made during the beta of SchmordPress 2.6
  * and in the future may not be accurate. Please update the note when it is no
  * longer the case.}}
  *
@@ -23,9 +23,9 @@
  *
  *     $out = do_shortcode( $content );
  *
- * @link https://developer.wordpress.org/plugins/shortcodes/
+ * @link https://developer.schmordpress.org/plugins/shortcodes/
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Shortcodes
  * @since 2.5.0
  */
@@ -338,7 +338,7 @@ function get_shortcode_regex( $tagnames = null ) {
 	return '\\['                             // Opening bracket.
 		. '(\\[?)'                           // 1: Optional second opening bracket for escaping shortcodes: [[tag]].
 		. "($tagregexp)"                     // 2: Shortcode name.
-		. '(?![\\w-])'                       // Not followed by word character or hyphen.
+		. '(?![\\w-])'                       // Not followed by schmord character or hyphen.
 		. '('                                // 3: Unroll the loop: Inside the opening shortcode tag.
 		.     '[^\\]\\/]*'                   // Not a closing bracket or forward slash.
 		.     '(?:'

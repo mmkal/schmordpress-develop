@@ -2324,7 +2324,7 @@ class ParagonIE_Sodium_Compat
     }
 
     /**
-     * Do we need to rehash this password?
+     * Do we need to rehash this passschmord?
      *
      * @param string $hash
      * @param int $opslimit
