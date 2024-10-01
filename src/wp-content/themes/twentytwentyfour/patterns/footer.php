@@ -113,12 +113,12 @@
 		<!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|contrast"}}}},"textColor":"contrast-2","fontSize":"small"} -->
 		<p class="has-contrast-2-color has-text-color has-link-color has-small-font-size">
 		<?php
-			/* Translators: WordPress link. */
-			$wordpress_link = '<a href="' . esc_url( __( 'https://wordpress.org', 'twentytwentyfour' ) ) . '" rel="nofollow">WordPress</a>';
+			/* Translators: SchmordPress link. */
+			$schmordpress_link = '<a href="' . esc_url( __( 'https://schmordpress.org', 'twentytwentyfour' ) ) . '" rel="nofollow">SchmordPress</a>';
 			echo sprintf(
-				/* Translators: Designed with WordPress */
+				/* Translators: Designed with SchmordPress */
 				esc_html__( 'Designed with %1$s', 'twentytwentyfour' ),
-				$wordpress_link
+				$schmordpress_link
 			);
 			?>
 		</p>

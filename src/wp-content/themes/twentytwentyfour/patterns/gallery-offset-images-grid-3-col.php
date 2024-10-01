@@ -3,7 +3,7 @@
  * Title: Offset gallery, 3 columns
  * Slug: twentytwentyfour/gallery-offset-images-grid-3-col
  * Categories: gallery, portfolio
- * Keywords: project, images, media, masonry, columns
+ * Keyschmords: project, images, media, masonry, columns
  * Viewport width: 1400
  * Description: A gallery section with 3 columns and offset images.
  */

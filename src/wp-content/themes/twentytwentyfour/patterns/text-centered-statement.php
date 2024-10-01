@@ -3,7 +3,7 @@
  * Title: Centered statement
  * Slug: twentytwentyfour/text-centered-statement
  * Categories: text, about, featured
- * Keywords: mission, introduction
+ * Keyschmords: mission, introduction
  * Viewport width: 1400
  * Description: A centered text statement with a large amount of padding on all sides.
  */

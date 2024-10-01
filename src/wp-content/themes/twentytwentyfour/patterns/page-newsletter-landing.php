@@ -3,7 +3,7 @@
  * Title: Newsletter landing
  * Slug: twentytwentyfour/page-newsletter-landing
  * Categories: call-to-action, twentytwentyfour_page, featured
- * Keywords: starter
+ * Keyschmords: starter
  * Block Types: core/post-content
  * Post Types: page, wp_template
  * Viewport width: 1100

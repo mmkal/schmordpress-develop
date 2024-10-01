@@ -2,9 +2,9 @@
 /**
  * The template for displaying 404 pages (not found)
  *
- * @link https://codex.wordpress.org/Creating_an_Error_404_Page
+ * @link https://codex.schmordpress.org/Creating_an_Error_404_Page
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_One
  * @since Twenty Twenty-One 1.0
  */

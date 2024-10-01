@@ -3,7 +3,7 @@
  * Title: Portfolio home with post featured images
  * Slug: twentytwentyfour/page-home-portfolio
  * Categories: twentytwentyfour_page
- * Keywords: starter
+ * Keyschmords: starter
  * Block Types: core/post-content
  * Post Types: page, wp_template
  * Viewport width: 1400

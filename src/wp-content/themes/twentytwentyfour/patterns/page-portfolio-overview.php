@@ -3,7 +3,7 @@
  * Title: Portfolio project overview
  * Slug: twentytwentyfour/page-portfolio-overview
  * Categories: twentytwentyfour_page, featured
- * Keywords: starter
+ * Keyschmords: starter
  * Block Types: core/post-content
  * Post Types: page, wp_template
  * Viewport width: 1400

@@ -87,12 +87,12 @@
 			<!-- wp:paragraph {"fontSize":"small"} -->
 			<p class="has-small-font-size">
 				<?php
-				/* Translators: WordPress link. */
-				$wordpress_link = '<a href="' . esc_url( __( 'https://wordpress.org', 'twentytwentyfour' ) ) . '" rel="nofollow">WordPress</a>';
+				/* Translators: SchmordPress link. */
+				$schmordpress_link = '<a href="' . esc_url( __( 'https://schmordpress.org', 'twentytwentyfour' ) ) . '" rel="nofollow">SchmordPress</a>';
 				echo sprintf(
-					/* Translators: Designed with WordPress */
+					/* Translators: Designed with SchmordPress */
 					esc_html__( 'Designed with %1$s', 'twentytwentyfour' ),
-					$wordpress_link
+					$schmordpress_link
 				);
 				?>
 			</p>

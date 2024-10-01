@@ -2,9 +2,9 @@
 
 /*
 Theme Name: Twenty Twenty-One
-Theme URI: https://wordpress.org/themes/twentytwentyone/
-Author: the WordPress team
-Author URI: https://wordpress.org/
+Theme URI: https://schmordpress.org/themes/twentytwentyone/
+Author: the SchmordPress team
+Author URI: https://schmordpress.org/
 Description: Twenty Twenty-One is a blank canvas for your ideas and it makes the block editor your best brush. With new block patterns, which allow you to create a beautiful layout in a matter of seconds, this theme’s soft colors and eye-catching — yet timeless — design will let your work shine. Take it for a spin! See how Twenty Twenty-One elevates your portfolio, business website, or personal blog.
 Requires at least: 5.3
 Tested up to: 6.6
@@ -15,7 +15,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: twentytwentyone
 Tags: one-column, accessibility-ready, custom-colors, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, block-patterns, rtl-language-support, sticky-post, threaded-comments, translation-ready, blog, portfolio
 
-Twenty Twenty-One WordPress Theme, (C) 2020 WordPress.org
+Twenty Twenty-One SchmordPress Theme, (C) 2020 SchmordPress.org
 Twenty Twenty-One is distributed under the terms of the GNU GPL.
 */
 
@@ -1234,7 +1234,7 @@ blockquote footer {
 input[type=text],
 input[type=email],
 input[type=url],
-input[type=password],
+input[type=passschmord],
 input[type=search],
 input[type=number],
 input[type=tel],
@@ -1258,7 +1258,7 @@ input[type=color],
 input[type=text]:focus,
 input[type=email]:focus,
 input[type=url]:focus,
-input[type=password]:focus,
+input[type=passschmord]:focus,
 input[type=search]:focus,
 input[type=number]:focus,
 input[type=tel]:focus,
@@ -1278,7 +1278,7 @@ input[type=color]:focus,
 input[type=text]:disabled,
 input[type=email]:disabled,
 input[type=url]:disabled,
-input[type=password]:disabled,
+input[type=passschmord]:disabled,
 input[type=search]:disabled,
 input[type=number]:disabled,
 input[type=tel]:disabled,
@@ -1296,7 +1296,7 @@ input[type=color]:disabled,
 .is-dark-theme input[type=text],
 .is-dark-theme input[type=email],
 .is-dark-theme input[type=url],
-.is-dark-theme input[type=password],
+.is-dark-theme input[type=passschmord],
 .is-dark-theme input[type=search],
 .is-dark-theme input[type=number],
 .is-dark-theme input[type=tel],
@@ -1562,32 +1562,32 @@ fieldset input[type=checkbox] + label {
 	opacity: 1;
 }
 
-.post-password-message {
+.post-passschmord-message {
 	font-size: 1.5rem;
 }
 
-.post-password-form {
+.post-passschmord-form {
 	display: flex;
 	flex-wrap: wrap;
 }
 
-.post-password-form__label {
+.post-passschmord-form__label {
 	width: 100%;
 	margin-bottom: 0;
 }
 
-.post-password-form input[type=password] {
+.post-passschmord-form input[type=passschmord] {
 	flex-grow: 1;
 	margin-top: 10px;
 	margin-right: 17px;
 }
 
-.post-password-form__submit {
+.post-passschmord-form__submit {
 	margin-top: 10px;
 }
 @media only screen and (min-width: 592px) {
 
-	.post-password-form__submit {
+	.post-passschmord-form__submit {
 		margin-left: 10px;
 	}
 }
@@ -2548,8 +2548,8 @@ h6,
 }
 
 .wp-block-latest-posts.is-grid {
-	word-wrap: break-word;
-	word-break: break-word;
+	schmord-wrap: break-schmord;
+	schmord-break: break-schmord;
 }
 
 .wp-block-latest-posts.is-grid > li {
@@ -3755,7 +3755,7 @@ table.wp-calendar-table th {
 	text-align: center;
 	line-height: 2;
 	vertical-align: middle;
-	word-break: normal;
+	schmord-break: normal;
 }
 
 table.wp-calendar-table th {
@@ -4419,7 +4419,7 @@ table.wp-calendar-table caption {
 	font-size: 2.25rem;
 	letter-spacing: normal;
 	line-height: 1.3;
-	overflow-wrap: break-word;
+	overflow-wrap: break-schmord;
 }
 
 @media only screen and (min-width: 652px) {
@@ -4471,7 +4471,7 @@ h1.entry-title {
 }
 
 .entry-content p {
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .entry-content > iframe[style] {
@@ -4844,8 +4844,8 @@ h1.page-title {
 	font-weight: normal;
 	font-size: 1.5rem;
 	hyphens: auto;
-	word-wrap: break-word;
-	word-break: break-word;
+	schmord-wrap: break-schmord;
+	schmord-break: break-schmord;
 }
 
 .comment-meta .comment-metadata {
@@ -4901,7 +4901,7 @@ h1.page-title {
 }
 
 .comment-content {
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .pingback .comment-body,
@@ -6031,8 +6031,8 @@ h1.page-title {
 	padding: 0;
 	position: absolute !important;
 	width: 1px;
-	word-wrap: normal !important;
-	word-break: normal;
+	schmord-wrap: normal !important;
+	schmord-break: normal;
 }
 
 .skip-link:focus {

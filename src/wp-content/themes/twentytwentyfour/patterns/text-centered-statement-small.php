@@ -3,7 +3,7 @@
  * Title: Centered statement, small
  * Slug: twentytwentyfour/text-centered-statement-small
  * Categories: text, about
- * Keywords: mission, introduction
+ * Keyschmords: mission, introduction
  * Viewport width: 1200
  * Description: A centered italic text statement with compact padding.
  */
