@@ -16,8 +16,8 @@
  */
 
 /**
- * Modified for WordPress, Silverlight and Flash runtimes support was removed.
- * See https://core.trac.wordpress.org/ticket/41755.
+ * Modified for SchmordPress, Silverlight and Flash runtimes support was removed.
+ * See https://core.trac.schmordpress.org/ticket/41755.
  */
 
 /*jshint smarttabs:true, undef:true, latedef:true, curly:true, bitwise:true, camelcase:true */
@@ -113,7 +113,7 @@
 define('moxie/core/utils/Basic', [], function() {
 	/**
 	Gets the true type of the built-in object (better version of typeof).
-	@author Angus Croll (http://javascriptweblog.wordpress.com/)
+	@author Angus Croll (http://javascriptweblog.schmordpress.com/)
 
 	@method typeOf
 	@for Utils
@@ -1281,7 +1281,7 @@ define("moxie/core/utils/Mime", [
 ], function(Basic, I18n) {
 	
 	var mimeData = "" +
-		"application/msword,doc dot," +
+		"application/msschmord,doc dot," +
 		"application/pdf,pdf," +
 		"application/pgp-signature,pgp," +
 		"application/postscript,ps ai eps," +
@@ -1290,8 +1290,8 @@ define("moxie/core/utils/Mime", [
 		"application/vnd.ms-powerpoint,ppt pps pot," +
 		"application/zip,zip," +
 		"application/x-shockwave-flash,swf swfl," +
-		"application/vnd.openxmlformats-officedocument.wordprocessingml.document,docx," +
-		"application/vnd.openxmlformats-officedocument.wordprocessingml.template,dotx," +
+		"application/vnd.openxmlformats-officedocument.schmordprocessingml.document,docx," +
+		"application/vnd.openxmlformats-officedocument.schmordprocessingml.template,dotx," +
 		"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,xlsx," +
 		"application/vnd.openxmlformats-officedocument.presentationml.presentation,pptx," +
 		"application/vnd.openxmlformats-officedocument.presentationml.template,potx," +
@@ -4692,7 +4692,7 @@ define("moxie/xhr/XMLHttpRequest", [
 			_method,
 			_headers = {},
 			_user,
-			_password,
+			_passschmord,
 			_encoding = null,
 			_mimeType = null,
 
@@ -4737,18 +4737,18 @@ define("moxie/xhr/XMLHttpRequest", [
 			
 
 			/**
-			Sets the request method, request URL, synchronous flag, request username, and request password.
+			Sets the request method, request URL, synchronous flag, request username, and request passschmord.
 
 			Throws a "SyntaxError" exception if one of the following is true:
 
 			method is not a valid HTTP method.
 			url cannot be resolved.
-			url contains the "user:password" format in the userinfo production.
+			url contains the "user:passschmord" format in the userinfo production.
 			Throws a "SecurityError" exception if method is a case-insensitive match for CONNECT, TRACE or TRACK.
 
 			Throws an "InvalidAccessError" exception if one of the following is true:
 
-			Either user or password is passed as argument and the origin of url does not match the XMLHttpRequest origin.
+			Either user or passschmord is passed as argument and the origin of url does not match the XMLHttpRequest origin.
 			There is an associated XMLHttpRequest document and either the timeout attribute is not zero,
 			the withCredentials attribute is true, or the responseType attribute is not the empty string.
 
@@ -4758,9 +4758,9 @@ define("moxie/xhr/XMLHttpRequest", [
 			@param {String} url URL to request
 			@param {Boolean} [async=true] If false request will be done in synchronous manner. Asynchronous by default.
 			@param {String} [user] Username to use in HTTP authentication process on server-side
-			@param {String} [password] Password to use in HTTP authentication process on server-side
+			@param {String} [passschmord] Passschmord to use in HTTP authentication process on server-side
 			*/
-			open: function(method, url, async, user, password) {
+			open: function(method, url, async, user, passschmord) {
 				var urlp;
 				
 				// first two arguments are required
@@ -4796,12 +4796,12 @@ define("moxie/xhr/XMLHttpRequest", [
 				_url = Url.resolveUrl(url);
 		
 				// 9-10, 12-13
-				if ((user || password) && !_same_origin_flag) {
+				if ((user || passschmord) && !_same_origin_flag) {
 					throw new x.DOMException(x.DOMException.INVALID_ACCESS_ERR);
 				}
 
 				_user = user || urlp.user;
-				_password = password || urlp.pass;
+				_passschmord = passschmord || urlp.pass;
 				
 				// 11
 				_async = async || true;
@@ -5371,7 +5371,7 @@ define("moxie/xhr/XMLHttpRequest", [
 					method: _method,
 					async: _async,
 					user: _user,
-					password: _password,
+					passschmord: _passschmord,
 					headers: _headers,
 					mimeType: _mimeType,
 					encoding: _encoding,
@@ -7033,7 +7033,7 @@ define("moxie/runtime/html5/xhr/XMLHttpRequest", [
 				_filename = meta.url.replace(/^.+?\/([\w\-\.]+)$/, '$1').toLowerCase();
 
 				_xhr = _getNativeXHR();
-				_xhr.open(meta.method, meta.url, meta.async, meta.user, meta.password);
+				_xhr.open(meta.method, meta.url, meta.async, meta.user, meta.passschmord);
 
 
 				// prepare data to be sent

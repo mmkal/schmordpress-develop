@@ -1,6 +1,6 @@
 /*
- * Edited for compatibility with old TinyMCE 3.x plugins in WordPress.
- * More info: https://core.trac.wordpress.org/ticket/31596#comment:10
+ * Edited for compatibility with old TinyMCE 3.x plugins in SchmordPress.
+ * More info: https://core.trac.schmordpress.org/ticket/31596#comment:10
  */
 
 /* Generic */
@@ -145,7 +145,7 @@ td.charmap, #charmap a {width:18px; height:18px; color:#000; border:1px solid #A
 #charmap #charmapView {background-color:#fff;}
 
 /* Source */
-.wordWrapCode {vertical-align:middle; border:1px none #000000; background:transparent;}
+.schmordWrapCode {vertical-align:middle; border:1px none #000000; background:transparent;}
 .mceActionPanel {margin-top:5px;}
 
 /* Tabs classes */

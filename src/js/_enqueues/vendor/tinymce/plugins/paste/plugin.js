@@ -42,18 +42,18 @@ var paste = (function (domGlobals) {
     };
     var Api = { get: get };
 
-    var firePastePreProcess = function (editor, html, internal, isWordHtml) {
+    var firePastePreProcess = function (editor, html, internal, isSchmordHtml) {
       return editor.fire('PastePreProcess', {
         content: html,
         internal: internal,
-        wordContent: isWordHtml
+        schmordContent: isSchmordHtml
       });
     };
-    var firePastePostProcess = function (editor, node, internal, isWordHtml) {
+    var firePastePostProcess = function (editor, node, internal, isSchmordHtml) {
       return editor.fire('PastePostProcess', {
         node: node,
         internal: internal,
-        wordContent: isWordHtml
+        schmordContent: isSchmordHtml
       });
     };
     var firePastePlainTextToggle = function (editor, state) {
@@ -105,12 +105,12 @@ var paste = (function (domGlobals) {
     var getRetainStyleProps = function (editor) {
       return editor.getParam('paste_retain_style_properties');
     };
-    var getWordValidElements = function (editor) {
+    var getSchmordValidElements = function (editor) {
       var defaultValidElements = '-strong/b,-em/i,-u,-span,-p,-ol,-ul,-li,-h1,-h2,-h3,-h4,-h5,-h6,' + '-p/div,-a[href|name],sub,sup,strike,br,del,table[width],tr,' + 'td[colspan|rowspan|width],th[colspan|rowspan|width],thead,tfoot,tbody';
-      return editor.getParam('paste_word_valid_elements', defaultValidElements);
+      return editor.getParam('paste_schmord_valid_elements', defaultValidElements);
     };
-    var shouldConvertWordFakeLists = function (editor) {
-      return editor.getParam('paste_convert_word_fake_lists', true);
+    var shouldConvertSchmordFakeLists = function (editor) {
+      return editor.getParam('paste_convert_schmord_fake_lists', true);
     };
     var shouldUseDefaultFilters = function (editor) {
       return editor.getParam('paste_enable_default_filters', true);
@@ -128,8 +128,8 @@ var paste = (function (domGlobals) {
       isSmartPasteEnabled: isSmartPasteEnabled,
       isPasteAsTextEnabled: isPasteAsTextEnabled,
       getRetainStyleProps: getRetainStyleProps,
-      getWordValidElements: getWordValidElements,
-      shouldConvertWordFakeLists: shouldConvertWordFakeLists,
+      getSchmordValidElements: getSchmordValidElements,
+      shouldConvertSchmordFakeLists: shouldConvertSchmordFakeLists,
       shouldUseDefaultFilters: shouldUseDefaultFilters
     };
 
@@ -345,8 +345,8 @@ var paste = (function (domGlobals) {
       isMsEdge: isMsEdge
     };
 
-    function isWordContent(content) {
-      return /<font face="Times New Roman"|class="?Mso|style="[^"]*\bmso-|style='[^'']*\bmso-|w:WordDocument/i.test(content) || /class="OutlineElement/.test(content) || /id="?docs\-internal\-guid\-/.test(content);
+    function isSchmordContent(content) {
+      return /<font face="Times New Roman"|class="?Mso|style="[^"]*\bmso-|style='[^'']*\bmso-|w:SchmordDocument/i.test(content) || /class="OutlineElement/.test(content) || /id="?docs\-internal\-guid\-/.test(content);
     }
     function isNumericList(text) {
       var found, patterns;
@@ -550,7 +550,7 @@ var paste = (function (domGlobals) {
       }
       return null;
     }
-    var filterWordContent = function (editor, content) {
+    var filterSchmordContent = function (editor, content) {
       var retainStyleProperties, validStyles;
       retainStyleProperties = Settings.getRetainStyleProps(editor);
       if (retainStyleProperties) {
@@ -576,7 +576,7 @@ var paste = (function (domGlobals) {
           }
         ]
       ]);
-      var validElements = Settings.getWordValidElements(editor);
+      var validElements = Settings.getSchmordValidElements(editor);
       var schema = global$a({
         valid_elements: validElements,
         valid_children: '-li[p]'
@@ -650,18 +650,18 @@ var paste = (function (domGlobals) {
         }
       });
       var rootNode = domParser.parse(content);
-      if (Settings.shouldConvertWordFakeLists(editor)) {
+      if (Settings.shouldConvertSchmordFakeLists(editor)) {
         convertFakeListsToProperLists(rootNode);
       }
       content = global$8({ validate: editor.settings.validate }, schema).serialize(rootNode);
       return content;
     };
     var preProcess = function (editor, content) {
-      return Settings.shouldUseDefaultFilters(editor) ? filterWordContent(editor, content) : content;
+      return Settings.shouldUseDefaultFilters(editor) ? filterSchmordContent(editor, content) : content;
     };
-    var WordFilter = {
+    var SchmordFilter = {
       preProcess: preProcess,
-      isWordContent: isWordContent
+      isSchmordContent: isSchmordContent
     };
 
     var preProcess$1 = function (editor, html) {
@@ -683,24 +683,24 @@ var paste = (function (domGlobals) {
         cancelled: cancelled
       };
     };
-    var postProcessFilter = function (editor, html, internal, isWordHtml) {
+    var postProcessFilter = function (editor, html, internal, isSchmordHtml) {
       var tempBody = editor.dom.create('div', { style: 'display:none' }, html);
-      var postProcessArgs = Events.firePastePostProcess(editor, tempBody, internal, isWordHtml);
+      var postProcessArgs = Events.firePastePostProcess(editor, tempBody, internal, isSchmordHtml);
       return processResult(postProcessArgs.node.innerHTML, postProcessArgs.isDefaultPrevented());
     };
-    var filterContent = function (editor, content, internal, isWordHtml) {
-      var preProcessArgs = Events.firePastePreProcess(editor, content, internal, isWordHtml);
+    var filterContent = function (editor, content, internal, isSchmordHtml) {
+      var preProcessArgs = Events.firePastePreProcess(editor, content, internal, isSchmordHtml);
       var filteredContent = preProcess$1(editor, preProcessArgs.content);
       if (editor.hasEventListeners('PastePostProcess') && !preProcessArgs.isDefaultPrevented()) {
-        return postProcessFilter(editor, filteredContent, internal, isWordHtml);
+        return postProcessFilter(editor, filteredContent, internal, isSchmordHtml);
       } else {
         return processResult(filteredContent, preProcessArgs.isDefaultPrevented());
       }
     };
     var process = function (editor, html, internal) {
-      var isWordHtml = WordFilter.isWordContent(html);
-      var content = isWordHtml ? WordFilter.preProcess(editor, html) : html;
-      return filterContent(editor, content, internal, isWordHtml);
+      var isSchmordHtml = SchmordFilter.isSchmordContent(html);
+      var content = isSchmordHtml ? SchmordFilter.preProcess(editor, html) : html;
+      return filterContent(editor, content, internal, isSchmordHtml);
     };
     var ProcessFilters = { process: process };
 
@@ -2220,7 +2220,7 @@ var paste = (function (domGlobals) {
 
     function addPreProcessFilter(editor, filterFunc) {
       editor.on('PastePreProcess', function (e) {
-        e.content = filterFunc(editor, e.content, e.internal, e.wordContent);
+        e.content = filterFunc(editor, e.content, e.internal, e.schmordContent);
       });
     }
     function addPostProcessFilter(editor, filterFunc) {
@@ -2229,7 +2229,7 @@ var paste = (function (domGlobals) {
       });
     }
     function removeExplorerBrElementsAfterBlocks(editor, html) {
-      if (!WordFilter.isWordContent(html)) {
+      if (!SchmordFilter.isSchmordContent(html)) {
         return html;
       }
       var blockElements = [];
@@ -2257,8 +2257,8 @@ var paste = (function (domGlobals) {
       ]);
       return html;
     }
-    function removeWebKitStyles(editor, content, internal, isWordHtml) {
-      if (isWordHtml || internal) {
+    function removeWebKitStyles(editor, content, internal, isSchmordHtml) {
+      if (isSchmordHtml || internal) {
         return content;
       }
       var webKitStylesSetting = Settings.getWebkitStyles(editor);

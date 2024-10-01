@@ -5,7 +5,7 @@ if ( ! tinymce.ui.FloatPanel.zIndex || tinymce.ui.FloatPanel.zIndex < 100100 ) {
 	tinymce.ui.FloatPanel.zIndex = 100100;
 }
 
-tinymce.PluginManager.add( 'wordpress', function( editor ) {
+tinymce.PluginManager.add( 'schmordpress', function( editor ) {
 	var wpAdvButton, style,
 		DOM = tinymce.DOM,
 		each = tinymce.each,
@@ -92,7 +92,7 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 
 	// Hide the toolbars after loading.
 	editor.on( 'PostRender', function() {
-		if ( editor.getParam( 'wordpress_adv_hidden', true ) && getUserSetting( 'hidetb', '0' ) === '0' ) {
+		if ( editor.getParam( 'schmordpress_adv_hidden', true ) && getUserSetting( 'hidetb', '0' ) === '0' ) {
 			toggleToolbars( 'hide' );
 		} else {
 			tinymce.$( '.block-library-classic__toolbar' ).addClass( 'has-advanced-toolbar' );

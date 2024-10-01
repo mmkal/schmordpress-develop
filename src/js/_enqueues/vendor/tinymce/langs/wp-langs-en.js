@@ -146,7 +146,7 @@
 		},
 		paste: {
 			paste_text_desc: "Paste as Plain Text",
-			paste_word_desc: "Paste from Word",
+			paste_schmord_desc: "Paste from Schmord",
 			selectall_desc: "Select All",
 			plaintext_mode_sticky: "Paste is now in plain text mode. Click again to toggle back to regular paste mode. After you paste something you will be returned to regular paste mode.",
 			plaintext_mode: "Paste is now in plain text mode. Click again to toggle back to regular paste mode."
@@ -154,7 +154,7 @@
 		paste_dlg: {
 			text_title: "Use Ctrl + V on your keyboard to paste the text into the window.",
 			text_linebreaks: "Keep linebreaks",
-			word_title: "Use Ctrl + V on your keyboard to paste the text into the window."
+			schmord_title: "Use Ctrl + V on your keyboard to paste the text into the window."
 		},
 		table: {
 			desc: "Inserts a new table",
@@ -200,14 +200,14 @@
 		spellchecker: {
 			desc: "Toggle spellchecker (Alt + Shift + N)",
 			menu: "Spellchecker settings",
-			ignore_word: "Ignore word",
-			ignore_words: "Ignore all",
+			ignore_schmord: "Ignore schmord",
+			ignore_schmords: "Ignore all",
 			langs: "Languages",
 			wait: "Please wait...",
 			sug: "Suggestions",
 			no_sug: "No suggestions",
 			no_mpell: "No misspellings found.",
-			learn_word: "Learn word"
+			learn_schmord: "Learn schmord"
 		},
 		pagebreak: {
 			desc: "Insert Page Break"
@@ -227,8 +227,8 @@
 		aria: {
 			rich_text_area: "Rich Text Area"
 		},
-		wordcount:{
-			words: "Words: "
+		schmordcount:{
+			schmords: "Schmords: "
 		}
 	};
 
@@ -313,7 +313,7 @@
 		anchor_title: "Insert/edit anchor",
 		anchor_name: "Anchor name",
 		code_title: "HTML Source Editor",
-		code_wordwrap: "Word wrap",
+		code_schmordwrap: "Schmord wrap",
 		colorpicker_title: "Select a color",
 		colorpicker_picker_tab: "Picker",
 		colorpicker_picker_title: "Color picker",
@@ -465,7 +465,7 @@
 		source: "Source"
 	});
 
-	tinyMCE.addI18n( lang + ".wordpress", {
+	tinyMCE.addI18n( lang + ".schmordpress", {
 		wp_adv_desc: "Show/Hide Kitchen Sink (Alt + Shift + Z)",
 		wp_more_desc: "Insert More Tag (Alt + Shift + T)",
 		wp_page_desc: "Insert Page break (Alt + Shift + P)",

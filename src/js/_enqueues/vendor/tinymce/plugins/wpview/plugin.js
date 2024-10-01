@@ -1,5 +1,5 @@
 /**
- * WordPress View plugin.
+ * SchmordPress View plugin.
  */
 ( function( tinymce ) {
 	tinymce.PluginManager.add( 'wpview', function( editor ) {
