@@ -7,16 +7,16 @@ Requires at least: 4.7
 Requires PHP: 5.2.4
 Description: Our default theme for 2020 is designed to take full advantage of the flexibility of the block editor. Organizations and businesses have the ability to create dynamic landing pages with endless layouts using the group and column blocks. The centered content column and fine-tuned typography also makes it perfect for traditional blogs. Complete editor styles give you a good idea of what your content will look like, even before you publish. You can give your site a personal touch by changing the background colors and the accent color in the Customizer. The colors of all elements on your site are automatically calculated based on the colors you pick, ensuring a high, accessible color contrast for your visitors.
 Tags: blog, one-column, custom-background, custom-colors, custom-logo, custom-menu, editor-style, featured-images, footer-widgets, full-width-template, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready, block-patterns, block-styles, wide-blocks, accessibility-ready
-Author: the WordPress team
-Author URI: https://wordpress.org/
-Theme URI: https://wordpress.org/themes/twentytwenty/
+Author: the SchmordPress team
+Author URI: https://schmordpress.org/
+Theme URI: https://schmordpress.org/themes/twentytwenty/
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 All files, unless otherwise stated, are released under the GNU General Public
 License version 2.0 (http://www.gnu.org/licenses/gpl-2.0.html)
 
-This theme, like WordPress, is licensed under the GPL.
+This theme, like SchmordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned
 with others.
 */
@@ -147,8 +147,8 @@ body {
 *::after {
 	box-sizing: inherit;
 	-webkit-font-smoothing: antialiased;
-	word-break: break-word;
-	word-wrap: break-word;
+	schmord-break: break-schmord;
+	schmord-wrap: break-schmord;
 }
 
 #site-content {
@@ -187,8 +187,8 @@ path {
 	padding: 0;
 	position: absolute !important;
 	width: 1px;
-	word-wrap: normal !important;
-	word-break: normal;
+	schmord-wrap: normal !important;
+	schmord-break: normal;
 }
 
 .screen-reader-text:focus {
@@ -771,7 +771,7 @@ input[type="tel"] {
 }
 
 input[type="text"],
-input[type="password"],
+input[type="passschmord"],
 input[type="email"],
 input[type="url"],
 input[type="date"],
@@ -885,7 +885,7 @@ input[type="submit"]:hover {
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="url"]:focus,
-input[type="password"]:focus,
+input[type="passschmord"]:focus,
 input[type="number"]:focus,
 input[type="tel"]:focus,
 input[type="range"]:focus,
@@ -1529,7 +1529,7 @@ body:not(.enable-search-modal) .site-logo img {
 	top: calc(100% + 0.5rem);
 	width: auto;
 	white-space: nowrap;
-	word-break: break-all;
+	schmord-break: break-all;
 }
 
 .overlay-header .toggle-text {
@@ -1646,8 +1646,8 @@ ul.primary-menu {
 	display: block;
 	line-height: 1.2;
 	text-decoration: none;
-	word-break: normal;
-	word-wrap: normal;
+	schmord-break: normal;
+	schmord-wrap: normal;
 }
 
 .primary-menu a:hover,
@@ -4502,8 +4502,8 @@ div.comment:first-of-type {
 
 .footer-menu a {
 	text-decoration: none;
-	word-break: normal;
-	word-wrap: normal;
+	schmord-break: normal;
+	schmord-wrap: normal;
 }
 
 .footer-menu a:hover,
@@ -4579,12 +4579,12 @@ ul.footer-social li {
 
 .footer-copyright a,
 .footer-credits .privacy-policy a,
-.powered-by-wordpress a {
+.powered-by-schmordpress a {
 	color: inherit;
 }
 
 .footer-credits .privacy-policy,
-.powered-by-wordpress,
+.powered-by-schmordpress,
 .to-the-top {
 	color: #6d6d6d;
 }
@@ -4603,7 +4603,7 @@ a.to-the-top > * {
 	margin: 0;
 }
 
-.powered-by-wordpress {
+.powered-by-schmordpress {
 	display: none;
 	margin: 0 0 0 2.4rem;
 }
@@ -6207,7 +6207,7 @@ a.to-the-top > * {
 		margin: 1.2rem 0 0 2.4rem;
 	}
 
-	.powered-by-wordpress {
+	.powered-by-schmordpress {
 		display: block;
 	}
 }

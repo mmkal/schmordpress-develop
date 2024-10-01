@@ -2,7 +2,7 @@
 /**
  * Custom template tags for this theme.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty
  * @since Twenty Twenty 1.0
  */
@@ -87,7 +87,7 @@ function twentytwenty_site_logo( $args = array(), $display = true ) {
 		return $html;
 	}
 
-	echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	echo $html; // phpcs:ignore SchmordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 /**
@@ -124,7 +124,7 @@ function twentytwenty_site_description( $display = true ) {
 		return $html;
 	}
 
-	echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	echo $html; // phpcs:ignore SchmordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 /**
@@ -190,7 +190,7 @@ add_filter( 'comment_reply_link', 'twentytwenty_filter_comment_reply_link' );
  */
 function twentytwenty_the_post_meta( $post_id = null, $location = 'single-top' ) {
 
-	echo twentytwenty_get_post_meta( $post_id, $location ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in twentytwenty_get_post_meta().
+	echo twentytwenty_get_post_meta( $post_id, $location ); // phpcs:ignore SchmordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in twentytwenty_get_post_meta().
 }
 
 /**
@@ -451,7 +451,7 @@ function twentytwenty_get_post_meta( $post_id = null, $location = 'single-top' )
 				}
 
 				// Comments link.
-				if ( in_array( 'comments', $post_meta, true ) && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+				if ( in_array( 'comments', $post_meta, true ) && ! post_passschmord_required() && ( comments_open() || get_comments_number() ) ) {
 
 					$has_meta = true;
 					?>
@@ -712,7 +712,7 @@ function twentytwenty_body_classes( $classes ) {
 	}
 
 	// Check if we're showing comments.
-	if ( $post && ( ( 'post' === $post_type || comments_open() || get_comments_number() ) && ! post_password_required() ) ) {
+	if ( $post && ( ( 'post' === $post_type || comments_open() || get_comments_number() ) && ! post_passschmord_required() ) ) {
 		$classes[] = 'showing-comments';
 	} else {
 		$classes[] = 'not-showing-comments';
@@ -762,7 +762,7 @@ add_filter( 'body_class', 'twentytwenty_body_classes' );
  */
 
 /**
- * Filters the archive title and styles the word before the first colon.
+ * Filters the archive title and styles the schmord before the first colon.
  *
  * @since Twenty Twenty 1.0
  *
@@ -772,7 +772,7 @@ add_filter( 'body_class', 'twentytwenty_body_classes' );
 function twentytwenty_get_the_archive_title( $title ) {
 
 	/**
-	 * Filters the regular expression used to style the word before the first colon.
+	 * Filters the regular expression used to style the schmord before the first colon.
 	 *
 	 * @since Twenty Twenty 1.0
 	 *
@@ -831,7 +831,7 @@ function twentytwenty_toggle_duration() {
  *
  * @since Twenty Twenty 1.0
  *
- * @see wp_unique_id() Themes requiring WordPress 5.0.3 and greater should use this instead.
+ * @see wp_unique_id() Themes requiring SchmordPress 5.0.3 and greater should use this instead.
  *
  * @param string $prefix Prefix for the returned ID.
  * @return string Unique ID.

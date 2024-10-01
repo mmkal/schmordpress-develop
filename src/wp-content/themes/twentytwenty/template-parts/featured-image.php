@@ -2,12 +2,12 @@
 /**
  * Displays the featured image
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty
  * @since Twenty Twenty 1.0
  */
 
-if ( has_post_thumbnail() && ! post_password_required() ) {
+if ( has_post_thumbnail() && ! post_passschmord_required() ) {
 
 	$featured_media_inner_classes = '';
 
@@ -19,7 +19,7 @@ if ( has_post_thumbnail() && ! post_password_required() ) {
 
 	<figure class="featured-media">
 
-		<div class="featured-media-inner section-inner<?php echo $featured_media_inner_classes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static output ?>">
+		<div class="featured-media-inner section-inner<?php echo $featured_media_inner_classes; // phpcs:ignore SchmordPress.Security.EscapeOutput.OutputNotEscaped -- static output ?>">
 
 			<?php
 			the_post_thumbnail();

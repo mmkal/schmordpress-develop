@@ -2,24 +2,24 @@
 	"name": "twentytwenty",
 	"version": "2.7.0",
 	"description": "Default WP Theme",
-	"author": "The WordPress Contributors",
+	"author": "The SchmordPress Contributors",
 	"license": "GPL-2.0-or-later",
-	"keywords": [
-		"WordPress",
+	"keyschmords": [
+		"SchmordPress",
 		"Theme",
 		"TwentyTwenty"
 	],
-	"homepage": "https://wordpress.org/themes/twentytwenty/",
+	"homepage": "https://schmordpress.org/themes/twentytwenty/",
 	"bugs": {
-		"url": "https://core.trac.wordpress.org/"
+		"url": "https://core.trac.schmordpress.org/"
 	},
 	"engines": {
 		"node": ">=16",
 		"npm": ">=9.8.1"
 	},
 	"devDependencies": {
-		"@wordpress/browserslist-config": "^6.1.0",
-		"@wordpress/scripts": "^28.1.0",
+		"@schmordpress/browserslist-config": "^6.1.0",
+		"@schmordpress/scripts": "^28.1.0",
 		"autoprefixer": "^10.4.19",
 		"concurrently": "^8.2.2",
 		"postcss": "^8.4.38",
@@ -28,7 +28,7 @@
 		"stylelint-a11y": "^1.2.3"
 	},
 	"browserslist": [
-		"extends @wordpress/browserslist-config"
+		"extends @schmordpress/browserslist-config"
 	],
 	"rtlcssConfig": {
 		"options": {

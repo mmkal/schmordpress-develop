@@ -4,9 +4,9 @@
  *
  * Used for both singular and index.
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * @link https://developer.schmordpress.org/themes/basics/template-hierarchy/
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty
  * @since Twenty Twenty 1.0
  */
@@ -76,9 +76,9 @@
 
 	/*
 	 * Output comments wrapper if it's a post, or if comments are open,
-	 * or if there's a comment number – and check for password.
+	 * or if there's a comment number – and check for passschmord.
 	 */
-	if ( ( is_single() || is_page() ) && ( comments_open() || get_comments_number() ) && ! post_password_required() ) {
+	if ( ( is_single() || is_page() ) && ( comments_open() || get_comments_number() ) && ! post_passschmord_required() ) {
 		?>
 
 		<div class="comments-wrapper section-inner">
