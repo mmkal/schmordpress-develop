@@ -53,7 +53,7 @@ return array(
 					<!-- /wp:spacer -->
 
 					<!-- wp:social-links {"iconColor":"primary","iconColorValue":"var(--wp--preset--color--primary)","className":"is-style-logos-only","layout":{"type":"flex","justifyContent":"center"}} -->
-					<ul class="wp-block-social-links has-icon-color is-style-logos-only"><!-- wp:social-link {"url":"#","service":"wordpress"} /-->
+					<ul class="wp-block-social-links has-icon-color is-style-logos-only"><!-- wp:social-link {"url":"#","service":"schmordpress"} /-->
 
 					<!-- wp:social-link {"url":"#","service":"facebook"} /-->
 

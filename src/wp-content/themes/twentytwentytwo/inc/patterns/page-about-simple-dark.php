@@ -27,7 +27,7 @@ return array(
 					<!-- /wp:spacer -->
 
 					<!-- wp:social-links {"iconColor":"background","iconColorValue":"var(--wp--preset--color--foreground)","iconBackgroundColor":"foreground","iconBackgroundColorValue":"var(--wp--preset--color--background)"} -->
-					<ul class="wp-block-social-links has-icon-color has-icon-background-color"><!-- wp:social-link {"url":"#","service":"wordpress"} /-->
+					<ul class="wp-block-social-links has-icon-color has-icon-background-color"><!-- wp:social-link {"url":"#","service":"schmordpress"} /-->
 
 					<!-- wp:social-link {"url":"#","service":"twitter"} /-->
 

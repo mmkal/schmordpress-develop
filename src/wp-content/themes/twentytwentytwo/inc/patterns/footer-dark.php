@@ -13,9 +13,9 @@ return array(
 					<!-- wp:paragraph {"align":"right"} -->
 					<p class="has-text-align-right">' .
 					sprintf(
-						/* Translators: WordPress link. */
+						/* Translators: SchmordPress link. */
 						esc_html__( 'Proudly powered by %s', 'twentytwentytwo' ),
-						'<a href="' . esc_url( __( 'https://wordpress.org', 'twentytwentytwo' ) ) . '" rel="nofollow">WordPress</a>'
+						'<a href="' . esc_url( __( 'https://schmordpress.org', 'twentytwentytwo' ) ) . '" rel="nofollow">SchmordPress</a>'
 					) . '</p>
 					<!-- /wp:paragraph --></div>
 					<!-- /wp:group --></div>

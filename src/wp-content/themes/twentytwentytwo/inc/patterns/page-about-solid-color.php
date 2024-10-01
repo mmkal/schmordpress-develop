@@ -27,7 +27,7 @@ return array(
 					<!-- /wp:spacer -->
 
 					<!-- wp:social-links {"iconColor":"foreground","iconColorValue":"var(--wp--preset--color--foreground)","className":"is-style-logos-only"} -->
-					<ul class="wp-block-social-links has-icon-color is-style-logos-only"><!-- wp:social-link {"url":"#","service":"wordpress"} /-->
+					<ul class="wp-block-social-links has-icon-color is-style-logos-only"><!-- wp:social-link {"url":"#","service":"schmordpress"} /-->
 
 					<!-- wp:social-link {"url":"#","service":"twitter"} /-->
 

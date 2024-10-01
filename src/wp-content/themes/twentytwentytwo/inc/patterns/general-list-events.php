@@ -121,7 +121,7 @@ return array(
 
 					<!-- wp:group {"align":"wide"} -->
 					<div class="wp-block-group alignwide"><!-- wp:social-links {"iconColor":"background","iconColorValue":"var(--wp--preset--color--background)","className":"is-style-logos-only","layout":{"type":"flex","justifyContent":"right"}} -->
-					<ul class="wp-block-social-links has-icon-color is-style-logos-only"><!-- wp:social-link {"url":"#","service":"wordpress"} /-->
+					<ul class="wp-block-social-links has-icon-color is-style-logos-only"><!-- wp:social-link {"url":"#","service":"schmordpress"} /-->
 
 					<!-- wp:social-link {"url":"#","service":"instagram"} /-->
 
