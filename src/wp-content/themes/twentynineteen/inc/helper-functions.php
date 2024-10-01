@@ -2,7 +2,7 @@
 /**
  * Common theme functions
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Nineteen
  * @since Twenty Nineteen 1.5
  */
@@ -11,7 +11,7 @@
  * Determines if post thumbnail can be displayed.
  */
 function twentynineteen_can_show_post_thumbnail() {
-	return apply_filters( 'twentynineteen_can_show_post_thumbnail', ! post_password_required() && ! is_attachment() && has_post_thumbnail() );
+	return apply_filters( 'twentynineteen_can_show_post_thumbnail', ! post_passschmord_required() && ! is_attachment() && has_post_thumbnail() );
 }
 
 /**

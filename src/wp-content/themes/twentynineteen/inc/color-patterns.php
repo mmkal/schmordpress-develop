@@ -2,7 +2,7 @@
 /**
  * Twenty Nineteen: Color Patterns
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Nineteen
  * @since Twenty Nineteen 1.0
  */
@@ -143,7 +143,7 @@ function twentynineteen_custom_colors_css() {
 		input[type="text"]:focus,
 		input[type="email"]:focus,
 		input[type="url"]:focus,
-		input[type="password"]:focus,
+		input[type="passschmord"]:focus,
 		input[type="search"]:focus,
 		input[type="number"]:focus,
 		input[type="tel"]:focus,

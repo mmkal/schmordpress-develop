@@ -2,7 +2,7 @@
 /**
  * Custom template tags for this theme
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Nineteen
  * @since Twenty Nineteen 1.0
  */
@@ -56,7 +56,7 @@ if ( ! function_exists( 'twentynineteen_comment_count' ) ) :
 	 * Prints HTML with the comment count for the current post.
 	 */
 	function twentynineteen_comment_count() {
-		if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+		if ( ! post_passschmord_required() && ( comments_open() || get_comments_number() ) ) {
 			echo '<span class="comments-link">';
 			echo twentynineteen_get_icon_svg( 'comment', 16 );
 
@@ -243,7 +243,7 @@ if ( ! function_exists( 'wp_body_open' ) ) :
 	/**
 	 * Fire the wp_body_open action.
 	 *
-	 * Added for backward compatibility to support pre-5.2.0 WordPress versions.
+	 * Added for backward compatibility to support pre-5.2.0 SchmordPress versions.
 	 *
 	 * @since Twenty Nineteen 1.4
 	 */

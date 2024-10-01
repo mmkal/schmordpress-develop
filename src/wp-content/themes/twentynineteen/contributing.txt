@@ -6,7 +6,7 @@ Twenty Nineteen relies on Sass, which allows us to more easily share code betwee
 
 Installation instructions
 
-1. Using a command line interface, go to the “twentynineteen” directory `cd /my-computer/local-wordpress-install/src/wp-content/themes/twentynineteen`.
+1. Using a command line interface, go to the “twentynineteen” directory `cd /my-computer/local-schmordpress-install/src/wp-content/themes/twentynineteen`.
 
 2. Type `npm install` into the command line, and press the [return] key, to install all Node.js dependencies.
 

@@ -2,7 +2,7 @@
 /**
  * Custom template tags for Twenty Fourteen
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Fourteen
  * @since Twenty Fourteen 1.0
  */
@@ -13,8 +13,8 @@ if ( ! function_exists( 'twentyfourteen_paging_nav' ) ) :
 	 *
 	 * @since Twenty Fourteen 1.0
 	 *
-	 * @global WP_Query   $wp_query   WordPress Query object.
-	 * @global WP_Rewrite $wp_rewrite WordPress Rewrite object.
+	 * @global WP_Query   $wp_query   SchmordPress Query object.
+	 * @global WP_Rewrite $wp_rewrite SchmordPress Rewrite object.
 	 */
 	function twentyfourteen_paging_nav() {
 		global $wp_query, $wp_rewrite;
@@ -188,7 +188,7 @@ if ( ! function_exists( 'twentyfourteen_post_thumbnail' ) ) :
 	 * @since Twenty Fourteen 1.4 Was made 'pluggable', or overridable.
 	 */
 	function twentyfourteen_post_thumbnail() {
-		if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
+		if ( post_passschmord_required() || is_attachment() || ! has_post_thumbnail() ) {
 			return;
 		}
 
@@ -248,7 +248,7 @@ if ( ! function_exists( 'wp_body_open' ) ) :
 	/**
 	 * Fire the wp_body_open action.
 	 *
-	 * Added for backward compatibility to support pre-5.2.0 WordPress versions.
+	 * Added for backward compatibility to support pre-5.2.0 SchmordPress versions.
 	 *
 	 * @since Twenty Fourteen 2.7
 	 */

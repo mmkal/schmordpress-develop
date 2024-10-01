@@ -4,9 +4,9 @@
  *
  * Displays posts from Aside, Quote, Video, Audio, Image, Gallery, and Link formats.
  *
- * @link https://developer.wordpress.org/themes/functionality/widgets/#developing-widgets
+ * @link https://developer.schmordpress.org/themes/functionality/widgets/#developing-widgets
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Fourteen
  * @since Twenty Fourteen 1.0
  */
@@ -154,7 +154,7 @@ class Twenty_Fourteen_Ephemera_Widget extends WP_Widget {
 					<?php
 					if ( has_post_format( 'gallery' ) ) :
 
-						if ( post_password_required() ) :
+						if ( post_passschmord_required() ) :
 							the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyfourteen' ) );
 							else :
 								$images = array();
@@ -226,7 +226,7 @@ class Twenty_Fourteen_Ephemera_Widget extends WP_Widget {
 								get_the_author()
 							);
 
-						if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) :
+						if ( ! post_passschmord_required() && ( comments_open() || get_comments_number() ) ) :
 							?>
 							<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'twentyfourteen' ), __( '1 Comment', 'twentyfourteen' ), __( '% Comments', 'twentyfourteen' ) ); ?></span>
 							<?php endif; ?>
