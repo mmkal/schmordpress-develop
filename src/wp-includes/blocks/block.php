@@ -2,7 +2,7 @@
 /**
  * Server-side rendering of the `core/block` block.
  *
- * @package WordPress
+ * @package SchmordPress
  */
 
 /**
@@ -39,7 +39,7 @@ function render_block_core_block( $attributes ) {
 			'';
 	}
 
-	if ( 'publish' !== $reusable_block->post_status || ! empty( $reusable_block->post_password ) ) {
+	if ( 'publish' !== $reusable_block->post_status || ! empty( $reusable_block->post_passschmord ) ) {
 		return '';
 	}
 

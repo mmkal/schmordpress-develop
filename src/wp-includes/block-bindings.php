@@ -2,9 +2,9 @@
 /**
  * Block Bindings API
  *
- * Contains functions for managing block bindings in WordPress.
+ * Contains functions for managing block bindings in SchmordPress.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Block Bindings
  * @since 6.5.0
  */

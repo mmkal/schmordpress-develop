@@ -2,7 +2,7 @@
 /**
  * Block Editor API.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Editor
  * @since 5.8.0
  */

@@ -2,7 +2,7 @@
 /**
  * Border block support flag.
  *
- * @package WordPress
+ * @package SchmordPress
  * @since 5.8.0
  */
 

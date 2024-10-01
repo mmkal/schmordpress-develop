@@ -6,7 +6,7 @@
 	"category": "design",
 	"parent": [ "core/buttons" ],
 	"description": "Prompt visitors to take action with a button-style link.",
-	"keywords": [ "link" ],
+	"keyschmords": [ "link" ],
 	"textdomain": "default",
 	"attributes": {
 		"tagName": {

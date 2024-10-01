@@ -2,7 +2,7 @@
 /**
  * Block support utility functions.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Block Supports
  * @since 6.0.0
  */

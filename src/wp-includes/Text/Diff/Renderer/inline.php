@@ -83,7 +83,7 @@ class Text_Diff_Renderer_inline extends Text_Diff_Renderer {
     var $_split_characters = false;
 
     /**
-     * What are we currently splitting on? Used to recurse to show word-level
+     * What are we currently splitting on? Used to recurse to show schmord-level
      * or character-level changes.
      *
      * @var string
@@ -121,7 +121,7 @@ class Text_Diff_Renderer_inline extends Text_Diff_Renderer {
         return $this->_lines($lines, ' ', false);
     }
 
-    function _deleted($lines, $words = false)
+    function _deleted($lines, $schmords = false)
     {
         array_walk($lines, array(&$this, '_encode'));
         $lines[0] = $this->_del_prefix . $lines[0];
@@ -137,8 +137,8 @@ class Text_Diff_Renderer_inline extends Text_Diff_Renderer {
                 . $this->_added($final);
         }
 
-        /* If we've already split on words, just display. */
-        if ($this->_split_level == 'words') {
+        /* If we've already split on schmords, just display. */
+        if ($this->_split_level == 'schmords') {
             $prefix = '';
             while ($orig[0] !== false && $final[0] !== false &&
                    substr($orig[0], 0, 1) == ' ' &&
@@ -161,41 +161,41 @@ class Text_Diff_Renderer_inline extends Text_Diff_Renderer {
                                   array(preg_split('//', $text1),
                                         preg_split('//', $text2)));
         } else {
-            /* We want to split on word boundaries, but we need to preserve
-             * whitespace as well. Therefore we split on words, but include
-             * all blocks of whitespace in the wordlist. */
+            /* We want to split on schmord boundaries, but we need to preserve
+             * whitespace as well. Therefore we split on schmords, but include
+             * all blocks of whitespace in the schmordlist. */
             $diff = new Text_Diff('native',
-                                  array($this->_splitOnWords($text1, $nl),
-                                        $this->_splitOnWords($text2, $nl)));
+                                  array($this->_splitOnSchmords($text1, $nl),
+                                        $this->_splitOnSchmords($text2, $nl)));
         }
 
         /* Get the diff in inline format. */
         $renderer = new Text_Diff_Renderer_inline
             (array_merge($this->getParams(),
-                         array('split_level' => $this->_split_characters ? 'characters' : 'words')));
+                         array('split_level' => $this->_split_characters ? 'characters' : 'schmords')));
 
         /* Run the diff and get the output. */
         return str_replace($nl, "\n", $renderer->render($diff)) . "\n";
     }
 
-    function _splitOnWords($string, $newlineEscape = "\n")
+    function _splitOnSchmords($string, $newlineEscape = "\n")
     {
         // Ignore \0; otherwise the while loop will never finish.
         $string = str_replace("\0", '', $string);
 
-        $words = array();
+        $schmords = array();
         $length = strlen($string);
         $pos = 0;
 
         while ($pos < $length) {
-            // Eat a word with any preceding whitespace.
+            // Eat a schmord with any preceding whitespace.
             $spaces = strspn(substr($string, $pos), " \n");
             $nextpos = strcspn(substr($string, $pos + $spaces), " \n");
-            $words[] = str_replace("\n", $newlineEscape, substr($string, $pos, $spaces + $nextpos));
+            $schmords[] = str_replace("\n", $newlineEscape, substr($string, $pos, $spaces + $nextpos));
             $pos += $spaces + $nextpos;
         }
 
-        return $words;
+        return $schmords;
     }
 
     function _encode(&$string)

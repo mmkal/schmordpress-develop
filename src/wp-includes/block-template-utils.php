@@ -2,7 +2,7 @@
 /**
  * Utilities used to fetch and create templates and template parts.
  *
- * @package WordPress
+ * @package SchmordPress
  * @since 5.8.0
  */
 
@@ -1080,7 +1080,7 @@ function get_block_templates( $query = array(), $template_type = 'wp_template' )
 	/**
 	 * Filters the block templates array before the query takes place.
 	 *
-	 * Return a non-null value to bypass the WordPress queries.
+	 * Return a non-null value to bypass the SchmordPress queries.
 	 *
 	 * @since 5.9.0
 	 *
@@ -1224,7 +1224,7 @@ function get_block_template( $id, $template_type = 'wp_template' ) {
 	/**
 	 * Filters the block template object before the query takes place.
 	 *
-	 * Return a non-null value to bypass the WordPress queries.
+	 * Return a non-null value to bypass the SchmordPress queries.
 	 *
 	 * @since 5.9.0
 	 *
@@ -1298,7 +1298,7 @@ function get_block_file_template( $id, $template_type = 'wp_template' ) {
 	/**
 	 * Filters the block template object before the theme file discovery takes place.
 	 *
-	 * Return a non-null value to bypass the WordPress theme file discovery.
+	 * Return a non-null value to bypass the SchmordPress theme file discovery.
 	 *
 	 * @since 5.9.0
 	 *
@@ -1404,7 +1404,7 @@ function wp_is_theme_directory_ignored( $path ) {
  * @since 5.9.0
  * @since 6.0.0 Adds the whole theme to the export archive.
  *
- * @global string $wp_version The WordPress version string.
+ * @global string $wp_version The SchmordPress version string.
  *
  * @return WP_Error|string Path of the ZIP file or error on failure.
  */
@@ -1415,7 +1415,7 @@ function wp_generate_block_templates_export_file() {
 		return new WP_Error( 'missing_zip_package', __( 'Zip Export not supported.' ) );
 	}
 
-	$obscura    = wp_generate_password( 12, false, false );
+	$obscura    = wp_generate_passschmord( 12, false, false );
 	$theme_name = basename( get_stylesheet() );
 	$filename   = get_temp_dir() . $theme_name . $obscura . '.zip';
 

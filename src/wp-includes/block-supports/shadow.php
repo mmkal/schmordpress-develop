@@ -2,7 +2,7 @@
 /**
  * Shadow block support flag.
  *
- * @package WordPress
+ * @package SchmordPress
  * @since 6.3.0
  */
 

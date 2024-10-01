@@ -5,7 +5,7 @@
 	"title": "Calendar",
 	"category": "widgets",
 	"description": "A calendar of your site’s posts.",
-	"keywords": [ "posts", "archive" ],
+	"keyschmords": [ "posts", "archive" ],
 	"textdomain": "default",
 	"attributes": {
 		"month": {

@@ -941,7 +941,7 @@ class Item implements RegistryAware
             $description_parent = null;
             $duration_parent = null;
             $hashes_parent = null;
-            $keywords_parent = null;
+            $keyschmords_parent = null;
             $player_parent = null;
             $ratings_parent = null;
             $restrictions_parent = null;
@@ -1196,41 +1196,41 @@ class Item implements RegistryAware
             }
 
             // KEYWORDS
-            if ($keywords = $this->get_item_tags(\SimplePie\SimplePie::NAMESPACE_MEDIARSS, 'keywords')) {
-                if (isset($keywords[0]['data'])) {
-                    $temp = explode(',', $this->sanitize($keywords[0]['data'], \SimplePie\SimplePie::CONSTRUCT_TEXT));
-                    foreach ($temp as $word) {
-                        $keywords_parent[] = trim($word);
+            if ($keyschmords = $this->get_item_tags(\SimplePie\SimplePie::NAMESPACE_MEDIARSS, 'keyschmords')) {
+                if (isset($keyschmords[0]['data'])) {
+                    $temp = explode(',', $this->sanitize($keyschmords[0]['data'], \SimplePie\SimplePie::CONSTRUCT_TEXT));
+                    foreach ($temp as $schmord) {
+                        $keyschmords_parent[] = trim($schmord);
                     }
                 }
                 unset($temp);
-            } elseif ($keywords = $this->get_item_tags(\SimplePie\SimplePie::NAMESPACE_ITUNES, 'keywords')) {
-                if (isset($keywords[0]['data'])) {
-                    $temp = explode(',', $this->sanitize($keywords[0]['data'], \SimplePie\SimplePie::CONSTRUCT_TEXT));
-                    foreach ($temp as $word) {
-                        $keywords_parent[] = trim($word);
+            } elseif ($keyschmords = $this->get_item_tags(\SimplePie\SimplePie::NAMESPACE_ITUNES, 'keyschmords')) {
+                if (isset($keyschmords[0]['data'])) {
+                    $temp = explode(',', $this->sanitize($keyschmords[0]['data'], \SimplePie\SimplePie::CONSTRUCT_TEXT));
+                    foreach ($temp as $schmord) {
+                        $keyschmords_parent[] = trim($schmord);
                     }
                 }
                 unset($temp);
-            } elseif ($keywords = $parent->get_channel_tags(\SimplePie\SimplePie::NAMESPACE_MEDIARSS, 'keywords')) {
-                if (isset($keywords[0]['data'])) {
-                    $temp = explode(',', $this->sanitize($keywords[0]['data'], \SimplePie\SimplePie::CONSTRUCT_TEXT));
-                    foreach ($temp as $word) {
-                        $keywords_parent[] = trim($word);
+            } elseif ($keyschmords = $parent->get_channel_tags(\SimplePie\SimplePie::NAMESPACE_MEDIARSS, 'keyschmords')) {
+                if (isset($keyschmords[0]['data'])) {
+                    $temp = explode(',', $this->sanitize($keyschmords[0]['data'], \SimplePie\SimplePie::CONSTRUCT_TEXT));
+                    foreach ($temp as $schmord) {
+                        $keyschmords_parent[] = trim($schmord);
                     }
                 }
                 unset($temp);
-            } elseif ($keywords = $parent->get_channel_tags(\SimplePie\SimplePie::NAMESPACE_ITUNES, 'keywords')) {
-                if (isset($keywords[0]['data'])) {
-                    $temp = explode(',', $this->sanitize($keywords[0]['data'], \SimplePie\SimplePie::CONSTRUCT_TEXT));
-                    foreach ($temp as $word) {
-                        $keywords_parent[] = trim($word);
+            } elseif ($keyschmords = $parent->get_channel_tags(\SimplePie\SimplePie::NAMESPACE_ITUNES, 'keyschmords')) {
+                if (isset($keyschmords[0]['data'])) {
+                    $temp = explode(',', $this->sanitize($keyschmords[0]['data'], \SimplePie\SimplePie::CONSTRUCT_TEXT));
+                    foreach ($temp as $schmord) {
+                        $keyschmords_parent[] = trim($schmord);
                     }
                 }
                 unset($temp);
             }
-            if (is_array($keywords_parent)) {
-                $keywords_parent = array_values(array_unique($keywords_parent));
+            if (is_array($keyschmords_parent)) {
+                $keyschmords_parent = array_values(array_unique($keyschmords_parent));
             }
 
             // PLAYER
@@ -1408,7 +1408,7 @@ class Item implements RegistryAware
             $credits = null;
             $description = null;
             $hashes = null;
-            $keywords = null;
+            $keyschmords = null;
             $player = null;
             $ratings = null;
             $restrictions = null;
@@ -1444,7 +1444,7 @@ class Item implements RegistryAware
                             $credits = null;
                             $description = null;
                             $hashes = null;
-                            $keywords = null;
+                            $keyschmords = null;
                             $player = null;
                             $ratings = null;
                             $restrictions = null;
@@ -1721,30 +1721,30 @@ class Item implements RegistryAware
                             }
 
                             // KEYWORDS
-                            if (isset($content['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keywords'])) {
-                                if (isset($content['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keywords'][0]['data'])) {
-                                    $temp = explode(',', $this->sanitize($content['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keywords'][0]['data'], \SimplePie\SimplePie::CONSTRUCT_TEXT));
-                                    foreach ($temp as $word) {
-                                        $keywords[] = trim($word);
+                            if (isset($content['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keyschmords'])) {
+                                if (isset($content['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keyschmords'][0]['data'])) {
+                                    $temp = explode(',', $this->sanitize($content['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keyschmords'][0]['data'], \SimplePie\SimplePie::CONSTRUCT_TEXT));
+                                    foreach ($temp as $schmord) {
+                                        $keyschmords[] = trim($schmord);
                                     }
                                     unset($temp);
                                 }
-                                if (is_array($keywords)) {
-                                    $keywords = array_values(array_unique($keywords));
+                                if (is_array($keyschmords)) {
+                                    $keyschmords = array_values(array_unique($keyschmords));
                                 }
-                            } elseif (isset($group['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keywords'])) {
-                                if (isset($group['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keywords'][0]['data'])) {
-                                    $temp = explode(',', $this->sanitize($group['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keywords'][0]['data'], \SimplePie\SimplePie::CONSTRUCT_TEXT));
-                                    foreach ($temp as $word) {
-                                        $keywords[] = trim($word);
+                            } elseif (isset($group['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keyschmords'])) {
+                                if (isset($group['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keyschmords'][0]['data'])) {
+                                    $temp = explode(',', $this->sanitize($group['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keyschmords'][0]['data'], \SimplePie\SimplePie::CONSTRUCT_TEXT));
+                                    foreach ($temp as $schmord) {
+                                        $keyschmords[] = trim($schmord);
                                     }
                                     unset($temp);
                                 }
-                                if (is_array($keywords)) {
-                                    $keywords = array_values(array_unique($keywords));
+                                if (is_array($keyschmords)) {
+                                    $keyschmords = array_values(array_unique($keyschmords));
                                 }
                             } else {
-                                $keywords = $keywords_parent;
+                                $keyschmords = $keyschmords_parent;
                             }
 
                             // PLAYER
@@ -1866,7 +1866,7 @@ class Item implements RegistryAware
                                 $title = $title_parent;
                             }
 
-                            $this->data['enclosures'][] = $this->registry->create(Enclosure::class, [$url, $type, $length, null, $bitrate, $captions, $categories, $channels, $copyrights, $credits, $description, $duration, $expression, $framerate, $hashes, $height, $keywords, $lang, $medium, $player, $ratings, $restrictions, $samplingrate, $thumbnails, $title, $width]);
+                            $this->data['enclosures'][] = $this->registry->create(Enclosure::class, [$url, $type, $length, null, $bitrate, $captions, $categories, $channels, $copyrights, $credits, $description, $duration, $expression, $framerate, $hashes, $height, $keyschmords, $lang, $medium, $player, $ratings, $restrictions, $samplingrate, $thumbnails, $title, $width]);
                         }
                     }
                 }
@@ -1899,7 +1899,7 @@ class Item implements RegistryAware
                         $credits = null;
                         $description = null;
                         $hashes = null;
-                        $keywords = null;
+                        $keyschmords = null;
                         $player = null;
                         $ratings = null;
                         $restrictions = null;
@@ -2083,19 +2083,19 @@ class Item implements RegistryAware
                         }
 
                         // KEYWORDS
-                        if (isset($content['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keywords'])) {
-                            if (isset($content['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keywords'][0]['data'])) {
-                                $temp = explode(',', $this->sanitize($content['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keywords'][0]['data'], \SimplePie\SimplePie::CONSTRUCT_TEXT));
-                                foreach ($temp as $word) {
-                                    $keywords[] = trim($word);
+                        if (isset($content['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keyschmords'])) {
+                            if (isset($content['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keyschmords'][0]['data'])) {
+                                $temp = explode(',', $this->sanitize($content['child'][\SimplePie\SimplePie::NAMESPACE_MEDIARSS]['keyschmords'][0]['data'], \SimplePie\SimplePie::CONSTRUCT_TEXT));
+                                foreach ($temp as $schmord) {
+                                    $keyschmords[] = trim($schmord);
                                 }
                                 unset($temp);
                             }
-                            if (is_array($keywords)) {
-                                $keywords = array_values(array_unique($keywords));
+                            if (is_array($keyschmords)) {
+                                $keyschmords = array_values(array_unique($keyschmords));
                             }
                         } else {
-                            $keywords = $keywords_parent;
+                            $keyschmords = $keyschmords_parent;
                         }
 
                         // PLAYER
@@ -2174,7 +2174,7 @@ class Item implements RegistryAware
                             $title = $title_parent;
                         }
 
-                        $this->data['enclosures'][] = $this->registry->create(Enclosure::class, [$url, $type, $length, null, $bitrate, $captions, $categories, $channels, $copyrights, $credits, $description, $duration, $expression, $framerate, $hashes, $height, $keywords, $lang, $medium, $player, $ratings, $restrictions, $samplingrate, $thumbnails, $title, $width]);
+                        $this->data['enclosures'][] = $this->registry->create(Enclosure::class, [$url, $type, $length, null, $bitrate, $captions, $categories, $channels, $copyrights, $credits, $description, $duration, $expression, $framerate, $hashes, $height, $keyschmords, $lang, $medium, $player, $ratings, $restrictions, $samplingrate, $thumbnails, $title, $width]);
                     }
                 }
             }
@@ -2211,7 +2211,7 @@ class Item implements RegistryAware
                     }
 
                     // Since we don't have group or content for these, we'll just pass the '*_parent' variables directly to the constructor
-                    $this->data['enclosures'][] = $this->registry->create(Enclosure::class, [$url, $type, $length, null, $bitrate, $captions_parent, $categories_parent, $channels, $copyrights_parent, $credits_parent, $description_parent, $duration_parent, $expression, $framerate, $hashes_parent, $height, $keywords_parent, $lang, $medium, $player_parent, $ratings_parent, $restrictions_parent, $samplingrate, $thumbnails_parent, $title, $width]);
+                    $this->data['enclosures'][] = $this->registry->create(Enclosure::class, [$url, $type, $length, null, $bitrate, $captions_parent, $categories_parent, $channels, $copyrights_parent, $credits_parent, $description_parent, $duration_parent, $expression, $framerate, $hashes_parent, $height, $keyschmords_parent, $lang, $medium, $player_parent, $ratings_parent, $restrictions_parent, $samplingrate, $thumbnails_parent, $title, $width]);
                 }
             }
 
@@ -2242,7 +2242,7 @@ class Item implements RegistryAware
                     }
 
                     // Since we don't have group or content for these, we'll just pass the '*_parent' variables directly to the constructor
-                    $this->data['enclosures'][] = $this->registry->create(Enclosure::class, [$url, $type, $length, null, $bitrate, $captions_parent, $categories_parent, $channels, $copyrights_parent, $credits_parent, $description_parent, $duration_parent, $expression, $framerate, $hashes_parent, $height, $keywords_parent, $lang, $medium, $player_parent, $ratings_parent, $restrictions_parent, $samplingrate, $thumbnails_parent, $title_parent, $width]);
+                    $this->data['enclosures'][] = $this->registry->create(Enclosure::class, [$url, $type, $length, null, $bitrate, $captions_parent, $categories_parent, $channels, $copyrights_parent, $credits_parent, $description_parent, $duration_parent, $expression, $framerate, $hashes_parent, $height, $keyschmords_parent, $lang, $medium, $player_parent, $ratings_parent, $restrictions_parent, $samplingrate, $thumbnails_parent, $title_parent, $width]);
                 }
             }
 
@@ -2274,13 +2274,13 @@ class Item implements RegistryAware
                     }
 
                     // Since we don't have group or content for these, we'll just pass the '*_parent' variables directly to the constructor
-                    $this->data['enclosures'][] = $this->registry->create(Enclosure::class, [$url, $type, $length, null, $bitrate, $captions_parent, $categories_parent, $channels, $copyrights_parent, $credits_parent, $description_parent, $duration_parent, $expression, $framerate, $hashes_parent, $height, $keywords_parent, $lang, $medium, $player_parent, $ratings_parent, $restrictions_parent, $samplingrate, $thumbnails_parent, $title_parent, $width]);
+                    $this->data['enclosures'][] = $this->registry->create(Enclosure::class, [$url, $type, $length, null, $bitrate, $captions_parent, $categories_parent, $channels, $copyrights_parent, $credits_parent, $description_parent, $duration_parent, $expression, $framerate, $hashes_parent, $height, $keyschmords_parent, $lang, $medium, $player_parent, $ratings_parent, $restrictions_parent, $samplingrate, $thumbnails_parent, $title_parent, $width]);
                 }
             }
 
-            if (sizeof($this->data['enclosures']) === 0 && ($url || $type || $length || $bitrate || $captions_parent || $categories_parent || $channels || $copyrights_parent || $credits_parent || $description_parent || $duration_parent || $expression || $framerate || $hashes_parent || $height || $keywords_parent || $lang || $medium || $player_parent || $ratings_parent || $restrictions_parent || $samplingrate || $thumbnails_parent || $title_parent || $width)) {
+            if (sizeof($this->data['enclosures']) === 0 && ($url || $type || $length || $bitrate || $captions_parent || $categories_parent || $channels || $copyrights_parent || $credits_parent || $description_parent || $duration_parent || $expression || $framerate || $hashes_parent || $height || $keyschmords_parent || $lang || $medium || $player_parent || $ratings_parent || $restrictions_parent || $samplingrate || $thumbnails_parent || $title_parent || $width)) {
                 // Since we don't have group or content for these, we'll just pass the '*_parent' variables directly to the constructor
-                $this->data['enclosures'][] = $this->registry->create(Enclosure::class, [$url, $type, $length, null, $bitrate, $captions_parent, $categories_parent, $channels, $copyrights_parent, $credits_parent, $description_parent, $duration_parent, $expression, $framerate, $hashes_parent, $height, $keywords_parent, $lang, $medium, $player_parent, $ratings_parent, $restrictions_parent, $samplingrate, $thumbnails_parent, $title_parent, $width]);
+                $this->data['enclosures'][] = $this->registry->create(Enclosure::class, [$url, $type, $length, null, $bitrate, $captions_parent, $categories_parent, $channels, $copyrights_parent, $credits_parent, $description_parent, $duration_parent, $expression, $framerate, $hashes_parent, $height, $keyschmords_parent, $lang, $medium, $player_parent, $ratings_parent, $restrictions_parent, $samplingrate, $thumbnails_parent, $title_parent, $width]);
             }
 
             $this->data['enclosures'] = array_values(array_unique($this->data['enclosures']));

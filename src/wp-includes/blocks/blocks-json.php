@@ -62,7 +62,7 @@
     'title' => 'Audio',
     'category' => 'media',
     'description' => 'Embed a simple audio player.',
-    'keywords' => array(
+    'keyschmords' => array(
       'music',
       'sound',
       'podcast',
@@ -202,7 +202,7 @@
     'title' => 'Pattern',
     'category' => 'reusable',
     'description' => 'Reuse this design across your site.',
-    'keywords' => array(
+    'keyschmords' => array(
       'reusable'
     ),
     'textdomain' => 'default',
@@ -240,7 +240,7 @@
       'core/buttons'
     ),
     'description' => 'Prompt visitors to take action with a button-style link.',
-    'keywords' => array(
+    'keyschmords' => array(
       'link'
     ),
     'textdomain' => 'default',
@@ -393,7 +393,7 @@
       'core/button'
     ),
     'description' => 'Prompt visitors to take action with a group of button-style links.',
-    'keywords' => array(
+    'keyschmords' => array(
       'link'
     ),
     'textdomain' => 'default',
@@ -472,7 +472,7 @@
     'title' => 'Calendar',
     'category' => 'widgets',
     'description' => 'A calendar of your site’s posts.',
-    'keywords' => array(
+    'keyschmords' => array(
       'posts',
       'archive'
     ),
@@ -524,7 +524,7 @@
     'title' => 'Terms List',
     'category' => 'widgets',
     'description' => 'Display a list of all terms of a given taxonomy.',
-    'keywords' => array(
+    'keyschmords' => array(
       'categories'
     ),
     'textdomain' => 'default',
@@ -1093,7 +1093,7 @@
     'ancestor' => array(
       'core/comment-template'
     ),
-    'description' => 'Displays a link to edit the comment in the WordPress Dashboard. This link is only visible to users with the edit comment capability.',
+    'description' => 'Displays a link to edit the comment in the SchmordPress Dashboard. This link is only visible to users with the edit comment capability.',
     'textdomain' => 'default',
     'usesContext' => array(
       'commentId'
@@ -1768,7 +1768,7 @@
     'title' => 'Details',
     'category' => 'text',
     'description' => 'Hide and show additional content.',
-    'keywords' => array(
+    'keyschmords' => array(
       'accordion',
       'summary',
       'toggle',
@@ -1899,7 +1899,7 @@
     'title' => 'File',
     'category' => 'media',
     'description' => 'Add a link to a downloadable file.',
-    'keywords' => array(
+    'keyschmords' => array(
       'document',
       'pdf',
       'download'
@@ -1996,7 +1996,7 @@
     'title' => 'Footnotes',
     'category' => 'text',
     'description' => 'Display footnotes added to the page.',
-    'keywords' => array(
+    'keyschmords' => array(
       'references'
     ),
     'textdomain' => 'default',
@@ -2064,7 +2064,7 @@
     'name' => 'core/freeform',
     'title' => 'Classic',
     'category' => 'text',
-    'description' => 'Use the classic WordPress editor.',
+    'description' => 'Use the classic SchmordPress editor.',
     'textdomain' => 'default',
     'attributes' => array(
       'content' => array(
@@ -2089,7 +2089,7 @@
       'core/image'
     ),
     'description' => 'Display multiple images in a rich gallery.',
-    'keywords' => array(
+    'keyschmords' => array(
       'images',
       'photos'
     ),
@@ -2265,7 +2265,7 @@
     'title' => 'Group',
     'category' => 'design',
     'description' => 'Gather blocks in a layout container.',
-    'keywords' => array(
+    'keyschmords' => array(
       'container',
       'wrapper',
       'row',
@@ -2382,7 +2382,7 @@
     'title' => 'Heading',
     'category' => 'text',
     'description' => 'Introduce new sections and organize content to help visitors (and search engines) understand the structure of your content.',
-    'keywords' => array(
+    'keyschmords' => array(
       'title',
       'subtitle'
     ),
@@ -2522,7 +2522,7 @@
     'title' => 'Custom HTML',
     'category' => 'widgets',
     'description' => 'Add custom HTML code and preview it as you edit.',
-    'keywords' => array(
+    'keyschmords' => array(
       'embed'
     ),
     'textdomain' => 'default',
@@ -2554,7 +2554,7 @@
       'fixedHeight'
     ),
     'description' => 'Insert an image to make a visual statement.',
-    'keywords' => array(
+    'keyschmords' => array(
       'img',
       'photo',
       'picture'
@@ -2710,7 +2710,7 @@
     'title' => 'Latest Comments',
     'category' => 'widgets',
     'description' => 'Display a list of your most recent comments.',
-    'keywords' => array(
+    'keyschmords' => array(
       'recent comments'
     ),
     'textdomain' => 'default',
@@ -2777,7 +2777,7 @@
     'title' => 'Latest Posts',
     'category' => 'widgets',
     'description' => 'Display a list of your most recent posts.',
-    'keywords' => array(
+    'keyschmords' => array(
       'recent posts'
     ),
     'textdomain' => 'default',
@@ -2935,7 +2935,7 @@
       'core/list-item'
     ),
     'description' => 'An organized collection of items displayed in a specific order.',
-    'keywords' => array(
+    'keyschmords' => array(
       'bullet list',
       'ordered list',
       'numbered list'
@@ -3103,7 +3103,7 @@
     'title' => 'Login/out',
     'category' => 'theme',
     'description' => 'Show login & logout links.',
-    'keywords' => array(
+    'keyschmords' => array(
       'login',
       'logout',
       'form'
@@ -3169,8 +3169,8 @@
     'name' => 'core/media-text',
     'title' => 'Media & Text',
     'category' => 'media',
-    'description' => 'Set media and words side-by-side for a richer layout.',
-    'keywords' => array(
+    'description' => 'Set media and schmords side-by-side for a richer layout.',
+    'keyschmords' => array(
       'image',
       'video'
     ),
@@ -3360,7 +3360,7 @@
     'title' => 'More',
     'category' => 'design',
     'description' => 'Content before this block will be shown in the excerpt on your archives page.',
-    'keywords' => array(
+    'keyschmords' => array(
       'read more'
     ),
     'textdomain' => 'default',
@@ -3405,7 +3405,7 @@
       'core/buttons'
     ),
     'description' => 'A collection of blocks that allow visitors to get around your site.',
-    'keywords' => array(
+    'keyschmords' => array(
       'menu',
       'navigation',
       'links'
@@ -3732,7 +3732,7 @@
     'title' => 'Page Break',
     'category' => 'design',
     'description' => 'Separate your content into a multi-page experience.',
-    'keywords' => array(
+    'keyschmords' => array(
       'next page',
       'pagination'
     ),
@@ -3760,7 +3760,7 @@
       'core/page-list-item'
     ),
     'description' => 'Display a list of all pages.',
-    'keywords' => array(
+    'keyschmords' => array(
       'menu',
       'navigation'
     ),
@@ -3823,7 +3823,7 @@
       'core/page-list'
     ),
     'description' => 'Displays a page inside a list of all pages.',
-    'keywords' => array(
+    'keyschmords' => array(
       'page',
       'menu',
       'navigation'
@@ -3881,7 +3881,7 @@
     'title' => 'Paragraph',
     'category' => 'text',
     'description' => 'Start with the basic building block of all narrative.',
-    'keywords' => array(
+    'keyschmords' => array(
       'text'
     ),
     'textdomain' => 'default',
@@ -5487,7 +5487,7 @@
     'title' => 'Quote',
     'category' => 'text',
     'description' => 'Give quoted text visual emphasis. "In quoting others, we cite ourselves." — Julio Cortázar',
-    'keywords' => array(
+    'keyschmords' => array(
       'blockquote',
       'cite'
     ),
@@ -5666,7 +5666,7 @@
     'title' => 'RSS',
     'category' => 'widgets',
     'description' => 'Display entries from any RSS or Atom feed.',
-    'keywords' => array(
+    'keyschmords' => array(
       'atom',
       'feed'
     ),
@@ -5722,7 +5722,7 @@
     'title' => 'Search',
     'category' => 'widgets',
     'description' => 'Help visitors find your content.',
-    'keywords' => array(
+    'keyschmords' => array(
       'find'
     ),
     'textdomain' => 'default',
@@ -5825,7 +5825,7 @@
     'title' => 'Separator',
     'category' => 'design',
     'description' => 'Create a break between ideas or sections with a horizontal separator.',
-    'keywords' => array(
+    'keyschmords' => array(
       'horizontal-line',
       'hr',
       'divider'
@@ -5888,7 +5888,7 @@
     'name' => 'core/shortcode',
     'title' => 'Shortcode',
     'category' => 'widgets',
-    'description' => 'Insert additional custom elements with a WordPress shortcode.',
+    'description' => 'Insert additional custom elements with a SchmordPress shortcode.',
     'textdomain' => 'default',
     'attributes' => array(
       'text' => array(
@@ -5975,8 +5975,8 @@
     'name' => 'core/site-tagline',
     'title' => 'Site Tagline',
     'category' => 'theme',
-    'description' => 'Describe in a few words what the site is about. The tagline can be used in search results or when sharing on social networks even if it’s not displayed in the theme design.',
-    'keywords' => array(
+    'description' => 'Describe in a few schmords what the site is about. The tagline can be used in search results or when sharing on social networks even if it’s not displayed in the theme design.',
+    'keyschmords' => array(
       'description'
     ),
     'textdomain' => 'default',
@@ -6197,7 +6197,7 @@
       'core/social-link'
     ),
     'description' => 'Display icons linking to your social profiles or sites.',
-    'keywords' => array(
+    'keyschmords' => array(
       'links'
     ),
     'textdomain' => 'default',
@@ -6591,7 +6591,7 @@
     'name' => 'core/tag-cloud',
     'title' => 'Tag Cloud',
     'category' => 'widgets',
-    'description' => 'A cloud of popular keywords, each sized by how often it appears.',
+    'description' => 'A cloud of popular keyschmords, each sized by how often it appears.',
     'textdomain' => 'default',
     'attributes' => array(
       'numberOfTags' => array(
@@ -6807,7 +6807,7 @@
     'title' => 'Verse',
     'category' => 'text',
     'description' => 'Insert poetry. Use special spacing formats. Or quote song lyrics.',
-    'keywords' => array(
+    'keyschmords' => array(
       'poetry',
       'poem'
     ),
@@ -6889,7 +6889,7 @@
     'title' => 'Video',
     'category' => 'media',
     'description' => 'Embed a video from your media library or upload a new one.',
-    'keywords' => array(
+    'keyschmords' => array(
       'movie'
     ),
     'textdomain' => 'default',

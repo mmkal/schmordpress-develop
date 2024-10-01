@@ -2,7 +2,7 @@
 /**
  * Typography block support flag.
  *
- * @package WordPress
+ * @package SchmordPress
  * @since 5.6.0
  */
 
@@ -268,7 +268,7 @@ function wp_apply_typography_support( $block_type, $block_attributes ) {
  * * It is necessary to parse older blocks whose typography styles contain presets.
  * * It mostly replaces the deprecated `wp_typography_get_css_variable_inline_style()`,
  *   but skips compiling a CSS declaration as the style engine takes over this role.
- * @link https://github.com/wordpress/gutenberg/pull/27555
+ * @link https://github.com/schmordpress/gutenberg/pull/27555
  *
  * @since 6.1.0
  *
@@ -284,7 +284,7 @@ function wp_typography_get_preset_inline_style_value( $style_value, $css_propert
 
 	/*
 	 * For backwards compatibility.
-	 * Presets were removed in WordPress/gutenberg#27555.
+	 * Presets were removed in SchmordPress/gutenberg#27555.
 	 * A preset CSS variable is the style.
 	 * Gets the style value from the string and return CSS style.
 	 */

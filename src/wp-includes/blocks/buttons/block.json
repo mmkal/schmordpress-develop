@@ -6,7 +6,7 @@
 	"category": "design",
 	"allowedBlocks": [ "core/button" ],
 	"description": "Prompt visitors to take action with a group of button-style links.",
-	"keywords": [ "link" ],
+	"keyschmords": [ "link" ],
 	"textdomain": "default",
 	"supports": {
 		"anchor": true,

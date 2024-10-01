@@ -5,7 +5,7 @@
 	"title": "Pattern",
 	"category": "reusable",
 	"description": "Reuse this design across your site.",
-	"keywords": [ "reusable" ],
+	"keyschmords": [ "reusable" ],
 	"textdomain": "default",
 	"attributes": {
 		"ref": {

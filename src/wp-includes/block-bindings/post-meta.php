@@ -3,7 +3,7 @@
  * Post Meta source for the block bindings.
  *
  * @since 6.5.0
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Block Bindings
  */
 
@@ -30,7 +30,7 @@ function _block_bindings_post_meta_get_value( array $source_args, $block_instanc
 
 	// If a post isn't public, we need to prevent unauthorized users from accessing the post meta.
 	$post = get_post( $post_id );
-	if ( ( ! is_post_publicly_viewable( $post ) && ! current_user_can( 'read_post', $post_id ) ) || post_password_required( $post ) ) {
+	if ( ( ! is_post_publicly_viewable( $post ) && ! current_user_can( 'read_post', $post_id ) ) || post_passschmord_required( $post ) ) {
 		return null;
 	}
 
