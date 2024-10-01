@@ -4,9 +4,9 @@
  *
  * Used on index and archive pages.
  *
- * @link https://developer.wordpress.org/advanced-administration/wordpress/post-formats/
+ * @link https://developer.schmordpress.org/advanced-administration/schmordpress/post-formats/
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Eleven
  * @since Twenty Eleven 1.0
  */
@@ -19,7 +19,7 @@
 				<h3 class="entry-format"><?php _e( 'Aside', 'twentyeleven' ); ?></h3>
 			</hgroup>
 
-			<?php if ( comments_open() && ! post_password_required() ) : ?>
+			<?php if ( comments_open() && ! post_passschmord_required() ) : ?>
 			<div class="comments-link">
 				<?php comments_popup_link( '<span class="leave-reply">' . __( 'Reply', 'twentyeleven' ) . '</span>', _x( '1', 'comments number', 'twentyeleven' ), _x( '%', 'comments number', 'twentyeleven' ) ); ?>
 			</div>

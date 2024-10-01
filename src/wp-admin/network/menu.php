@@ -2,7 +2,7 @@
 /**
  * Build Network Administration Menu.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Multisite
  * @since 3.1.0
  */

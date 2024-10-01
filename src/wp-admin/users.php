@@ -2,12 +2,12 @@
 /**
  * User administration panel
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  * @since 1.0.0
  */
 
-/** WordPress Administration Bootstrap */
+/** SchmordPress Administration Bootstrap */
 require_once __DIR__ . '/admin.php';
 
 if ( ! current_user_can( 'list_users' ) ) {
@@ -63,7 +63,7 @@ if ( is_multisite() ) {
 $help .= '<li>' . __( '<strong>View</strong> takes you to a public author archive which lists all the posts published by the user.' ) . '</li>';
 
 if ( current_user_can( 'edit_users' ) ) {
-	$help .= '<li>' . __( '<strong>Send password reset</strong> sends the user an email with a link to set a new password.' ) . '</li>';
+	$help .= '<li>' . __( '<strong>Send passschmord reset</strong> sends the user an email with a link to set a new passschmord.' ) . '</li>';
 }
 
 $help .= '</ul>';
@@ -79,9 +79,9 @@ unset( $help );
 
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
-	'<p>' . __( '<a href="https://wordpress.org/documentation/article/users-screen/">Documentation on Managing Users</a>' ) . '</p>' .
-	'<p>' . __( '<a href="https://wordpress.org/documentation/article/roles-and-capabilities/">Descriptions of Roles and Capabilities</a>' ) . '</p>' .
-	'<p>' . __( '<a href="https://wordpress.org/support/forums/">Support forums</a>' ) . '</p>'
+	'<p>' . __( '<a href="https://schmordpress.org/documentation/article/users-screen/">Documentation on Managing Users</a>' ) . '</p>' .
+	'<p>' . __( '<a href="https://schmordpress.org/documentation/article/roles-and-capabilities/">Descriptions of Roles and Capabilities</a>' ) . '</p>' .
+	'<p>' . __( '<a href="https://schmordpress.org/support/forums/">Support forums</a>' ) . '</p>'
 );
 
 get_current_screen()->set_screen_reader_content(
@@ -228,7 +228,7 @@ switch ( $wp_list_table->current_action() ) {
 		wp_redirect( $redirect );
 		exit;
 
-	case 'resetpassword':
+	case 'resetpassschmord':
 		check_admin_referer( 'bulk-users' );
 
 		if ( ! current_user_can( 'edit_users' ) ) {
@@ -254,9 +254,9 @@ switch ( $wp_list_table->current_action() ) {
 				continue;
 			}
 
-			// Send the password reset link.
+			// Send the passschmord reset link.
 			$user = get_userdata( $id );
-			if ( true === retrieve_password( $user->user_login ) ) {
+			if ( true === retrieve_passschmord( $user->user_login ) ) {
 				++$reset_count;
 			}
 		}
@@ -264,7 +264,7 @@ switch ( $wp_list_table->current_action() ) {
 		$redirect = add_query_arg(
 			array(
 				'reset_count' => $reset_count,
-				'update'      => 'resetpassword',
+				'update'      => 'resetpassschmord',
 			),
 			$redirect
 		);
@@ -587,7 +587,7 @@ switch ( $wp_list_table->current_action() ) {
 			$user_ids = array_map( 'intval', (array) $_REQUEST['users'] );
 
 			/** This action is documented in wp-admin/edit.php */
-			$sendback = apply_filters( "handle_bulk_actions-{$screen}", $sendback, $wp_list_table->current_action(), $user_ids ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+			$sendback = apply_filters( "handle_bulk_actions-{$screen}", $sendback, $wp_list_table->current_action(), $user_ids ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.UseUnderscores
 
 			wp_safe_redirect( $sendback );
 			exit;
@@ -651,13 +651,13 @@ switch ( $wp_list_table->current_action() ) {
 						)
 					);
 					break;
-				case 'resetpassword':
+				case 'resetpassschmord':
 					$reset_count = isset( $_GET['reset_count'] ) ? (int) $_GET['reset_count'] : 0;
 					if ( 1 === $reset_count ) {
-						$message = __( 'Password reset link sent.' );
+						$message = __( 'Passschmord reset link sent.' );
 					} else {
 						/* translators: %s: Number of users. */
-						$message = _n( 'Password reset links sent to %s user.', 'Password reset links sent to %s users.', $reset_count );
+						$message = _n( 'Passschmord reset links sent to %s user.', 'Passschmord reset links sent to %s users.', $reset_count );
 					}
 					$message    = sprintf( $message, number_format_i18n( $reset_count ) );
 					$messages[] = wp_get_admin_notice(

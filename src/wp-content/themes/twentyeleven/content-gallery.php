@@ -4,9 +4,9 @@
  *
  * Used on index and archive pages.
  *
- * @link https://developer.wordpress.org/advanced-administration/wordpress/post-formats/
+ * @link https://developer.schmordpress.org/advanced-administration/schmordpress/post-formats/
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Eleven
  * @since Twenty Eleven 1.0
  */
@@ -30,7 +30,7 @@
 		</div><!-- .entry-summary -->
 		<?php else : ?>
 		<div class="entry-content">
-			<?php if ( post_password_required() ) : ?>
+			<?php if ( post_passschmord_required() ) : ?>
 				<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyeleven' ) ); ?>
 				<?php
 			else :

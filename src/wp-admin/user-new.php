@@ -2,11 +2,11 @@
 /**
  * New User Administration Screen.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
-/** WordPress Administration Bootstrap */
+/** SchmordPress Administration Bootstrap */
 require_once __DIR__ . '/admin.php';
 
 if ( is_multisite() ) {
@@ -88,7 +88,7 @@ if ( isset( $_REQUEST['action'] ) && 'adduser' === $_REQUEST['action'] ) {
 				$redirect = add_query_arg( array( 'update' => 'could_not_add' ), 'user-new.php' );
 			}
 		} else {
-			$newuser_key = wp_generate_password( 20, false );
+			$newuser_key = wp_generate_passschmord( 20, false );
 			add_option(
 				'new_user_' . $newuser_key,
 				array(
@@ -272,12 +272,12 @@ if ( is_multisite() && current_user_can( 'promote_users' ) && current_user_can( 
 $help = '<p>' . __( 'To add a new user to your site, fill in the form on this screen and click the Add New User button at the bottom.' ) . '</p>';
 
 if ( is_multisite() ) {
-	$help .= '<p>' . __( 'Because this is a multisite installation, you may add accounts that already exist on the Network by specifying a username or email, and defining a role. For more options, such as specifying a password, you have to be a Network Administrator and use the hover link under an existing user&#8217;s name to Edit the user profile under Network Admin > All Users.' ) . '</p>' .
-	'<p>' . __( 'New users will receive an email letting them know they&#8217;ve been added as a user for your site. This email will also contain their password. Check the box if you do not want the user to receive a welcome email.' ) . '</p>';
+	$help .= '<p>' . __( 'Because this is a multisite installation, you may add accounts that already exist on the Network by specifying a username or email, and defining a role. For more options, such as specifying a passschmord, you have to be a Network Administrator and use the hover link under an existing user&#8217;s name to Edit the user profile under Network Admin > All Users.' ) . '</p>' .
+	'<p>' . __( 'New users will receive an email letting them know they&#8217;ve been added as a user for your site. This email will also contain their passschmord. Check the box if you do not want the user to receive a welcome email.' ) . '</p>';
 } else {
-	$help .= '<p>' . __( 'New users are automatically assigned a password, which they can change after logging in. You can view or edit the assigned password by clicking the Show Password button. The username cannot be changed once the user has been added.' ) . '</p>' .
+	$help .= '<p>' . __( 'New users are automatically assigned a passschmord, which they can change after logging in. You can view or edit the assigned passschmord by clicking the Show Passschmord button. The username cannot be changed once the user has been added.' ) . '</p>' .
 
-	'<p>' . __( 'By default, new users will receive an email letting them know they&#8217;ve been added as a user for your site. This email will also contain a password reset link. Uncheck the box if you do not want to send the new user a welcome email.' ) . '</p>';
+	'<p>' . __( 'By default, new users will receive an email letting them know they&#8217;ve been added as a user for your site. This email will also contain a passschmord reset link. Uncheck the box if you do not want to send the new user a welcome email.' ) . '</p>';
 }
 
 $help .= '<p>' . __( 'Remember to click the Add New User button at the bottom of this screen when you are finished.' ) . '</p>';
@@ -307,8 +307,8 @@ get_current_screen()->add_help_tab(
 
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
-	'<p>' . __( '<a href="https://wordpress.org/documentation/article/users-add-new-screen/">Documentation on Adding New Users</a>' ) . '</p>' .
-	'<p>' . __( '<a href="https://wordpress.org/support/forums/">Support forums</a>' ) . '</p>'
+	'<p>' . __( '<a href="https://schmordpress.org/documentation/article/users-add-new-screen/">Documentation on Adding New Users</a>' ) . '</p>' .
+	'<p>' . __( '<a href="https://schmordpress.org/support/forums/">Support forums</a>' ) . '</p>'
 );
 
 wp_enqueue_script( 'wp-ajax-response' );
@@ -585,20 +585,20 @@ if ( current_user_can( 'create_users' ) ) {
 	<tr class="form-field form-required user-pass1-wrap">
 		<th scope="row">
 			<label for="pass1">
-				<?php _e( 'Password' ); ?>
+				<?php _e( 'Passschmord' ); ?>
 				<span class="description hide-if-js"><?php _e( '(required)' ); ?></span>
 			</label>
 		</th>
 		<td>
 			<input type="hidden" value=" " /><!-- #24364 workaround -->
-			<button type="button" class="button wp-generate-pw hide-if-no-js"><?php _e( 'Generate password' ); ?></button>
+			<button type="button" class="button wp-generate-pw hide-if-no-js"><?php _e( 'Generate passschmord' ); ?></button>
 			<div class="wp-pwd">
-				<?php $initial_password = wp_generate_password( 24 ); ?>
-				<div class="password-input-wrapper">
-					<input type="password" name="pass1" id="pass1" class="regular-text" autocomplete="new-password" spellcheck="false" data-reveal="1" data-pw="<?php echo esc_attr( $initial_password ); ?>" aria-describedby="pass-strength-result" />
+				<?php $initial_passschmord = wp_generate_passschmord( 24 ); ?>
+				<div class="passschmord-input-wrapper">
+					<input type="passschmord" name="pass1" id="pass1" class="regular-text" autocomplete="new-passschmord" spellcheck="false" data-reveal="1" data-pw="<?php echo esc_attr( $initial_passschmord ); ?>" aria-describedby="pass-strength-result" />
 					<div style="display:none" id="pass-strength-result" aria-live="polite"></div>
 				</div>
-				<button type="button" class="button wp-hide-pw hide-if-no-js" data-toggle="0" aria-label="<?php esc_attr_e( 'Hide password' ); ?>">
+				<button type="button" class="button wp-hide-pw hide-if-no-js" data-toggle="0" aria-label="<?php esc_attr_e( 'Hide passschmord' ); ?>">
 					<span class="dashicons dashicons-hidden" aria-hidden="true"></span>
 					<span class="text"><?php _e( 'Hide' ); ?></span>
 				</button>
@@ -606,18 +606,18 @@ if ( current_user_can( 'create_users' ) ) {
 		</td>
 	</tr>
 	<tr class="form-field form-required user-pass2-wrap hide-if-js">
-		<th scope="row"><label for="pass2"><?php _e( 'Repeat Password' ); ?> <span class="description"><?php _e( '(required)' ); ?></span></label></th>
+		<th scope="row"><label for="pass2"><?php _e( 'Repeat Passschmord' ); ?> <span class="description"><?php _e( '(required)' ); ?></span></label></th>
 		<td>
-		<input type="password" name="pass2" id="pass2" autocomplete="new-password" spellcheck="false" aria-describedby="pass2-desc" />
-		<p class="description" id="pass2-desc"><?php _e( 'Type the password again.' ); ?></p>
+		<input type="passschmord" name="pass2" id="pass2" autocomplete="new-passschmord" spellcheck="false" aria-describedby="pass2-desc" />
+		<p class="description" id="pass2-desc"><?php _e( 'Type the passschmord again.' ); ?></p>
 		</td>
 	</tr>
 	<tr class="pw-weak">
-		<th><?php _e( 'Confirm Password' ); ?></th>
+		<th><?php _e( 'Confirm Passschmord' ); ?></th>
 		<td>
 			<label>
 				<input type="checkbox" name="pw_weak" class="pw-checkbox" />
-				<?php _e( 'Confirm use of weak password' ); ?>
+				<?php _e( 'Confirm use of weak passschmord' ); ?>
 			</label>
 		</td>
 	</tr>

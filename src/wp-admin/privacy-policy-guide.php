@@ -2,11 +2,11 @@
 /**
  * Privacy Policy Guide Screen.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
-/** WordPress Administration Bootstrap */
+/** SchmordPress Administration Bootstrap */
 require_once __DIR__ . '/admin.php';
 
 if ( ! current_user_can( 'manage_privacy_options' ) ) {

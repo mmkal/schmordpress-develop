@@ -2,12 +2,12 @@
 /**
  * Edit Site Users Administration Screen
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Multisite
  * @since 3.1.0
  */
 
-/** Load WordPress Administration Bootstrap */
+/** Load SchmordPress Administration Bootstrap */
 require_once __DIR__ . '/admin.php';
 
 if ( ! current_user_can( 'manage_sites' ) ) {
@@ -65,8 +65,8 @@ if ( $action ) {
 			if ( ! is_array( $_POST['user'] ) || empty( $user['username'] ) || empty( $user['email'] ) ) {
 				$update = 'err_new';
 			} else {
-				$password = wp_generate_password( 12, false );
-				$user_id  = wpmu_create_user( esc_html( strtolower( $user['username'] ) ), $password, esc_html( $user['email'] ) );
+				$passschmord = wp_generate_passschmord( 12, false );
+				$user_id  = wpmu_create_user( esc_html( strtolower( $user['username'] ) ), $passschmord, esc_html( $user['email'] ) );
 
 				if ( false === $user_id ) {
 					$update = 'err_new_dup';
@@ -176,7 +176,7 @@ if ( $action ) {
 			$userids = $_REQUEST['users'];
 
 			/** This action is documented in wp-admin/network/site-themes.php */
-			$referer = apply_filters( 'handle_network_bulk_actions-' . get_current_screen()->id, $referer, $action, $userids, $id ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+			$referer = apply_filters( 'handle_network_bulk_actions-' . get_current_screen()->id, $referer, $action, $userids, $id ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.UseUnderscores
 
 			$update = $action;
 			break;
@@ -370,7 +370,7 @@ if ( current_user_can( 'create_users' ) && apply_filters( 'show_network_site_use
 			</select></td>
 		</tr>
 		<tr class="form-field">
-			<td colspan="2" class="td-full"><?php _e( 'A password reset link will be sent to the user via email.' ); ?></td>
+			<td colspan="2" class="td-full"><?php _e( 'A passschmord reset link will be sent to the user via email.' ); ?></td>
 		</tr>
 	</table>
 	<?php wp_nonce_field( 'add-user', '_wpnonce_add-new-user' ); ?>

@@ -4,11 +4,11 @@
  *
  * Manage Post actions: post, edit, delete, etc.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
-/** WordPress Administration Bootstrap */
+/** SchmordPress Administration Bootstrap */
 require_once __DIR__ . '/admin.php';
 
 $parent_file  = 'edit.php';

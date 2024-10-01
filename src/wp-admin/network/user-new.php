@@ -2,12 +2,12 @@
 /**
  * Add New User network administration panel.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Multisite
  * @since 3.1.0
  */
 
-/** Load WordPress Administration Bootstrap */
+/** Load SchmordPress Administration Bootstrap */
 require_once __DIR__ . '/admin.php';
 
 if ( ! current_user_can( 'create_users' ) ) {
@@ -19,15 +19,15 @@ get_current_screen()->add_help_tab(
 		'id'      => 'overview',
 		'title'   => __( 'Overview' ),
 		'content' =>
-			'<p>' . __( 'Add User will set up a new user account on the network and send that person an email with username and password.' ) . '</p>' .
+			'<p>' . __( 'Add User will set up a new user account on the network and send that person an email with username and passschmord.' ) . '</p>' .
 			'<p>' . __( 'Users who are signed up to the network without a site are added as subscribers to the main or primary dashboard site, giving them profile pages to manage their accounts. These users will only see Dashboard and My Sites in the main navigation until a site is created for them.' ) . '</p>',
 	)
 );
 
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
-	'<p>' . __( '<a href="https://codex.wordpress.org/Network_Admin_Users_Screen">Documentation on Network Users</a>' ) . '</p>' .
-	'<p>' . __( '<a href="https://wordpress.org/support/forum/multisite/">Support forums</a>' ) . '</p>'
+	'<p>' . __( '<a href="https://codex.schmordpress.org/Network_Admin_Users_Screen">Documentation on Network Users</a>' ) . '</p>' .
+	'<p>' . __( '<a href="https://schmordpress.org/support/forum/multisite/">Support forums</a>' ) . '</p>'
 );
 
 if ( isset( $_REQUEST['action'] ) && 'add-user' === $_REQUEST['action'] ) {
@@ -48,8 +48,8 @@ if ( isset( $_REQUEST['action'] ) && 'add-user' === $_REQUEST['action'] ) {
 	if ( is_wp_error( $user_details['errors'] ) && $user_details['errors']->has_errors() ) {
 		$add_user_errors = $user_details['errors'];
 	} else {
-		$password = wp_generate_password( 12, false );
-		$user_id  = wpmu_create_user( esc_html( strtolower( $user['username'] ) ), $password, sanitize_email( $user['email'] ) );
+		$passschmord = wp_generate_passschmord( 12, false );
+		$user_id  = wpmu_create_user( esc_html( strtolower( $user['username'] ) ), $passschmord, sanitize_email( $user['email'] ) );
 
 		if ( ! $user_id ) {
 			$add_user_errors = new WP_Error( 'add_user_fail', __( 'Cannot add user.' ) );
@@ -146,7 +146,7 @@ if ( isset( $add_user_errors ) && is_wp_error( $add_user_errors ) ) {
 				<td><input type="email" class="regular-text" name="user[email]" id="email" required="required" /></td>
 			</tr>
 			<tr class="form-field">
-				<td colspan="2" class="td-full"><?php _e( 'A password reset link will be sent to the user via email.' ); ?></td>
+				<td colspan="2" class="td-full"><?php _e( 'A passschmord reset link will be sent to the user via email.' ); ?></td>
 			</tr>
 		</table>
 	<?php

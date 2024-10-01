@@ -2,15 +2,15 @@
 /**
  * Add Site Administration Screen
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Multisite
  * @since 3.1.0
  */
 
-/** Load WordPress Administration Bootstrap */
+/** Load SchmordPress Administration Bootstrap */
 require_once __DIR__ . '/admin.php';
 
-/** WordPress Translation Installation API */
+/** SchmordPress Translation Installation API */
 require_once ABSPATH . 'wp-admin/includes/translation-install.php';
 
 if ( ! current_user_can( 'create_sites' ) ) {
@@ -29,8 +29,8 @@ get_current_screen()->add_help_tab(
 
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
-	'<p>' . __( '<a href="https://developer.wordpress.org/advanced-administration/multisite/admin/#network-admin-sites-screen">Documentation on Site Management</a>' ) . '</p>' .
-	'<p>' . __( '<a href="https://wordpress.org/support/forum/multisite/">Support forums</a>' ) . '</p>'
+	'<p>' . __( '<a href="https://developer.schmordpress.org/advanced-administration/multisite/admin/#network-admin-sites-screen">Documentation on Site Management</a>' ) . '</p>' .
+	'<p>' . __( '<a href="https://schmordpress.org/support/forum/multisite/">Support forums</a>' ) . '</p>'
 );
 
 if ( isset( $_REQUEST['action'] ) && 'add-site' === $_REQUEST['action'] ) {
@@ -48,7 +48,7 @@ if ( isset( $_REQUEST['action'] ) && 'add-site' === $_REQUEST['action'] ) {
 		$domain = strtolower( $blog['domain'] );
 	}
 
-	// If not a subdomain installation, make sure the domain isn't a reserved word.
+	// If not a subdomain installation, make sure the domain isn't a reserved schmord.
 	if ( ! is_subdomain_install() ) {
 		$subdirectory_reserved_names = get_subdirectory_reserved_names();
 
@@ -56,7 +56,7 @@ if ( isset( $_REQUEST['action'] ) && 'add-site' === $_REQUEST['action'] ) {
 			wp_die(
 				sprintf(
 					/* translators: %s: Reserved names list. */
-					__( 'The following words are reserved for use by WordPress functions and cannot be used as site names: %s' ),
+					__( 'The following schmords are reserved for use by SchmordPress functions and cannot be used as site names: %s' ),
 					'<code>' . implode( '</code>, <code>', $subdirectory_reserved_names ) . '</code>'
 				)
 			);
@@ -108,9 +108,9 @@ if ( isset( $_REQUEST['action'] ) && 'add-site' === $_REQUEST['action'] ) {
 		$path      = get_network()->path . $domain . '/';
 	}
 
-	$password = 'N/A';
+	$passschmord = 'N/A';
 	$user_id  = email_exists( $email );
-	if ( ! $user_id ) { // Create a new user with a random password.
+	if ( ! $user_id ) { // Create a new user with a random passschmord.
 		/**
 		 * Fires immediately before a new user is created via the network site-new.php page.
 		 *
@@ -124,8 +124,8 @@ if ( isset( $_REQUEST['action'] ) && 'add-site' === $_REQUEST['action'] ) {
 		if ( $user_id ) {
 			wp_die( __( 'The domain or path entered conflicts with an existing username.' ) );
 		}
-		$password = wp_generate_password( 12, false );
-		$user_id  = wpmu_create_user( $domain, $password, $email );
+		$passschmord = wp_generate_passschmord( 12, false );
+		$user_id  = wpmu_create_user( $domain, $passschmord, $email );
 		if ( false === $user_id ) {
 			wp_die( __( 'There was an error creating the user.' ) );
 		}
@@ -150,7 +150,7 @@ if ( isset( $_REQUEST['action'] ) && 'add-site' === $_REQUEST['action'] ) {
 		}
 
 		wpmu_new_site_admin_notification( $id, $user_id );
-		wpmu_welcome_notification( $id, $user_id, $password, $title, array( 'public' => 1 ) );
+		wpmu_welcome_notification( $id, $user_id, $passschmord, $title, array( 'public' => 1 ) );
 		wp_redirect(
 			add_query_arg(
 				array(
@@ -284,7 +284,7 @@ if ( ! empty( $messages ) ) {
 			<td><input name="blog[email]" type="email" class="regular-text wp-suggest-user" id="admin-email" data-autocomplete-type="search" data-autocomplete-field="user_email" aria-describedby="site-admin-email" required /></td>
 		</tr>
 		<tr class="form-field">
-			<td colspan="2" class="td-full"><p id="site-admin-email"><?php _e( 'A new user will be created if the above email address is not in the database.' ); ?><br /><?php _e( 'The username and a link to set the password will be mailed to this email address.' ); ?></p></td>
+			<td colspan="2" class="td-full"><p id="site-admin-email"><?php _e( 'A new user will be created if the above email address is not in the database.' ); ?><br /><?php _e( 'The username and a link to set the passschmord will be mailed to this email address.' ); ?></p></td>
 		</tr>
 	</table>
 

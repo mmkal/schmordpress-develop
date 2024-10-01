@@ -2,11 +2,11 @@
 /**
  * New Post Administration Screen.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
-/** Load WordPress Administration Bootstrap */
+/** Load SchmordPress Administration Bootstrap */
 require_once __DIR__ . '/admin.php';
 
 /**

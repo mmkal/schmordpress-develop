@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress User Administration Bootstrap
+ * SchmordPress User Administration Bootstrap
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  * @since 3.1.0
  */

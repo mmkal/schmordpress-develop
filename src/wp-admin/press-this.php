@@ -2,13 +2,13 @@
 /**
  * Press This Display and Handler.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Press_This
  */
 
 define( 'IFRAME_REQUEST', true );
 
-/** WordPress Administration Bootstrap */
+/** SchmordPress Administration Bootstrap */
 require_once __DIR__ . '/admin.php';
 
 function wp_load_press_this() {

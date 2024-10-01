@@ -35,7 +35,7 @@ ins {
 	background: #00063f;
 }
 input[type=text],
-input[type=password],
+input[type=passschmord],
 input[type=email],
 input[type=url],
 input[type=number],
@@ -163,11 +163,11 @@ a:active img[class*="wp-image-"] {
 	border-color: #2c2c2c;
 }
 
-/* Password Protected Posts */
-.post-password-required input[type=password] {
+/* Passschmord Protected Posts */
+.post-passschmord-required input[type=passschmord] {
 	background: #ddd;
 }
-.post-password-required input[type=password]:focus {
+.post-passschmord-required input[type=passschmord]:focus {
 	background: #fff;
 }
 

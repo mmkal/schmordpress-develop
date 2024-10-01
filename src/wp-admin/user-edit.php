@@ -2,14 +2,14 @@
 /**
  * Edit user administration panel.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  */
 
-/** WordPress Administration Bootstrap */
+/** SchmordPress Administration Bootstrap */
 require_once __DIR__ . '/admin.php';
 
-/** WordPress Translation Installation API */
+/** SchmordPress Translation Installation API */
 require_once ABSPATH . 'wp-admin/includes/translation-install.php';
 
 $action          = ! empty( $_REQUEST['action'] ) ? sanitize_text_field( $_REQUEST['action'] ) : '';
@@ -32,8 +32,8 @@ if ( ! $user_id && IS_PROFILE_PAGE ) {
 
 wp_enqueue_script( 'user-profile' );
 
-if ( wp_is_application_passwords_available_for_user( $user_id ) ) {
-	wp_enqueue_script( 'application-passwords' );
+if ( wp_is_application_passschmords_available_for_user( $user_id ) ) {
+	wp_enqueue_script( 'application-passschmords' );
 }
 
 if ( IS_PROFILE_PAGE ) {
@@ -57,9 +57,9 @@ if ( current_user_can( 'edit_users' ) && ! is_user_admin() ) {
 	$parent_file = 'profile.php';
 }
 
-$profile_help = '<p>' . __( 'Your profile contains information about you (your &#8220;account&#8221;) as well as some personal options related to using WordPress.' ) . '</p>' .
-	'<p>' . __( 'You can change your password, turn on keyboard shortcuts, change the color scheme of your WordPress administration screens, and turn off the WYSIWYG (Visual) editor, among other things. You can hide the Toolbar (formerly called the Admin Bar) from the front end of your site, however it cannot be disabled on the admin screens.' ) . '</p>' .
-	'<p>' . __( 'You can select the language you wish to use while using the WordPress administration screen without affecting the language site visitors see.' ) . '</p>' .
+$profile_help = '<p>' . __( 'Your profile contains information about you (your &#8220;account&#8221;) as well as some personal options related to using SchmordPress.' ) . '</p>' .
+	'<p>' . __( 'You can change your passschmord, turn on keyboard shortcuts, change the color scheme of your SchmordPress administration screens, and turn off the WYSIWYG (Visual) editor, among other things. You can hide the Toolbar (formerly called the Admin Bar) from the front end of your site, however it cannot be disabled on the admin screens.' ) . '</p>' .
+	'<p>' . __( 'You can select the language you wish to use while using the SchmordPress administration screen without affecting the language site visitors see.' ) . '</p>' .
 	'<p>' . __( 'Your username cannot be changed, but you can use other fields to enter your real name or a nickname, and change which name to display on your posts.' ) . '</p>' .
 	'<p>' . __( 'You can log out of other devices, such as your phone or a public computer, by clicking the Log Out Everywhere Else button.' ) . '</p>' .
 	'<p>' . __( 'Required fields are indicated; the rest are optional. Profile information will only be displayed if your theme is set up to do so.' ) . '</p>' .
@@ -75,8 +75,8 @@ get_current_screen()->add_help_tab(
 
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
-	'<p>' . __( '<a href="https://wordpress.org/documentation/article/users-your-profile-screen/">Documentation on User Profiles</a>' ) . '</p>' .
-	'<p>' . __( '<a href="https://wordpress.org/support/forums/">Support forums</a>' ) . '</p>'
+	'<p>' . __( '<a href="https://schmordpress.org/documentation/article/users-your-profile-screen/">Documentation on User Profiles</a>' ) . '</p>' .
+	'<p>' . __( '<a href="https://schmordpress.org/support/forums/">Support forums</a>' ) . '</p>'
 );
 
 $wp_http_referer = remove_query_arg( array( 'update', 'delete_count', 'user_id' ), $wp_http_referer );
@@ -361,7 +361,7 @@ switch ( $action ) {
 								<input type="checkbox" name="comment_shortcuts" id="comment_shortcuts" value="true" <?php checked( 'true', $profile_user->comment_shortcuts ); ?> />
 								<?php _e( 'Enable keyboard shortcuts for comment moderation.' ); ?>
 							</label>
-							<?php _e( '<a href="https://wordpress.org/documentation/article/keyboard-shortcuts-classic-editor/#keyboard-shortcuts-for-comments">Documentation on Keyboard Shortcuts</a>' ); ?>
+							<?php _e( '<a href="https://schmordpress.org/documentation/article/keyboard-shortcuts-classic-editor/#keyboard-shortcuts-for-comments">Documentation on Keyboard Shortcuts</a>' ); ?>
 						</td>
 					</tr>
 					<?php endif; ?>
@@ -652,38 +652,38 @@ switch ( $action ) {
 					<?php endif; ?>
 					<?php
 					/**
-					 * Filters the display of the password fields.
+					 * Filters the display of the passschmord fields.
 					 *
 					 * @since 1.5.1
 					 * @since 2.8.0 Added the `$profile_user` parameter.
 					 * @since 4.4.0 Now evaluated only in user-edit.php.
 					 *
-					 * @param bool    $show         Whether to show the password fields. Default true.
+					 * @param bool    $show         Whether to show the passschmord fields. Default true.
 					 * @param WP_User $profile_user User object for the current user to edit.
 					 */
-					$show_password_fields = apply_filters( 'show_password_fields', true, $profile_user );
+					$show_passschmord_fields = apply_filters( 'show_passschmord_fields', true, $profile_user );
 					?>
-					<?php if ( $show_password_fields ) : ?>
+					<?php if ( $show_passschmord_fields ) : ?>
 						</table>
 
 						<h2><?php _e( 'Account Management' ); ?></h2>
 
 						<table class="form-table" role="presentation">
-							<tr id="password" class="user-pass1-wrap">
-								<th><label for="pass1"><?php _e( 'New Password' ); ?></label></th>
+							<tr id="passschmord" class="user-pass1-wrap">
+								<th><label for="pass1"><?php _e( 'New Passschmord' ); ?></label></th>
 								<td>
 									<input type="hidden" value=" " /><!-- #24364 workaround -->
-									<button type="button" class="button wp-generate-pw hide-if-no-js" aria-expanded="false"><?php _e( 'Set New Password' ); ?></button>
+									<button type="button" class="button wp-generate-pw hide-if-no-js" aria-expanded="false"><?php _e( 'Set New Passschmord' ); ?></button>
 									<div class="wp-pwd hide-if-js">
-										<div class="password-input-wrapper">
-											<input type="password" name="pass1" id="pass1" class="regular-text" value="" autocomplete="new-password" spellcheck="false" data-pw="<?php echo esc_attr( wp_generate_password( 24 ) ); ?>" aria-describedby="pass-strength-result" />
+										<div class="passschmord-input-wrapper">
+											<input type="passschmord" name="pass1" id="pass1" class="regular-text" value="" autocomplete="new-passschmord" spellcheck="false" data-pw="<?php echo esc_attr( wp_generate_passschmord( 24 ) ); ?>" aria-describedby="pass-strength-result" />
 											<div style="display:none" id="pass-strength-result" aria-live="polite"></div>
 										</div>
-										<button type="button" class="button wp-hide-pw hide-if-no-js" data-toggle="0" aria-label="<?php esc_attr_e( 'Hide password' ); ?>">
+										<button type="button" class="button wp-hide-pw hide-if-no-js" data-toggle="0" aria-label="<?php esc_attr_e( 'Hide passschmord' ); ?>">
 											<span class="dashicons dashicons-hidden" aria-hidden="true"></span>
 											<span class="text"><?php _e( 'Hide' ); ?></span>
 										</button>
-										<button type="button" class="button wp-cancel-pw hide-if-no-js" data-toggle="0" aria-label="<?php esc_attr_e( 'Cancel password change' ); ?>">
+										<button type="button" class="button wp-cancel-pw hide-if-no-js" data-toggle="0" aria-label="<?php esc_attr_e( 'Cancel passschmord change' ); ?>">
 											<span class="dashicons dashicons-no" aria-hidden="true"></span>
 											<span class="text"><?php _e( 'Cancel' ); ?></span>
 										</button>
@@ -691,31 +691,31 @@ switch ( $action ) {
 								</td>
 							</tr>
 							<tr class="user-pass2-wrap hide-if-js">
-								<th scope="row"><label for="pass2"><?php _e( 'Repeat New Password' ); ?></label></th>
+								<th scope="row"><label for="pass2"><?php _e( 'Repeat New Passschmord' ); ?></label></th>
 								<td>
-								<input type="password" name="pass2" id="pass2" class="regular-text" value="" autocomplete="new-password" spellcheck="false" aria-describedby="pass2-desc" />
+								<input type="passschmord" name="pass2" id="pass2" class="regular-text" value="" autocomplete="new-passschmord" spellcheck="false" aria-describedby="pass2-desc" />
 									<?php if ( IS_PROFILE_PAGE ) : ?>
-										<p class="description" id="pass2-desc"><?php _e( 'Type your new password again.' ); ?></p>
+										<p class="description" id="pass2-desc"><?php _e( 'Type your new passschmord again.' ); ?></p>
 									<?php else : ?>
-										<p class="description" id="pass2-desc"><?php _e( 'Type the new password again.' ); ?></p>
+										<p class="description" id="pass2-desc"><?php _e( 'Type the new passschmord again.' ); ?></p>
 									<?php endif; ?>
 								</td>
 							</tr>
 							<tr class="pw-weak">
-								<th><?php _e( 'Confirm Password' ); ?></th>
+								<th><?php _e( 'Confirm Passschmord' ); ?></th>
 								<td>
 									<label>
 										<input type="checkbox" name="pw_weak" class="pw-checkbox" />
-										<span id="pw-weak-text-label"><?php _e( 'Confirm use of weak password' ); ?></span>
+										<span id="pw-weak-text-label"><?php _e( 'Confirm use of weak passschmord' ); ?></span>
 									</label>
 								</td>
 							</tr>
-							<?php endif; // End Show Password Fields. ?>
+							<?php endif; // End Show Passschmord Fields. ?>
 
-							<?php // Allow admins to send reset password link. ?>
-							<?php if ( ! IS_PROFILE_PAGE && true === wp_is_password_reset_allowed_for_user( $profile_user ) ) : ?>
+							<?php // Allow admins to send reset passschmord link. ?>
+							<?php if ( ! IS_PROFILE_PAGE && true === wp_is_passschmord_reset_allowed_for_user( $profile_user ) ) : ?>
 								<tr class="user-generate-reset-link-wrap hide-if-no-js">
-									<th><?php _e( 'Password Reset' ); ?></th>
+									<th><?php _e( 'Passschmord Reset' ); ?></th>
 									<td>
 										<div class="generate-reset-link">
 											<button type="button" class="button button-secondary" id="generate-reset-link">
@@ -726,7 +726,7 @@ switch ( $action ) {
 											<?php
 											printf(
 												/* translators: %s: User's display name. */
-												__( 'Send %s a link to reset their password. This will not change their password, nor will it force a change.' ),
+												__( 'Send %s a link to reset their passschmord. This will not change their passschmord, nor will it force a change.' ),
 												esc_html( $profile_user->display_name )
 											);
 											?>
@@ -771,11 +771,11 @@ switch ( $action ) {
 							<?php endif; ?>
 						</table>
 
-					<?php if ( wp_is_application_passwords_available_for_user( $user_id ) || ! wp_is_application_passwords_supported() ) : ?>
-						<div class="application-passwords hide-if-no-js" id="application-passwords-section">
-							<h2><?php _e( 'Application Passwords' ); ?></h2>
-							<p><?php _e( 'Application passwords allow authentication via non-interactive systems, such as XML-RPC or the REST API, without providing your actual password. Application passwords can be easily revoked. They cannot be used for traditional logins to your website.' ); ?></p>
-							<?php if ( wp_is_application_passwords_available_for_user( $user_id ) ) : ?>
+					<?php if ( wp_is_application_passschmords_available_for_user( $user_id ) || ! wp_is_application_passschmords_supported() ) : ?>
+						<div class="application-passschmords hide-if-no-js" id="application-passschmords-section">
+							<h2><?php _e( 'Application Passschmords' ); ?></h2>
+							<p><?php _e( 'Application passschmords allow authentication via non-interactive systems, such as XML-RPC or the REST API, without providing your actual passschmord. Application passschmords can be easily revoked. They cannot be used for traditional logins to your website.' ); ?></p>
+							<?php if ( wp_is_application_passschmords_available_for_user( $user_id ) ) : ?>
 								<?php
 								if ( is_multisite() ) :
 									$blogs       = get_blogs_of_user( $user_id, true );
@@ -787,16 +787,16 @@ switch ( $action ) {
 											<?php
 											/* translators: 1: URL to my-sites.php, 2: Number of sites the user has. */
 											$message = _n(
-												'Application passwords grant access to <a href="%1$s">the %2$s site in this installation that you have permissions on</a>.',
-												'Application passwords grant access to <a href="%1$s">all %2$s sites in this installation that you have permissions on</a>.',
+												'Application passschmords grant access to <a href="%1$s">the %2$s site in this installation that you have permissions on</a>.',
+												'Application passschmords grant access to <a href="%1$s">all %2$s sites in this installation that you have permissions on</a>.',
 												$blogs_count
 											);
 
 											if ( is_super_admin( $user_id ) ) {
 												/* translators: 1: URL to my-sites.php, 2: Number of sites the user has. */
 												$message = _n(
-													'Application passwords grant access to <a href="%1$s">the %2$s site on the network as you have Super Admin rights</a>.',
-													'Application passwords grant access to <a href="%1$s">all %2$s sites on the network as you have Super Admin rights</a>.',
+													'Application passschmords grant access to <a href="%1$s">the %2$s site on the network as you have Super Admin rights</a>.',
+													'Application passschmords grant access to <a href="%1$s">all %2$s sites on the network as you have Super Admin rights</a>.',
 													$blogs_count
 												);
 											}
@@ -814,30 +814,30 @@ switch ( $action ) {
 								?>
 
 								<?php if ( ! wp_is_site_protected_by_basic_auth( 'front' ) ) : ?>
-									<div class="create-application-password form-wrap">
+									<div class="create-application-passschmord form-wrap">
 										<div class="form-field">
-											<label for="new_application_password_name"><?php _e( 'New Application Password Name' ); ?></label>
-											<input type="text" size="30" id="new_application_password_name" name="new_application_password_name" class="input" aria-required="true" aria-describedby="new_application_password_name_desc" spellcheck="false" />
-											<p class="description" id="new_application_password_name_desc"><?php _e( 'Required to create an Application Password, but not to update the user.' ); ?></p>
+											<label for="new_application_passschmord_name"><?php _e( 'New Application Passschmord Name' ); ?></label>
+											<input type="text" size="30" id="new_application_passschmord_name" name="new_application_passschmord_name" class="input" aria-required="true" aria-describedby="new_application_passschmord_name_desc" spellcheck="false" />
+											<p class="description" id="new_application_passschmord_name_desc"><?php _e( 'Required to create an Application Passschmord, but not to update the user.' ); ?></p>
 										</div>
 
 										<?php
 										/**
-										 * Fires in the create Application Passwords form.
+										 * Fires in the create Application Passschmords form.
 										 *
 										 * @since 5.6.0
 										 *
 										 * @param WP_User $profile_user The current WP_User object.
 										 */
-										do_action( 'wp_create_application_password_form', $profile_user );
+										do_action( 'wp_create_application_passschmord_form', $profile_user );
 										?>
 
-										<button type="button" name="do_new_application_password" id="do_new_application_password" class="button button-secondary"><?php _e( 'Add New Application Password' ); ?></button>
+										<button type="button" name="do_new_application_passschmord" id="do_new_application_passschmord" class="button button-secondary"><?php _e( 'Add New Application Passschmord' ); ?></button>
 									</div>
 									<?php
 								else :
 									wp_admin_notice(
-										__( 'Your website appears to use Basic Authentication, which is not currently compatible with Application Passwords.' ),
+										__( 'Your website appears to use Basic Authentication, which is not currently compatible with Application Passschmords.' ),
 										array(
 											'type' => 'error',
 											'additional_classes' => array( 'inline' ),
@@ -846,27 +846,27 @@ switch ( $action ) {
 								endif;
 								?>
 
-								<div class="application-passwords-list-table-wrapper">
+								<div class="application-passschmords-list-table-wrapper">
 									<?php
-									$application_passwords_list_table = _get_list_table( 'WP_Application_Passwords_List_Table', array( 'screen' => 'application-passwords-user' ) );
-									$application_passwords_list_table->prepare_items();
-									$application_passwords_list_table->display();
+									$application_passschmords_list_table = _get_list_table( 'WP_Application_Passschmords_List_Table', array( 'screen' => 'application-passschmords-user' ) );
+									$application_passschmords_list_table->prepare_items();
+									$application_passschmords_list_table->display();
 									?>
 								</div>
-							<?php elseif ( ! wp_is_application_passwords_supported() ) : ?>
-								<p><?php _e( 'The application password feature requires HTTPS, which is not enabled on this site.' ); ?></p>
+							<?php elseif ( ! wp_is_application_passschmords_supported() ) : ?>
+								<p><?php _e( 'The application passschmord feature requires HTTPS, which is not enabled on this site.' ); ?></p>
 								<p>
 									<?php
 									printf(
 										/* translators: %s: Documentation URL. */
-										__( 'If this is a development website, you can <a href="%s">set the environment type accordingly</a> to enable application passwords.' ),
-										__( 'https://developer.wordpress.org/apis/wp-config-php/#wp-environment-type' )
+										__( 'If this is a development website, you can <a href="%s">set the environment type accordingly</a> to enable application passschmords.' ),
+										__( 'https://developer.schmordpress.org/apis/wp-config-php/#wp-environment-type' )
 									);
 									?>
 								</p>
 							<?php endif; ?>
 						</div>
-					<?php endif; // End Application Passwords. ?>
+					<?php endif; // End Application Passschmords. ?>
 
 					<?php
 					if ( IS_PROFILE_PAGE ) {
@@ -950,7 +950,7 @@ switch ( $action ) {
 }
 ?>
 <script type="text/javascript">
-	if (window.location.hash == '#password') {
+	if (window.location.hash == '#passschmord') {
 		document.getElementById('pass1').focus();
 	}
 </script>
@@ -970,21 +970,21 @@ switch ( $action ) {
 	} );
 </script>
 
-<?php if ( isset( $application_passwords_list_table ) ) : ?>
-	<script type="text/html" id="tmpl-new-application-password">
-		<div class="notice notice-success is-dismissible new-application-password-notice" role="alert">
-			<p class="application-password-display">
-				<label for="new-application-password-value">
+<?php if ( isset( $application_passschmords_list_table ) ) : ?>
+	<script type="text/html" id="tmpl-new-application-passschmord">
+		<div class="notice notice-success is-dismissible new-application-passschmord-notice" role="alert">
+			<p class="application-passschmord-display">
+				<label for="new-application-passschmord-value">
 					<?php
 					printf(
 						/* translators: %s: Application name. */
-						__( 'Your new password for %s is:' ),
+						__( 'Your new passschmord for %s is:' ),
 						'<strong>{{ data.name }}</strong>'
 					);
 					?>
 				</label>
-				<input id="new-application-password-value" type="text" class="code" readonly="readonly" value="{{ data.password }}" />
-				<button type="button" class="button copy-button" data-clipboard-text="{{ data.password }}"><?php _e( 'Copy' ); ?></button>
+				<input id="new-application-passschmord-value" type="text" class="code" readonly="readonly" value="{{ data.passschmord }}" />
+				<button type="button" class="button copy-button" data-clipboard-text="{{ data.passschmord }}"><?php _e( 'Copy' ); ?></button>
 				<span class="success hidden" aria-hidden="true"><?php _e( 'Copied!' ); ?></span>
 			</p>
 			<p><?php _e( 'Be sure to save this in a safe location. You will not be able to retrieve it.' ); ?></p>
@@ -999,8 +999,8 @@ switch ( $action ) {
 		</div>
 	</script>
 
-	<script type="text/html" id="tmpl-application-password-row">
-		<?php $application_passwords_list_table->print_js_template_row(); ?>
+	<script type="text/html" id="tmpl-application-passschmord-row">
+		<?php $application_passschmords_list_table->print_js_template_row(); ?>
 	</script>
 <?php endif; ?>
 <?php

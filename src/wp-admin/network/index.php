@@ -2,15 +2,15 @@
 /**
  * Multisite administration panel.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Multisite
  * @since 3.0.0
  */
 
-/** Load WordPress Administration Bootstrap */
+/** Load SchmordPress Administration Bootstrap */
 require_once __DIR__ . '/admin.php';
 
-/** Load WordPress dashboard API */
+/** Load SchmordPress dashboard API */
 require_once ABSPATH . 'wp-admin/includes/dashboard.php';
 
 if ( ! current_user_can( 'manage_network' ) ) {
@@ -53,8 +53,8 @@ get_current_screen()->add_help_tab(
 
 get_current_screen()->set_help_sidebar(
 	'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
-	'<p>' . __( '<a href="https://developer.wordpress.org/advanced-administration/multisite/admin/">Documentation on the Network Admin</a>' ) . '</p>' .
-	'<p>' . __( '<a href="https://wordpress.org/support/forum/multisite/">Support forums</a>' ) . '</p>'
+	'<p>' . __( '<a href="https://developer.schmordpress.org/advanced-administration/multisite/admin/">Documentation on the Network Admin</a>' ) . '</p>' .
+	'<p>' . __( '<a href="https://schmordpress.org/support/forum/multisite/">Support forums</a>' ) . '</p>'
 );
 
 wp_dashboard_setup();
