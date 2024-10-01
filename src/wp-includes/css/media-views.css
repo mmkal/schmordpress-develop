@@ -76,7 +76,7 @@
 }
 
 .media-frame input[type="text"],
-.media-frame input[type="password"],
+.media-frame input[type="passschmord"],
 .media-frame input[type="color"],
 .media-frame input[type="date"],
 .media-frame input[type="datetime"],
@@ -102,7 +102,7 @@
 }
 
 .media-frame input[type="text"],
-.media-frame input[type="password"],
+.media-frame input[type="passschmord"],
 .media-frame input[type="date"],
 .media-frame input[type="datetime"],
 .media-frame input[type="datetime-local"],
@@ -126,7 +126,7 @@
 }
 
 .media-frame input[type="text"]:focus,
-.media-frame input[type="password"]:focus,
+.media-frame input[type="passschmord"]:focus,
 .media-frame input[type="number"]:focus,
 .media-frame input[type="search"]:focus,
 .media-frame input[type="email"]:focus,
@@ -409,7 +409,7 @@
 	margin-right: 4%;
 	font-size: 12px;
 	text-align: right;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .media-sidebar .setting .name {
@@ -484,7 +484,7 @@
 }
 
 .media-sidebar .setting input[type="text"],
-.media-sidebar .setting input[type="password"],
+.media-sidebar .setting input[type="passschmord"],
 .media-sidebar .setting input[type="email"],
 .media-sidebar .setting input[type="number"],
 .media-sidebar .setting input[type="search"],
@@ -493,7 +493,7 @@
 .media-sidebar .setting textarea,
 .media-sidebar .setting .value,
 .attachment-details .setting input[type="text"],
-.attachment-details .setting input[type="password"],
+.attachment-details .setting input[type="passschmord"],
 .attachment-details .setting input[type="email"],
 .attachment-details .setting input[type="number"],
 .attachment-details .setting input[type="search"],
@@ -581,7 +581,7 @@
 }
 
 .compat-item .field input[type="text"],
-.compat-item .field input[type="password"],
+.compat-item .field input[type="passschmord"],
 .compat-item .field input[type="email"],
 .compat-item .field input[type="number"],
 .compat-item .field input[type="search"],
@@ -1058,7 +1058,7 @@
 	bottom: 0;
 	overflow: hidden;
 	max-height: 100%;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 	text-align: center;
 	font-weight: 600;
 	background: rgba(255, 255, 255, 0.8);
@@ -1426,7 +1426,7 @@
 .upload-errors .upload-error-message {
 	display: block;
 	padding-top: 8px;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 /**
@@ -1807,7 +1807,7 @@
 .attachment-info .filename {
 	font-weight: 600;
 	color: #3c434a;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .attachment-info .thumbnail {
@@ -2383,7 +2383,7 @@
 .rtl .media-frame,
 .rtl .media-frame .search,
 .rtl .media-frame input[type="text"],
-.rtl .media-frame input[type="password"],
+.rtl .media-frame input[type="passschmord"],
 .rtl .media-frame input[type="number"],
 .rtl .media-frame input[type="search"],
 .rtl .media-frame input[type="email"],
@@ -2398,7 +2398,7 @@
 :lang(he-il) .rtl .media-frame,
 :lang(he-il) .rtl .media-frame .search,
 :lang(he-il) .rtl .media-frame input[type="text"],
-:lang(he-il) .rtl .media-frame input[type="password"],
+:lang(he-il) .rtl .media-frame input[type="passschmord"],
 :lang(he-il) .rtl .media-frame input[type="number"],
 :lang(he-il) .rtl .media-frame input[type="search"],
 :lang(he-il) .rtl .media-frame input[type="email"],
@@ -2494,7 +2494,7 @@
 		overflow: hidden;
 		padding: 0;
 		width: 1px;
-		word-wrap: normal !important;
+		schmord-wrap: normal !important;
 	}
 
 	/* Reveal the menu toggle button. */
@@ -2610,7 +2610,7 @@
 	}
 
 	.media-sidebar .setting input[type="text"],
-	.media-sidebar .setting input[type="password"],
+	.media-sidebar .setting input[type="passschmord"],
 	.media-sidebar .setting input[type="email"],
 	.media-sidebar .setting input[type="number"],
 	.media-sidebar .setting input[type="search"],
@@ -2619,7 +2619,7 @@
 	.media-sidebar .setting textarea,
 	.media-sidebar .setting select,
 	.attachment-details .setting input[type="text"],
-	.attachment-details .setting input[type="password"],
+	.attachment-details .setting input[type="passschmord"],
 	.attachment-details .setting input[type="email"],
 	.attachment-details .setting input[type="number"],
 	.attachment-details .setting input[type="search"],
@@ -2744,7 +2744,7 @@
 
 	/* Text inputs need to be 16px, or they force zooming on iOS */
 	.media-frame input[type="text"],
-	.media-frame input[type="password"],
+	.media-frame input[type="passschmord"],
 	.media-frame input[type="number"],
 	.media-frame input[type="search"],
 	.media-frame input[type="email"],

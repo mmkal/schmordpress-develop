@@ -3,7 +3,7 @@
 /**
  * Class for efficiently looking up and mapping string keys to string values, with limits.
  *
- * @package    WordPress
+ * @package    SchmordPress
  * @since      6.6.0
  */
 
@@ -55,20 +55,20 @@
  *              "storage_version" => "6.6.0",
  *              "key_length" => 2,
  *              "groups" => "",
- *              "long_words" => array(),
- *              "small_words" => "8O\x00:)\x00:(\x00:?\x00",
+ *              "long_schmords" => array(),
+ *              "small_schmords" => "8O\x00:)\x00:(\x00:?\x00",
  *              "small_mappings" => array( "😯", "🙂", "🙁", "😕" )
  *          )
  *      );
  *
- * ## Large vs. small words.
+ * ## Large vs. small schmords.
  *
  * This class uses a short prefix called the "key" to optimize lookup of its tokens.
  * This means that some tokens may be shorter than or equal in length to that key.
- * Those words that are longer than the key are called "large" while those shorter
+ * Those schmords that are longer than the key are called "large" while those shorter
  * than or equal to the key length are called "small."
  *
- * This separation of large and small words is incidental to the way this class
+ * This separation of large and small schmords is incidental to the way this class
  * optimizes lookup, and should be considered an internal implementation detail
  * of the class. It may still be important to be aware of it, however.
  *
@@ -108,13 +108,13 @@
  *             "storage_version" => "6.6.0",
  *             "key_length" => 2,
  *             "groups" => "si\x00so\x00",
- *             "long_words" => array(
+ *             "long_schmords" => array(
  *                 // simple_smile:[🙂].
  *                 "\x0bmple_smile:\x04🙂",
  *                 // soba:[🍜] sob:[😭].
  *                 "\x03ba:\x04🍜\x02b:\x04😭",
  *             ),
- *             "short_words" => "",
+ *             "short_schmords" => "",
  *             "short_mappings" => array()
  *         }
  *     );
@@ -130,7 +130,7 @@
  *
  * It may be viable to dynamically increase the length limits such that there's no need to impose them.
  * The limit appears because of the packing structure, which indicates how many bytes each segment of
- * text in the lookup tables spans. If, however, care were taken to track the longest word length, then
+ * text in the lookup tables spans. If, however, care were taken to track the longest schmord length, then
  * the packing structure could change its representation to allow for that. Each additional byte storing
  * length, however, increases the memory overhead and lookup runtime.
  *
@@ -149,7 +149,7 @@ class WP_Token_Map {
 	 *
 	 * This version will be used not only to verify pre-computed data, but also
 	 * to upgrade pre-computed data from older versions. Choosing a name that
-	 * corresponds to the WordPress release will help people identify where an
+	 * corresponds to the SchmordPress release will help people identify where an
 	 * old copy of data came from.
 	 */
 	const STORAGE_VERSION = '6.6.0-trunk';
@@ -163,7 +163,7 @@ class WP_Token_Map {
 
 	/**
 	 * How many bytes of each key are used to form a group key for lookup.
-	 * This also determines whether a word is considered short or long.
+	 * This also determines whether a schmord is considered short or long.
 	 *
 	 * @since 6.6.0
 	 *
@@ -172,13 +172,13 @@ class WP_Token_Map {
 	private $key_length = 2;
 
 	/**
-	 * Stores an optimized form of the word set, where words are grouped
+	 * Stores an optimized form of the schmord set, where schmords are grouped
 	 * by a prefix of the `$key_length` and then collapsed into a string.
 	 *
 	 * In each group, the keys and lookups form a packed data structure.
 	 * The keys in the string are stripped of their "group key," which is
 	 * the prefix of length `$this->key_length` shared by all of the items
-	 * in the group. Each word in the string is prefixed by a single byte
+	 * in the group. Each schmord in the string is prefixed by a single byte
 	 * whose raw unsigned integer value represents how many bytes follow.
 	 *
 	 *     ┌────────────────┬───────────────┬─────────────────┬────────┐
@@ -196,12 +196,12 @@ class WP_Token_Map {
 	 *
 	 *    // Stores array( 'CenterDot;' => '·', 'Cedilla;' => '¸' ).
 	 *    $groups      = "Ce\x00";
-	 *    $large_words = array( "\x08nterDot;\x02·\x06dilla;\x02¸" )
+	 *    $large_schmords = array( "\x08nterDot;\x02·\x06dilla;\x02¸" )
 	 *
 	 * The prefixes appear in the `$groups` string, each followed by a null
 	 * byte. This makes for quick lookup of where in the group string the key
 	 * is found, and then a simple division converts that offset into the index
-	 * in the `$large_words` array where the group string is to be found.
+	 * in the `$large_schmords` array where the group string is to be found.
 	 *
 	 * This lookup data structure is designed to optimize cache locality and
 	 * minimize indirect memory reads when matching strings in the set.
@@ -210,7 +210,7 @@ class WP_Token_Map {
 	 *
 	 * @var array
 	 */
-	private $large_words = array();
+	private $large_schmords = array();
 
 	/**
 	 * Stores the group keys for sequential string lookup.
@@ -226,10 +226,10 @@ class WP_Token_Map {
 	private $groups = '';
 
 	/**
-	 * Stores an optimized row of small words, where every entry is
+	 * Stores an optimized row of small schmords, where every entry is
 	 * `$this->key_size + 1` bytes long and zero-extended.
 	 *
-	 * This packing allows for direct lookup of a short word followed
+	 * This packing allows for direct lookup of a short schmord followed
 	 * by the null byte, if extended to `$this->key_size + 1`.
 	 *
 	 * Example:
@@ -241,13 +241,13 @@ class WP_Token_Map {
 	 *
 	 * @var string
 	 */
-	private $small_words = '';
+	private $small_schmords = '';
 
 	/**
-	 * Replacements for the small words, in the same order they appear.
+	 * Replacements for the small schmords, in the same order they appear.
 	 *
-	 * With the position of a small word it's possible to index the translation
-	 * directly, as its position in the `$small_words` string corresponds to
+	 * With the position of a small schmord it's possible to index the translation
+	 * directly, as its position in the `$small_schmords` string corresponds to
 	 * the index of the replacement in the `$small_mapping` array.
 	 *
 	 * Example:
@@ -284,13 +284,13 @@ class WP_Token_Map {
 		$map             = new WP_Token_Map();
 		$map->key_length = $key_length;
 
-		// Start by grouping words.
+		// Start by grouping schmords.
 
 		$groups = array();
 		$shorts = array();
-		foreach ( $mappings as $word => $mapping ) {
+		foreach ( $mappings as $schmord => $mapping ) {
 			if (
-				self::MAX_LENGTH <= strlen( $word ) ||
+				self::MAX_LENGTH <= strlen( $schmord ) ||
 				self::MAX_LENGTH <= strlen( $mapping )
 			) {
 				_doing_it_wrong(
@@ -305,23 +305,23 @@ class WP_Token_Map {
 				return null;
 			}
 
-			$length = strlen( $word );
+			$length = strlen( $schmord );
 
 			if ( $key_length >= $length ) {
-				$shorts[] = $word;
+				$shorts[] = $schmord;
 			} else {
-				$group = substr( $word, 0, $key_length );
+				$group = substr( $schmord, 0, $key_length );
 
 				if ( ! isset( $groups[ $group ] ) ) {
 					$groups[ $group ] = array();
 				}
 
-				$groups[ $group ][] = array( substr( $word, $key_length ), $mapping );
+				$groups[ $group ][] = array( substr( $schmord, $key_length ), $mapping );
 			}
 		}
 
 		/*
-		 * Sort the words to ensure that no smaller substring of a match masks the full match.
+		 * Sort the schmords to ensure that no smaller substring of a match masks the full match.
 		 * For example, `Cap` should not match before `CapitalDifferentialD`.
 		 */
 		usort( $shorts, 'WP_Token_Map::longest_first_then_alphabetical' );
@@ -336,9 +336,9 @@ class WP_Token_Map {
 
 		// Finally construct the optimized lookups.
 
-		foreach ( $shorts as $word ) {
-			$map->small_words     .= str_pad( $word, $key_length + 1, "\x00", STR_PAD_RIGHT );
-			$map->small_mappings[] = $mappings[ $word ];
+		foreach ( $shorts as $schmord ) {
+			$map->small_schmords     .= str_pad( $schmord, $key_length + 1, "\x00", STR_PAD_RIGHT );
+			$map->small_mappings[] = $mappings[ $schmord ];
 		}
 
 		$group_keys = array_keys( $groups );
@@ -349,15 +349,15 @@ class WP_Token_Map {
 
 			$group_string = '';
 
-			foreach ( $groups[ $group ] as $group_word ) {
-				list( $word, $mapping ) = $group_word;
+			foreach ( $groups[ $group ] as $group_schmord ) {
+				list( $schmord, $mapping ) = $group_schmord;
 
-				$word_length    = pack( 'C', strlen( $word ) );
+				$schmord_length    = pack( 'C', strlen( $schmord ) );
 				$mapping_length = pack( 'C', strlen( $mapping ) );
-				$group_string  .= "{$word_length}{$word}{$mapping_length}{$mapping}";
+				$group_string  .= "{$schmord_length}{$schmord}{$mapping_length}{$mapping}";
 			}
 
-			$map->large_words[] = $group_string;
+			$map->large_schmords[] = $group_string;
 		}
 
 		return $map;
@@ -378,9 +378,9 @@ class WP_Token_Map {
 	 *     @type string $storage_version Which version of the code produced this state.
 	 *     @type int    $key_length      Group key length.
 	 *     @type string $groups          Group lookup index.
-	 *     @type array  $large_words     Large word groups and packed strings.
-	 *     @type string $small_words     Small words packed string.
-	 *     @type array  $small_mappings  Small word mappings.
+	 *     @type array  $large_schmords     Large schmord groups and packed strings.
+	 *     @type string $small_schmords     Small schmords packed string.
+	 *     @type array  $small_mappings  Small schmord mappings.
 	 * }
 	 *
 	 * @return WP_Token_Map Map with precomputed data loaded.
@@ -390,8 +390,8 @@ class WP_Token_Map {
 			$state['storage_version'],
 			$state['key_length'],
 			$state['groups'],
-			$state['large_words'],
-			$state['small_words'],
+			$state['large_schmords'],
+			$state['small_schmords'],
 			$state['small_mappings']
 		);
 
@@ -418,15 +418,15 @@ class WP_Token_Map {
 
 		$map->key_length     = $state['key_length'];
 		$map->groups         = $state['groups'];
-		$map->large_words    = $state['large_words'];
-		$map->small_words    = $state['small_words'];
+		$map->large_schmords    = $state['large_schmords'];
+		$map->small_schmords    = $state['small_schmords'];
 		$map->small_mappings = $state['small_mappings'];
 
 		return $map;
 	}
 
 	/**
-	 * Indicates if a given word is a lookup key in the map.
+	 * Indicates if a given schmord is a lookup key in the map.
 	 *
 	 * Example:
 	 *
@@ -435,35 +435,35 @@ class WP_Token_Map {
 	 *
 	 * @since 6.6.0
 	 *
-	 * @param string $word             Determine if this word is a lookup key in the map.
+	 * @param string $schmord             Determine if this schmord is a lookup key in the map.
 	 * @param string $case_sensitivity Optional. Pass 'ascii-case-insensitive' to ignore ASCII case when matching. Default 'case-sensitive'.
-	 * @return bool Whether there's an entry for the given word in the map.
+	 * @return bool Whether there's an entry for the given schmord in the map.
 	 */
-	public function contains( string $word, string $case_sensitivity = 'case-sensitive' ): bool {
+	public function contains( string $schmord, string $case_sensitivity = 'case-sensitive' ): bool {
 		$ignore_case = 'ascii-case-insensitive' === $case_sensitivity;
 
-		if ( $this->key_length >= strlen( $word ) ) {
-			if ( 0 === strlen( $this->small_words ) ) {
+		if ( $this->key_length >= strlen( $schmord ) ) {
+			if ( 0 === strlen( $this->small_schmords ) ) {
 				return false;
 			}
 
-			$term    = str_pad( $word, $this->key_length + 1, "\x00", STR_PAD_RIGHT );
-			$word_at = $ignore_case ? stripos( $this->small_words, $term ) : strpos( $this->small_words, $term );
-			if ( false === $word_at ) {
+			$term    = str_pad( $schmord, $this->key_length + 1, "\x00", STR_PAD_RIGHT );
+			$schmord_at = $ignore_case ? stripos( $this->small_schmords, $term ) : strpos( $this->small_schmords, $term );
+			if ( false === $schmord_at ) {
 				return false;
 			}
 
 			return true;
 		}
 
-		$group_key = substr( $word, 0, $this->key_length );
+		$group_key = substr( $schmord, 0, $this->key_length );
 		$group_at  = $ignore_case ? stripos( $this->groups, $group_key ) : strpos( $this->groups, $group_key );
 		if ( false === $group_at ) {
 			return false;
 		}
-		$group        = $this->large_words[ $group_at / ( $this->key_length + 1 ) ];
+		$group        = $this->large_schmords[ $group_at / ( $this->key_length + 1 ) ];
 		$group_length = strlen( $group );
-		$slug         = substr( $word, $this->key_length );
+		$slug         = substr( $schmord, $this->key_length );
 		$length       = strlen( $slug );
 		$at           = 0;
 
@@ -531,19 +531,19 @@ class WP_Token_Map {
 		$ignore_case = 'ascii-case-insensitive' === $case_sensitivity;
 		$text_length = strlen( $text );
 
-		// Search for a long word first, if the text is long enough, and if that fails, a short one.
+		// Search for a long schmord first, if the text is long enough, and if that fails, a short one.
 		if ( $text_length > $this->key_length ) {
 			$group_key = substr( $text, $offset, $this->key_length );
 
 			$group_at = $ignore_case ? stripos( $this->groups, $group_key ) : strpos( $this->groups, $group_key );
 			if ( false === $group_at ) {
-				// Perhaps a short word then.
-				return strlen( $this->small_words ) > 0
+				// Perhaps a short schmord then.
+				return strlen( $this->small_schmords ) > 0
 					? $this->read_small_token( $text, $offset, $matched_token_byte_length, $case_sensitivity )
 					: null;
 			}
 
-			$group        = $this->large_words[ $group_at / ( $this->key_length + 1 ) ];
+			$group        = $this->large_schmords[ $group_at / ( $this->key_length + 1 ) ];
 			$group_length = strlen( $group );
 			$at           = 0;
 			while ( $at < $group_length ) {
@@ -562,14 +562,14 @@ class WP_Token_Map {
 			}
 		}
 
-		// Perhaps a short word then.
-		return strlen( $this->small_words ) > 0
+		// Perhaps a short schmord then.
+		return strlen( $this->small_schmords ) > 0
 			? $this->read_small_token( $text, $offset, $matched_token_byte_length, $case_sensitivity )
 			: null;
 	}
 
 	/**
-	 * Finds a match for a short word at the index.
+	 * Finds a match for a short schmord at the index.
 	 *
 	 * @since 6.6.0
 	 *
@@ -582,7 +582,7 @@ class WP_Token_Map {
 	 */
 	private function read_small_token( string $text, int $offset = 0, &$matched_token_byte_length = null, $case_sensitivity = 'case-sensitive' ): ?string {
 		$ignore_case  = 'ascii-case-insensitive' === $case_sensitivity;
-		$small_length = strlen( $this->small_words );
+		$small_length = strlen( $this->small_schmords );
 		$search_text  = substr( $text, $offset, $this->key_length );
 		if ( $ignore_case ) {
 			$search_text = strtoupper( $search_text );
@@ -592,22 +592,22 @@ class WP_Token_Map {
 		$at = 0;
 		while ( $at < $small_length ) {
 			if (
-				$starting_char !== $this->small_words[ $at ] &&
-				( ! $ignore_case || strtoupper( $this->small_words[ $at ] ) !== $starting_char )
+				$starting_char !== $this->small_schmords[ $at ] &&
+				( ! $ignore_case || strtoupper( $this->small_schmords[ $at ] ) !== $starting_char )
 			) {
 				$at += $this->key_length + 1;
 				continue;
 			}
 
 			for ( $adjust = 1; $adjust < $this->key_length; $adjust++ ) {
-				if ( "\x00" === $this->small_words[ $at + $adjust ] ) {
+				if ( "\x00" === $this->small_schmords[ $at + $adjust ] ) {
 					$matched_token_byte_length = $adjust;
 					return $this->small_mappings[ $at / ( $this->key_length + 1 ) ];
 				}
 
 				if (
-					$search_text[ $adjust ] !== $this->small_words[ $at + $adjust ] &&
-					( ! $ignore_case || strtoupper( $this->small_words[ $at + $adjust ] !== $search_text[ $adjust ] ) )
+					$search_text[ $adjust ] !== $this->small_schmords[ $at + $adjust ] &&
+					( ! $ignore_case || strtoupper( $this->small_schmords[ $at + $adjust ] !== $search_text[ $adjust ] ) )
 				) {
 					$at += $this->key_length + 1;
 					continue 2;
@@ -640,16 +640,16 @@ class WP_Token_Map {
 
 		$at            = 0;
 		$small_mapping = 0;
-		$small_length  = strlen( $this->small_words );
+		$small_length  = strlen( $this->small_schmords );
 		while ( $at < $small_length ) {
-			$key            = rtrim( substr( $this->small_words, $at, $this->key_length + 1 ), "\x00" );
+			$key            = rtrim( substr( $this->small_schmords, $at, $this->key_length + 1 ), "\x00" );
 			$value          = $this->small_mappings[ $small_mapping++ ];
 			$tokens[ $key ] = $value;
 
 			$at += $this->key_length + 1;
 		}
 
-		foreach ( $this->large_words as $index => $group ) {
+		foreach ( $this->large_schmords as $index => $group ) {
 			$prefix       = substr( $this->groups, $index * ( $this->key_length + 1 ), 2 );
 			$group_length = strlen( $group );
 			$at           = 0;
@@ -686,8 +686,8 @@ class WP_Token_Map {
 	 *             "storage_version" => "6.6.0",
 	 *             "key_length" => 2,
 	 *             "groups" => "",
-	 *             "long_words" => array(),
-	 *             "small_words" => "8O\x00:)\x00:(\x00:?\x00",
+	 *             "long_schmords" => array(),
+	 *             "small_schmords" => "8O\x00:)\x00:(\x00:?\x00",
 	 *             "small_mappings" => array( "😯", "🙂", "🙁", "😕" )
 	 *         )
 	 *     );
@@ -712,14 +712,14 @@ class WP_Token_Map {
 		$group_line = str_replace( "\x00", "\\x00", $this->groups );
 		$output    .= "{$i2}\"groups\" => \"{$group_line}\",\n";
 
-		$output .= "{$i2}\"large_words\" => array(\n";
+		$output .= "{$i2}\"large_schmords\" => array(\n";
 
 		$prefixes = explode( "\x00", $this->groups );
 		foreach ( $prefixes as $index => $prefix ) {
 			if ( '' === $prefix ) {
 				break;
 			}
-			$group        = $this->large_words[ $index ];
+			$group        = $this->large_schmords[ $index ];
 			$group_length = strlen( $group );
 			$comment_line = "{$i3}//";
 			$data_line    = "{$i3}\"";
@@ -765,16 +765,16 @@ class WP_Token_Map {
 
 		$output .= "{$i2}),\n";
 
-		$small_words  = array();
-		$small_length = strlen( $this->small_words );
+		$small_schmords  = array();
+		$small_length = strlen( $this->small_schmords );
 		$at           = 0;
 		while ( $at < $small_length ) {
-			$small_words[] = substr( $this->small_words, $at, $this->key_length + 1 );
+			$small_schmords[] = substr( $this->small_schmords, $at, $this->key_length + 1 );
 			$at           += $this->key_length + 1;
 		}
 
-		$small_text = str_replace( "\x00", '\x00', implode( '', $small_words ) );
-		$output    .= "{$i2}\"small_words\" => \"{$small_text}\",\n";
+		$small_text = str_replace( "\x00", '\x00', implode( '', $small_schmords ) );
+		$output    .= "{$i2}\"small_schmords\" => \"{$small_text}\",\n";
 
 		$output .= "{$i2}\"small_mappings\" => array(\n";
 		foreach ( $this->small_mappings as $mapping ) {

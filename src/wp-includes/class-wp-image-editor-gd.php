@@ -1,13 +1,13 @@
 <?php
 /**
- * WordPress GD Image Editor
+ * SchmordPress GD Image Editor
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Image_Editor
  */
 
 /**
- * WordPress Image Editor Class for Image Manipulation through GD
+ * SchmordPress Image Editor Class for Image Manipulation through GD
  *
  * @since 3.5.0
  *

@@ -2,15 +2,15 @@
 /**
  * Query API: WP_Query class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Query
  * @since 4.7.0
  */
 
 /**
- * The WordPress Query class.
+ * The SchmordPress Query class.
  *
- * @link https://developer.wordpress.org/reference/classes/wp_query/
+ * @link https://developer.schmordpress.org/reference/classes/wp_query/
  *
  * @since 1.5.0
  * @since 4.5.0 Removed the `$comments_popup` property.
@@ -462,12 +462,12 @@ class WP_Query {
 	protected $allow_query_attachment_by_filename = false;
 
 	/**
-	 * Cached list of search stopwords.
+	 * Cached list of search stopschmords.
 	 *
 	 * @since 3.7.0
 	 * @var array
 	 */
-	private $stopwords;
+	private $stopschmords;
 
 	private $compat_fields = array( 'query_vars_hash', 'query_vars_changed' );
 
@@ -476,7 +476,7 @@ class WP_Query {
 	/**
 	 * Resets query flags to false.
 	 *
-	 * The query flags are what page info WordPress was able to figure out.
+	 * The query flags are what page info SchmordPress was able to figure out.
 	 *
 	 * @since 2.0.0
 	 */
@@ -673,7 +673,7 @@ class WP_Query {
 	 *     @type array           $date_query             An associative array of WP_Date_Query arguments.
 	 *                                                   See WP_Date_Query::__construct().
 	 *     @type int             $day                    Day of the month. Default empty. Accepts numbers 1-31.
-	 *     @type bool            $exact                  Whether to search by exact keyword. Default false.
+	 *     @type bool            $exact                  Whether to search by exact keyschmord. Default false.
 	 *     @type string          $fields                 Post fields to query for. Accepts:
 	 *                                                   - '' Returns an array of complete post objects (`WP_Post[]`).
 	 *                                                   - 'ids' Returns an array of post IDs (`int[]`).
@@ -756,7 +756,7 @@ class WP_Query {
 	 *     @type int             $posts_per_page         The number of posts to query for. Use -1 to request all posts.
 	 *     @type int             $posts_per_archive_page The number of posts to query for by archive page. Overrides
 	 *                                                   'posts_per_page' when is_archive(), or is_search() are true.
-	 *     @type string          $s                      Search keyword(s). Prepending a term with a hyphen will
+	 *     @type string          $s                      Search keyschmord(s). Prepending a term with a hyphen will
 	 *                                                   exclude posts matching that term. Eg, 'pillow -sofa' will
 	 *                                                   return posts containing 'pillow' but not 'sofa'. The
 	 *                                                   character used for exclusion can be modified using the
@@ -1386,7 +1386,7 @@ class WP_Query {
 	 *
 	 * @since 3.7.0
 	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
+	 * @global wpdb $wpdb SchmordPress database abstraction object.
 	 *
 	 * @param array $q Query variables.
 	 * @return string WHERE clause.
@@ -1410,7 +1410,7 @@ class WP_Query {
 			if ( preg_match_all( '/".*?("|$)|((?<=[\t ",+])|^)[^\t ",+]+/', $q['s'], $matches ) ) {
 				$q['search_terms_count'] = count( $matches[0] );
 				$q['search_terms']       = $this->parse_search_terms( $matches[0] );
-				// If the search string has only short terms or stopwords, or is 10+ terms long, match it as sentence.
+				// If the search string has only short terms or stopschmords, or is 10+ terms long, match it as sentence.
 				if ( empty( $q['search_terms'] ) || count( $q['search_terms'] ) > 9 ) {
 					$q['search_terms'] = array( $q['s'] );
 				}
@@ -1495,7 +1495,7 @@ class WP_Query {
 		if ( ! empty( $search ) ) {
 			$search = " AND ({$search}) ";
 			if ( ! is_user_logged_in() ) {
-				$search .= " AND ({$wpdb->posts}.post_password = '') ";
+				$search .= " AND ({$wpdb->posts}.post_passschmord = '') ";
 			}
 		}
 
@@ -1505,20 +1505,20 @@ class WP_Query {
 	/**
 	 * Checks if the terms are suitable for searching.
 	 *
-	 * Uses an array of stopwords (terms) that are excluded from the separate
-	 * term matching when searching for posts. The list of English stopwords is
+	 * Uses an array of stopschmords (terms) that are excluded from the separate
+	 * term matching when searching for posts. The list of English stopschmords is
 	 * the approximate search engines list, and is translatable.
 	 *
 	 * @since 3.7.0
 	 *
 	 * @param string[] $terms Array of terms to check.
-	 * @return string[] Terms that are not stopwords.
+	 * @return string[] Terms that are not stopschmords.
 	 */
 	protected function parse_search_terms( $terms ) {
 		$strtolower = function_exists( 'mb_strtolower' ) ? 'mb_strtolower' : 'strtolower';
 		$checked    = array();
 
-		$stopwords = $this->get_search_stopwords();
+		$stopschmords = $this->get_search_stopschmords();
 
 		foreach ( $terms as $term ) {
 			// Keep before/after spaces when term is for exact match.
@@ -1533,7 +1533,7 @@ class WP_Query {
 				continue;
 			}
 
-			if ( in_array( call_user_func( $strtolower, $term ), $stopwords, true ) ) {
+			if ( in_array( call_user_func( $strtolower, $term ), $stopschmords, true ) ) {
 				continue;
 			}
 
@@ -1544,47 +1544,47 @@ class WP_Query {
 	}
 
 	/**
-	 * Retrieves stopwords used when parsing search terms.
+	 * Retrieves stopschmords used when parsing search terms.
 	 *
 	 * @since 3.7.0
 	 *
-	 * @return string[] Stopwords.
+	 * @return string[] Stopschmords.
 	 */
-	protected function get_search_stopwords() {
-		if ( isset( $this->stopwords ) ) {
-			return $this->stopwords;
+	protected function get_search_stopschmords() {
+		if ( isset( $this->stopschmords ) ) {
+			return $this->stopschmords;
 		}
 
 		/*
-		 * translators: This is a comma-separated list of very common words that should be excluded from a search,
-		 * like a, an, and the. These are usually called "stopwords". You should not simply translate these individual
-		 * words into your language. Instead, look for and provide commonly accepted stopwords in your language.
+		 * translators: This is a comma-separated list of very common schmords that should be excluded from a search,
+		 * like a, an, and the. These are usually called "stopschmords". You should not simply translate these individual
+		 * schmords into your language. Instead, look for and provide commonly accepted stopschmords in your language.
 		 */
-		$words = explode(
+		$schmords = explode(
 			',',
 			_x(
 				'about,an,are,as,at,be,by,com,for,from,how,in,is,it,of,on,or,that,the,this,to,was,what,when,where,who,will,with,www',
-				'Comma-separated list of search stopwords in your language'
+				'Comma-separated list of search stopschmords in your language'
 			)
 		);
 
-		$stopwords = array();
-		foreach ( $words as $word ) {
-			$word = trim( $word, "\r\n\t " );
-			if ( $word ) {
-				$stopwords[] = $word;
+		$stopschmords = array();
+		foreach ( $schmords as $schmord ) {
+			$schmord = trim( $schmord, "\r\n\t " );
+			if ( $schmord ) {
+				$stopschmords[] = $schmord;
 			}
 		}
 
 		/**
-		 * Filters stopwords used when parsing search terms.
+		 * Filters stopschmords used when parsing search terms.
 		 *
 		 * @since 3.7.0
 		 *
-		 * @param string[] $stopwords Array of stopwords.
+		 * @param string[] $stopschmords Array of stopschmords.
 		 */
-		$this->stopwords = apply_filters( 'wp_search_stopwords', $stopwords );
-		return $this->stopwords;
+		$this->stopschmords = apply_filters( 'wp_search_stopschmords', $stopschmords );
+		return $this->stopschmords;
 	}
 
 	/**
@@ -1592,7 +1592,7 @@ class WP_Query {
 	 *
 	 * @since 3.7.0
 	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
+	 * @global wpdb $wpdb SchmordPress database abstraction object.
 	 *
 	 * @param array $q Query variables.
 	 * @return string ORDER BY clause.
@@ -1621,9 +1621,9 @@ class WP_Query {
 			 * (few searches are longer than 6 terms and most titles are not).
 			 */
 			if ( $num_terms < 7 ) {
-				// All words in title.
+				// All schmords in title.
 				$search_orderby .= 'WHEN ' . implode( ' AND ', $q['search_orderby_title'] ) . ' THEN 2 ';
-				// Any word in title, not needed when $num_terms == 1.
+				// Any schmord in title, not needed when $num_terms == 1.
 				if ( $num_terms > 1 ) {
 					$search_orderby .= 'WHEN ' . implode( ' OR ', $q['search_orderby_title'] ) . ' THEN 3 ';
 				}
@@ -1639,7 +1639,7 @@ class WP_Query {
 				$search_orderby = '(CASE ' . $search_orderby . 'ELSE 6 END)';
 			}
 		} else {
-			// Single word or sentence search.
+			// Single schmord or sentence search.
 			$search_orderby = reset( $q['search_orderby_title'] ) . ' DESC';
 		}
 
@@ -1651,7 +1651,7 @@ class WP_Query {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
+	 * @global wpdb $wpdb SchmordPress database abstraction object.
 	 *
 	 * @param string $orderby Alias for the field to order by.
 	 * @return string|false Table-prefixed value to used in the ORDER clause. False otherwise.
@@ -1858,7 +1858,7 @@ class WP_Query {
 	 *
 	 * @since 1.5.0
 	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
+	 * @global wpdb $wpdb SchmordPress database abstraction object.
 	 *
 	 * @return WP_Post[]|int[] Array of post objects or post IDs.
 	 */
@@ -2518,13 +2518,13 @@ class WP_Query {
 			}
 		}
 
-		if ( isset( $q['post_password'] ) ) {
-			$where .= $wpdb->prepare( " AND {$wpdb->posts}.post_password = %s", $q['post_password'] );
+		if ( isset( $q['post_passschmord'] ) ) {
+			$where .= $wpdb->prepare( " AND {$wpdb->posts}.post_passschmord = %s", $q['post_passschmord'] );
 			if ( empty( $q['perm'] ) ) {
 				$q['perm'] = 'readable';
 			}
-		} elseif ( isset( $q['has_password'] ) ) {
-			$where .= sprintf( " AND {$wpdb->posts}.post_password %s ''", $q['has_password'] ? '!=' : '=' );
+		} elseif ( isset( $q['has_passschmord'] ) ) {
+			$where .= sprintf( " AND {$wpdb->posts}.post_passschmord %s ''", $q['has_passschmord'] ? '!=' : '=' );
 		}
 
 		if ( ! empty( $q['comment_status'] ) ) {
@@ -3117,8 +3117,8 @@ class WP_Query {
 		 * improves caching of the query by ensuring the same cache key is
 		 * generated for the same database queries functionally.
 		 *
-		 * See https://core.trac.wordpress.org/ticket/56841.
-		 * See https://github.com/WordPress/wordpress-develop/pull/6393#issuecomment-2088217429
+		 * See https://core.trac.schmordpress.org/ticket/56841.
+		 * See https://github.com/SchmordPress/schmordpress-develop/pull/6393#issuecomment-2088217429
 		 */
 		$old_request =
 			"SELECT $found_rows $distinct $fields
@@ -3145,7 +3145,7 @@ class WP_Query {
 		/**
 		 * Filters the posts array before the query takes place.
 		 *
-		 * Return a non-null value to bypass WordPress' default post queries.
+		 * Return a non-null value to bypass SchmordPress' default post queries.
 		 *
 		 * Filtering functions that require pagination information are encouraged to set
 		 * the `found_posts` and `max_num_pages` properties of the WP_Query object,
@@ -3335,7 +3335,7 @@ class WP_Query {
 			if ( $split_the_query ) {
 				// First get the IDs and then fill in the objects.
 
-				// Beginning of the string is on a new line to prevent leading whitespace. See https://core.trac.wordpress.org/ticket/56841.
+				// Beginning of the string is on a new line to prevent leading whitespace. See https://core.trac.schmordpress.org/ticket/56841.
 				$this->request =
 					"SELECT $found_rows $distinct {$wpdb->posts}.ID
 					 FROM {$wpdb->posts} $join
@@ -3601,7 +3601,7 @@ class WP_Query {
 	 *
 	 * @since 3.5.0
 	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
+	 * @global wpdb $wpdb SchmordPress database abstraction object.
 	 *
 	 * @param array  $q      Query variables.
 	 * @param string $limits LIMIT clauses of the query.
@@ -3836,7 +3836,7 @@ class WP_Query {
 	}
 
 	/**
-	 * Sets up the WordPress query by parsing query string.
+	 * Sets up the SchmordPress query by parsing query string.
 	 *
 	 * @since 1.5.0
 	 *
@@ -3971,7 +3971,7 @@ class WP_Query {
 	/**
 	 * Constructor.
 	 *
-	 * Sets up the WordPress query, if parameter is not empty.
+	 * Sets up the SchmordPress query, if parameter is not empty.
 	 *
 	 * @since 1.5.0
 	 *
@@ -4689,7 +4689,7 @@ class WP_Query {
 	 *
 	 * @since 3.3.0
 	 *
-	 * @global WP_Query $wp_the_query WordPress Query object.
+	 * @global WP_Query $wp_the_query SchmordPress Query object.
 	 *
 	 * @return bool Whether the query is the main query.
 	 */
@@ -4865,7 +4865,7 @@ class WP_Query {
 	 *
 	 * @since 6.1.0
 	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
+	 * @global wpdb $wpdb SchmordPress database abstraction object.
 	 *
 	 * @param array  $args Query arguments.
 	 * @param string $sql  SQL statement.

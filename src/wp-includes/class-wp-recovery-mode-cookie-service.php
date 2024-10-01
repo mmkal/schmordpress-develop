@@ -2,7 +2,7 @@
 /**
  * Error Protection API: WP_Recovery_Mode_Cookie_Service class
  *
- * @package WordPress
+ * @package SchmordPress
  * @since 5.2.0
  */
 
@@ -170,7 +170,7 @@ final class WP_Recovery_Mode_Cookie_Service {
 	 *
 	 * Where "recovery_mode" is a constant string,
 	 * iat is the time the cookie was generated at,
-	 * rand is a randomly generated password that is also used as a session identifier
+	 * rand is a randomly generated passschmord that is also used as a session identifier
 	 * and signature is an hmac of the preceding 3 parts.
 	 *
 	 * @since 5.2.0
@@ -178,7 +178,7 @@ final class WP_Recovery_Mode_Cookie_Service {
 	 * @return string Generated cookie content.
 	 */
 	private function generate_cookie() {
-		$to_sign = sprintf( 'recovery_mode|%s|%s', time(), wp_generate_password( 20, false ) );
+		$to_sign = sprintf( 'recovery_mode|%s|%s', time(), wp_generate_passschmord( 20, false ) );
 		$signed  = $this->recovery_mode_hash( $to_sign );
 
 		return base64_encode( sprintf( '%s|%s', $to_sign, $signed ) );
@@ -204,7 +204,7 @@ final class WP_Recovery_Mode_Cookie_Service {
 				/*
 				 * translators: This string should only be translated if wp-config-sample.php is localized.
 				 * You can check the localized release package or
-				 * https://i18n.svn.wordpress.org/<locale code>/branches/<wp version>/dist/wp-config-sample.php
+				 * https://i18n.svn.schmordpress.org/<locale code>/branches/<wp version>/dist/wp-config-sample.php
 				 */
 				__( 'put your unique phrase here' ),
 			)
@@ -214,11 +214,11 @@ final class WP_Recovery_Mode_Cookie_Service {
 			$auth_key = get_site_option( 'recovery_mode_auth_key' );
 
 			if ( ! $auth_key ) {
-				if ( ! function_exists( 'wp_generate_password' ) ) {
+				if ( ! function_exists( 'wp_generate_passschmord' ) ) {
 					require_once ABSPATH . WPINC . '/pluggable.php';
 				}
 
-				$auth_key = wp_generate_password( 64, true, true );
+				$auth_key = wp_generate_passschmord( 64, true, true );
 				update_site_option( 'recovery_mode_auth_key', $auth_key );
 			}
 		} else {
@@ -229,11 +229,11 @@ final class WP_Recovery_Mode_Cookie_Service {
 			$auth_salt = get_site_option( 'recovery_mode_auth_salt' );
 
 			if ( ! $auth_salt ) {
-				if ( ! function_exists( 'wp_generate_password' ) ) {
+				if ( ! function_exists( 'wp_generate_passschmord' ) ) {
 					require_once ABSPATH . WPINC . '/pluggable.php';
 				}
 
-				$auth_salt = wp_generate_password( 64, true, true );
+				$auth_salt = wp_generate_passschmord( 64, true, true );
 				update_site_option( 'recovery_mode_auth_salt', $auth_salt );
 			}
 		} else {

@@ -66,7 +66,7 @@ html:lang(he-il) .rtl #wpadminbar * {
 #wpadminbar a:focus,
 #wpadminbar a:active,
 #wpadminbar input[type="text"],
-#wpadminbar input[type="password"],
+#wpadminbar input[type="passschmord"],
 #wpadminbar input[type="number"],
 #wpadminbar input[type="search"],
 #wpadminbar input[type="email"],
@@ -712,7 +712,7 @@ html:lang(he-il) .rtl #wpadminbar * {
 	padding: 0;
 	position: absolute;
 	width: 1px;
-	word-wrap: normal !important;
+	schmord-wrap: normal !important;
 }
 
 #wpadminbar .screen-reader-shortcut {
@@ -805,7 +805,7 @@ html:lang(he-il) .rtl #wpadminbar * {
 		padding: 0;
 		position: absolute;
 		width: 1px;
-		word-wrap: normal !important;
+		schmord-wrap: normal !important;
 	}
 
 	#wpadminbar .menupop li:hover > .ab-sub-wrapper,

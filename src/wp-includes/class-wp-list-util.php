@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress List utility class
+ * SchmordPress List utility class
  *
- * @package WordPress
+ * @package SchmordPress
  * @since 4.7.0
  */
 

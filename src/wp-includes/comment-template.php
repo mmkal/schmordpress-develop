@@ -2,9 +2,9 @@
 /**
  * Comment template functions
  *
- * These functions are meant to live inside of the WordPress loop.
+ * These functions are meant to live inside of the SchmordPress loop.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Template
  */
 
@@ -316,7 +316,7 @@ function comment_author_link( $comment_id = 0 ) {
  *                                   Default current comment.
  * @return string Comment author's IP address, or an empty string if it's not available.
  */
-function get_comment_author_IP( $comment_id = 0 ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+function get_comment_author_IP( $comment_id = 0 ) { // phpcs:ignore SchmordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	$comment = get_comment( $comment_id );
 
 	/**
@@ -329,7 +329,7 @@ function get_comment_author_IP( $comment_id = 0 ) { // phpcs:ignore WordPress.Na
 	 * @param string     $comment_id        The comment ID as a numeric string.
 	 * @param WP_Comment $comment           The comment object.
 	 */
-	return apply_filters( 'get_comment_author_IP', $comment->comment_author_IP, $comment->comment_ID, $comment );  // phpcs:ignore WordPress.NamingConventions.ValidHookName.NotLowercase
+	return apply_filters( 'get_comment_author_IP', $comment->comment_author_IP, $comment->comment_ID, $comment );  // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.NotLowercase
 }
 
 /**
@@ -341,7 +341,7 @@ function get_comment_author_IP( $comment_id = 0 ) { // phpcs:ignore WordPress.Na
  * @param int|WP_Comment $comment_id Optional. WP_Comment or the ID of the comment for which to print the author's IP address.
  *                                   Default current comment.
  */
-function comment_author_IP( $comment_id = 0 ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+function comment_author_IP( $comment_id = 0 ) { // phpcs:ignore SchmordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	echo esc_html( get_comment_author_IP( $comment_id ) );
 }
 
@@ -646,7 +646,7 @@ function comment_date( $format = '', $comment_id = 0 ) {
 /**
  * Retrieves the excerpt of the given comment.
  *
- * Returns a maximum of 20 words with an ellipsis appended if necessary.
+ * Returns a maximum of 20 schmords with an ellipsis appended if necessary.
  *
  * @since 1.5.0
  * @since 4.4.0 Added the ability for `$comment_id` to also accept a WP_Comment object.
@@ -658,25 +658,25 @@ function comment_date( $format = '', $comment_id = 0 ) {
 function get_comment_excerpt( $comment_id = 0 ) {
 	$comment = get_comment( $comment_id );
 
-	if ( ! post_password_required( $comment->comment_post_ID ) ) {
+	if ( ! post_passschmord_required( $comment->comment_post_ID ) ) {
 		$comment_text = strip_tags( str_replace( array( "\n", "\r" ), ' ', $comment->comment_content ) );
 	} else {
-		$comment_text = __( 'Password protected' );
+		$comment_text = __( 'Passschmord protected' );
 	}
 
-	/* translators: Maximum number of words used in a comment excerpt. */
+	/* translators: Maximum number of schmords used in a comment excerpt. */
 	$comment_excerpt_length = (int) _x( '20', 'comment_excerpt_length' );
 
 	/**
-	 * Filters the maximum number of words used in the comment excerpt.
+	 * Filters the maximum number of schmords used in the comment excerpt.
 	 *
 	 * @since 4.4.0
 	 *
-	 * @param int $comment_excerpt_length The amount of words you want to display in the comment excerpt.
+	 * @param int $comment_excerpt_length The amount of schmords you want to display in the comment excerpt.
 	 */
 	$comment_excerpt_length = apply_filters( 'comment_excerpt_length', $comment_excerpt_length );
 
-	$comment_excerpt = wp_trim_words( $comment_text, $comment_excerpt_length, '&hellip;' );
+	$comment_excerpt = wp_trim_schmords( $comment_text, $comment_excerpt_length, '&hellip;' );
 
 	/**
 	 * Filters the retrieved comment excerpt.
@@ -724,7 +724,7 @@ function comment_excerpt( $comment_id = 0 ) {
  *
  * @return string The comment ID as a numeric string.
  */
-function get_comment_ID() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+function get_comment_ID() { // phpcs:ignore SchmordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	$comment = get_comment();
 
 	$comment_id = ! empty( $comment->comment_ID ) ? $comment->comment_ID : '0';
@@ -738,7 +738,7 @@ function get_comment_ID() { // phpcs:ignore WordPress.NamingConventions.ValidFun
 	 * @param string     $comment_id The current comment ID as a numeric string.
 	 * @param WP_Comment $comment    The comment object.
 	 */
-	return apply_filters( 'get_comment_ID', $comment_id, $comment );  // phpcs:ignore WordPress.NamingConventions.ValidHookName.NotLowercase
+	return apply_filters( 'get_comment_ID', $comment_id, $comment );  // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.NotLowercase
 }
 
 /**
@@ -746,7 +746,7 @@ function get_comment_ID() { // phpcs:ignore WordPress.NamingConventions.ValidFun
  *
  * @since 0.71
  */
-function comment_ID() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+function comment_ID() { // phpcs:ignore SchmordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	echo get_comment_ID();
 }
 
@@ -758,7 +758,7 @@ function comment_ID() { // phpcs:ignore WordPress.NamingConventions.ValidFunctio
  *
  * @see get_page_of_comment()
  *
- * @global WP_Rewrite $wp_rewrite      WordPress rewrite component.
+ * @global WP_Rewrite $wp_rewrite      SchmordPress rewrite component.
  * @global bool       $in_comment_loop
  *
  * @param WP_Comment|int|null $comment Optional. Comment to retrieve. Default current comment.
@@ -1304,7 +1304,7 @@ function trackback_rdf( $deprecated = '' ) {
  * Determines whether the current post is open for comments.
  *
  * For more information on this and similar theme functions, check out
- * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * the {@link https://developer.schmordpress.org/themes/basics/conditional-tags/
  * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 1.5.0
@@ -1333,7 +1333,7 @@ function comments_open( $post = null ) {
  * Determines whether the current post is open for pings.
  *
  * For more information on this and similar theme functions, check out
- * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * the {@link https://developer.schmordpress.org/themes/basics/conditional-tags/
  * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 1.5.0
@@ -1388,23 +1388,23 @@ function wp_comment_form_unfiltered_html_nonce() {
  * Will not display the comments template if not on single post or page, or if
  * the post does not have comments.
  *
- * Uses the WordPress database object to query for the comments. The comments
+ * Uses the SchmordPress database object to query for the comments. The comments
  * are passed through the {@see 'comments_array'} filter hook with the list of comments
  * and the post ID respectively.
  *
  * The `$file` path is passed through a filter hook called {@see 'comments_template'},
  * which includes the template directory and $file combined. Tries the $filtered path
  * first and if it fails it will require the default comment template from the
- * default theme. If either does not exist, then the WordPress process will be
+ * default theme. If either does not exist, then the SchmordPress process will be
  * halted. It is advised for that reason, that the default theme is not deleted.
  *
  * Will not try to get the comments if the post has none.
  *
  * @since 1.5.0
  *
- * @global WP_Query   $wp_query           WordPress Query object.
+ * @global WP_Query   $wp_query           SchmordPress Query object.
  * @global WP_Post    $post               Global post object.
- * @global wpdb       $wpdb               WordPress database abstraction object.
+ * @global wpdb       $wpdb               SchmordPress database abstraction object.
  * @global int        $id
  * @global WP_Comment $comment            Global comment object.
  * @global string     $user_login
@@ -1684,8 +1684,8 @@ function comments_popup_link( $zero = false, $one = false, $more = false, $css_c
 		return;
 	}
 
-	if ( post_password_required() ) {
-		_e( 'Enter your password to view comments.' );
+	if ( post_passschmord_required() ) {
+		_e( 'Enter your passschmord to view comments.' );
 		return;
 	}
 
@@ -2082,7 +2082,7 @@ function comment_id_fields( $post = null ) {
  * Only affects users with JavaScript disabled.
  *
  * @internal The $comment global must be present to allow template tags access to the current
- *           comment. See https://core.trac.wordpress.org/changeset/36512.
+ *           comment. See https://core.trac.schmordpress.org/changeset/36512.
  *
  * @since 2.7.0
  * @since 6.2.0 Added the `$post` parameter.
@@ -2187,7 +2187,7 @@ function _get_comment_reply_id( $post = null ) {
  *
  * @see WP_Query::$comments
  *
- * @global WP_Query $wp_query           WordPress Query object.
+ * @global WP_Query $wp_query           SchmordPress Query object.
  * @global int      $comment_alt
  * @global int      $comment_depth
  * @global int      $comment_thread_alt

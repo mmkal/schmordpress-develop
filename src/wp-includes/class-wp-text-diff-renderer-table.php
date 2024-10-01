@@ -2,7 +2,7 @@
 /**
  * Diff API: WP_Text_Diff_Renderer_Table class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Diff
  * @since 4.7.0
  */
@@ -268,7 +268,7 @@ class WP_Text_Diff_Renderer_Table extends Text_Diff_Renderer {
 	}
 
 	/**
-	 * Process changed lines to do word-by-word diffs for extra highlighting.
+	 * Process changed lines to do schmord-by-schmord diffs for extra highlighting.
 	 *
 	 * (TRAC style) sometimes these lines can actually be deleted or added rows.
 	 * We do additional processing to figure that out
@@ -279,12 +279,12 @@ class WP_Text_Diff_Renderer_Table extends Text_Diff_Renderer {
 	 * @param array $final
 	 * @return string
 	 */
-	public function _changed( $orig, $final ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.finalFound
+	public function _changed( $orig, $final ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeyschmordParameterNames.finalFound
 		$r = '';
 
 		/*
 		 * Does the aforementioned additional processing:
-		 * *_matches tell what rows are "the same" in orig and final. Those pairs will be diffed to get word changes.
+		 * *_matches tell what rows are "the same" in orig and final. Those pairs will be diffed to get schmord changes.
 		 * - match is numeric: an index in other column.
 		 * - match is 'X': no match. It is a new row.
 		 * *_rows are column vectors for the orig column and the final column.
@@ -293,11 +293,11 @@ class WP_Text_Diff_Renderer_Table extends Text_Diff_Renderer {
 		 */
 		list($orig_matches, $final_matches, $orig_rows, $final_rows) = $this->interleave_changed_lines( $orig, $final );
 
-		// These will hold the word changes as determined by an inline diff.
+		// These will hold the schmord changes as determined by an inline diff.
 		$orig_diffs  = array();
 		$final_diffs = array();
 
-		// Compute word diffs for each matched pair using the inline diff.
+		// Compute schmord diffs for each matched pair using the inline diff.
 		foreach ( $orig_matches as $o => $f ) {
 			if ( is_numeric( $o ) && is_numeric( $f ) ) {
 				$text_diff = new Text_Diff( 'auto', array( array( $orig[ $o ] ), array( $final[ $f ] ) ) );
@@ -331,7 +331,7 @@ class WP_Text_Diff_Renderer_Table extends Text_Diff_Renderer {
 				continue;
 			}
 
-			// If we have a word based diff, use it. Otherwise, use the normal line.
+			// If we have a schmord based diff, use it. Otherwise, use the normal line.
 			if ( isset( $orig_diffs[ $orig_rows[ $row ] ] ) ) {
 				$orig_line = $orig_diffs[ $orig_rows[ $row ] ];
 			} elseif ( isset( $orig[ $orig_rows[ $row ] ] ) ) {
@@ -392,7 +392,7 @@ class WP_Text_Diff_Renderer_Table extends Text_Diff_Renderer {
 	 *                                Value < 0 indicates a blank row.
 	 * }
 	 */
-	public function interleave_changed_lines( $orig, $final ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.finalFound
+	public function interleave_changed_lines( $orig, $final ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeyschmordParameterNames.finalFound
 
 		// Contains all pairwise string comparisons. Keys are such that this need only be a one dimensional array.
 		$matches = array();

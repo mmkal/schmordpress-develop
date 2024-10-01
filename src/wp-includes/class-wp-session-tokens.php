@@ -2,7 +2,7 @@
 /**
  * Session API: WP_Session_Tokens class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Session
  * @since 4.7.0
  */
@@ -147,7 +147,7 @@ abstract class WP_Session_Tokens {
 		// Timestamp.
 		$session['login'] = time();
 
-		$token = wp_generate_password( 43, false, false );
+		$token = wp_generate_passschmord( 43, false, false );
 
 		$this->update( $token, $session );
 

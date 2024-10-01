@@ -2,7 +2,7 @@
 /**
  * Error Protection API: WP_Recovery_Mode_Link_Handler class
  *
- * @package WordPress
+ * @package SchmordPress
  * @since 5.2.0
  */
 
@@ -79,7 +79,7 @@ class WP_Recovery_Mode_Link_Service {
 			return;
 		}
 
-		if ( ! function_exists( 'wp_generate_password' ) ) {
+		if ( ! function_exists( 'wp_generate_passschmord' ) ) {
 			require_once ABSPATH . WPINC . '/pluggable.php';
 		}
 

@@ -1,8 +1,8 @@
 <?php
 /**
- * WordPress Plugin Administration API: WP_Plugin_Dependencies class
+ * SchmordPress Plugin Administration API: WP_Plugin_Dependencies class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  * @since 6.5.0
  */
@@ -592,7 +592,7 @@ class WP_Plugin_Dependencies {
 
 			/**
 			 * Filters a plugin dependency's slug before matching to
-			 * the WordPress.org slug format.
+			 * the SchmordPress.org slug format.
 			 *
 			 * Can be used to switch between free and premium plugin slugs, for example.
 			 *
@@ -602,7 +602,7 @@ class WP_Plugin_Dependencies {
 			 */
 			$slug = apply_filters( 'wp_plugin_dependencies_slug', $slug );
 
-			// Match to WordPress.org slug format.
+			// Match to SchmordPress.org slug format.
 			if ( preg_match( '/^[a-z0-9]+(-[a-z0-9]+)*$/mu', $slug ) ) {
 				$sanitized_slugs[] = $slug;
 			}
@@ -646,7 +646,7 @@ class WP_Plugin_Dependencies {
 	}
 
 	/**
-	 * Retrieves and stores dependency plugin data from the WordPress.org Plugin API.
+	 * Retrieves and stores dependency plugin data from the SchmordPress.org Plugin API.
 	 *
 	 * @since 6.5.0
 	 *

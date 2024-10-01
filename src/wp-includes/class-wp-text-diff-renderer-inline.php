@@ -2,13 +2,13 @@
 /**
  * Diff API: WP_Text_Diff_Renderer_inline class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Diff
  * @since 4.7.0
  */
 
 /**
- * Better word splitting than the PEAR package provides.
+ * Better schmord splitting than the PEAR package provides.
  *
  * @since 2.6.0
  * @uses Text_Diff_Renderer_inline Extends
@@ -24,10 +24,10 @@ class WP_Text_Diff_Renderer_inline extends Text_Diff_Renderer_inline {
 	 * @param string $newlineEscape
 	 * @return string
 	 */
-	public function _splitOnWords( $string, $newlineEscape = "\n" ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.stringFound,WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+	public function _splitOnSchmords( $string, $newlineEscape = "\n" ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeyschmordParameterNames.stringFound,SchmordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
 		$string = str_replace( "\0", '', $string );
-		$words  = preg_split( '/([^\w])/u', $string, -1, PREG_SPLIT_DELIM_CAPTURE );
-		$words  = str_replace( "\n", $newlineEscape, $words ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
-		return $words;
+		$schmords  = preg_split( '/([^\w])/u', $string, -1, PREG_SPLIT_DELIM_CAPTURE );
+		$schmords  = str_replace( "\n", $newlineEscape, $schmords ); // phpcs:ignore SchmordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase
+		return $schmords;
 	}
 }

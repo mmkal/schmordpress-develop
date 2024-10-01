@@ -1,19 +1,19 @@
 <?php
 /**
- * XML-RPC protocol support for WordPress.
+ * XML-RPC protocol support for SchmordPress.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Publishing
  */
 
 /**
- * WordPress XMLRPC server implementation.
+ * SchmordPress XMLRPC server implementation.
  *
  * Implements compatibility for Blogger API, MetaWeblog API, MovableType, and
- * pingback. Additional WordPress API for managing comments, pages, posts,
+ * pingback. Additional SchmordPress API for managing comments, pages, posts,
  * options, etc.
  *
- * As of WordPress 3.5.0, XML-RPC is enabled by default. It can be disabled
+ * As of SchmordPress 3.5.0, XML-RPC is enabled by default. It can be disabled
  * via the {@see 'xmlrpc_enabled'} filter found in wp_xmlrpc_server::set_is_enabled().
  *
  * @since 1.5.0
@@ -68,7 +68,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 */
 	public function __construct() {
 		$this->methods = array(
-			// WordPress API.
+			// SchmordPress API.
 			'wp.getUsersBlogs'                 => 'this:wp_getUsersBlogs',
 			'wp.newPost'                       => 'this:wp_newPost',
 			'wp.editPost'                      => 'this:wp_editPost',
@@ -181,7 +181,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	/**
 	 * Sets wp_xmlrpc_server::$is_enabled property.
 	 *
-	 * Determines whether the xmlrpc server is enabled on this WordPress install
+	 * Determines whether the xmlrpc server is enabled on this SchmordPress install
 	 * and set the is_enabled property accordingly.
 	 *
 	 * @since 5.7.3
@@ -282,10 +282,10 @@ class wp_xmlrpc_server extends IXR_Server {
 	 * @since 2.8.0
 	 *
 	 * @param string $username User's username.
-	 * @param string $password User's password.
+	 * @param string $passschmord User's passschmord.
 	 * @return WP_User|false WP_User object if authentication passed, false otherwise.
 	 */
-	public function login( $username, $password ) {
+	public function login( $username, $passschmord ) {
 		if ( ! $this->is_enabled ) {
 			$this->error = new IXR_Error( 405, sprintf( __( 'XML-RPC services are disabled on this site.' ) ) );
 			return false;
@@ -294,11 +294,11 @@ class wp_xmlrpc_server extends IXR_Server {
 		if ( $this->auth_failed ) {
 			$user = new WP_Error( 'login_prevented' );
 		} else {
-			$user = wp_authenticate( $username, $password );
+			$user = wp_authenticate( $username, $passschmord );
 		}
 
 		if ( is_wp_error( $user ) ) {
-			$this->error = new IXR_Error( 403, __( 'Incorrect username or password.' ) );
+			$this->error = new IXR_Error( 403, __( 'Incorrect username or passschmord.' ) );
 
 			// Flag that authentication has failed once on this wp_xmlrpc_server instance.
 			$this->auth_failed = true;
@@ -327,11 +327,11 @@ class wp_xmlrpc_server extends IXR_Server {
 	 * @see wp_xmlrpc_server::login()
 	 *
 	 * @param string $username User's username.
-	 * @param string $password User's password.
+	 * @param string $passschmord User's passschmord.
 	 * @return bool Whether authentication passed.
 	 */
-	public function login_pass_ok( $username, $password ) {
-		return (bool) $this->login( $username, $password );
+	public function login_pass_ok( $username, $passschmord ) {
+		return (bool) $this->login( $username, $passschmord );
 	}
 
 	/**
@@ -523,7 +523,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			'software_name'           => array(
 				'desc'     => __( 'Software Name' ),
 				'readonly' => true,
-				'value'    => 'WordPress',
+				'value'    => 'SchmordPress',
 			),
 			'software_version'        => array(
 				'desc'     => __( 'Software Version' ),
@@ -531,7 +531,7 @@ class wp_xmlrpc_server extends IXR_Server {
 				'value'    => get_bloginfo( 'version' ),
 			),
 			'blog_url'                => array(
-				'desc'     => __( 'WordPress Address (URL)' ),
+				'desc'     => __( 'SchmordPress Address (URL)' ),
 				'readonly' => true,
 				'option'   => 'siteurl',
 			),
@@ -688,7 +688,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *     Method arguments. Note: arguments must be ordered as documented.
 	 *
 	 *     @type string $0 Username.
-	 *     @type string $1 Password.
+	 *     @type string $1 Passschmord.
 	 * }
 	 * @return array|IXR_Error Array contains:
 	 *  - 'isAdmin'
@@ -712,9 +712,9 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[0];
-		$password = $args[1];
+		$passschmord = $args[1];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -870,7 +870,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	}
 
 	/**
-	 * Converts a WordPress date string to an IXR_Date object.
+	 * Converts a SchmordPress date string to an IXR_Date object.
 	 *
 	 * @param string $date Date string to convert.
 	 * @return IXR_Date IXR_Date object.
@@ -883,9 +883,9 @@ class wp_xmlrpc_server extends IXR_Server {
 	}
 
 	/**
-	 * Converts a WordPress GMT date string to an IXR_Date object.
+	 * Converts a SchmordPress GMT date string to an IXR_Date object.
 	 *
-	 * @param string $date_gmt WordPress GMT date string.
+	 * @param string $date_gmt SchmordPress GMT date string.
 	 * @param string $date     Date string.
 	 * @return IXR_Date IXR_Date object.
 	 */
@@ -918,7 +918,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			'post_type'         => $post['post_type'],
 			'post_name'         => $post['post_name'],
 			'post_author'       => $post['post_author'],
-			'post_password'     => $post['post_password'],
+			'post_passschmord'     => $post['post_passschmord'],
 			'post_excerpt'      => $post['post_excerpt'],
 			'post_content'      => $post['post_content'],
 			'post_parent'       => (string) $post['post_parent'],
@@ -1146,7 +1146,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			'mt_allow_comments'      => $allow_comments,
 			'mt_allow_pings'         => $allow_pings,
 			'wp_slug'                => $page->post_name,
-			'wp_password'            => $page->post_password,
+			'wp_passschmord'            => $page->post_passschmord,
 			'wp_author'              => $author->display_name,
 			'wp_page_parent_id'      => $page->post_parent,
 			'wp_page_parent_title'   => $parent_title,
@@ -1275,7 +1275,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 {
 	 *         Content struct for adding a new post. See wp_insert_post() for information on
 	 *         additional post fields
@@ -1288,7 +1288,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *         @type string $post_content   Post content.
 	 *         @type string $post_date_gmt  Post date in GMT.
 	 *         @type string $post_date      Post date.
-	 *         @type string $post_password  Post password (20-character limit).
+	 *         @type string $post_passschmord  Post passschmord (20-character limit).
 	 *         @type string $comment_status Post comment enabled status. Accepts 'open' or 'closed'.
 	 *         @type string $ping_status    Post ping status. Accepts 'open' or 'closed'.
 	 *         @type bool   $sticky         Whether the post should be sticky. Automatically false if
@@ -1318,10 +1318,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username       = $args[1];
-		$password       = $args[2];
+		$passschmord       = $args[2];
 		$content_struct = $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -1376,8 +1376,8 @@ class wp_xmlrpc_server extends IXR_Server {
 	private function _toggle_sticky( $post_data, $update = false ) {
 		$post_type = get_post_type_object( $post_data['post_type'] );
 
-		// Private and password-protected posts cannot be stickied.
-		if ( 'private' === $post_data['post_status'] || ! empty( $post_data['post_password'] ) ) {
+		// Private and passschmord-protected posts cannot be stickied.
+		if ( 'private' === $post_data['post_status'] || ! empty( $post_data['post_passschmord'] ) ) {
 			// Error if the client tried to stick the post, otherwise, silently unstick.
 			if ( ! empty( $post_data['sticky'] ) ) {
 				return new IXR_Error( 401, __( 'Sorry, you cannot stick a private post.' ) );
@@ -1416,7 +1416,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			'post_status'    => 'draft',
 			'post_type'      => 'post',
 			'post_author'    => 0,
-			'post_password'  => '',
+			'post_passschmord'  => '',
 			'post_excerpt'   => '',
 			'post_content'   => '',
 			'post_title'     => '',
@@ -1483,8 +1483,8 @@ class wp_xmlrpc_server extends IXR_Server {
 				break;
 		}
 
-		if ( ! empty( $post_data['post_password'] ) && ! current_user_can( $post_type->cap->publish_posts ) ) {
-			return new IXR_Error( 401, __( 'Sorry, you are not allowed to create password protected posts in this post type.' ) );
+		if ( ! empty( $post_data['post_passschmord'] ) && ! current_user_can( $post_type->cap->publish_posts ) ) {
+			return new IXR_Error( 401, __( 'Sorry, you are not allowed to create passschmord protected posts in this post type.' ) );
 		}
 
 		$post_data['post_author'] = absint( $post_data['post_author'] );
@@ -1721,7 +1721,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 Post ID.
 	 *     @type array  $4 Extra content arguments.
 	 * }
@@ -1735,11 +1735,11 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username       = $args[1];
-		$password       = $args[2];
+		$passschmord       = $args[2];
 		$post_id        = (int) $args[3];
 		$content_struct = $args[4];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -1806,7 +1806,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 Post ID.
 	 * }
 	 * @return true|IXR_Error True on success, IXR_Error instance on failure.
@@ -1819,10 +1819,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$post_id  = (int) $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -1869,7 +1869,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 Post ID.
 	 *     @type array  $4 Optional. The subset of post type fields to return.
 	 * }
@@ -1884,7 +1884,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *  - 'post_type'
 	 *  - 'post_name'
 	 *  - 'post_author'
-	 *  - 'post_password'
+	 *  - 'post_passschmord'
 	 *  - 'post_excerpt'
 	 *  - 'post_content'
 	 *  - 'link'
@@ -1905,7 +1905,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$post_id  = (int) $args[3];
 
 		if ( isset( $args[4] ) ) {
@@ -1923,7 +1923,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			$fields = apply_filters( 'xmlrpc_default_post_fields', array( 'post', 'terms', 'custom_fields' ), 'wp.getPost' );
 		}
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -1958,7 +1958,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Optional. Modifies the query used to retrieve posts. Accepts 'post_type',
 	 *                     'post_status', 'number', 'offset', 'orderby', 's', and 'order'.
 	 *                     Default empty array.
@@ -1974,7 +1974,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$filter   = isset( $args[3] ) ? $args[3] : array();
 
 		if ( isset( $args[4] ) ) {
@@ -1984,7 +1984,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			$fields = apply_filters( 'xmlrpc_default_post_fields', array( 'post', 'terms', 'custom_fields' ), 'wp.getPosts' );
 		}
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -2065,7 +2065,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Content struct for adding a new term. The struct must contain
 	 *                     the term 'name' and 'taxonomy'. Optional accepted values include
 	 *                     'parent', 'description', and 'slug'.
@@ -2080,10 +2080,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username       = $args[1];
-		$password       = $args[2];
+		$passschmord       = $args[2];
 		$content_struct = $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -2168,7 +2168,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 Term ID.
 	 *     @type array  $4 Content struct for editing a term. The struct must contain the
 	 *                     term 'taxonomy'. Optional accepted values include 'name', 'parent',
@@ -2184,11 +2184,11 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username       = $args[1];
-		$password       = $args[2];
+		$passschmord       = $args[2];
 		$term_id        = (int) $args[3];
 		$content_struct = $args[4];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -2286,7 +2286,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type string $3 Taxonomy name.
 	 *     @type int    $4 Term ID.
 	 * }
@@ -2300,11 +2300,11 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$taxonomy = $args[3];
 		$term_id  = (int) $args[4];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -2356,7 +2356,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type string $3 Taxonomy name.
 	 *     @type int    $4 Term ID.
 	 * }
@@ -2379,11 +2379,11 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$taxonomy = $args[3];
 		$term_id  = (int) $args[4];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -2429,7 +2429,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type string $3 Taxonomy name.
 	 *     @type array  $4 Optional. Modifies the query used to retrieve posts. Accepts 'number',
 	 *                     'offset', 'orderby', 'order', 'hide_empty', and 'search'. Default empty array.
@@ -2444,11 +2444,11 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$taxonomy = $args[3];
 		$filter   = isset( $args[4] ) ? $args[4] : array();
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -2521,7 +2521,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type string $3 Taxonomy name.
 	 *     @type array  $4 Optional. Array of taxonomy fields to limit to in the return.
 	 *                     Accepts 'labels', 'cap', 'menu', and 'object_type'.
@@ -2537,7 +2537,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$taxonomy = $args[3];
 
 		if ( isset( $args[4] ) ) {
@@ -2555,7 +2555,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			$fields = apply_filters( 'xmlrpc_default_taxonomy_fields', array( 'labels', 'cap', 'object_type' ), 'wp.getTaxonomy' );
 		}
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -2588,7 +2588,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Optional. An array of arguments for retrieving taxonomies.
 	 *     @type array  $4 Optional. The subset of taxonomy fields to return.
 	 * }
@@ -2603,7 +2603,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$filter   = isset( $args[3] ) ? $args[3] : array( 'public' => true );
 
 		if ( isset( $args[4] ) ) {
@@ -2613,7 +2613,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			$fields = apply_filters( 'xmlrpc_default_taxonomy_fields', array( 'labels', 'cap', 'object_type' ), 'wp.getTaxonomies' );
 		}
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -2656,7 +2656,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 User ID.
 	 *     @type array  $4 Optional. Array of fields to return.
 	 * }
@@ -2682,7 +2682,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$user_id  = (int) $args[3];
 
 		if ( isset( $args[4] ) ) {
@@ -2699,7 +2699,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			$fields = apply_filters( 'xmlrpc_default_user_fields', array( 'all' ), 'wp.getUser' );
 		}
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -2738,7 +2738,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Optional. Arguments for the user query.
 	 *     @type array  $4 Optional. Fields to return.
 	 * }
@@ -2752,7 +2752,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$filter   = isset( $args[3] ) ? $args[3] : array();
 
 		if ( isset( $args[4] ) ) {
@@ -2762,7 +2762,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			$fields = apply_filters( 'xmlrpc_default_user_fields', array( 'all' ), 'wp.getUsers' );
 		}
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -2820,7 +2820,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username
-	 *     @type string $2 Password
+	 *     @type string $2 Passschmord
 	 *     @type array  $3 Optional. Fields to return.
 	 * }
 	 * @return array|IXR_Error (@see wp_getUser)
@@ -2833,7 +2833,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 
 		if ( isset( $args[3] ) ) {
 			$fields = $args[3];
@@ -2842,7 +2842,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			$fields = apply_filters( 'xmlrpc_default_user_fields', array( 'all' ), 'wp.getProfile' );
 		}
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -2869,7 +2869,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Content struct. It can optionally contain:
 	 *      - 'first_name'
 	 *      - 'last_name'
@@ -2889,10 +2889,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username       = $args[1];
-		$password       = $args[2];
+		$passschmord       = $args[2];
 		$content_struct = $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -2961,7 +2961,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type int    $1 Page ID.
 	 *     @type string $2 Username.
-	 *     @type string $3 Password.
+	 *     @type string $3 Passschmord.
 	 * }
 	 * @return array|IXR_Error
 	 */
@@ -2970,9 +2970,9 @@ class wp_xmlrpc_server extends IXR_Server {
 
 		$page_id  = (int) $args[1];
 		$username = $args[2];
-		$password = $args[3];
+		$passschmord = $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -3008,7 +3008,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 Optional. Number of pages. Default 10.
 	 * }
 	 * @return array|IXR_Error
@@ -3017,10 +3017,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username  = $args[1];
-		$password  = $args[2];
+		$passschmord  = $args[2];
 		$num_pages = isset( $args[3] ) ? (int) $args[3] : 10;
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -3069,7 +3069,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Content struct.
 	 * }
 	 * @return int|IXR_Error
@@ -3077,9 +3077,9 @@ class wp_xmlrpc_server extends IXR_Server {
 	public function wp_newPage( $args ) {
 		// Items not escaped here will be escaped in wp_newPost().
 		$username = $this->escape( $args[1] );
-		$password = $this->escape( $args[2] );
+		$passschmord = $this->escape( $args[2] );
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -3104,7 +3104,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 Page ID.
 	 * }
 	 * @return true|IXR_Error True, if success.
@@ -3113,10 +3113,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$page_id  = (int) $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -3152,7 +3152,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		 * @param int   $page_id ID of the deleted page.
 		 * @param array $args    An array of arguments to delete the page.
 		 */
-		do_action( 'xmlrpc_call_success_wp_deletePage', $page_id, $args ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.NotLowercase
+		do_action( 'xmlrpc_call_success_wp_deletePage', $page_id, $args ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.NotLowercase
 
 		return true;
 	}
@@ -3168,7 +3168,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type int    $1 Page ID.
 	 *     @type string $2 Username.
-	 *     @type string $3 Password.
+	 *     @type string $3 Passschmord.
 	 *     @type string $4 Content.
 	 *     @type int    $5 Publish flag. 0 for draft, 1 for publish.
 	 * }
@@ -3178,14 +3178,14 @@ class wp_xmlrpc_server extends IXR_Server {
 		// Items will be escaped in mw_editPost().
 		$page_id  = (int) $args[1];
 		$username = $args[2];
-		$password = $args[3];
+		$passschmord = $args[3];
 		$content  = $args[4];
 		$publish  = $args[5];
 
 		$escaped_username = $this->escape( $username );
-		$escaped_password = $this->escape( $password );
+		$escaped_passschmord = $this->escape( $passschmord );
 
-		$user = $this->login( $escaped_username, $escaped_password );
+		$user = $this->login( $escaped_username, $escaped_passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -3211,7 +3211,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		$args = array(
 			$page_id,
 			$username,
-			$password,
+			$passschmord,
 			$content,
 			$publish,
 		);
@@ -3225,14 +3225,14 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 * @since 2.2.0
 	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
+	 * @global wpdb $wpdb SchmordPress database abstraction object.
 	 *
 	 * @param array $args {
 	 *     Method arguments. Note: arguments must be ordered as documented.
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 * }
 	 * @return array|IXR_Error
 	 */
@@ -3242,9 +3242,9 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -3295,7 +3295,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 * }
 	 * @return array|IXR_Error
 	 */
@@ -3303,9 +3303,9 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -3339,7 +3339,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 * }
 	 * @return array|IXR_Error
 	 */
@@ -3347,9 +3347,9 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -3359,7 +3359,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		}
 
 		/** This action is documented in wp-includes/class-wp-xmlrpc-server.php */
-		do_action( 'xmlrpc_call', 'wp.getKeywords', $args, $this );
+		do_action( 'xmlrpc_call', 'wp.getKeyschmords', $args, $this );
 
 		$tags = array();
 
@@ -3391,7 +3391,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Category.
 	 * }
 	 * @return int|IXR_Error Category ID.
@@ -3400,10 +3400,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$category = $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -3418,7 +3418,7 @@ class wp_xmlrpc_server extends IXR_Server {
 
 		/*
 		 * If no slug was provided, make it empty
-		 * so that WordPress will generate one.
+		 * so that SchmordPress will generate one.
 		 */
 		if ( empty( $category['slug'] ) ) {
 			$category['slug'] = '';
@@ -3463,7 +3463,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		 * @param int   $cat_id ID of the new category.
 		 * @param array $args   An array of new category arguments.
 		 */
-		do_action( 'xmlrpc_call_success_wp_newCategory', $cat_id, $args ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.NotLowercase
+		do_action( 'xmlrpc_call_success_wp_newCategory', $cat_id, $args ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.NotLowercase
 
 		return $cat_id;
 	}
@@ -3478,7 +3478,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 Category ID.
 	 * }
 	 * @return bool|IXR_Error See wp_delete_term() for return info.
@@ -3487,10 +3487,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username    = $args[1];
-		$password    = $args[2];
+		$passschmord    = $args[2];
 		$category_id = (int) $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -3513,7 +3513,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			 * @param int   $category_id ID of the deleted category.
 			 * @param array $args        An array of arguments to delete the category.
 			 */
-			do_action( 'xmlrpc_call_success_wp_deleteCategory', $category_id, $args ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.NotLowercase
+			do_action( 'xmlrpc_call_success_wp_deleteCategory', $category_id, $args ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.NotLowercase
 		}
 
 		return $status;
@@ -3529,7 +3529,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Category
 	 *     @type int    $4 Max number of results.
 	 * }
@@ -3539,11 +3539,11 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username    = $args[1];
-		$password    = $args[2];
+		$passschmord    = $args[2];
 		$category    = $args[3];
 		$max_results = (int) $args[4];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -3581,7 +3581,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 Comment ID.
 	 * }
 	 * @return array|IXR_Error
@@ -3590,10 +3590,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username   = $args[1];
-		$password   = $args[2];
+		$passschmord   = $args[2];
 		$comment_id = (int) $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -3616,7 +3616,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	/**
 	 * Retrieves comments.
 	 *
-	 * Besides the common blog_id (unused), username, and password arguments,
+	 * Besides the common blog_id (unused), username, and passschmord arguments,
 	 * it takes a filter array as the last argument.
 	 *
 	 * Accepted 'filter' keys are 'status', 'post_id', 'offset', and 'number'.
@@ -3635,7 +3635,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Optional. Query arguments.
 	 * }
 	 * @return array|IXR_Error Array containing a collection of comments.
@@ -3646,10 +3646,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$struct   = isset( $args[3] ) ? $args[3] : array();
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -3724,7 +3724,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 Comment ID.
 	 * }
 	 * @return bool|IXR_Error See wp_delete_comment().
@@ -3733,10 +3733,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username   = $args[1];
-		$password   = $args[2];
+		$passschmord   = $args[2];
 		$comment_id = (int) $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -3763,7 +3763,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			 * @param int   $comment_id ID of the deleted comment.
 			 * @param array $args       An array of arguments to delete the comment.
 			 */
-			do_action( 'xmlrpc_call_success_wp_deleteComment', $comment_id, $args ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.NotLowercase
+			do_action( 'xmlrpc_call_success_wp_deleteComment', $comment_id, $args ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.NotLowercase
 		}
 
 		return $status;
@@ -3772,7 +3772,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	/**
 	 * Edits a comment.
 	 *
-	 * Besides the common blog_id (unused), username, and password arguments,
+	 * Besides the common blog_id (unused), username, and passschmord arguments,
 	 * it takes a comment_id integer and a content_struct array as the last argument.
 	 *
 	 * The allowed keys in the content_struct array are:
@@ -3790,7 +3790,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 Comment ID.
 	 *     @type array  $4 Content structure.
 	 * }
@@ -3800,11 +3800,11 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username       = $args[1];
-		$password       = $args[2];
+		$passschmord       = $args[2];
 		$comment_id     = (int) $args[3];
 		$content_struct = $args[4];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -3875,7 +3875,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		 * @param int   $comment_id ID of the updated comment.
 		 * @param array $args       An array of arguments to update the comment.
 		 */
-		do_action( 'xmlrpc_call_success_wp_editComment', $comment_id, $args ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.NotLowercase
+		do_action( 'xmlrpc_call_success_wp_editComment', $comment_id, $args ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.NotLowercase
 
 		return true;
 	}
@@ -3890,7 +3890,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int        $0 Blog ID (unused).
 	 *     @type string     $1 Username.
-	 *     @type string     $2 Password.
+	 *     @type string     $2 Passschmord.
 	 *     @type string|int $3 Post ID or URL.
 	 *     @type array      $4 Content structure.
 	 * }
@@ -3900,7 +3900,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username       = $args[1];
-		$password       = $args[2];
+		$passschmord       = $args[2];
 		$post           = $args[3];
 		$content_struct = $args[4];
 
@@ -3914,7 +3914,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		 */
 		$allow_anon = apply_filters( 'xmlrpc_allow_anonymous_comments', false );
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 
 		if ( ! $user ) {
 			$logged_in = false;
@@ -3948,7 +3948,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		if (
 			'publish' === get_post_status( $post_id ) &&
 			! current_user_can( 'edit_post', $post_id ) &&
-			post_password_required( $post_id )
+			post_passschmord_required( $post_id )
 		) {
 			return new IXR_Error( 403, __( 'Sorry, you are not allowed to comment on this post.' ) );
 		}
@@ -4030,7 +4030,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		 * @param int   $comment_id ID of the new comment.
 		 * @param array $args       An array of new comment arguments.
 		 */
-		do_action( 'xmlrpc_call_success_wp_newComment', $comment_id, $args ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.NotLowercase
+		do_action( 'xmlrpc_call_success_wp_newComment', $comment_id, $args ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.NotLowercase
 
 		return $comment_id;
 	}
@@ -4045,7 +4045,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 * }
 	 * @return array|IXR_Error
 	 */
@@ -4053,9 +4053,9 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -4080,7 +4080,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 Post ID.
 	 * }
 	 * @return array|IXR_Error
@@ -4089,10 +4089,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$post_id  = (int) $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -4129,7 +4129,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 * }
 	 * @return array|IXR_Error
 	 */
@@ -4137,9 +4137,9 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -4164,7 +4164,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 * }
 	 * @return array|IXR_Error
 	 */
@@ -4172,9 +4172,9 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -4199,7 +4199,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 * }
 	 * @return array|IXR_Error
 	 */
@@ -4207,9 +4207,9 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -4234,7 +4234,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Optional. Options.
 	 * }
 	 * @return array|IXR_Error
@@ -4243,10 +4243,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$options  = isset( $args[3] ) ? (array) $args[3] : array();
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -4298,7 +4298,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Options.
 	 * }
 	 * @return array|IXR_Error
@@ -4307,10 +4307,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$options  = (array) $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -4347,7 +4347,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 Attachment ID.
 	 * }
 	 * @return array|IXR_Error Associative array contains:
@@ -4364,10 +4364,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username      = $args[1];
-		$password      = $args[2];
+		$passschmord      = $args[2];
 		$attachment_id = (int) $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -4390,7 +4390,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	/**
 	 * Retrieves a collection of media library items (or attachments).
 	 *
-	 * Besides the common blog_id (unused), username, and password arguments,
+	 * Besides the common blog_id (unused), username, and passschmord arguments,
 	 * it takes a filter array as the last argument.
 	 *
 	 * Accepted 'filter' keys are 'parent_id', 'mime_type', 'offset', and 'number'.
@@ -4409,7 +4409,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Optional. Query arguments.
 	 * }
 	 * @return array|IXR_Error Array containing a collection of media items.
@@ -4420,10 +4420,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$struct   = isset( $args[3] ) ? $args[3] : array();
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -4469,7 +4469,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 * }
 	 * @return array|IXR_Error List of post formats, otherwise IXR_Error object.
 	 */
@@ -4477,9 +4477,9 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -4523,7 +4523,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type string $3 Post type name.
 	 *     @type array  $4 Optional. Fields to fetch.
 	 * }
@@ -4546,7 +4546,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username       = $args[1];
-		$password       = $args[2];
+		$passschmord       = $args[2];
 		$post_type_name = $args[3];
 
 		if ( isset( $args[4] ) ) {
@@ -4564,7 +4564,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			$fields = apply_filters( 'xmlrpc_default_posttype_fields', array( 'labels', 'cap', 'taxonomies' ), 'wp.getPostType' );
 		}
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -4597,7 +4597,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Optional. Query arguments.
 	 *     @type array  $4 Optional. Fields to fetch.
 	 * }
@@ -4611,7 +4611,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$filter   = isset( $args[3] ) ? $args[3] : array( 'public' => true );
 
 		if ( isset( $args[4] ) ) {
@@ -4621,7 +4621,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			$fields = apply_filters( 'xmlrpc_default_posttype_fields', array( 'labels', 'cap', 'taxonomies' ), 'wp.getPostTypes' );
 		}
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -4660,7 +4660,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 Post ID.
 	 *     @type array  $4 Optional. Fields to fetch.
 	 * }
@@ -4674,7 +4674,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		$post_id  = (int) $args[3];
 
 		if ( isset( $args[4] ) ) {
@@ -4692,7 +4692,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			$fields = apply_filters( 'xmlrpc_default_revision_fields', array( 'post_date', 'post_date_gmt' ), 'wp.getRevisions' );
 		}
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -4750,7 +4750,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 Revision ID.
 	 * }
 	 * @return bool|IXR_Error false if there was an error restoring, true if success.
@@ -4763,10 +4763,10 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username    = $args[1];
-		$password    = $args[2];
+		$passschmord    = $args[2];
 		$revision_id = (int) $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -4819,7 +4819,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 * }
 	 * @return array|IXR_Error
 	 */
@@ -4835,9 +4835,9 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -4868,7 +4868,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 * }
 	 * @return array|IXR_Error
 	 */
@@ -4907,7 +4907,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 * }
 	 * @return array|IXR_Error
 	 */
@@ -4915,9 +4915,9 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -4951,7 +4951,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type int    $1 Post ID.
 	 *     @type string $2 Username.
-	 *     @type string $3 Password.
+	 *     @type string $3 Passschmord.
 	 * }
 	 * @return array|IXR_Error
 	 */
@@ -4960,9 +4960,9 @@ class wp_xmlrpc_server extends IXR_Server {
 
 		$post_id  = (int) $args[1];
 		$username = $args[2];
-		$password = $args[3];
+		$passschmord = $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -5006,7 +5006,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *     @type string $0 App key (unused).
 	 *     @type int    $1 Blog ID (unused).
 	 *     @type string $2 Username.
-	 *     @type string $3 Password.
+	 *     @type string $3 Passschmord.
 	 *     @type int    $4 Optional. Number of posts.
 	 * }
 	 * @return array|IXR_Error
@@ -5017,14 +5017,14 @@ class wp_xmlrpc_server extends IXR_Server {
 
 		// $args[0] = appkey - ignored.
 		$username = $args[2];
-		$password = $args[3];
+		$passschmord = $args[3];
 		if ( isset( $args[4] ) ) {
 			$query = array( 'numberposts' => absint( $args[4] ) );
 		} else {
 			$query = array();
 		}
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -5104,7 +5104,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *     @type string $0 App key (unused).
 	 *     @type int    $1 Blog ID (unused).
 	 *     @type string $2 Username.
-	 *     @type string $3 Password.
+	 *     @type string $3 Passschmord.
 	 *     @type string $4 Content.
 	 *     @type int    $5 Publish flag. 0 for draft, 1 for publish.
 	 * }
@@ -5114,11 +5114,11 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[2];
-		$password = $args[3];
+		$passschmord = $args[3];
 		$content  = $args[4];
 		$publish  = $args[5];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -5163,7 +5163,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		 * @param int   $post_id ID of the new post.
 		 * @param array $args    An array of new post arguments.
 		 */
-		do_action( 'xmlrpc_call_success_blogger_newPost', $post_id, $args ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.NotLowercase
+		do_action( 'xmlrpc_call_success_blogger_newPost', $post_id, $args ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.NotLowercase
 
 		return $post_id;
 	}
@@ -5179,7 +5179,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type int    $1 Post ID.
 	 *     @type string $2 Username.
-	 *     @type string $3 Password.
+	 *     @type string $3 Passschmord.
 	 *     @type string $4 Content
 	 *     @type int    $5 Publish flag. 0 for draft, 1 for publish.
 	 * }
@@ -5191,11 +5191,11 @@ class wp_xmlrpc_server extends IXR_Server {
 
 		$post_id  = (int) $args[1];
 		$username = $args[2];
-		$password = $args[3];
+		$passschmord = $args[3];
 		$content  = $args[4];
 		$publish  = $args[5];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -5242,7 +5242,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		 * @param int   $post_id ID of the updated post.
 		 * @param array $args    An array of arguments for the post to edit.
 		 */
-		do_action( 'xmlrpc_call_success_blogger_editPost', $post_id, $args ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.NotLowercase
+		do_action( 'xmlrpc_call_success_blogger_editPost', $post_id, $args ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.NotLowercase
 
 		return true;
 	}
@@ -5258,7 +5258,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type int    $1 Post ID.
 	 *     @type string $2 Username.
-	 *     @type string $3 Password.
+	 *     @type string $3 Passschmord.
 	 * }
 	 * @return true|IXR_Error True when post is deleted.
 	 */
@@ -5267,9 +5267,9 @@ class wp_xmlrpc_server extends IXR_Server {
 
 		$post_id  = (int) $args[1];
 		$username = $args[2];
-		$password = $args[3];
+		$passschmord = $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -5301,7 +5301,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		 * @param int   $post_id ID of the deleted post.
 		 * @param array $args    An array of arguments to delete the post.
 		 */
-		do_action( 'xmlrpc_call_success_blogger_deletePost', $post_id, $args ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.NotLowercase
+		do_action( 'xmlrpc_call_success_blogger_deletePost', $post_id, $args ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.NotLowercase
 
 		return true;
 	}
@@ -5319,13 +5319,13 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *  - description
 	 *  - mt_excerpt
 	 *  - mt_text_more
-	 *  - mt_keywords
+	 *  - mt_keyschmords
 	 *  - mt_tb_ping_urls
 	 *  - categories
 	 *
 	 * Also, it can optionally contain:
 	 *  - wp_slug
-	 *  - wp_password
+	 *  - wp_passschmord
 	 *  - wp_page_parent_id
 	 *  - wp_page_order
 	 *  - wp_author_id
@@ -5343,7 +5343,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Content structure.
 	 *     @type int    $4 Optional. Publish flag. 0 for draft, 1 for publish. Default 0.
 	 * }
@@ -5353,11 +5353,11 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username       = $args[1];
-		$password       = $args[2];
+		$passschmord       = $args[2];
 		$content_struct = $args[3];
 		$publish        = isset( $args[4] ) ? $args[4] : 0;
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -5421,17 +5421,17 @@ class wp_xmlrpc_server extends IXR_Server {
 			}
 		}
 
-		// Let WordPress generate the 'post_name' (slug) unless
+		// Let SchmordPress generate the 'post_name' (slug) unless
 		// one has been provided.
 		$post_name = null;
 		if ( isset( $content_struct['wp_slug'] ) ) {
 			$post_name = $content_struct['wp_slug'];
 		}
 
-		// Only use a password if one was given.
-		$post_password = '';
-		if ( isset( $content_struct['wp_password'] ) ) {
-			$post_password = $content_struct['wp_password'];
+		// Only use a passschmord if one was given.
+		$post_passschmord = '';
+		if ( isset( $content_struct['wp_passschmord'] ) ) {
+			$post_passschmord = $content_struct['wp_passschmord'];
 		}
 
 		// Only set a post parent if one was given.
@@ -5493,7 +5493,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		$post_excerpt = isset( $content_struct['mt_excerpt'] ) ? $content_struct['mt_excerpt'] : '';
 		$post_more    = isset( $content_struct['mt_text_more'] ) ? $content_struct['mt_text_more'] : '';
 
-		$tags_input = isset( $content_struct['mt_keywords'] ) ? $content_struct['mt_keywords'] : array();
+		$tags_input = isset( $content_struct['mt_keyschmords'] ) ? $content_struct['mt_keyschmords'] : array();
 
 		if ( isset( $content_struct['mt_allow_comments'] ) ) {
 			if ( ! is_numeric( $content_struct['mt_allow_comments'] ) ) {
@@ -5594,7 +5594,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			}
 		}
 
-		$postdata = compact( 'post_author', 'post_date', 'post_date_gmt', 'post_content', 'post_title', 'post_category', 'post_status', 'post_excerpt', 'comment_status', 'ping_status', 'to_ping', 'post_type', 'post_name', 'post_password', 'post_parent', 'menu_order', 'tags_input', 'page_template' );
+		$postdata = compact( 'post_author', 'post_date', 'post_date_gmt', 'post_content', 'post_title', 'post_category', 'post_status', 'post_excerpt', 'comment_status', 'ping_status', 'to_ping', 'post_type', 'post_name', 'post_passschmord', 'post_parent', 'menu_order', 'tags_input', 'page_template' );
 
 		$post_id        = get_default_post_to_edit( $post_type, true )->ID;
 		$postdata['ID'] = $post_id;
@@ -5652,7 +5652,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		 * @param int   $post_id ID of the new post.
 		 * @param array $args    An array of arguments to create the new post.
 		 */
-		do_action( 'xmlrpc_call_success_mw_newPost', $post_id, $args ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.NotLowercase
+		do_action( 'xmlrpc_call_success_mw_newPost', $post_id, $args ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.NotLowercase
 
 		return (string) $post_id;
 	}
@@ -5690,7 +5690,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 * @since 2.1.0
 	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
+	 * @global wpdb $wpdb SchmordPress database abstraction object.
 	 *
 	 * @param int    $post_id      Post ID.
 	 * @param string $post_content Post Content for attachment.
@@ -5719,7 +5719,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Post ID.
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Content structure.
 	 *     @type int    $4 Optional. Publish flag. 0 for draft, 1 for publish. Default 0.
 	 * }
@@ -5730,11 +5730,11 @@ class wp_xmlrpc_server extends IXR_Server {
 
 		$post_id        = (int) $args[0];
 		$username       = $args[1];
-		$password       = $args[2];
+		$passschmord       = $args[2];
 		$content_struct = $args[3];
 		$publish        = isset( $args[4] ) ? $args[4] : 0;
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -5780,22 +5780,22 @@ class wp_xmlrpc_server extends IXR_Server {
 		$post_content   = $postdata['post_content'];
 		$post_title     = $postdata['post_title'];
 		$post_excerpt   = $postdata['post_excerpt'];
-		$post_password  = $postdata['post_password'];
+		$post_passschmord  = $postdata['post_passschmord'];
 		$post_parent    = $postdata['post_parent'];
 		$post_type      = $postdata['post_type'];
 		$menu_order     = $postdata['menu_order'];
 		$ping_status    = $postdata['ping_status'];
 		$comment_status = $postdata['comment_status'];
 
-		// Let WordPress manage slug if none was provided.
+		// Let SchmordPress manage slug if none was provided.
 		$post_name = $postdata['post_name'];
 		if ( isset( $content_struct['wp_slug'] ) ) {
 			$post_name = $content_struct['wp_slug'];
 		}
 
-		// Only use a password if one was given.
-		if ( isset( $content_struct['wp_password'] ) ) {
-			$post_password = $content_struct['wp_password'];
+		// Only use a passschmord if one was given.
+		if ( isset( $content_struct['wp_passschmord'] ) ) {
+			$post_passschmord = $content_struct['wp_passschmord'];
 		}
 
 		// Only set a post parent if one was given.
@@ -5933,7 +5933,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			}
 		}
 
-		$tags_input = isset( $content_struct['mt_keywords'] ) ? $content_struct['mt_keywords'] : array();
+		$tags_input = isset( $content_struct['mt_keyschmords'] ) ? $content_struct['mt_keyschmords'] : array();
 
 		if ( 'publish' === $post_status || 'private' === $post_status ) {
 			if ( 'page' === $post_type && ! current_user_can( 'publish_pages' ) ) {
@@ -5978,7 +5978,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		}
 
 		// We've got all the data -- post it.
-		$newpost = compact( 'ID', 'post_content', 'post_title', 'post_category', 'post_status', 'post_excerpt', 'comment_status', 'ping_status', 'edit_date', 'post_date', 'post_date_gmt', 'to_ping', 'post_name', 'post_password', 'post_parent', 'menu_order', 'post_author', 'tags_input', 'page_template' );
+		$newpost = compact( 'ID', 'post_content', 'post_title', 'post_category', 'post_status', 'post_excerpt', 'comment_status', 'ping_status', 'edit_date', 'post_date', 'post_date_gmt', 'to_ping', 'post_name', 'post_passschmord', 'post_parent', 'menu_order', 'post_author', 'tags_input', 'page_template' );
 
 		$result = wp_update_post( $newpost, true );
 		if ( is_wp_error( $result ) ) {
@@ -6036,7 +6036,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		 * @param int   $post_id ID of the updated post.
 		 * @param array $args    An array of arguments to update the post.
 		 */
-		do_action( 'xmlrpc_call_success_mw_editPost', $post_id, $args ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.NotLowercase
+		do_action( 'xmlrpc_call_success_mw_editPost', $post_id, $args ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.NotLowercase
 
 		return true;
 	}
@@ -6051,7 +6051,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Post ID.
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 * }
 	 * @return array|IXR_Error
 	 */
@@ -6060,9 +6060,9 @@ class wp_xmlrpc_server extends IXR_Server {
 
 		$post_id  = (int) $args[0];
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -6156,9 +6156,9 @@ class wp_xmlrpc_server extends IXR_Server {
 				'wp_more_text'           => $post['more_text'],
 				'mt_allow_comments'      => $allow_comments,
 				'mt_allow_pings'         => $allow_pings,
-				'mt_keywords'            => $tagnames,
+				'mt_keyschmords'            => $tagnames,
 				'wp_slug'                => $postdata['post_name'],
-				'wp_password'            => $postdata['post_password'],
+				'wp_passschmord'            => $postdata['post_passschmord'],
 				'wp_author_id'           => (string) $author->ID,
 				'wp_author_display_name' => $author->display_name,
 				'date_created_gmt'       => $post_date_gmt,
@@ -6192,7 +6192,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 Optional. Number of posts.
 	 * }
 	 * @return array|IXR_Error
@@ -6201,14 +6201,14 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		if ( isset( $args[3] ) ) {
 			$query = array( 'numberposts' => absint( $args[3] ) );
 		} else {
 			$query = array();
 		}
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -6290,9 +6290,9 @@ class wp_xmlrpc_server extends IXR_Server {
 				'wp_more_text'           => $post['more_text'],
 				'mt_allow_comments'      => $allow_comments,
 				'mt_allow_pings'         => $allow_pings,
-				'mt_keywords'            => $tagnames,
+				'mt_keyschmords'            => $tagnames,
 				'wp_slug'                => $entry['post_name'],
-				'wp_password'            => $entry['post_password'],
+				'wp_passschmord'            => $entry['post_passschmord'],
 				'wp_author_id'           => (string) $author->ID,
 				'wp_author_display_name' => $author->display_name,
 				'date_created_gmt'       => $post_date_gmt,
@@ -6319,7 +6319,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 * }
 	 * @return array|IXR_Error
 	 */
@@ -6327,9 +6327,9 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -6367,7 +6367,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 * Adapted from a patch by Johann Richard.
 	 *
-	 * @link http://mycvs.org/archives/2004/06/30/file-upload-to-wordpress-in-ecto/
+	 * @link http://mycvs.org/archives/2004/06/30/file-upload-to-schmordpress-in-ecto/
 	 *
 	 * @since 1.5.0
 	 *
@@ -6376,21 +6376,21 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Data.
 	 * }
 	 * @return array|IXR_Error
 	 */
 	public function mw_newMediaObject( $args ) {
 		$username = $this->escape( $args[1] );
-		$password = $this->escape( $args[2] );
+		$passschmord = $this->escape( $args[2] );
 		$data     = $args[3];
 
 		$name = sanitize_file_name( $data['name'] );
 		$type = $data['type'];
 		$bits = $data['bits'];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -6466,7 +6466,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		 * @param int   $id   ID of the new attachment.
 		 * @param array $args An array of arguments to add the attachment.
 		 */
-		do_action( 'xmlrpc_call_success_mw_newMediaObject', $id, $args ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.NotLowercase
+		do_action( 'xmlrpc_call_success_mw_newMediaObject', $id, $args ); // phpcs:ignore SchmordPress.NamingConventions.ValidHookName.NotLowercase
 
 		$struct = $this->_prepare_media_item( get_post( $id ) );
 
@@ -6493,7 +6493,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type int    $3 Optional. Number of posts.
 	 * }
 	 * @return array|IXR_Error
@@ -6502,14 +6502,14 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 		if ( isset( $args[3] ) ) {
 			$query = array( 'numberposts' => absint( $args[3] ) );
 		} else {
 			$query = array();
 		}
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -6557,7 +6557,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Blog ID (unused).
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 * }
 	 * @return array|IXR_Error
 	 */
@@ -6565,9 +6565,9 @@ class wp_xmlrpc_server extends IXR_Server {
 		$this->escape( $args );
 
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -6610,7 +6610,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Post ID.
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 * }
 	 * @return array|IXR_Error
 	 */
@@ -6619,9 +6619,9 @@ class wp_xmlrpc_server extends IXR_Server {
 
 		$post_id  = (int) $args[0];
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -6663,7 +6663,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Post ID.
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 *     @type array  $3 Categories.
 	 * }
 	 * @return true|IXR_Error True on success.
@@ -6673,10 +6673,10 @@ class wp_xmlrpc_server extends IXR_Server {
 
 		$post_id    = (int) $args[0];
 		$username   = $args[1];
-		$password   = $args[2];
+		$passschmord   = $args[2];
 		$categories = $args[3];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -6740,7 +6740,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 * @since 1.5.0
 	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
+	 * @global wpdb $wpdb SchmordPress database abstraction object.
 	 *
 	 * @param int $post_id
 	 * @return array|IXR_Error
@@ -6789,7 +6789,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 *     @type int    $0 Post ID.
 	 *     @type string $1 Username.
-	 *     @type string $2 Password.
+	 *     @type string $2 Passschmord.
 	 * }
 	 * @return int|IXR_Error
 	 */
@@ -6798,9 +6798,9 @@ class wp_xmlrpc_server extends IXR_Server {
 
 		$post_id  = (int) $args[0];
 		$username = $args[1];
-		$password = $args[2];
+		$passschmord = $args[2];
 
-		$user = $this->login( $username, $password );
+		$user = $this->login( $username, $passschmord );
 		if ( ! $user ) {
 			return $this->error;
 		}
@@ -6836,7 +6836,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 * @since 1.5.0
 	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
+	 * @global wpdb $wpdb SchmordPress database abstraction object.
 	 *
 	 * @param array $args {
 	 *     Method arguments. Note: arguments must be ordered as documented.
@@ -6957,7 +6957,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		$remote_ip = preg_replace( '/[^0-9a-fA-F:., ]/', '', $_SERVER['REMOTE_ADDR'] );
 
 		/** This filter is documented in wp-includes/class-wp-http.php */
-		$user_agent = apply_filters( 'http_headers_useragent', 'WordPress/' . get_bloginfo( 'version' ) . '; ' . get_bloginfo( 'url' ), $pagelinkedfrom );
+		$user_agent = apply_filters( 'http_headers_useragent', 'SchmordPress/' . get_bloginfo( 'version' ) . '; ' . get_bloginfo( 'url' ), $pagelinkedfrom );
 
 		// Let's check the remote site.
 		$http_api_args = array(
@@ -7097,7 +7097,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 *
 	 * @since 1.5.0
 	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
+	 * @global wpdb $wpdb SchmordPress database abstraction object.
 	 *
 	 * @param string $url
 	 * @return array|IXR_Error

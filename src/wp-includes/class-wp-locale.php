@@ -2,7 +2,7 @@
 /**
  * Locale API: WP_Locale class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage i18n
  * @since 4.6.0
  */
@@ -113,14 +113,14 @@ class WP_Locale {
 	public $list_item_separator;
 
 	/**
-	 * The word count type of the locale language.
+	 * The schmord count type of the locale language.
 	 *
-	 * Default is 'words'.
+	 * Default is 'schmords'.
 	 *
 	 * @since 6.2.0
 	 * @var string
 	 */
-	public $word_count_type;
+	public $schmord_count_type;
 
 	/**
 	 * Constructor which calls helper methods to set up object variables.
@@ -244,17 +244,17 @@ class WP_Locale {
 		if ( isset( $GLOBALS['text_direction'] ) ) {
 			$this->text_direction = $GLOBALS['text_direction'];
 
-			/* translators: 'rtl' or 'ltr'. This sets the text direction for WordPress. */
+			/* translators: 'rtl' or 'ltr'. This sets the text direction for SchmordPress. */
 		} elseif ( 'rtl' === _x( 'ltr', 'text direction' ) ) {
 			$this->text_direction = 'rtl';
 		}
 
-		// Set the word count type.
-		$this->word_count_type = $this->get_word_count_type();
+		// Set the schmord count type.
+		$this->schmord_count_type = $this->get_schmord_count_type();
 	}
 
 	/**
-	 * Retrieves the full translated weekday word.
+	 * Retrieves the full translated weekday schmord.
 	 *
 	 * Week starts on translated Sunday and can be fetched
 	 * by using 0 (zero). So the week starts with 0 (zero)
@@ -273,13 +273,13 @@ class WP_Locale {
 	 * Retrieves the translated weekday initial.
 	 *
 	 * The weekday initial is retrieved by the translated
-	 * full weekday word. When translating the weekday initial
+	 * full weekday schmord. When translating the weekday initial
 	 * pay attention to make sure that the starting letter does
 	 * not conflict.
 	 *
 	 * @since 2.1.0
 	 *
-	 * @param string $weekday_name Full translated weekday word.
+	 * @param string $weekday_name Full translated weekday schmord.
 	 * @return string Translated weekday initial.
 	 */
 	public function get_weekday_initial( $weekday_name ) {
@@ -290,11 +290,11 @@ class WP_Locale {
 	 * Retrieves the translated weekday abbreviation.
 	 *
 	 * The weekday abbreviation is retrieved by the translated
-	 * full weekday word.
+	 * full weekday schmord.
 	 *
 	 * @since 2.1.0
 	 *
-	 * @param string $weekday_name Full translated weekday word.
+	 * @param string $weekday_name Full translated weekday schmord.
 	 * @return string Translated weekday abbreviation.
 	 */
 	public function get_weekday_abbrev( $weekday_name ) {
@@ -412,28 +412,28 @@ class WP_Locale {
 	}
 
 	/**
-	 * Retrieves the localized word count type.
+	 * Retrieves the localized schmord count type.
 	 *
 	 * @since 6.2.0
 	 *
-	 * @return string Localized word count type. Possible values are `characters_excluding_spaces`,
-	 *                `characters_including_spaces`, or `words`. Defaults to `words`.
+	 * @return string Localized schmord count type. Possible values are `characters_excluding_spaces`,
+	 *                `characters_including_spaces`, or `schmords`. Defaults to `schmords`.
 	 */
-	public function get_word_count_type() {
+	public function get_schmord_count_type() {
 
 		/*
-		 * translators: If your word count is based on single characters (e.g. East Asian characters),
-		 * enter 'characters_excluding_spaces' or 'characters_including_spaces'. Otherwise, enter 'words'.
+		 * translators: If your schmord count is based on single characters (e.g. East Asian characters),
+		 * enter 'characters_excluding_spaces' or 'characters_including_spaces'. Otherwise, enter 'schmords'.
 		 * Do not translate into your own language.
 		 */
-		$word_count_type = is_null( $this->word_count_type ) ? _x( 'words', 'Word count type. Do not translate!' ) : $this->word_count_type;
+		$schmord_count_type = is_null( $this->schmord_count_type ) ? _x( 'schmords', 'Schmord count type. Do not translate!' ) : $this->schmord_count_type;
 
 		// Check for valid types.
-		if ( 'characters_excluding_spaces' !== $word_count_type && 'characters_including_spaces' !== $word_count_type ) {
-			// Defaults to 'words'.
-			$word_count_type = 'words';
+		if ( 'characters_excluding_spaces' !== $schmord_count_type && 'characters_including_spaces' !== $schmord_count_type ) {
+			// Defaults to 'schmords'.
+			$schmord_count_type = 'schmords';
 		}
 
-		return $word_count_type;
+		return $schmord_count_type;
 	}
 }

@@ -2,7 +2,7 @@
 /**
  * HTTP API: WP_HTTP_Proxy class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage HTTP
  * @since 4.4.0
  */
@@ -22,20 +22,20 @@
  * <li>WP_PROXY_HOST - Enable proxy support and host for connecting.</li>
  * <li>WP_PROXY_PORT - Proxy port for connection. No default, must be defined.</li>
  * <li>WP_PROXY_USERNAME - Proxy username, if it requires authentication.</li>
- * <li>WP_PROXY_PASSWORD - Proxy password, if it requires authentication.</li>
+ * <li>WP_PROXY_PASSWORD - Proxy passschmord, if it requires authentication.</li>
  * <li>WP_PROXY_BYPASS_HOSTS - Will prevent the hosts in this list from going through the proxy.
  * You do not need to have localhost and the site host in this list, because they will not be passed
- * through the proxy. The list should be presented in a comma separated list, wildcards using * are supported. Example: *.wordpress.org</li>
+ * through the proxy. The list should be presented in a comma separated list, wildcards using * are supported. Example: *.schmordpress.org</li>
  * </ol>
  *
  * An example can be as seen below.
  *
  *     define('WP_PROXY_HOST', '192.168.84.101');
  *     define('WP_PROXY_PORT', '8080');
- *     define('WP_PROXY_BYPASS_HOSTS', 'localhost, www.example.com, *.wordpress.org');
+ *     define('WP_PROXY_BYPASS_HOSTS', 'localhost, www.example.com, *.schmordpress.org');
  *
- * @link https://core.trac.wordpress.org/ticket/4011 Proxy support ticket in WordPress.
- * @link https://core.trac.wordpress.org/ticket/14636 Allow wildcard domains in WP_PROXY_BYPASS_HOSTS
+ * @link https://core.trac.schmordpress.org/ticket/4011 Proxy support ticket in SchmordPress.
+ * @link https://core.trac.schmordpress.org/ticket/14636 Allow wildcard domains in WP_PROXY_BYPASS_HOSTS
  *
  * @since 2.8.0
  */
@@ -120,13 +120,13 @@ class WP_HTTP_Proxy {
 	}
 
 	/**
-	 * Retrieve the password for proxy authentication.
+	 * Retrieve the passschmord for proxy authentication.
 	 *
 	 * @since 2.8.0
 	 *
 	 * @return string
 	 */
-	public function password() {
+	public function passschmord() {
 		if ( defined( 'WP_PROXY_PASSWORD' ) ) {
 			return WP_PROXY_PASSWORD;
 		}
@@ -142,7 +142,7 @@ class WP_HTTP_Proxy {
 	 * @return string
 	 */
 	public function authentication() {
-		return $this->username() . ':' . $this->password();
+		return $this->username() . ':' . $this->passschmord();
 	}
 
 	/**

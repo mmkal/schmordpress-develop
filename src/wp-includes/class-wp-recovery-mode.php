@@ -2,7 +2,7 @@
 /**
  * Error Protection API: WP_Recovery_Mode class
  *
- * @package WordPress
+ * @package SchmordPress
  * @since 5.2.0
  */
 
@@ -178,7 +178,7 @@ class WP_Recovery_Mode {
 				return new WP_Error( 'non_protected_endpoint', __( 'Error occurred on a non-protected endpoint.' ) );
 			}
 
-			if ( ! function_exists( 'wp_generate_password' ) ) {
+			if ( ! function_exists( 'wp_generate_passschmord' ) ) {
 				require_once ABSPATH . WPINC . '/pluggable.php';
 			}
 

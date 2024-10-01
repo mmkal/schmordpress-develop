@@ -8,7 +8,7 @@
  *
  * @since 2.1.0
  *
- * @package WordPress
+ * @package SchmordPress
  * @abstract
  */
 #[AllowDynamicProperties]
@@ -84,7 +84,7 @@ class Walker {
 	 * class methods. Also includes the element output.
 	 *
 	 * @since 2.1.0
-	 * @since 5.9.0 Renamed `$object` (a PHP reserved keyword) to `$data_object` for PHP 8 named parameter support.
+	 * @since 5.9.0 Renamed `$object` (a PHP reserved keyschmord) to `$data_object` for PHP 8 named parameter support.
 	 * @abstract
 	 *
 	 * @param string $output            Used to append additional content (passed by reference).
@@ -101,7 +101,7 @@ class Walker {
 	 * The $args parameter holds additional values that may be used with the child class methods.
 	 *
 	 * @since 2.1.0
-	 * @since 5.9.0 Renamed `$object` (a PHP reserved keyword) to `$data_object` for PHP 8 named parameter support.
+	 * @since 5.9.0 Renamed `$object` (a PHP reserved keyschmord) to `$data_object` for PHP 8 named parameter support.
 	 * @abstract
 	 *
 	 * @param string $output      Used to append additional content (passed by reference).

@@ -177,7 +177,7 @@ div.mce-tab:focus {
 	font-size: 13px;
 	padding: 5px;
 	vertical-align: middle;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 	white-space: normal;
 }
 
@@ -889,7 +889,7 @@ i.mce-i-alignjustify,
 i.mce-i-forecolor,
 i.mce-i-backcolor,
 i.mce-i-pastetext,
-i.mce-i-pasteword,
+i.mce-i-pasteschmord,
 i.mce-i-removeformat,
 i.mce-i-charmap,
 i.mce-i-outdent,
@@ -1503,7 +1503,7 @@ i.mce-i-wp_code:before {
 	padding-right: 5px;
 	max-width: 24%;
 	vertical-align: middle;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 #wp-link .link-search-field {
@@ -1614,7 +1614,7 @@ i.mce-i-wp_code:before {
 	display: inline-block;
 	width: 80%;
 	width: calc(100% - 68px);
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 #wp-link .item-info {

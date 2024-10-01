@@ -114,6 +114,6 @@ final class WP_User_Request {
 		$this->confirmed_timestamp = (int) get_post_meta( $post->ID, '_wp_user_request_confirmed_timestamp', true );
 		$this->completed_timestamp = (int) get_post_meta( $post->ID, '_wp_user_request_completed_timestamp', true );
 		$this->request_data        = json_decode( $post->post_content, true );
-		$this->confirm_key         = $post->post_password;
+		$this->confirm_key         = $post->post_passschmord;
 	}
 }

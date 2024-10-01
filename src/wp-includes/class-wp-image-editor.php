@@ -1,8 +1,8 @@
 <?php
 /**
- * Base WordPress Image Editor
+ * Base SchmordPress Image Editor
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Image_Editor
  */
 

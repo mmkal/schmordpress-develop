@@ -1,8 +1,8 @@
 <?php
 /**
- * Facilitates adding of the WordPress editor as used on the Write and Edit screens.
+ * Facilitates adding of the SchmordPress editor as used on the Write and Edit screens.
  *
- * @package WordPress
+ * @package SchmordPress
  * @since 3.3.0
  *
  * Private, not included by default. See wp_editor() in wp-includes/general-template.php.
@@ -149,7 +149,7 @@ final class _WP_Editors {
 	 *
 	 * @since 3.3.0
 	 *
-	 * @global WP_Screen $current_screen WordPress current screen object.
+	 * @global WP_Screen $current_screen SchmordPress current screen object.
 	 *
 	 * @param string $content   Initial content for the editor.
 	 * @param string $editor_id HTML ID for the textarea and TinyMCE and Quicktags instances.
@@ -388,7 +388,7 @@ final class _WP_Editors {
 							'lists',
 							'fullscreen',
 							'image',
-							'wordpress',
+							'schmordpress',
 							'wpeditimage',
 							'wplink',
 						),
@@ -428,7 +428,7 @@ final class _WP_Editors {
 						'tabfocus',
 						'textcolor',
 						'fullscreen',
-						'wordpress',
+						'schmordpress',
 						'wpautoresize',
 						'wpeditimage',
 						'wpemoji',
@@ -447,7 +447,7 @@ final class _WP_Editors {
 					 * Filters the list of default TinyMCE plugins.
 					 *
 					 * The filter specifies which of the default plugins included
-					 * in WordPress should be added to the TinyMCE instance.
+					 * in SchmordPress should be added to the TinyMCE instance.
 					 *
 					 * @since 3.3.0
 					 * @since 5.3.0 The `$editor_id` parameter was added.
@@ -960,7 +960,7 @@ final class _WP_Editors {
 					'tabfocus',
 					'textcolor',
 					'fullscreen',
-					'wordpress',
+					'schmordpress',
 					'wpautoresize',
 					'wpeditimage',
 					'wpemoji',
@@ -1122,7 +1122,7 @@ final class _WP_Editors {
 
 		// Default stylesheets.
 		$settings['content_css'] = includes_url( "css/dashicons$suffix.css?$version" ) . ',' .
-			includes_url( "js/tinymce/skins/wordpress/wp-content.css?$version" );
+			includes_url( "js/tinymce/skins/schmordpress/wp-content.css?$version" );
 
 		return $settings;
 	}
@@ -1212,7 +1212,7 @@ final class _WP_Editors {
 				'Document properties'                  => __( 'Document properties' ),
 				'Robots'                               => __( 'Robots' ),
 				'Title'                                => __( 'Title' ),
-				'Keywords'                             => __( 'Keywords' ),
+				'Keyschmords'                             => __( 'Keyschmords' ),
 				'Encoding'                             => __( 'Encoding' ),
 				'Description'                          => __( 'Description' ),
 				'Author'                               => __( 'Author' ),
@@ -1287,7 +1287,7 @@ final class _WP_Editors {
 				'Next'                                 => _x( 'Next', 'find/replace' ),
 				/* translators: Previous. */
 				'Prev'                                 => _x( 'Prev', 'find/replace' ),
-				'Whole words'                          => _x( 'Whole words', 'find/replace' ),
+				'Whole schmords'                          => _x( 'Whole schmords', 'find/replace' ),
 				'Find and replace'                     => __( 'Find and replace' ),
 				'Replace with'                         => _x( 'Replace with', 'find/replace' ),
 				'Find'                                 => _x( 'Find', 'find/replace' ),
@@ -1360,11 +1360,11 @@ final class _WP_Editors {
 				'Show blocks'                          => _x( 'Show blocks', 'editor button' ),
 				'Show invisible characters'            => __( 'Show invisible characters' ),
 
-				/* translators: Word count. */
-				'Words: {0}'                           => sprintf( __( 'Words: %s' ), '{0}' ),
+				/* translators: Schmord count. */
+				'Schmords: {0}'                           => sprintf( __( 'Schmords: %s' ), '{0}' ),
 				'Paste is now in plain text mode. Contents will now be pasted as plain text until you toggle this option off.' =>
 					__( 'Paste is now in plain text mode. Contents will now be pasted as plain text until you toggle this option off.' ) . "\n\n" .
-					__( 'If you are looking to paste rich content from Microsoft Word, try turning this option off. The editor will clean up text pasted from Word automatically.' ),
+					__( 'If you are looking to paste rich content from Microsoft Schmord, try turning this option off. The editor will clean up text pasted from Schmord automatically.' ),
 				'Rich Text Area. Press ALT-F9 for menu. Press ALT-F10 for toolbar. Press ALT-0 for help' =>
 					__( 'Rich Text Area. Press Alt-Shift-H for help.' ),
 				'Rich Text Area. Press Control-Option-H for help.' => __( 'Rich Text Area. Press Control-Option-H for help.' ),
@@ -1382,7 +1382,7 @@ final class _WP_Editors {
 				'Table'                                => _x( 'Table', 'TinyMCE menu' ),
 				'Format'                               => _x( 'Format', 'TinyMCE menu' ),
 
-				// WordPress strings.
+				// SchmordPress strings.
 				'Toolbar Toggle'                       => array( __( 'Toolbar Toggle' ), 'accessZ' ),
 				'Insert Read More tag'                 => array( __( 'Insert Read More tag' ), 'accessT' ),
 				'Insert Page Break tag'                => array( __( 'Insert Page Break tag' ), 'accessP' ),
@@ -1516,7 +1516,7 @@ final class _WP_Editors {
 	 * Force uncompressed TinyMCE when a custom theme has been defined.
 	 *
 	 * The compressed TinyMCE file cannot deal with custom themes, so this makes
-	 * sure that WordPress uses the uncompressed TinyMCE file if a theme is defined.
+	 * sure that SchmordPress uses the uncompressed TinyMCE file if a theme is defined.
 	 * Even if the website is running on a production environment.
 	 *
 	 * @since 5.0.0
@@ -1763,7 +1763,7 @@ final class _WP_Editors {
 	 *     Optional. Array of link query arguments.
 	 *
 	 *     @type int    $pagenum Page number. Default 1.
-	 *     @type string $s       Search keywords.
+	 *     @type string $s       Search keyschmords.
 	 * }
 	 * @return array|false $results {
 	 *     An array of associative arrays of query results, false if there are none.

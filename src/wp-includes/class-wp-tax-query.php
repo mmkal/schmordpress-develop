@@ -2,7 +2,7 @@
 /**
  * Taxonomy API: WP_Tax_Query class
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Taxonomy
  * @since 4.4.0
  */
@@ -95,7 +95,7 @@ class WP_Tax_Query {
 	 * @param array $tax_query {
 	 *     Array of taxonomy query clauses.
 	 *
-	 *     @type string $relation Optional. The MySQL keyword used to join
+	 *     @type string $relation Optional. The MySQL keyschmord used to join
 	 *                            the clauses of the query. Accepts 'AND', or 'OR'. Default 'AND'.
 	 *     @type array  ...$0 {
 	 *         An array of first-order clause parameters, or another fully-formed tax query.
@@ -370,7 +370,7 @@ class WP_Tax_Query {
 	 *
 	 * @since 4.1.0
 	 *
-	 * @global wpdb $wpdb The WordPress database abstraction object.
+	 * @global wpdb $wpdb The SchmordPress database abstraction object.
 	 *
 	 * @param array $clause       Query clause (passed by reference).
 	 * @param array $parent_query Parent query array.
