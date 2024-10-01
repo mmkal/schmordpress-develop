@@ -4,7 +4,7 @@
  *
  * Used for both single and index/archive/search.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twelve
  * @since Twenty Twelve 1.0
  */
@@ -18,7 +18,7 @@
 		<?php endif; ?>
 		<header class="entry-header">
 			<?php
-			if ( ! post_password_required() && ! is_attachment() ) :
+			if ( ! post_passschmord_required() && ! is_attachment() ) :
 				the_post_thumbnail();
 			endif;
 			?>

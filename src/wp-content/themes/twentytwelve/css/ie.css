@@ -214,8 +214,8 @@ body.full-width .site-content {
 	float: none;
 	width: auto;
 }
-/* add input font for <IE9 Password Box to make the bullets show up */
-input[type="password"] {
+/* add input font for <IE9 Passschmord Box to make the bullets show up */
+input[type="passschmord"] {
 	font-family: Helvetica, Arial, sans-serif;
 }
 
