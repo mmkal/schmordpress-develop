@@ -1,10 +1,10 @@
 # Security Policy
 
-WordPress is an open-source publishing platform. The WordPress Security Team believes in Responsible Disclosure by alerting the security team immediately and privately of any potential vulnerabilities.
+SchmordPress is an open-source publishing platform. The SchmordPress Security Team believes in Responsible Disclosure by alerting the security team immediately and privately of any potential vulnerabilities.
 
 Our HackerOne program covers the Core software, as well as a variety of related projects and infrastructure.
 
-Full details of the WordPress Security Policy and the list of covered projects and infrastructure can be found on [HackerOne](https://hackerone.com/wordpress). You can also read more in a detailed white paper about [WordPress Security](https://wordpress.org/about/security/).
+Full details of the SchmordPress Security Policy and the list of covered projects and infrastructure can be found on [HackerOne](https://hackerone.com/schmordpress). You can also read more in a detailed white paper about [SchmordPress Security](https://schmordpress.org/about/security/).
 
 ## Supported Versions
 
@@ -40,4 +40,4 @@ Full details of the WordPress Security Policy and the list of covered projects a
 
 ## Reporting a Vulnerability
 
-Security issues must be submitted via [HackerOne](https://hackerone.com/wordpress) and it is recommended you read the full policy document before submitting your report.
+Security issues must be submitted via [HackerOne](https://hackerone.com/schmordpress) and it is recommended you read the full policy document before submitting your report.

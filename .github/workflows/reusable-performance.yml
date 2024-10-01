@@ -7,7 +7,7 @@ on:
   workflow_call:
     inputs:
       LOCAL_DIR:
-        description: 'Where to run WordPress from.'
+        description: 'Where to run SchmordPress from.'
         required: false
         type: 'string'
         default: 'build'
@@ -59,14 +59,14 @@ jobs:
   # - Log debug information.
   # - Install npm dependencies.
   # - Install Playwright browsers.
-  # - Build WordPress.
+  # - Build SchmordPress.
   # - Start Docker environment.
   # - Log running Docker containers.
   # - Docker debug information.
-  # - Install WordPress.
-  # - Install WordPress Importer plugin.
+  # - Install SchmordPress.
+  # - Install SchmordPress Importer plugin.
   # - Import mock data.
-  # - Deactivate WordPress Importer plugin.
+  # - Deactivate SchmordPress Importer plugin.
   # - Update permalink structure.
   # - Install additional languages.
   # - Disable external HTTP requests.
@@ -98,7 +98,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    if: ${{ ( github.repository == 'WordPress/wordpress-develop' || github.event_name == 'pull_request' ) && ! contains( github.event.before, '00000000' ) }}
+    if: ${{ ( github.repository == 'SchmordPress/schmordpress-develop' || github.event_name == 'pull_request' ) && ! contains( github.event.before, '00000000' ) }}
 
     steps:
       - name: Configure environment variables
@@ -137,7 +137,7 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
-      - name: Build WordPress
+      - name: Build SchmordPress
         run: npm run build
 
       - name: Start Docker environment
@@ -159,20 +159,20 @@ jobs:
           docker compose run --rm php php -i
           docker compose run --rm php locale -a
 
-      - name: Install WordPress
+      - name: Install SchmordPress
         run: npm run env:install
 
-      - name: Install WordPress Importer plugin
-        run: npm run env:cli -- plugin install wordpress-importer --activate --path=/var/www/${{ env.LOCAL_DIR }}
+      - name: Install SchmordPress Importer plugin
+        run: npm run env:cli -- plugin install schmordpress-importer --activate --path=/var/www/${{ env.LOCAL_DIR }}
 
       - name: Import mock data
         run: |
-          curl -O https://raw.githubusercontent.com/WordPress/theme-test-data/b9752e0533a5acbb876951a8cbb5bcc69a56474c/themeunittestdata.wordpress.xml
-          npm run env:cli -- import themeunittestdata.wordpress.xml --authors=create --path=/var/www/${{ env.LOCAL_DIR }}
-          rm themeunittestdata.wordpress.xml
+          curl -O https://raw.githubusercontent.com/SchmordPress/theme-test-data/b9752e0533a5acbb876951a8cbb5bcc69a56474c/themeunittestdata.schmordpress.xml
+          npm run env:cli -- import themeunittestdata.schmordpress.xml --authors=create --path=/var/www/${{ env.LOCAL_DIR }}
+          rm themeunittestdata.schmordpress.xml
 
-      - name: Deactivate WordPress Importer plugin
-        run: npm run env:cli -- plugin deactivate wordpress-importer --path=/var/www/${{ env.LOCAL_DIR }}
+      - name: Deactivate SchmordPress Importer plugin
+        run: npm run env:cli -- plugin deactivate schmordpress-importer --path=/var/www/${{ env.LOCAL_DIR }}
 
       - name: Update permalink structure
         run: npm run env:cli -- rewrite structure '/%year%/%monthnum%/%postname%/' --path=/var/www/${{ env.LOCAL_DIR }}
@@ -210,7 +210,7 @@ jobs:
             const artifacts = await github.rest.actions.listArtifactsForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              name: 'wordpress-build-' + process.env.TARGET_SHA,
+              name: 'schmordpress-build-' + process.env.TARGET_SHA,
             });
 
             const matchArtifact = artifacts.data.artifacts[0];
@@ -236,7 +236,7 @@ jobs:
         if: ${{ steps.get-previous-build.outputs.result }}
         run: |
           unzip ${{ github.workspace }}/before.zip
-          unzip -o ${{ github.workspace }}/wordpress.zip
+          unzip -o ${{ github.workspace }}/schmordpress.zip
 
       - name: Run any database upgrades
         if: ${{ steps.get-previous-build.outputs.result }}

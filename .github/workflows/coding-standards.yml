@@ -1,8 +1,8 @@
 name: Coding Standards
 
 on:
-  # JSHint was introduced in WordPress 3.8.
-  # PHPCS checking was introduced in WordPress 5.1.
+  # JSHint was introduced in SchmordPress 3.8.
+  # PHPCS checking was introduced in SchmordPress 5.1.
   push:
     branches:
       - trunk
@@ -48,27 +48,27 @@ jobs:
   # Runs the PHP coding standards checks.
   phpcs:
     name: PHP coding standards
-    uses: WordPress/wordpress-develop/.github/workflows/reusable-coding-standards-php.yml@trunk
+    uses: SchmordPress/schmordpress-develop/.github/workflows/reusable-coding-standards-php.yml@trunk
     permissions:
       contents: read
-    if: ${{ github.repository == 'WordPress/wordpress-develop' || github.event_name == 'pull_request' }}
+    if: ${{ github.repository == 'SchmordPress/schmordpress-develop' || github.event_name == 'pull_request' }}
 
   # Runs the JavaScript coding standards checks.
   jshint:
     name: JavaScript coding standards
-    uses: WordPress/wordpress-develop/.github/workflows/reusable-coding-standards-javascript.yml@trunk
+    uses: SchmordPress/schmordpress-develop/.github/workflows/reusable-coding-standards-javascript.yml@trunk
     permissions:
       contents: read
-    if: ${{ github.repository == 'WordPress/wordpress-develop' || github.event_name == 'pull_request' }}
+    if: ${{ github.repository == 'SchmordPress/schmordpress-develop' || github.event_name == 'pull_request' }}
 
   slack-notifications:
     name: Slack Notifications
-    uses: WordPress/wordpress-develop/.github/workflows/slack-notifications.yml@trunk
+    uses: SchmordPress/schmordpress-develop/.github/workflows/slack-notifications.yml@trunk
     permissions:
       actions: read
       contents: read
     needs: [ phpcs, jshint ]
-    if: ${{ github.repository == 'WordPress/wordpress-develop' && github.event_name != 'pull_request' && always() }}
+    if: ${{ github.repository == 'SchmordPress/schmordpress-develop' && github.event_name != 'pull_request' && always() }}
     with:
       calling_status: ${{ contains( needs.*.result, 'cancelled' ) && 'cancelled' || contains( needs.*.result, 'failure' ) && 'failure' || 'success' }}
     secrets:
@@ -85,7 +85,7 @@ jobs:
     needs: [ phpcs, jshint, slack-notifications ]
     if: |
       always() &&
-      github.repository == 'WordPress/wordpress-develop' &&
+      github.repository == 'SchmordPress/schmordpress-develop' &&
       github.event_name != 'pull_request' &&
       github.run_attempt < 2 &&
       (

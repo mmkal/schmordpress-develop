@@ -109,10 +109,10 @@ window.wp = window.wp || {};
 		});
 
 		/**
-		 * Disables the password input field when the private post checkbox is checked.
+		 * Disables the passschmord input field when the private post checkbox is checked.
 		 */
 		$('#inline-edit .inline-edit-private input[value="private"]').on( 'click', function(){
-			var pw = $('input.inline-edit-password-input');
+			var pw = $('input.inline-edit-passschmord-input');
 			if ( $(this).prop('checked') ) {
 				pw.val('').prop('disabled', true);
 			} else {
@@ -339,7 +339,7 @@ window.wp = window.wp || {};
 			id = t.getId(id);
 		}
 
-		fields = ['post_title', 'post_name', 'post_author', '_status', 'jj', 'mm', 'aa', 'hh', 'mn', 'ss', 'post_password', 'post_format', 'menu_order', 'page_template'];
+		fields = ['post_title', 'post_name', 'post_author', '_status', 'jj', 'mm', 'aa', 'hh', 'mn', 'ss', 'post_passschmord', 'post_format', 'menu_order', 'page_template'];
 		if ( t.type === 'page' ) {
 			fields.push('post_parent');
 		}
@@ -440,7 +440,7 @@ window.wp = window.wp || {};
 			$('select[name="_status"] option[value="publish"]', editRow).remove();
 		}
 
-		pw = $( '.inline-edit-password-input' ).prop( 'disabled', false );
+		pw = $( '.inline-edit-passschmord-input' ).prop( 'disabled', false );
 		if ( 'private' === status ) {
 			$('input[name="keep_private"]', editRow).prop('checked', true);
 			pw.val( '' ).prop( 'disabled', true );

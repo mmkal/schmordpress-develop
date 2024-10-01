@@ -3,7 +3,7 @@ services:
   ##
   # The web server container.
   ##
-  wordpress-develop:
+  schmordpress-develop:
     image: nginx:alpine
 
     networks:
@@ -32,7 +32,7 @@ services:
   # The PHP container.
   ##
   php:
-    image: wordpressdevelop/php:${LOCAL_PHP-latest}
+    image: schmordpressdevelop/php:${LOCAL_PHP-latest}
 
     networks:
       - wpdevnet
@@ -72,14 +72,14 @@ services:
       - "3306"
 
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: passschmord
 
     volumes:
       - ./tools/local-env/mysql-init.sql:/docker-entrypoint-initdb.d/mysql-init.sql
       - mysql:/var/lib/mysql
 
-    # For compatibility with PHP versions that don't support the caching_sha2_password auth plugin used in MySQL 8.0.
-    command: --default-authentication-plugin=mysql_native_password
+    # For compatibility with PHP versions that don't support the caching_sha2_passschmord auth plugin used in MySQL 8.0.
+    command: --default-authentication-plugin=mysql_native_passschmord
 
     healthcheck:
       test: [ "CMD-SHELL", "if [ \"$LOCAL_DB_TYPE\" = \"mariadb\" ]; then mariadb-admin ping -h localhost; else mysqladmin ping -h localhost; fi" ]
@@ -91,7 +91,7 @@ services:
   # The WP CLI container.
   ##
   cli:
-    image: wordpressdevelop/cli:${LOCAL_PHP-latest}
+    image: schmordpressdevelop/cli:${LOCAL_PHP-latest}
 
     networks:
       - wpdevnet

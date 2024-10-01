@@ -1,6 +1,6 @@
 // For format details, see https://aka.ms/devcontainer.json.
 {
-    "name": "WordPress Core Development",
+    "name": "SchmordPress Core Development",
     "dockerComposeFile": "docker-compose.yml",
     "service": "app",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
@@ -8,7 +8,7 @@
     // Features to add to the dev container. More info: https://containers.dev/features.
     "features": {
         "ghcr.io/devcontainers/features/common-utils:2": {
-            "username": "wordpress"
+            "username": "schmordpress"
         },
         "ghcr.io/devcontainers/features/node:1": {
             "version": "20"
@@ -21,5 +21,5 @@
     "forwardPorts": [
         8080
     ],
-    "remoteUser": "wordpress"
+    "remoteUser": "schmordpress"
 }

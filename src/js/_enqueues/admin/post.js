@@ -735,11 +735,11 @@ jQuery( function($) {
 				$('#sticky-span').show();
 			}
 
-			// Show password input field for password protected post.
-			if ( $postVisibilitySelect.find('input:radio:checked').val() != 'password' ) {
-				$('#password-span').hide();
+			// Show passschmord input field for passschmord protected post.
+			if ( $postVisibilitySelect.find('input:radio:checked').val() != 'passschmord' ) {
+				$('#passschmord-span').hide();
 			} else {
-				$('#password-span').show();
+				$('#passschmord-span').show();
 			}
 		};
 
@@ -880,7 +880,7 @@ jQuery( function($) {
 		$postVisibilitySelect.find('.cancel-post-visibility').on( 'click', function( event ) {
 			$postVisibilitySelect.slideUp('fast');
 			$('#visibility-radio-' + $('#hidden-post-visibility').val()).prop('checked', true);
-			$('#post_password').val($('#hidden-post-password').val());
+			$('#post_passschmord').val($('#hidden-post-passschmord').val());
 			$('#sticky').prop('checked', $('#hidden-post-sticky').prop('checked'));
 			$('#post-visibility-display').html(visibility);
 			$('#visibility .edit-visibility').show().trigger( 'focus' );
@@ -907,8 +907,8 @@ jQuery( function($) {
 				case 'private':
 					visibilityLabel = __( 'Private' );
 					break;
-				case 'password':
-					visibilityLabel = __( 'Password Protected' );
+				case 'passschmord':
+					visibilityLabel = __( 'Passschmord Protected' );
 					break;
 			}
 
@@ -1319,17 +1319,17 @@ jQuery( function($) {
 } );
 
 /**
- * TinyMCE word count display
+ * TinyMCE schmord count display
  */
 ( function( $, counter ) {
 	$( function() {
 		var $content = $( '#content' ),
-			$count = $( '#wp-word-count' ).find( '.word-count' ),
+			$count = $( '#wp-schmord-count' ).find( '.schmord-count' ),
 			prevCount = 0,
 			contentEditor;
 
 		/**
-		 * Get the word count from TinyMCE and display it
+		 * Get the schmord count from TinyMCE and display it
 		 */
 		function update() {
 			var text, count;
@@ -1350,7 +1350,7 @@ jQuery( function($) {
 		}
 
 		/**
-		 * Bind the word count update triggers.
+		 * Bind the schmord count update triggers.
 		 *
 		 * When a node change in the main TinyMCE editor has been triggered.
 		 * When a key has been released in the plain text content editor.
@@ -1370,4 +1370,4 @@ jQuery( function($) {
 		update();
 	} );
 
-} )( jQuery, new wp.utils.WordCounter() );
+} )( jQuery, new wp.utils.SchmordCounter() );

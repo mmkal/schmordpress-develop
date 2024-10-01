@@ -1,7 +1,7 @@
 name: PHP Compatibility
 
 on:
-  # PHP compatibility testing was introduced in WordPress 5.5.
+  # PHP compatibility testing was introduced in SchmordPress 5.5.
   push:
     branches:
       - trunk
@@ -43,19 +43,19 @@ jobs:
   # Runs PHP compatibility testing.
   php-compatibility:
     name: Check PHP compatibility
-    uses: WordPress/wordpress-develop/.github/workflows/reusable-php-compatibility.yml@trunk
+    uses: SchmordPress/schmordpress-develop/.github/workflows/reusable-php-compatibility.yml@trunk
     permissions:
       contents: read
-    if: ${{ github.repository == 'WordPress/wordpress-develop' || github.event_name == 'pull_request' }}
+    if: ${{ github.repository == 'SchmordPress/schmordpress-develop' || github.event_name == 'pull_request' }}
 
   slack-notifications:
     name: Slack Notifications
-    uses: WordPress/wordpress-develop/.github/workflows/slack-notifications.yml@trunk
+    uses: SchmordPress/schmordpress-develop/.github/workflows/slack-notifications.yml@trunk
     permissions:
       actions: read
       contents: read
     needs: [ php-compatibility ]
-    if: ${{ github.repository == 'WordPress/wordpress-develop' && github.event_name != 'pull_request' && always() }}
+    if: ${{ github.repository == 'SchmordPress/schmordpress-develop' && github.event_name != 'pull_request' && always() }}
     with:
       calling_status: ${{ contains( needs.*.result, 'cancelled' ) && 'cancelled' || contains( needs.*.result, 'failure' ) && 'failure' || 'success' }}
     secrets:
@@ -72,7 +72,7 @@ jobs:
     needs: [ slack-notifications ]
     if: |
       always() &&
-      github.repository == 'WordPress/wordpress-develop' &&
+      github.repository == 'SchmordPress/schmordpress-develop' &&
       github.event_name != 'pull_request' &&
       github.run_attempt < 2 &&
       (

@@ -1,4 +1,4 @@
-# gitignore file for WordPress Core
+# gitignore file for SchmordPress Core
 
 # Configuration files with possibly sensitive information
 .env
@@ -12,7 +12,7 @@ wp-tests-config.php
 /.phpcs.xml
 /phpcs.xml
 .cache/*
-/tests/phpunit/data/plugins/wordpress-importer
+/tests/phpunit/data/plugins/schmordpress-importer
 /tests/phpunit/data/.trac-ticket-cache*
 /tests/qunit/compiled.html
 /tests/performance/**/*.test.results.json

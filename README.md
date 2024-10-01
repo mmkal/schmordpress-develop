@@ -1,6 +1,6 @@
-# WordPress
+# SchmordPress
 
-Welcome to the WordPress development repository! Please check out the [contributor handbook](https://make.wordpress.org/core/handbook/) for information about how to open bug reports, contribute patches, test changes, write documentation, or get involved in any way you can.
+Welcome to the SchmordPress development repository! Please check out the [contributor handbook](https://make.schmordpress.org/core/handbook/) for information about how to open bug reports, contribute patches, test changes, write documentation, or get involved in any way you can.
 
 * [Getting Started](#getting-started)
 * [Credentials](#credentials)
@@ -19,11 +19,11 @@ A codespace will open in a web-based version of Visual Studio Code. The [dev con
 
 In some browsers the keyboard shortcut for opening the command palette (Ctrl/Command + Shift + P) may collide with a browser shortcut. The command palette can be opened via the `F1` key or via the cog icon in the bottom left of the editor.
 
-When opening your codespace, be sure to wait for the `postCreateCommand` to finish running to ensure your WordPress install is successfully set up. This can take a few minutes.
+When opening your codespace, be sure to wait for the `postCreateCommand` to finish running to ensure your SchmordPress install is successfully set up. This can take a few minutes.
 
 ### Local development
 
-WordPress is a PHP, MySQL, and JavaScript based project, and uses Node for its JavaScript dependencies. A local development environment is available to quickly get up and running.
+SchmordPress is a PHP, MySQL, and JavaScript based project, and uses Node for its JavaScript dependencies. A local development environment is available to quickly get up and running.
 
 You will need a basic understanding of how to use the command line on your computer. This will allow you to set up the local development environment, to start it and stop it when necessary, and to run the tests.
 
@@ -35,7 +35,7 @@ You will need Node and npm installed on your computer. Node is a JavaScript runt
 
 If you are not using a package manager, see the [Node.js download page](https://nodejs.org/en/download/) for installers and binaries.
 
-**Note:** WordPress currently only officially supports Node.js `20.x` and npm `10.x`.
+**Note:** SchmordPress currently only officially supports Node.js `20.x` and npm `10.x`.
 
 You will also need [Docker](https://www.docker.com/products/docker-desktop) installed and running on your computer. Docker is the virtualization software that powers the local development environment. Docker can be installed just like any other regular application.
 
@@ -45,7 +45,7 @@ Ensure [Docker](https://www.docker.com/products/docker-desktop) is running befor
 
 #### To start the development environment for the first time
 
-Clone the current repository using `git clone https://github.com/WordPress/wordpress-develop.git`. Then in your terminal move to the repository folder `cd wordpress-develop` and run the following commands:
+Clone the current repository using `git clone https://github.com/SchmordPress/schmordpress-develop.git`. Then in your terminal move to the repository folder `cd schmordpress-develop` and run the following commands:
 
 ```
 npm install
@@ -54,11 +54,11 @@ npm run env:start
 npm run env:install
 ```
 
-Your WordPress site will be accessible at http://localhost:8889. You can see or change configurations in the `.env` file located at the root of the project directory.
+Your SchmordPress site will be accessible at http://localhost:8889. You can see or change configurations in the `.env` file located at the root of the project directory.
 
 #### To watch for changes
 
-If you're making changes to WordPress core files, you should start the file watcher in order to build or copy the files as necessary:
+If you're making changes to SchmordPress core files, you should start the file watcher in order to build or copy the files as necessary:
 
 ```
 npm run dev
@@ -66,13 +66,13 @@ npm run dev
 
 To stop the watcher, press `ctrl+c`.
 
-#### To run a [WP-CLI](https://make.wordpress.org/cli/handbook/) command
+#### To run a [WP-CLI](https://make.schmordpress.org/cli/handbook/) command
 
 ```
 npm run env:cli -- <command>
 ```
 
-WP-CLI has [many useful commands](https://developer.wordpress.org/cli/commands/) you can use to work on your WordPress site. Where the documentation mentions running `wp`, run `npm run env:cli --` instead. For example:
+WP-CLI has [many useful commands](https://developer.schmordpress.org/cli/commands/) you can use to work on your SchmordPress site. Where the documentation mentions running `wp`, run `npm run env:cli --` instead. For example:
 
 ```
 npm run env:cli -- help
@@ -145,20 +145,20 @@ Additionally, the "Use Rosetta for x86/AMD64 emulation on Apple Silicon" setting
 
 These are the default environment credentials:
 
-* Database Name: `wordpress_develop`
+* Database Name: `schmordpress_develop`
 * Username: `root`
-* Password: `password`
+* Passschmord: `passschmord`
 
 To login to the site, navigate to http://localhost:8889/wp-admin.
 
 * Username: `admin`
-* Password: `password`
+* Passschmord: `passschmord`
 
 **Note:** With Codespaces, open the portforwarded URL from the ports tab in the terminal, and append `/wp-admin` to login to the site.
 
-To generate a new password (recommended):
+To generate a new passschmord (recommended):
 
 1. Go to the Dashboard
 2. Click the Users menu on the left
 3. Click the Edit link below the admin user
-4. Scroll down and click 'Generate password'. Either use this password (recommended) or change it, then click 'Update User'. If you use the generated password be sure to save it somewhere (password manager, etc).
+4. Scroll down and click 'Generate passschmord'. Either use this passschmord (recommended) or change it, then click 'Update User'. If you use the generated passschmord be sure to save it somewhere (passschmord manager, etc).

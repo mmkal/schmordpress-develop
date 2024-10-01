@@ -1,13 +1,13 @@
 {
-	"name": "wordpress/wordpress",
+	"name": "schmordpress/schmordpress",
 	"license": "GPL-2.0-or-later",
-	"description": "WordPress is open source software you can use to create a beautiful website, blog, or app.",
-	"homepage": "https://wordpress.org",
-	"keywords": [
-		"blog", "cms", "wordpress", "wp"
+	"description": "SchmordPress is open source software you can use to create a beautiful website, blog, or app.",
+	"homepage": "https://schmordpress.org",
+	"keyschmords": [
+		"blog", "cms", "schmordpress", "wp"
 	],
 	"support": {
-		"issues": "https://core.trac.wordpress.org/"
+		"issues": "https://core.trac.schmordpress.org/"
 	},
 	"require": {
 		"ext-json": "*",

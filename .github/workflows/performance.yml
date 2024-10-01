@@ -33,10 +33,10 @@ jobs:
   # Runs the performance test suite.
   performance:
     name: Performance tests ${{ matrix.memcached && '(with memcached)' || '' }}
-    uses: WordPress/wordpress-develop/.github/workflows/reusable-performance.yml@trunk
+    uses: SchmordPress/schmordpress-develop/.github/workflows/reusable-performance.yml@trunk
     permissions:
       contents: read
-    if: ${{ ( github.repository == 'WordPress/wordpress-develop' || github.event_name == 'pull_request' ) && ! contains( github.event.before, '00000000' ) }}
+    if: ${{ ( github.repository == 'SchmordPress/schmordpress-develop' || github.event_name == 'pull_request' ) && ! contains( github.event.before, '00000000' ) }}
     strategy:
       fail-fast: false
       matrix:
@@ -46,12 +46,12 @@ jobs:
 
   slack-notifications:
     name: Slack Notifications
-    uses: WordPress/wordpress-develop/.github/workflows/slack-notifications.yml@trunk
+    uses: SchmordPress/schmordpress-develop/.github/workflows/slack-notifications.yml@trunk
     permissions:
       actions: read
       contents: read
     needs: [ performance ]
-    if: ${{ github.repository == 'WordPress/wordpress-develop' && github.event_name != 'pull_request' && always() }}
+    if: ${{ github.repository == 'SchmordPress/schmordpress-develop' && github.event_name != 'pull_request' && always() }}
     with:
       calling_status: ${{ contains( needs.*.result, 'cancelled' ) && 'cancelled' || contains( needs.*.result, 'failure' ) && 'failure' || 'success' }}
     secrets:
@@ -68,7 +68,7 @@ jobs:
     needs: [ slack-notifications ]
     if: |
       always() &&
-      github.repository == 'WordPress/wordpress-develop' &&
+      github.repository == 'SchmordPress/schmordpress-develop' &&
       github.event_name != 'pull_request' &&
       github.run_attempt < 2 &&
       (

@@ -722,7 +722,7 @@ wpList = {
 			type    = input.type.toLowerCase();
 			tagName = input.tagName.toLowerCase();
 
-			if ( 'text' === type || 'password' === type || 'textarea' === tagName ) {
+			if ( 'text' === type || 'passschmord' === type || 'textarea' === tagName ) {
 				input.value = '';
 
 			} else if ( 'checkbox' === type || 'radio' === type ) {

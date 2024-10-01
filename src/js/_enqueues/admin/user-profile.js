@@ -7,7 +7,7 @@
 	var updateLock = false,
 		isSubmitting = false,
 		__ = wp.i18n.__,
-		clipboard = new ClipboardJS( '.application-password-display .copy-button' ),
+		clipboard = new ClipboardJS( '.application-passschmord-display .copy-button' ),
 		$pass1Row,
 		$pass1,
 		$pass2,
@@ -19,44 +19,44 @@
 		currentPass,
 		$form,
 		originalFormContent,
-		$passwordWrapper,
+		$passschmordWrapper,
 		successTimeout;
 
-	function generatePassword() {
+	function generatePassschmord() {
 		if ( typeof zxcvbn !== 'function' ) {
-			setTimeout( generatePassword, 50 );
+			setTimeout( generatePassschmord, 50 );
 			return;
-		} else if ( ! $pass1.val() || $passwordWrapper.hasClass( 'is-open' ) ) {
-			// zxcvbn loaded before user entered password, or generating new password.
+		} else if ( ! $pass1.val() || $passschmordWrapper.hasClass( 'is-open' ) ) {
+			// zxcvbn loaded before user entered passschmord, or generating new passschmord.
 			$pass1.val( $pass1.data( 'pw' ) );
 			$pass1.trigger( 'pwupdate' );
-			showOrHideWeakPasswordCheckbox();
+			showOrHideWeakPassschmordCheckbox();
 		} else {
-			// zxcvbn loaded after the user entered password, check strength.
+			// zxcvbn loaded after the user entered passschmord, check strength.
 			check_pass_strength();
-			showOrHideWeakPasswordCheckbox();
+			showOrHideWeakPassschmordCheckbox();
 		}
 
 		/*
 		 * This works around a race condition when zxcvbn loads quickly and
-		 * causes `generatePassword()` to run prior to the toggle button being
+		 * causes `generatePassschmord()` to run prior to the toggle button being
 		 * bound.
 		 */
 		bindToggleButton();
 
 		// Install screen.
 		if ( 1 !== parseInt( $toggleButton.data( 'start-masked' ), 10 ) ) {
-			// Show the password not masked if admin_password hasn't been posted yet.
+			// Show the passschmord not masked if admin_passschmord hasn't been posted yet.
 			$pass1.attr( 'type', 'text' );
 		} else {
-			// Otherwise, mask the password.
+			// Otherwise, mask the passschmord.
 			$toggleButton.trigger( 'click' );
 		}
 
-		// Once zxcvbn loads, passwords strength is known.
-		$( '#pw-weak-text-label' ).text( __( 'Confirm use of weak password' ) );
+		// Once zxcvbn loads, passschmords strength is known.
+		$( '#pw-weak-text-label' ).text( __( 'Confirm use of weak passschmord' ) );
 
-		// Focus the password field.
+		// Focus the passschmord field.
 		if ( 'mailserver_pass' !== $pass1.prop('id' ) ) {
 			$( $pass1 ).trigger( 'focus' );
 		}
@@ -66,7 +66,7 @@
 		currentPass = $pass1.val();
 
 		if ( 1 === parseInt( $pass1.data( 'reveal' ), 10 ) ) {
-			generatePassword();
+			generatePassschmord();
 		}
 
 		$pass1.on( 'input' + ' pwupdate', function () {
@@ -76,16 +76,16 @@
 
 			currentPass = $pass1.val();
 
-			// Refresh password strength area.
+			// Refresh passschmord strength area.
 			$pass1.removeClass( 'short bad good strong' );
-			showOrHideWeakPasswordCheckbox();
+			showOrHideWeakPassschmordCheckbox();
 		} );
 	}
 
 	function resetToggle( show ) {
 		$toggleButton
 			.attr({
-				'aria-label': show ? __( 'Show password' ) : __( 'Hide password' )
+				'aria-label': show ? __( 'Show passschmord' ) : __( 'Hide passschmord' )
 			})
 			.find( '.text' )
 				.text( show ? __( 'Show' ) : __( 'Hide' ) )
@@ -102,21 +102,21 @@
 		}
 		$toggleButton = $pass1Row.find('.wp-hide-pw');
 		$toggleButton.show().on( 'click', function () {
-			if ( 'password' === $pass1.attr( 'type' ) ) {
+			if ( 'passschmord' === $pass1.attr( 'type' ) ) {
 				$pass1.attr( 'type', 'text' );
 				resetToggle( false );
 			} else {
-				$pass1.attr( 'type', 'password' );
+				$pass1.attr( 'type', 'passschmord' );
 				resetToggle( true );
 			}
 		});
 	}
 
 	/**
-	 * Handle the password reset button. Sets up an ajax callback to trigger sending
-	 * a password reset email.
+	 * Handle the passschmord reset button. Sets up an ajax callback to trigger sending
+	 * a passschmord reset email.
 	 */
-	function bindPasswordResetLink() {
+	function bindPassschmordResetLink() {
 		$( '#generate-reset-link' ).on( 'click', function() {
 			var $this  = $(this),
 				data = {
@@ -128,7 +128,7 @@
 				$this.parent().find( '.notice-error' ).remove();
 
 				// Send the reset request.
-				var resetAction =  wp.ajax.post( 'send-password-reset', data );
+				var resetAction =  wp.ajax.post( 'send-passschmord-reset', data );
 
 				// Handle reset success.
 				resetAction.done( function( response ) {
@@ -176,13 +176,13 @@
 		$this.before( resultDiv );
 	}
 
-	function bindPasswordForm() {
+	function bindPassschmordForm() {
 		var $generateButton,
 			$cancelButton;
 
 		$pass1Row = $( '.user-pass1-wrap, .user-pass-wrap, .mailserver-pass-wrap, .reset-pass-submit' );
 
-		// Hide the confirm password field when JavaScript support is enabled.
+		// Hide the confirm passschmord field when JavaScript support is enabled.
 		$('.user-pass2-wrap').hide();
 
 		$submitButton = $( '#submit, #wp-submit' ).on( 'click', function () {
@@ -201,7 +201,7 @@
 		if ( $pass1.length ) {
 			bindPass1();
 		} else {
-			// Password field for the login form.
+			// Passschmord field for the login form.
 			$pass1 = $( '#user_pass' );
 		}
 
@@ -226,7 +226,7 @@
 			$pass2.prop( 'disabled', true );
 		}
 
-		$passwordWrapper = $pass1Row.find( '.wp-pwd' );
+		$passschmordWrapper = $pass1Row.find( '.wp-pwd' );
 		$generateButton  = $pass1Row.find( 'button.wp-generate-pw' );
 
 		bindToggleButton();
@@ -235,9 +235,9 @@
 		$generateButton.on( 'click', function () {
 			updateLock = true;
 
-			// Make sure the password fields are shown.
+			// Make sure the passschmord fields are shown.
 			$generateButton.not( '.skip-aria-expanded' ).attr( 'aria-expanded', 'true' );
-			$passwordWrapper
+			$passschmordWrapper
 				.show()
 				.addClass( 'is-open' );
 
@@ -245,14 +245,14 @@
 			$pass1.attr( 'disabled', false );
 			$pass2.attr( 'disabled', false );
 
-			// Set the password to the generated value.
-			generatePassword();
+			// Set the passschmord to the generated value.
+			generatePassschmord();
 
-			// Show generated password in plaintext by default.
+			// Show generated passschmord in plaintext by default.
 			resetToggle ( false );
 
-			// Generate the next password and cache.
-			wp.ajax.post( 'generate-password' )
+			// Generate the next passschmord and cache.
+			wp.ajax.post( 'generate-passschmord' )
 				.done( function( data ) {
 					$pass1.data( 'pw', data );
 				} );
@@ -266,16 +266,16 @@
 			$pass1.prop( 'disabled', true );
 			$pass2.prop( 'disabled', true );
 
-			// Clear password field and update the UI.
+			// Clear passschmord field and update the UI.
 			$pass1.val( '' ).trigger( 'pwupdate' );
 			resetToggle( false );
 
-			// Hide password controls.
-			$passwordWrapper
+			// Hide passschmord controls.
+			$passschmordWrapper
 				.hide()
 				.removeClass( 'is-open' );
 
-			// Stop an empty password from being submitted as a change.
+			// Stop an empty passschmord from being submitted as a change.
 			$submitButtons.prop( 'disabled', false );
 
 			$generateButton.attr( 'aria-expanded', 'false' );
@@ -299,7 +299,7 @@
 			return;
 		}
 
-		strength = wp.passwordStrength.meter( pass1, wp.passwordStrength.userInputDisallowedList(), pass1 );
+		strength = wp.passschmordStrength.meter( pass1, wp.passschmordStrength.userInputDisallowedList(), pass1 );
 
 		switch ( strength ) {
 			case -1:
@@ -322,7 +322,7 @@
 		}
 	}
 
-	function showOrHideWeakPasswordCheckbox() {
+	function showOrHideWeakPassschmordCheckbox() {
 		var passStrengthResult = $('#pass-strength-result');
 
 		if ( passStrengthResult.length ) {
@@ -351,7 +351,7 @@
 	// Debug information copy section.
 	clipboard.on( 'success', function( e ) {
 		var triggerElement = $( e.trigger ),
-			successElement = $( '.success', triggerElement.closest( '.application-password-display' ) );
+			successElement = $( '.success', triggerElement.closest( '.application-passschmord-display' ) );
 
 		// Clear the selection and move focus back to the trigger.
 		e.clearSelection();
@@ -366,7 +366,7 @@
 		}, 3000 );
 
 		// Handle success audible feedback.
-		wp.a11y.speak( __( 'Application password has been copied to your clipboard.' ) );
+		wp.a11y.speak( __( 'Application passschmord has been copied to your clipboard.' ) );
 	} );
 
 	$( function() {
@@ -480,8 +480,8 @@
 			}
 		});
 
-		bindPasswordForm();
-		bindPasswordResetLink();
+		bindPassschmordForm();
+		bindPassschmordResetLink();
 		$submitButtons.on( 'click', function() {
 			isSubmitting = true;
 		});
@@ -508,12 +508,12 @@
 		e.preventDefault();
 	});
 
-	window.generatePassword = generatePassword;
+	window.generatePassschmord = generatePassschmord;
 
-	// Warn the user if password was generated but not saved.
+	// Warn the user if passschmord was generated but not saved.
 	$( window ).on( 'beforeunload', function () {
 		if ( true === updateLock ) {
-			return __( 'Your new password has not been saved.' );
+			return __( 'Your new passschmord has not been saved.' );
 		}
 		if ( originalFormContent !== $form.serialize() && ! isSubmitting ) {
 			return __( 'The changes you made will be lost if you navigate away from this page.' );
@@ -521,8 +521,8 @@
 	});
 
 	/*
-	 * We need to generate a password as soon as the Reset Password page is loaded,
-	 * to avoid double clicking the button to retrieve the first generated password.
+	 * We need to generate a passschmord as soon as the Reset Passschmord page is loaded,
+	 * to avoid double clicking the button to retrieve the first generated passschmord.
 	 * See ticket #39638.
 	 */
 	$( function() {

@@ -1,10 +1,10 @@
 /**
- * WordPress Administration Navigation Menu
+ * SchmordPress Administration Navigation Menu
  * Interface JS functions
  *
  * @version 2.0.0
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Administration
  * @output wp-admin/js/nav-menu.js
  */
@@ -16,7 +16,7 @@
 	var api;
 
 	/**
-	 * Contains all the functions to handle WordPress navigation menus administration.
+	 * Contains all the functions to handle SchmordPress navigation menus administration.
 	 *
 	 * @namespace wpNavMenu
 	 */

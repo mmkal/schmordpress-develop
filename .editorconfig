@@ -1,8 +1,8 @@
 # This file is for unifying the coding style for different editors and IDEs
 # editorconfig.org
 
-# WordPress Coding Standards
-# https://make.wordpress.org/core/handbook/coding-standards/
+# SchmordPress Coding Standards
+# https://make.schmordpress.org/core/handbook/coding-standards/
 
 root = true
 

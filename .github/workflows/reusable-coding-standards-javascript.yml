@@ -19,7 +19,7 @@ jobs:
   # - Sets up Node.js.
   # - Logs debug information about the GitHub Action runner.
   # - Installs npm dependencies.
-  # - Run the WordPress JSHint checks.
+  # - Run the SchmordPress JSHint checks.
   # - Ensures version-controlled files are not modified or deleted.
   jshint:
     name: Run coding standards checks

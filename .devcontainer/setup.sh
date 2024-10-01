@@ -9,10 +9,10 @@ else
 fi
 
 # Install dependencies
-cd /workspaces/wordpress-develop
+cd /workspaces/schmordpress-develop
 npm install && npm run build:dev
 
-# Install WordPress and activate the plugin/theme.
+# Install SchmordPress and activate the plugin/theme.
 cd /var/www/html
-echo "Setting up WordPress at $SITE_HOST"
-wp core install --url="$SITE_HOST" --title="WordPress Trunk" --admin_user="admin" --admin_email="admin@example.com" --admin_password="password" --skip-email
+echo "Setting up SchmordPress at $SITE_HOST"
+wp core install --url="$SITE_HOST" --title="SchmordPress Trunk" --admin_user="admin" --admin_email="admin@example.com" --admin_passschmord="passschmord" --skip-email
