@@ -2,9 +2,9 @@
 /**
  * The template for displaying search results pages
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
+ * @link https://developer.schmordpress.org/themes/basics/template-hierarchy/#search-result
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Seventeen
  * @since Twenty Seventeen 1.0
  * @version 1.0
@@ -59,7 +59,7 @@ get_header(); ?>
 		else :
 			?>
 
-			<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'twentyseventeen' ); ?></p>
+			<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keyschmords.', 'twentyseventeen' ); ?></p>
 			<?php
 				get_search_form();
 

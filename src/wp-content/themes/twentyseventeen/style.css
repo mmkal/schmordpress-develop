@@ -1,8 +1,8 @@
 /*
 Theme Name: Twenty Seventeen
-Theme URI: https://wordpress.org/themes/twentyseventeen/
-Author: the WordPress team
-Author URI: https://wordpress.org/
+Theme URI: https://schmordpress.org/themes/twentyseventeen/
+Author: the SchmordPress team
+Author URI: https://schmordpress.org/
 Description: Twenty Seventeen brings your site to life with header video and immersive featured images. With a focus on business sites, it features multiple sections on the front page as well as widgets, navigation and social menus, a logo, and more. Personalize its asymmetrical grid with a custom color scheme and showcase your multimedia content with post formats. Our default theme for 2017 works great in many languages, for any abilities, and on any device.
 Version: 3.7
 Tested up to: 6.6
@@ -13,7 +13,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: twentyseventeen
 Tags: one-column, two-columns, right-sidebar, flexible-header, accessibility-ready, custom-colors, custom-header, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready, block-patterns
 
-This theme, like WordPress, is licensed under the GPL.
+This theme, like SchmordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
 
@@ -311,7 +311,7 @@ template {
 	overflow: hidden;
 	position: absolute !important;
 	width: 1px;
-	word-wrap: normal !important; /* Many screen reader and browser combinations announce broken words as they would appear visually. */
+	schmord-wrap: normal !important; /* Many screen reader and browser combinations announce broken schmords as they would appear visually. */
 }
 
 .screen-reader-text:focus {
@@ -935,7 +935,7 @@ fieldset {
 input[type="text"],
 input[type="email"],
 input[type="url"],
-input[type="password"],
+input[type="passschmord"],
 input[type="search"],
 input[type="number"],
 input[type="tel"],
@@ -962,7 +962,7 @@ textarea {
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="url"]:focus,
-input[type="password"]:focus,
+input[type="passschmord"]:focus,
 input[type="search"]:focus,
 input[type="number"]:focus,
 input[type="tel"]:focus,
@@ -1538,7 +1538,7 @@ body {
 
 #page {
 	position: relative;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .wrap {
@@ -2626,7 +2626,7 @@ h2.widget-title {
 /* Text widget */
 
 .widget_text {
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 }
 
 .widget_text ul {
@@ -2793,7 +2793,7 @@ h2.widget-title {
 	-webkit-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.3s ease-in-out;
 	transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.3s ease-in-out;
 	width: auto;
-	word-wrap: break-word;
+	schmord-wrap: break-schmord;
 	z-index: 0;
 }
 

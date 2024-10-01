@@ -2,7 +2,7 @@
 /**
  * Twenty Seventeen: Color Patterns
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Seventeen
  * @since Twenty Seventeen 1.0
  */
@@ -112,7 +112,7 @@ function twentyseventeen_custom_colors_css() {
 .colors-custom input[type="text"]:focus,
 .colors-custom input[type="email"]:focus,
 .colors-custom input[type="url"]:focus,
-.colors-custom input[type="password"]:focus,
+.colors-custom input[type="passschmord"]:focus,
 .colors-custom input[type="search"]:focus,
 .colors-custom input[type="number"]:focus,
 .colors-custom input[type="tel"]:focus,
@@ -237,7 +237,7 @@ body.colors-custom,
 .colors-custom input[type="text"]:focus,
 .colors-custom input[type="email"]:focus,
 .colors-custom input[type="url"]:focus,
-.colors-custom input[type="password"]:focus,
+.colors-custom input[type="passschmord"]:focus,
 .colors-custom input[type="search"]:focus,
 .colors-custom input[type="number"]:focus,
 .colors-custom input[type="tel"]:focus,
@@ -259,7 +259,7 @@ body.colors-custom,
 .colors-custom input[type="text"],
 .colors-custom input[type="email"],
 .colors-custom input[type="url"],
-.colors-custom input[type="password"],
+.colors-custom input[type="passschmord"],
 .colors-custom input[type="search"],
 .colors-custom input[type="number"],
 .colors-custom input[type="tel"],
@@ -342,7 +342,7 @@ body.colors-custom,
 .colors-custom input[type="text"],
 .colors-custom input[type="email"],
 .colors-custom input[type="url"],
-.colors-custom input[type="password"],
+.colors-custom input[type="passschmord"],
 .colors-custom input[type="search"],
 .colors-custom input[type="number"],
 .colors-custom input[type="tel"],
