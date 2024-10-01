@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Theme_Compat
  * @deprecated 3.0.0
  *
@@ -20,8 +20,8 @@ if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && 'comments.php' === basename( $_SE
 	die( 'Please do not load this page directly. Thanks!' );
 }
 
-if ( post_password_required() ) { ?>
-		<p class="nocomments"><?php _e( 'This post is password protected. Enter the password to view comments.' ); ?></p>
+if ( post_passschmord_required() ) { ?>
+		<p class="nocomments"><?php _e( 'This post is passschmord protected. Enter the passschmord to view comments.' ); ?></p>
 	<?php
 	return;
 }

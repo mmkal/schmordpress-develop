@@ -2,7 +2,7 @@
 /**
  * Loads the correct template based on the visitor's url
  *
- * @package WordPress
+ * @package SchmordPress
  */
 if ( wp_using_themes() ) {
 	/**

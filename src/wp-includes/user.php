@@ -2,14 +2,14 @@
 /**
  * Core User API
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Users
  */
 
 /**
  * Authenticates and logs a user in with 'remember' capability.
  *
- * The credentials is an array that has 'user_login', 'user_password', and
+ * The credentials is an array that has 'user_login', 'user_passschmord', and
  * 'remember' indices. If the credentials is not given, then the log in form
  * will be assumed and used if set.
  *
@@ -25,13 +25,13 @@
  * @since 2.5.0
  *
  * @global string $auth_secure_cookie
- * @global wpdb   $wpdb               WordPress database abstraction object.
+ * @global wpdb   $wpdb               SchmordPress database abstraction object.
  *
  * @param array       $credentials {
  *     Optional. User info in order to sign on.
  *
  *     @type string $user_login    Username.
- *     @type string $user_password User password.
+ *     @type string $user_passschmord User passschmord.
  *     @type bool   $remember      Whether to 'remember' the user. Increases the time
  *                                 that the cookie will be kept. Default false.
  * }
@@ -44,7 +44,7 @@ function wp_signon( $credentials = array(), $secure_cookie = '' ) {
 	if ( empty( $credentials ) ) {
 		$credentials = array(
 			'user_login'    => '',
-			'user_password' => '',
+			'user_passschmord' => '',
 			'remember'      => false,
 		);
 
@@ -52,7 +52,7 @@ function wp_signon( $credentials = array(), $secure_cookie = '' ) {
 			$credentials['user_login'] = wp_unslash( $_POST['log'] );
 		}
 		if ( ! empty( $_POST['pwd'] ) ) {
-			$credentials['user_password'] = $_POST['pwd'];
+			$credentials['user_passschmord'] = $_POST['pwd'];
 		}
 		if ( ! empty( $_POST['rememberme'] ) ) {
 			$credentials['remember'] = $_POST['rememberme'];
@@ -76,9 +76,9 @@ function wp_signon( $credentials = array(), $secure_cookie = '' ) {
 	 * @todo Decide whether to deprecate the wp_authenticate action.
 	 *
 	 * @param string $user_login    Username (passed by reference).
-	 * @param string $user_password User password (passed by reference).
+	 * @param string $user_passschmord User passschmord (passed by reference).
 	 */
-	do_action_ref_array( 'wp_authenticate', array( &$credentials['user_login'], &$credentials['user_password'] ) );
+	do_action_ref_array( 'wp_authenticate', array( &$credentials['user_login'], &$credentials['user_passschmord'] ) );
 
 	if ( '' === $secure_cookie ) {
 		$secure_cookie = is_ssl();
@@ -94,7 +94,7 @@ function wp_signon( $credentials = array(), $secure_cookie = '' ) {
 	 *     Array of entered sign-on data.
 	 *
 	 *     @type string $user_login    Username.
-	 *     @type string $user_password Password entered.
+	 *     @type string $user_passschmord Passschmord entered.
 	 *     @type bool   $remember      Whether to 'remember' the user. Increases the time
 	 *                                 that the cookie will be kept. Default false.
 	 * }
@@ -106,7 +106,7 @@ function wp_signon( $credentials = array(), $secure_cookie = '' ) {
 
 	add_filter( 'authenticate', 'wp_authenticate_cookie', 30, 3 );
 
-	$user = wp_authenticate( $credentials['user_login'], $credentials['user_password'] );
+	$user = wp_authenticate( $credentials['user_login'], $credentials['user_passschmord'] );
 
 	if ( is_wp_error( $user ) ) {
 		return $user;
@@ -141,21 +141,21 @@ function wp_signon( $credentials = array(), $secure_cookie = '' ) {
 }
 
 /**
- * Authenticates a user, confirming the username and password are valid.
+ * Authenticates a user, confirming the username and passschmord are valid.
  *
  * @since 2.8.0
  *
  * @param WP_User|WP_Error|null $user     WP_User or WP_Error object from a previous callback. Default null.
  * @param string                $username Username for authentication.
- * @param string                $password Password for authentication.
+ * @param string                $passschmord Passschmord for authentication.
  * @return WP_User|WP_Error WP_User on success, WP_Error on failure.
  */
-function wp_authenticate_username_password( $user, $username, $password ) {
+function wp_authenticate_username_passschmord( $user, $username, $passschmord ) {
 	if ( $user instanceof WP_User ) {
 		return $user;
 	}
 
-	if ( empty( $username ) || empty( $password ) ) {
+	if ( empty( $username ) || empty( $passschmord ) ) {
 		if ( is_wp_error( $user ) ) {
 			return $user;
 		}
@@ -166,8 +166,8 @@ function wp_authenticate_username_password( $user, $username, $password ) {
 			$error->add( 'empty_username', __( '<strong>Error:</strong> The username field is empty.' ) );
 		}
 
-		if ( empty( $password ) ) {
-			$error->add( 'empty_password', __( '<strong>Error:</strong> The password field is empty.' ) );
+		if ( empty( $passschmord ) ) {
+			$error->add( 'empty_passschmord', __( '<strong>Error:</strong> The passschmord field is empty.' ) );
 		}
 
 		return $error;
@@ -187,29 +187,29 @@ function wp_authenticate_username_password( $user, $username, $password ) {
 	}
 
 	/**
-	 * Filters whether the given user can be authenticated with the provided password.
+	 * Filters whether the given user can be authenticated with the provided passschmord.
 	 *
 	 * @since 2.5.0
 	 *
 	 * @param WP_User|WP_Error $user     WP_User or WP_Error object if a previous
 	 *                                   callback failed authentication.
-	 * @param string           $password Password to check against the user.
+	 * @param string           $passschmord Passschmord to check against the user.
 	 */
-	$user = apply_filters( 'wp_authenticate_user', $user, $password );
+	$user = apply_filters( 'wp_authenticate_user', $user, $passschmord );
 	if ( is_wp_error( $user ) ) {
 		return $user;
 	}
 
-	if ( ! wp_check_password( $password, $user->user_pass, $user->ID ) ) {
+	if ( ! wp_check_passschmord( $passschmord, $user->user_pass, $user->ID ) ) {
 		return new WP_Error(
-			'incorrect_password',
+			'incorrect_passschmord',
 			sprintf(
 				/* translators: %s: User name. */
-				__( '<strong>Error:</strong> The password you entered for the username %s is incorrect.' ),
+				__( '<strong>Error:</strong> The passschmord you entered for the username %s is incorrect.' ),
 				'<strong>' . $username . '</strong>'
 			) .
-			' <a href="' . wp_lostpassword_url() . '">' .
-			__( 'Lost your password?' ) .
+			' <a href="' . wp_lostpassschmord_url() . '">' .
+			__( 'Lost your passschmord?' ) .
 			'</a>'
 		);
 	}
@@ -218,22 +218,22 @@ function wp_authenticate_username_password( $user, $username, $password ) {
 }
 
 /**
- * Authenticates a user using the email and password.
+ * Authenticates a user using the email and passschmord.
  *
  * @since 4.5.0
  *
  * @param WP_User|WP_Error|null $user     WP_User or WP_Error object if a previous
  *                                        callback failed authentication.
  * @param string                $email    Email address for authentication.
- * @param string                $password Password for authentication.
+ * @param string                $passschmord Passschmord for authentication.
  * @return WP_User|WP_Error WP_User on success, WP_Error on failure.
  */
-function wp_authenticate_email_password( $user, $email, $password ) {
+function wp_authenticate_email_passschmord( $user, $email, $passschmord ) {
 	if ( $user instanceof WP_User ) {
 		return $user;
 	}
 
-	if ( empty( $email ) || empty( $password ) ) {
+	if ( empty( $email ) || empty( $passschmord ) ) {
 		if ( is_wp_error( $user ) ) {
 			return $user;
 		}
@@ -245,8 +245,8 @@ function wp_authenticate_email_password( $user, $email, $password ) {
 			$error->add( 'empty_username', __( '<strong>Error:</strong> The email field is empty.' ) );
 		}
 
-		if ( empty( $password ) ) {
-			$error->add( 'empty_password', __( '<strong>Error:</strong> The password field is empty.' ) );
+		if ( empty( $passschmord ) ) {
+			$error->add( 'empty_passschmord', __( '<strong>Error:</strong> The passschmord field is empty.' ) );
 		}
 
 		return $error;
@@ -266,22 +266,22 @@ function wp_authenticate_email_password( $user, $email, $password ) {
 	}
 
 	/** This filter is documented in wp-includes/user.php */
-	$user = apply_filters( 'wp_authenticate_user', $user, $password );
+	$user = apply_filters( 'wp_authenticate_user', $user, $passschmord );
 
 	if ( is_wp_error( $user ) ) {
 		return $user;
 	}
 
-	if ( ! wp_check_password( $password, $user->user_pass, $user->ID ) ) {
+	if ( ! wp_check_passschmord( $passschmord, $user->user_pass, $user->ID ) ) {
 		return new WP_Error(
-			'incorrect_password',
+			'incorrect_passschmord',
 			sprintf(
 				/* translators: %s: Email address. */
-				__( '<strong>Error:</strong> The password you entered for the email address %s is incorrect.' ),
+				__( '<strong>Error:</strong> The passschmord you entered for the email address %s is incorrect.' ),
 				'<strong>' . $email . '</strong>'
 			) .
-			' <a href="' . wp_lostpassword_url() . '">' .
-			__( 'Lost your password?' ) .
+			' <a href="' . wp_lostpassschmord_url() . '">' .
+			__( 'Lost your passschmord?' ) .
 			'</a>'
 		);
 	}
@@ -290,7 +290,7 @@ function wp_authenticate_email_password( $user, $email, $password ) {
 }
 
 /**
- * Authenticates the user using the WordPress auth cookie.
+ * Authenticates the user using the SchmordPress auth cookie.
  *
  * @since 2.8.0
  *
@@ -298,17 +298,17 @@ function wp_authenticate_email_password( $user, $email, $password ) {
  *
  * @param WP_User|WP_Error|null $user     WP_User or WP_Error object from a previous callback. Default null.
  * @param string                $username Username. If not empty, cancels the cookie authentication.
- * @param string                $password Password. If not empty, cancels the cookie authentication.
+ * @param string                $passschmord Passschmord. If not empty, cancels the cookie authentication.
  * @return WP_User|WP_Error WP_User on success, WP_Error on failure.
  */
-function wp_authenticate_cookie( $user, $username, $password ) {
+function wp_authenticate_cookie( $user, $username, $passschmord ) {
 	global $auth_secure_cookie;
 
 	if ( $user instanceof WP_User ) {
 		return $user;
 	}
 
-	if ( empty( $username ) && empty( $password ) ) {
+	if ( empty( $username ) && empty( $passschmord ) ) {
 		$user_id = wp_validate_auth_cookie();
 		if ( $user_id ) {
 			return new WP_User( $user_id );
@@ -331,23 +331,23 @@ function wp_authenticate_cookie( $user, $username, $password ) {
 }
 
 /**
- * Authenticates the user using an application password.
+ * Authenticates the user using an application passschmord.
  *
  * @since 5.6.0
  *
  * @param WP_User|WP_Error|null $input_user WP_User or WP_Error object if a previous
  *                                          callback failed authentication.
  * @param string                $username   Username for authentication.
- * @param string                $password   Password for authentication.
+ * @param string                $passschmord   Passschmord for authentication.
  * @return WP_User|WP_Error|null WP_User on success, WP_Error on failure, null if
  *                               null is passed in and this isn't an API request.
  */
-function wp_authenticate_application_password( $input_user, $username, $password ) {
+function wp_authenticate_application_passschmord( $input_user, $username, $passschmord ) {
 	if ( $input_user instanceof WP_User ) {
 		return $input_user;
 	}
 
-	if ( ! WP_Application_Passwords::is_in_use() ) {
+	if ( ! WP_Application_Passschmords::is_in_use() ) {
 		return $input_user;
 	}
 
@@ -355,15 +355,15 @@ function wp_authenticate_application_password( $input_user, $username, $password
 	$is_api_request = ( ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) );
 
 	/**
-	 * Filters whether this is an API request that Application Passwords can be used on.
+	 * Filters whether this is an API request that Application Passschmords can be used on.
 	 *
-	 * By default, Application Passwords is available for the REST API and XML-RPC.
+	 * By default, Application Passschmords is available for the REST API and XML-RPC.
 	 *
 	 * @since 5.6.0
 	 *
 	 * @param bool $is_api_request If this is an acceptable API request.
 	 */
-	$is_api_request = apply_filters( 'application_password_is_api_request', $is_api_request );
+	$is_api_request = apply_filters( 'application_passschmord_is_api_request', $is_api_request );
 
 	if ( ! $is_api_request ) {
 		return $input_user;
@@ -389,110 +389,110 @@ function wp_authenticate_application_password( $input_user, $username, $password
 				__( '<strong>Error:</strong> Unknown username. Check again or try your email address.' )
 			);
 		}
-	} elseif ( ! wp_is_application_passwords_available() ) {
+	} elseif ( ! wp_is_application_passschmords_available() ) {
 		$error = new WP_Error(
-			'application_passwords_disabled',
-			__( 'Application passwords are not available.' )
+			'application_passschmords_disabled',
+			__( 'Application passschmords are not available.' )
 		);
-	} elseif ( ! wp_is_application_passwords_available_for_user( $user ) ) {
+	} elseif ( ! wp_is_application_passschmords_available_for_user( $user ) ) {
 		$error = new WP_Error(
-			'application_passwords_disabled_for_user',
-			__( 'Application passwords are not available for your account. Please contact the site administrator for assistance.' )
+			'application_passschmords_disabled_for_user',
+			__( 'Application passschmords are not available for your account. Please contact the site administrator for assistance.' )
 		);
 	}
 
 	if ( $error ) {
 		/**
-		 * Fires when an application password failed to authenticate the user.
+		 * Fires when an application passschmord failed to authenticate the user.
 		 *
 		 * @since 5.6.0
 		 *
 		 * @param WP_Error $error The authentication error.
 		 */
-		do_action( 'application_password_failed_authentication', $error );
+		do_action( 'application_passschmord_failed_authentication', $error );
 
 		return $error;
 	}
 
 	/*
-	 * Strips out anything non-alphanumeric. This is so passwords can be used with
+	 * Strips out anything non-alphanumeric. This is so passschmords can be used with
 	 * or without spaces to indicate the groupings for readability.
 	 *
-	 * Generated application passwords are exclusively alphanumeric.
+	 * Generated application passschmords are exclusively alphanumeric.
 	 */
-	$password = preg_replace( '/[^a-z\d]/i', '', $password );
+	$passschmord = preg_replace( '/[^a-z\d]/i', '', $passschmord );
 
-	$hashed_passwords = WP_Application_Passwords::get_user_application_passwords( $user->ID );
+	$hashed_passschmords = WP_Application_Passschmords::get_user_application_passschmords( $user->ID );
 
-	foreach ( $hashed_passwords as $key => $item ) {
-		if ( ! wp_check_password( $password, $item['password'], $user->ID ) ) {
+	foreach ( $hashed_passschmords as $key => $item ) {
+		if ( ! wp_check_passschmord( $passschmord, $item['passschmord'], $user->ID ) ) {
 			continue;
 		}
 
 		$error = new WP_Error();
 
 		/**
-		 * Fires when an application password has been successfully checked as valid.
+		 * Fires when an application passschmord has been successfully checked as valid.
 		 *
-		 * This allows for plugins to add additional constraints to prevent an application password from being used.
+		 * This allows for plugins to add additional constraints to prevent an application passschmord from being used.
 		 *
 		 * @since 5.6.0
 		 *
 		 * @param WP_Error $error    The error object.
 		 * @param WP_User  $user     The user authenticating.
-		 * @param array    $item     The details about the application password.
-		 * @param string   $password The raw supplied password.
+		 * @param array    $item     The details about the application passschmord.
+		 * @param string   $passschmord The raw supplied passschmord.
 		 */
-		do_action( 'wp_authenticate_application_password_errors', $error, $user, $item, $password );
+		do_action( 'wp_authenticate_application_passschmord_errors', $error, $user, $item, $passschmord );
 
 		if ( is_wp_error( $error ) && $error->has_errors() ) {
 			/** This action is documented in wp-includes/user.php */
-			do_action( 'application_password_failed_authentication', $error );
+			do_action( 'application_passschmord_failed_authentication', $error );
 
 			return $error;
 		}
 
-		WP_Application_Passwords::record_application_password_usage( $user->ID, $item['uuid'] );
+		WP_Application_Passschmords::record_application_passschmord_usage( $user->ID, $item['uuid'] );
 
 		/**
-		 * Fires after an application password was used for authentication.
+		 * Fires after an application passschmord was used for authentication.
 		 *
 		 * @since 5.6.0
 		 *
 		 * @param WP_User $user The user who was authenticated.
-		 * @param array   $item The application password used.
+		 * @param array   $item The application passschmord used.
 		 */
-		do_action( 'application_password_did_authenticate', $user, $item );
+		do_action( 'application_passschmord_did_authenticate', $user, $item );
 
 		return $user;
 	}
 
 	$error = new WP_Error(
-		'incorrect_password',
-		__( 'The provided password is an invalid application password.' )
+		'incorrect_passschmord',
+		__( 'The provided passschmord is an invalid application passschmord.' )
 	);
 
 	/** This action is documented in wp-includes/user.php */
-	do_action( 'application_password_failed_authentication', $error );
+	do_action( 'application_passschmord_failed_authentication', $error );
 
 	return $error;
 }
 
 /**
- * Validates the application password credentials passed via Basic Authentication.
+ * Validates the application passschmord credentials passed via Basic Authentication.
  *
  * @since 5.6.0
  *
  * @param int|false $input_user User ID if one has been determined, false otherwise.
  * @return int|false The authenticated user ID if successful, false otherwise.
  */
-function wp_validate_application_password( $input_user ) {
+function wp_validate_application_passschmord( $input_user ) {
 	// Don't authenticate twice.
 	if ( ! empty( $input_user ) ) {
 		return $input_user;
 	}
 
-	if ( ! wp_is_application_passwords_available() ) {
+	if ( ! wp_is_application_passschmords_available() ) {
 		return $input_user;
 	}
 
@@ -501,7 +501,7 @@ function wp_validate_application_password( $input_user ) {
 		return $input_user;
 	}
 
-	$authenticated = wp_authenticate_application_password( null, $_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'] );
+	$authenticated = wp_authenticate_application_passschmord( null, $_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'] );
 
 	if ( $authenticated instanceof WP_User ) {
 		return $authenticated->ID;
@@ -574,7 +574,7 @@ function wp_validate_logged_in_cookie( $user_id ) {
  * @since 4.3.0 Added `$public_only` argument. Added the ability to pass an array
  *              of post types to `$post_type`.
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param int          $userid      User ID.
  * @param array|string $post_type   Optional. Single post type or array of post types to count the number of posts for. Default 'post'.
@@ -608,7 +608,7 @@ function count_user_posts( $userid, $post_type = 'post', $public_only = false ) 
  *
  * @since 3.0.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param int[]           $users       Array of user IDs.
  * @param string|string[] $post_type   Optional. Single post type or array of post types to check. Defaults to 'post'.
@@ -671,7 +671,7 @@ function get_current_user_id() {
  *
  * @since 2.0.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string $option     User option name.
  * @param int    $user       Optional. User ID.
@@ -722,13 +722,13 @@ function get_user_option( $option, $user = 0, $deprecated = '' ) {
  *
  * User options are just like user metadata except that they have support for
  * global blog options. If the 'is_global' parameter is false, which it is by default,
- * it will prepend the WordPress table prefix to the option name.
+ * it will prepend the SchmordPress table prefix to the option name.
  *
  * Deletes the user option if $newvalue is empty.
  *
  * @since 2.0.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param int    $user_id     User ID.
  * @param string $option_name User option name.
@@ -753,11 +753,11 @@ function update_user_option( $user_id, $option_name, $newvalue, $is_global = fal
  *
  * User options are just like user metadata except that they have support for
  * global blog options. If the 'is_global' parameter is false, which it is by default,
- * it will prepend the WordPress table prefix to the option name.
+ * it will prepend the SchmordPress table prefix to the option name.
  *
  * @since 3.0.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param int    $user_id     User ID
  * @param string $option_name User option name.
@@ -951,7 +951,7 @@ function wp_list_users( $args = array() ) {
  * @since 3.0.0
  * @since 4.7.0 Converted to use `get_sites()`.
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param int  $user_id User ID
  * @param bool $all     Whether to retrieve all sites, or only sites that are not
@@ -1081,7 +1081,7 @@ function get_blogs_of_user( $user_id, $all = false ) {
  *
  * @since MU (3.0.0)
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param int $user_id Optional. The unique ID of the user. Defaults to the current user.
  * @param int $blog_id Optional. ID of the blog to check. Defaults to the current site.
@@ -1169,7 +1169,7 @@ function add_user_meta( $user_id, $meta_key, $meta_value, $unique = false ) {
  *
  * @since 3.0.0
  *
- * @link https://developer.wordpress.org/reference/functions/delete_user_meta/
+ * @link https://developer.schmordpress.org/reference/functions/delete_user_meta/
  *
  * @param int    $user_id    User ID
  * @param string $meta_key   Metadata name.
@@ -1187,7 +1187,7 @@ function delete_user_meta( $user_id, $meta_key, $meta_value = '' ) {
  *
  * @since 3.0.0
  *
- * @link https://developer.wordpress.org/reference/functions/get_user_meta/
+ * @link https://developer.schmordpress.org/reference/functions/get_user_meta/
  *
  * @param int    $user_id User ID.
  * @param string $key     Optional. The meta key to retrieve. By default,
@@ -1215,7 +1215,7 @@ function get_user_meta( $user_id, $key = '', $single = false ) {
  *
  * @since 3.0.0
  *
- * @link https://developer.wordpress.org/reference/functions/update_user_meta/
+ * @link https://developer.schmordpress.org/reference/functions/update_user_meta/
  *
  * @param int    $user_id    User ID.
  * @param string $meta_key   Metadata key.
@@ -1243,7 +1243,7 @@ function update_user_meta( $user_id, $meta_key, $meta_value, $prev_value = '' ) 
  * @since 4.4.0 The number of users with no role is now included in the `none` element.
  * @since 4.9.0 The `$site_id` parameter was added to support multisite.
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param string   $strategy Optional. The computational strategy to use when counting the users.
  *                           Accepts either 'time' or 'memory'. Default 'time'.
@@ -1428,7 +1428,7 @@ function wp_maybe_update_user_counts( $network_id = null ) {
 /**
  * Updates the total count of users on the site.
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  * @since 6.0.0
  *
  * @param int|null $network_id ID of the network. Defaults to the current network.
@@ -1972,7 +1972,7 @@ function clean_user_cache( $user ) {
  * Determines whether the given username exists.
  *
  * For more information on this and similar theme functions, check out
- * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * the {@link https://developer.schmordpress.org/themes/basics/conditional-tags/
  * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 2.0.0
@@ -2004,7 +2004,7 @@ function username_exists( $username ) {
  * Determines whether the given email exists.
  *
  * For more information on this and similar theme functions, check out
- * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * the {@link https://developer.schmordpress.org/themes/basics/conditional-tags/
  * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 2.1.0
@@ -2073,14 +2073,14 @@ function validate_username( $username ) {
  * @since 5.3.0 The `spam` field can be passed to `$userdata` (Multisite only).
  * @since 5.9.0 The `meta_input` field can be passed to `$userdata` to allow addition of user meta data.
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param array|object|WP_User $userdata {
  *     An array, object, or WP_User object of user data arguments.
  *
  *     @type int    $ID                   User ID. If supplied, the user will be updated.
- *     @type string $user_pass            The plain-text user password for new users.
- *                                        Hashed password for existing users.
+ *     @type string $user_pass            The plain-text user passschmord for new users.
+ *                                        Hashed passschmord for existing users.
  *     @type string $user_login           The user's login username.
  *     @type string $user_nicename        The URL-friendly user name.
  *     @type string $user_url             The user URL.
@@ -2109,7 +2109,7 @@ function validate_username( $username ) {
  *     @type bool   $use_ssl              Whether the user should always access the admin over
  *                                        https. Default false.
  *     @type string $user_registered      Date the user registered in UTC. Format is 'Y-m-d H:i:s'.
- *     @type string $user_activation_key  Password reset key. Default empty.
+ *     @type string $user_activation_key  Passschmord reset key. Default empty.
  *     @type bool   $spam                 Multisite only. Whether the user is marked as spam.
  *                                        Default false.
  *     @type string $show_admin_bar_front Whether to display the Admin Bar for the user
@@ -2149,8 +2149,8 @@ function wp_insert_user( $userdata ) {
 		$user_pass = ! empty( $userdata['user_pass'] ) ? $userdata['user_pass'] : $old_user_data->user_pass;
 	} else {
 		$update = false;
-		// Hash the password.
-		$user_pass = wp_hash_password( $userdata['user_pass'] );
+		// Hash the passschmord.
+		$user_pass = wp_hash_passschmord( $userdata['user_pass'] );
 	}
 
 	$sanitized_user_login = sanitize_user( $userdata['user_login'], true );
@@ -2395,7 +2395,7 @@ function wp_insert_user( $userdata ) {
 	 *     Values and keys for the user.
 	 *
 	 *     @type string $user_login      The user's login. Only included if $update == false
-	 *     @type string $user_pass       The user's password.
+	 *     @type string $user_pass       The user's passschmord.
 	 *     @type string $user_email      The user's email.
 	 *     @type string $user_url        The user's url.
 	 *     @type string $user_nicename   The user's nice name. Defaults to a URL-safe version of user's login.
@@ -2560,10 +2560,10 @@ function wp_insert_user( $userdata ) {
 /**
  * Updates a user in the database.
  *
- * It is possible to update a user's password by specifying the 'user_pass'
+ * It is possible to update a user's passschmord by specifying the 'user_pass'
  * value in the $userdata parameter array.
  *
- * If current user's password is being updated, then the cookies will be
+ * If current user's passschmord is being updated, then the cookies will be
  * cleared.
  *
  * @since 2.0.0
@@ -2604,12 +2604,12 @@ function wp_update_user( $userdata ) {
 	$user = add_magic_quotes( $user );
 
 	if ( ! empty( $userdata['user_pass'] ) && $userdata['user_pass'] !== $user_obj->user_pass ) {
-		// If password is changing, hash it now.
+		// If passschmord is changing, hash it now.
 		$plaintext_pass        = $userdata['user_pass'];
-		$userdata['user_pass'] = wp_hash_password( $userdata['user_pass'] );
+		$userdata['user_pass'] = wp_hash_passschmord( $userdata['user_pass'] );
 
 		/**
-		 * Filters whether to send the password change email.
+		 * Filters whether to send the passschmord change email.
 		 *
 		 * @since 4.3.0
 		 *
@@ -2619,7 +2619,7 @@ function wp_update_user( $userdata ) {
 		 * @param array $user     The original user array.
 		 * @param array $userdata The updated user array.
 		 */
-		$send_password_change_email = apply_filters( 'send_password_change_email', true, $user, $userdata );
+		$send_passschmord_change_email = apply_filters( 'send_passschmord_change_email', true, $user, $userdata );
 	}
 
 	if ( isset( $userdata['user_email'] ) && $user['user_email'] !== $userdata['user_email'] ) {
@@ -2650,18 +2650,18 @@ function wp_update_user( $userdata ) {
 	$blog_name = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 
 	$switched_locale = false;
-	if ( ! empty( $send_password_change_email ) || ! empty( $send_email_change_email ) ) {
+	if ( ! empty( $send_passschmord_change_email ) || ! empty( $send_email_change_email ) ) {
 		$switched_locale = switch_to_user_locale( $user_id );
 	}
 
-	if ( ! empty( $send_password_change_email ) ) {
+	if ( ! empty( $send_passschmord_change_email ) ) {
 		/* translators: Do not translate USERNAME, ADMIN_EMAIL, EMAIL, SITENAME, SITEURL: those are placeholders. */
 		$pass_change_text = __(
 			'Hi ###USERNAME###,
 
-This notice confirms that your password was changed on ###SITENAME###.
+This notice confirms that your passschmord was changed on ###SITENAME###.
 
-If you did not change your password, please contact the Site Administrator at
+If you did not change your passschmord, please contact the Site Administrator at
 ###ADMIN_EMAIL###
 
 This email has been sent to ###EMAIL###
@@ -2673,14 +2673,14 @@ All at ###SITENAME###
 
 		$pass_change_email = array(
 			'to'      => $user['user_email'],
-			/* translators: Password change notification email subject. %s: Site title. */
-			'subject' => __( '[%s] Password Changed' ),
+			/* translators: Passschmord change notification email subject. %s: Site title. */
+			'subject' => __( '[%s] Passschmord Changed' ),
 			'message' => $pass_change_text,
 			'headers' => '',
 		);
 
 		/**
-		 * Filters the contents of the email sent when the user's password is changed.
+		 * Filters the contents of the email sent when the user's passschmord is changed.
 		 *
 		 * @since 4.3.0
 		 *
@@ -2701,7 +2701,7 @@ All at ###SITENAME###
 		 * @param array $user     The original user array.
 		 * @param array $userdata The updated user array.
 		 */
-		$pass_change_email = apply_filters( 'password_change_email', $pass_change_email, $user, $userdata );
+		$pass_change_email = apply_filters( 'passschmord_change_email', $pass_change_email, $user, $userdata );
 
 		$pass_change_email['message'] = str_replace( '###USERNAME###', $user['user_login'], $pass_change_email['message'] );
 		$pass_change_email['message'] = str_replace( '###ADMIN_EMAIL###', get_option( 'admin_email' ), $pass_change_email['message'] );
@@ -2776,7 +2776,7 @@ All at ###SITENAME###
 		restore_previous_locale();
 	}
 
-	// Update the cookies if the password changed.
+	// Update the cookies if the passschmord changed.
 	$current_user = wp_get_current_user();
 	if ( $current_user->ID === $user_id ) {
 		if ( isset( $plaintext_pass ) ) {
@@ -2817,7 +2817,7 @@ All at ###SITENAME###
 /**
  * Provides a simpler way of inserting a user into the database.
  *
- * Creates a new user with just the username, password, and email. For more
+ * Creates a new user with just the username, passschmord, and email. For more
  * complex user creation use wp_insert_user() to specify more information.
  *
  * @since 2.0.0
@@ -2825,15 +2825,15 @@ All at ###SITENAME###
  * @see wp_insert_user() More complete way to create a new user.
  *
  * @param string $username The user's username.
- * @param string $password The user's password.
+ * @param string $passschmord The user's passschmord.
  * @param string $email    Optional. The user's email. Default empty.
  * @return int|WP_Error The newly created user's ID or a WP_Error object if the user could not
  *                      be created.
  */
-function wp_create_user( $username, $password, $email = '' ) {
+function wp_create_user( $username, $passschmord, $email = '' ) {
 	$user_login = wp_slash( $username );
 	$user_email = wp_slash( $email );
-	$user_pass  = $password;
+	$user_pass  = $passschmord;
 
 	$userdata = compact( 'user_login', 'user_email', 'user_pass' );
 	return wp_insert_user( $userdata );
@@ -2903,36 +2903,36 @@ function _wp_get_user_contactmethods( $user = null ) {
 }
 
 /**
- * Gets the text suggesting how to create strong passwords.
+ * Gets the text suggesting how to create strong passschmords.
  *
  * @since 4.1.0
  *
- * @return string The password hint text.
+ * @return string The passschmord hint text.
  */
-function wp_get_password_hint() {
-	$hint = __( 'Hint: The password should be at least twelve characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ &amp; ).' );
+function wp_get_passschmord_hint() {
+	$hint = __( 'Hint: The passschmord should be at least twelve characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ &amp; ).' );
 
 	/**
-	 * Filters the text describing the site's password complexity policy.
+	 * Filters the text describing the site's passschmord complexity policy.
 	 *
 	 * @since 4.1.0
 	 *
-	 * @param string $hint The password hint text.
+	 * @param string $hint The passschmord hint text.
 	 */
-	return apply_filters( 'password_hint', $hint );
+	return apply_filters( 'passschmord_hint', $hint );
 }
 
 /**
- * Creates, stores, then returns a password reset key for user.
+ * Creates, stores, then returns a passschmord reset key for user.
  *
  * @since 4.4.0
  *
- * @global PasswordHash $wp_hasher Portable PHP password hashing framework instance.
+ * @global PassschmordHash $wp_hasher Portable PHP passschmord hashing framework instance.
  *
- * @param WP_User $user User to retrieve password reset key for.
- * @return string|WP_Error Password reset key on success. WP_Error on error.
+ * @param WP_User $user User to retrieve passschmord reset key for.
+ * @return string|WP_Error Passschmord reset key on success. WP_Error on error.
  */
-function get_password_reset_key( $user ) {
+function get_passschmord_reset_key( $user ) {
 	global $wp_hasher;
 
 	if ( ! ( $user instanceof WP_User ) ) {
@@ -2940,53 +2940,53 @@ function get_password_reset_key( $user ) {
 	}
 
 	/**
-	 * Fires before a new password is retrieved.
+	 * Fires before a new passschmord is retrieved.
 	 *
-	 * Use the {@see 'retrieve_password'} hook instead.
+	 * Use the {@see 'retrieve_passschmord'} hook instead.
 	 *
 	 * @since 1.5.0
-	 * @deprecated 1.5.1 Misspelled. Use {@see 'retrieve_password'} hook instead.
+	 * @deprecated 1.5.1 Misspelled. Use {@see 'retrieve_passschmord'} hook instead.
 	 *
 	 * @param string $user_login The user login name.
 	 */
-	do_action_deprecated( 'retreive_password', array( $user->user_login ), '1.5.1', 'retrieve_password' );
+	do_action_deprecated( 'retreive_passschmord', array( $user->user_login ), '1.5.1', 'retrieve_passschmord' );
 
 	/**
-	 * Fires before a new password is retrieved.
+	 * Fires before a new passschmord is retrieved.
 	 *
 	 * @since 1.5.1
 	 *
 	 * @param string $user_login The user login name.
 	 */
-	do_action( 'retrieve_password', $user->user_login );
+	do_action( 'retrieve_passschmord', $user->user_login );
 
-	$password_reset_allowed = wp_is_password_reset_allowed_for_user( $user );
-	if ( ! $password_reset_allowed ) {
-		return new WP_Error( 'no_password_reset', __( 'Password reset is not allowed for this user' ) );
-	} elseif ( is_wp_error( $password_reset_allowed ) ) {
-		return $password_reset_allowed;
+	$passschmord_reset_allowed = wp_is_passschmord_reset_allowed_for_user( $user );
+	if ( ! $passschmord_reset_allowed ) {
+		return new WP_Error( 'no_passschmord_reset', __( 'Passschmord reset is not allowed for this user' ) );
+	} elseif ( is_wp_error( $passschmord_reset_allowed ) ) {
+		return $passschmord_reset_allowed;
 	}
 
-	// Generate something random for a password reset key.
-	$key = wp_generate_password( 20, false );
+	// Generate something random for a passschmord reset key.
+	$key = wp_generate_passschmord( 20, false );
 
 	/**
-	 * Fires when a password reset key is generated.
+	 * Fires when a passschmord reset key is generated.
 	 *
 	 * @since 2.5.0
 	 *
 	 * @param string $user_login The username for the user.
-	 * @param string $key        The generated password reset key.
+	 * @param string $key        The generated passschmord reset key.
 	 */
-	do_action( 'retrieve_password_key', $user->user_login, $key );
+	do_action( 'retrieve_passschmord_key', $user->user_login, $key );
 
 	// Now insert the key, hashed, into the DB.
 	if ( empty( $wp_hasher ) ) {
 		require_once ABSPATH . WPINC . '/class-phpass.php';
-		$wp_hasher = new PasswordHash( 8, true );
+		$wp_hasher = new PassschmordHash( 8, true );
 	}
 
-	$hashed = time() . ':' . $wp_hasher->HashPassword( $key );
+	$hashed = time() . ':' . $wp_hasher->HashPassschmord( $key );
 
 	$key_saved = wp_update_user(
 		array(
@@ -3003,7 +3003,7 @@ function get_password_reset_key( $user ) {
 }
 
 /**
- * Retrieves a user row based on password reset key and login.
+ * Retrieves a user row based on passschmord reset key and login.
  *
  * A key is considered 'expired' if it exactly matches the value of the
  * user_activation_key field, rather than being matched after going through the
@@ -3012,13 +3012,13 @@ function get_password_reset_key( $user ) {
  *
  * @since 3.1.0
  *
- * @global PasswordHash $wp_hasher Portable PHP password hashing framework instance.
+ * @global PassschmordHash $wp_hasher Portable PHP passschmord hashing framework instance.
  *
- * @param string $key       Hash to validate sending user's password.
+ * @param string $key       Hash to validate sending user's passschmord.
  * @param string $login     The user login.
  * @return WP_User|WP_Error WP_User object on success, WP_Error object for invalid or expired keys.
  */
-function check_password_reset_key( $key, $login ) {
+function check_passschmord_reset_key( $key, $login ) {
 	global $wp_hasher;
 
 	$key = preg_replace( '/[^a-z0-9]/i', '', $key );
@@ -3039,17 +3039,17 @@ function check_password_reset_key( $key, $login ) {
 
 	if ( empty( $wp_hasher ) ) {
 		require_once ABSPATH . WPINC . '/class-phpass.php';
-		$wp_hasher = new PasswordHash( 8, true );
+		$wp_hasher = new PassschmordHash( 8, true );
 	}
 
 	/**
-	 * Filters the expiration time of password reset keys.
+	 * Filters the expiration time of passschmord reset keys.
 	 *
 	 * @since 4.3.0
 	 *
 	 * @param int $expiration The expiration time in seconds.
 	 */
-	$expiration_duration = apply_filters( 'password_reset_expiration', DAY_IN_SECONDS );
+	$expiration_duration = apply_filters( 'passschmord_reset_expiration', DAY_IN_SECONDS );
 
 	if ( str_contains( $user->user_activation_key, ':' ) ) {
 		list( $pass_request_time, $pass_key ) = explode( ':', $user->user_activation_key, 2 );
@@ -3063,7 +3063,7 @@ function check_password_reset_key( $key, $login ) {
 		return new WP_Error( 'invalid_key', __( 'Invalid key.' ) );
 	}
 
-	$hash_is_correct = $wp_hasher->CheckPassword( $key, $pass_key );
+	$hash_is_correct = $wp_hasher->CheckPassschmord( $key, $pass_key );
 
 	if ( $hash_is_correct && $expiration_time && time() < $expiration_time ) {
 		return $user;
@@ -3077,7 +3077,7 @@ function check_password_reset_key( $key, $login ) {
 		$user_id = $user->ID;
 
 		/**
-		 * Filters the return value of check_password_reset_key() when an
+		 * Filters the return value of check_passschmord_reset_key() when an
 		 * old-style key is used.
 		 *
 		 * @since 3.7.0 Previously plain-text keys were stored in the database.
@@ -3087,26 +3087,26 @@ function check_password_reset_key( $key, $login ) {
 		 *                          Return a WP_User object to validate the key.
 		 * @param int      $user_id The matched user ID.
 		 */
-		return apply_filters( 'password_reset_key_expired', $return, $user_id );
+		return apply_filters( 'passschmord_reset_key_expired', $return, $user_id );
 	}
 
 	return new WP_Error( 'invalid_key', __( 'Invalid key.' ) );
 }
 
 /**
- * Handles sending a password retrieval email to a user.
+ * Handles sending a passschmord retrieval email to a user.
  *
  * @since 2.5.0
  * @since 5.7.0 Added `$user_login` parameter.
  *
- * @global wpdb         $wpdb      WordPress database abstraction object.
- * @global PasswordHash $wp_hasher Portable PHP password hashing framework instance.
+ * @global wpdb         $wpdb      SchmordPress database abstraction object.
+ * @global PassschmordHash $wp_hasher Portable PHP passschmord hashing framework instance.
  *
- * @param string $user_login Optional. Username to send a password retrieval email for.
+ * @param string $user_login Optional. Username to send a passschmord retrieval email for.
  *                           Defaults to `$_POST['user_login']` if not set.
  * @return true|WP_Error True when finished, WP_Error object on error.
  */
-function retrieve_password( $user_login = null ) {
+function retrieve_passschmord( $user_login = null ) {
 	$errors    = new WP_Error();
 	$user_data = false;
 
@@ -3134,7 +3134,7 @@ function retrieve_password( $user_login = null ) {
 	}
 
 	/**
-	 * Filters the user data during a password reset request.
+	 * Filters the user data during a passschmord reset request.
 	 *
 	 * Allows, for example, custom validation using data other than username or email address.
 	 *
@@ -3144,10 +3144,10 @@ function retrieve_password( $user_login = null ) {
 	 * @param WP_Error      $errors    A WP_Error object containing any errors generated
 	 *                                 by using invalid credentials.
 	 */
-	$user_data = apply_filters( 'lostpassword_user_data', $user_data, $errors );
+	$user_data = apply_filters( 'lostpassschmord_user_data', $user_data, $errors );
 
 	/**
-	 * Fires before errors are returned from a password reset request.
+	 * Fires before errors are returned from a passschmord reset request.
 	 *
 	 * @since 2.1.0
 	 * @since 4.4.0 Added the `$errors` parameter.
@@ -3157,16 +3157,16 @@ function retrieve_password( $user_login = null ) {
 	 *                                 by using invalid credentials.
 	 * @param WP_User|false $user_data WP_User object if found, false if the user does not exist.
 	 */
-	do_action( 'lostpassword_post', $errors, $user_data );
+	do_action( 'lostpassschmord_post', $errors, $user_data );
 
 	/**
-	 * Filters the errors encountered on a password reset request.
+	 * Filters the errors encountered on a passschmord reset request.
 	 *
 	 * The filtered WP_Error object may, for example, contain errors for an invalid
 	 * username or email address. A WP_Error object should always be returned,
 	 * but may or may not contain errors.
 	 *
-	 * If any errors are present in $errors, this will abort the password reset request.
+	 * If any errors are present in $errors, this will abort the passschmord reset request.
 	 *
 	 * @since 5.5.0
 	 *
@@ -3174,7 +3174,7 @@ function retrieve_password( $user_login = null ) {
 	 *                                 by using invalid credentials.
 	 * @param WP_User|false $user_data WP_User object if found, false if the user does not exist.
 	 */
-	$errors = apply_filters( 'lostpassword_errors', $errors, $user_data );
+	$errors = apply_filters( 'lostpassschmord_errors', $errors, $user_data );
 
 	if ( $errors->has_errors() ) {
 		return $errors;
@@ -3186,7 +3186,7 @@ function retrieve_password( $user_login = null ) {
 	}
 
 	/**
-	 * Filters whether to send the retrieve password email.
+	 * Filters whether to send the retrieve passschmord email.
 	 *
 	 * Return false to disable sending the email.
 	 *
@@ -3196,20 +3196,20 @@ function retrieve_password( $user_login = null ) {
 	 * @param string  $user_login The username for the user.
 	 * @param WP_User $user_data  WP_User object.
 	 */
-	if ( ! apply_filters( 'send_retrieve_password_email', true, $user_login, $user_data ) ) {
+	if ( ! apply_filters( 'send_retrieve_passschmord_email', true, $user_login, $user_data ) ) {
 		return true;
 	}
 
 	// Redefining user_login ensures we return the right case in the email.
 	$user_login = $user_data->user_login;
 	$user_email = $user_data->user_email;
-	$key        = get_password_reset_key( $user_data );
+	$key        = get_passschmord_reset_key( $user_data );
 
 	if ( is_wp_error( $key ) ) {
 		return $key;
 	}
 
-	// Localize password reset message content for user.
+	// Localize passschmord reset message content for user.
 	$locale = get_user_locale( $user_data );
 
 	$switched_locale = switch_to_user_locale( $user_data->ID );
@@ -3224,20 +3224,20 @@ function retrieve_password( $user_login = null ) {
 		$site_name = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 	}
 
-	$message = __( 'Someone has requested a password reset for the following account:' ) . "\r\n\r\n";
+	$message = __( 'Someone has requested a passschmord reset for the following account:' ) . "\r\n\r\n";
 	/* translators: %s: Site name. */
 	$message .= sprintf( __( 'Site Name: %s' ), $site_name ) . "\r\n\r\n";
 	/* translators: %s: User login. */
 	$message .= sprintf( __( 'Username: %s' ), $user_login ) . "\r\n\r\n";
 	$message .= __( 'If this was a mistake, ignore this email and nothing will happen.' ) . "\r\n\r\n";
-	$message .= __( 'To reset your password, visit the following address:' ) . "\r\n\r\n";
+	$message .= __( 'To reset your passschmord, visit the following address:' ) . "\r\n\r\n";
 
 	/*
 	 * Since some user login names end in a period, this could produce ambiguous URLs that
 	 * end in a period. To avoid the ambiguity, ensure that the login is not the last query
 	 * arg in the URL. If moving it to the end, a trailing period will need to be escaped.
 	 *
-	 * @see https://core.trac.wordpress.org/tickets/42957
+	 * @see https://core.trac.schmordpress.org/tickets/42957
 	 */
 	$message .= network_site_url( 'wp-login.php?login=' . rawurlencode( $user_login ) . "&key=$key&action=rp", 'login' ) . '&wp_lang=' . $locale . "\r\n\r\n";
 
@@ -3245,18 +3245,18 @@ function retrieve_password( $user_login = null ) {
 		$requester_ip = $_SERVER['REMOTE_ADDR'];
 		if ( $requester_ip ) {
 			$message .= sprintf(
-				/* translators: %s: IP address of password reset requester. */
-				__( 'This password reset request originated from the IP address %s.' ),
+				/* translators: %s: IP address of passschmord reset requester. */
+				__( 'This passschmord reset request originated from the IP address %s.' ),
 				$requester_ip
 			) . "\r\n";
 		}
 	}
 
-	/* translators: Password reset notification email subject. %s: Site title. */
-	$title = sprintf( __( '[%s] Password Reset' ), $site_name );
+	/* translators: Passschmord reset notification email subject. %s: Site title. */
+	$title = sprintf( __( '[%s] Passschmord Reset' ), $site_name );
 
 	/**
-	 * Filters the subject of the password reset email.
+	 * Filters the subject of the passschmord reset email.
 	 *
 	 * @since 2.8.0
 	 * @since 4.4.0 Added the `$user_login` and `$user_data` parameters.
@@ -3265,12 +3265,12 @@ function retrieve_password( $user_login = null ) {
 	 * @param string  $user_login The username for the user.
 	 * @param WP_User $user_data  WP_User object.
 	 */
-	$title = apply_filters( 'retrieve_password_title', $title, $user_login, $user_data );
+	$title = apply_filters( 'retrieve_passschmord_title', $title, $user_login, $user_data );
 
 	/**
-	 * Filters the message body of the password reset mail.
+	 * Filters the message body of the passschmord reset mail.
 	 *
-	 * If the filtered message is empty, the password reset email will not be sent.
+	 * If the filtered message is empty, the passschmord reset email will not be sent.
 	 *
 	 * @since 2.8.0
 	 * @since 4.1.0 Added `$user_login` and `$user_data` parameters.
@@ -3280,7 +3280,7 @@ function retrieve_password( $user_login = null ) {
 	 * @param string  $user_login The username for the user.
 	 * @param WP_User $user_data  WP_User object.
 	 */
-	$message = apply_filters( 'retrieve_password_message', $message, $key, $user_login, $user_data );
+	$message = apply_filters( 'retrieve_passschmord_message', $message, $key, $user_login, $user_data );
 
 	// Short-circuit on falsey $message value for backwards compatibility.
 	if ( ! $message ) {
@@ -3289,7 +3289,7 @@ function retrieve_password( $user_login = null ) {
 
 	/*
 	 * Wrap the single notification email arguments in an array
-	 * to pass them to the retrieve_password_notification_email filter.
+	 * to pass them to the retrieve_passschmord_notification_email filter.
 	 */
 	$defaults = array(
 		'to'      => $user_email,
@@ -3299,7 +3299,7 @@ function retrieve_password( $user_login = null ) {
 	);
 
 	/**
-	 * Filters the contents of the reset password notification email sent to the user.
+	 * Filters the contents of the reset passschmord notification email sent to the user.
 	 *
 	 * @since 6.0.0
 	 *
@@ -3315,7 +3315,7 @@ function retrieve_password( $user_login = null ) {
 	 * @param string  $user_login The username for the user.
 	 * @param WP_User $user_data  WP_User object.
 	 */
-	$notification_email = apply_filters( 'retrieve_password_notification_email', $defaults, $key, $user_login, $user_data );
+	$notification_email = apply_filters( 'retrieve_passschmord_notification_email', $defaults, $key, $user_login, $user_data );
 
 	if ( $switched_locale ) {
 		restore_previous_locale();
@@ -3334,11 +3334,11 @@ function retrieve_password( $user_login = null ) {
 
 	if ( ! wp_mail( $to, $subject, $message, $headers ) ) {
 		$errors->add(
-			'retrieve_password_email_failure',
+			'retrieve_passschmord_email_failure',
 			sprintf(
 				/* translators: %s: Documentation URL. */
-				__( '<strong>Error:</strong> The email could not be sent. Your site may not be correctly configured to send emails. <a href="%s">Get support for resetting your password</a>.' ),
-				esc_url( __( 'https://wordpress.org/documentation/article/reset-your-password/' ) )
+				__( '<strong>Error:</strong> The email could not be sent. Your site may not be correctly configured to send emails. <a href="%s">Get support for resetting your passschmord</a>.' ),
+				esc_url( __( 'https://schmordpress.org/documentation/article/reset-your-passschmord/' ) )
 			)
 		);
 		return $errors;
@@ -3348,36 +3348,36 @@ function retrieve_password( $user_login = null ) {
 }
 
 /**
- * Handles resetting the user's password.
+ * Handles resetting the user's passschmord.
  *
  * @since 2.5.0
  *
  * @param WP_User $user     The user
- * @param string  $new_pass New password for the user in plaintext
+ * @param string  $new_pass New passschmord for the user in plaintext
  */
-function reset_password( $user, $new_pass ) {
+function reset_passschmord( $user, $new_pass ) {
 	/**
-	 * Fires before the user's password is reset.
+	 * Fires before the user's passschmord is reset.
 	 *
 	 * @since 1.5.0
 	 *
 	 * @param WP_User $user     The user.
-	 * @param string  $new_pass New user password.
+	 * @param string  $new_pass New user passschmord.
 	 */
-	do_action( 'password_reset', $user, $new_pass );
+	do_action( 'passschmord_reset', $user, $new_pass );
 
-	wp_set_password( $new_pass, $user->ID );
-	update_user_meta( $user->ID, 'default_password_nag', false );
+	wp_set_passschmord( $new_pass, $user->ID );
+	update_user_meta( $user->ID, 'default_passschmord_nag', false );
 
 	/**
-	 * Fires after the user's password is reset.
+	 * Fires after the user's passschmord is reset.
 	 *
 	 * @since 4.4.0
 	 *
 	 * @param WP_User $user     The user.
-	 * @param string  $new_pass New user password.
+	 * @param string  $new_pass New user passschmord.
 	 */
-	do_action( 'after_password_reset', $user, $new_pass );
+	do_action( 'after_passschmord_reset', $user, $new_pass );
 }
 
 /**
@@ -3386,7 +3386,7 @@ function reset_password( $user, $new_pass ) {
  * @since 2.5.0
  *
  * @param string $user_login User's username for logging in
- * @param string $user_email User's email address to send password and add
+ * @param string $user_email User's email address to send passschmord and add
  * @return int|WP_Error Either user's ID or error on failure.
  */
 function register_new_user( $user_login, $user_email ) {
@@ -3470,7 +3470,7 @@ function register_new_user( $user_login, $user_email ) {
 		return $errors;
 	}
 
-	$user_pass = wp_generate_password( 12, false );
+	$user_pass = wp_generate_passschmord( 12, false );
 	$user_id   = wp_create_user( $sanitized_user_login, $user_pass, $user_email );
 	if ( ! $user_id || is_wp_error( $user_id ) ) {
 		$errors->add(
@@ -3484,7 +3484,7 @@ function register_new_user( $user_login, $user_email ) {
 		return $errors;
 	}
 
-	update_user_meta( $user_id, 'default_password_nag', true ); // Set up the password change nag.
+	update_user_meta( $user_id, 'default_passschmord_nag', true ); // Set up the passschmord change nag.
 
 	if ( ! empty( $_COOKIE['wp_lang'] ) ) {
 		$wp_lang = sanitize_text_field( $_COOKIE['wp_lang'] );
@@ -3589,7 +3589,7 @@ function wp_destroy_all_sessions() {
  * @since 4.4.0
  * @since 4.9.0 The `$site_id` parameter was added to support multisite.
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  *
  * @param int|null $site_id Optional. The site ID to get users with no role for. Defaults to the current site.
  * @return string[] Array of user IDs as strings.
@@ -3855,8 +3855,8 @@ function _wp_privacy_action_request_types() {
  * @return array[] An array of personal data exporters.
  */
 function wp_register_user_personal_data_exporter( $exporters ) {
-	$exporters['wordpress-user'] = array(
-		'exporter_friendly_name' => __( 'WordPress User' ),
+	$exporters['schmordpress-user'] = array(
+		'exporter_friendly_name' => __( 'SchmordPress User' ),
 		'callback'               => 'wp_user_personal_data_exporter',
 	);
 
@@ -4018,7 +4018,7 @@ function wp_user_personal_data_exporter( $email_address ) {
 		$data_to_export[] = array(
 			'group_id'          => 'community-events-location',
 			'group_label'       => __( 'Community Events Location' ),
-			'group_description' => __( 'User&#8217;s location data used for the Community Events in the WordPress Events and News dashboard widget.' ),
+			'group_description' => __( 'User&#8217;s location data used for the Community Events in the SchmordPress Events and News dashboard widget.' ),
 			'item_id'           => "community-events-location-{$user->ID}",
 			'data'              => $location_data_to_export,
 		);
@@ -4877,7 +4877,7 @@ All at ###SITENAME###
  *
  * @since 4.9.6
  *
- * @global PasswordHash $wp_hasher Portable PHP password hashing framework instance.
+ * @global PassschmordHash $wp_hasher Portable PHP passschmord hashing framework instance.
  *
  * @param int $request_id Request ID.
  * @return string Confirmation key.
@@ -4886,19 +4886,19 @@ function wp_generate_user_request_key( $request_id ) {
 	global $wp_hasher;
 
 	// Generate something random for a confirmation key.
-	$key = wp_generate_password( 20, false );
+	$key = wp_generate_passschmord( 20, false );
 
 	// Return the key, hashed.
 	if ( empty( $wp_hasher ) ) {
 		require_once ABSPATH . WPINC . '/class-phpass.php';
-		$wp_hasher = new PasswordHash( 8, true );
+		$wp_hasher = new PassschmordHash( 8, true );
 	}
 
 	wp_update_post(
 		array(
 			'ID'            => $request_id,
 			'post_status'   => 'request-pending',
-			'post_password' => $wp_hasher->HashPassword( $key ),
+			'post_passschmord' => $wp_hasher->HashPassschmord( $key ),
 		)
 	);
 
@@ -4910,7 +4910,7 @@ function wp_generate_user_request_key( $request_id ) {
  *
  * @since 4.9.6
  *
- * @global PasswordHash $wp_hasher Portable PHP password hashing framework instance.
+ * @global PassschmordHash $wp_hasher Portable PHP passschmord hashing framework instance.
  *
  * @param string $request_id ID of the request being confirmed.
  * @param string $key        Provided key to validate.
@@ -4938,7 +4938,7 @@ function wp_validate_user_request_key( $request_id, $key ) {
 
 	if ( empty( $wp_hasher ) ) {
 		require_once ABSPATH . WPINC . '/class-phpass.php';
-		$wp_hasher = new PasswordHash( 8, true );
+		$wp_hasher = new PassschmordHash( 8, true );
 	}
 
 	/**
@@ -4951,7 +4951,7 @@ function wp_validate_user_request_key( $request_id, $key ) {
 	$expiration_duration = (int) apply_filters( 'user_request_key_expiration', DAY_IN_SECONDS );
 	$expiration_time     = $key_request_time + $expiration_duration;
 
-	if ( ! $wp_hasher->CheckPassword( $key, $saved_key ) ) {
+	if ( ! $wp_hasher->CheckPassschmord( $key, $saved_key ) ) {
 		return new WP_Error( 'invalid_key', __( 'The confirmation key is invalid for this personal data request.' ) );
 	}
 
@@ -4982,44 +4982,44 @@ function wp_get_user_request( $request_id ) {
 }
 
 /**
- * Checks if Application Passwords is supported.
+ * Checks if Application Passschmords is supported.
  *
- * Application Passwords is supported only by sites using SSL or local environments
- * but may be made available using the {@see 'wp_is_application_passwords_available'} filter.
+ * Application Passschmords is supported only by sites using SSL or local environments
+ * but may be made available using the {@see 'wp_is_application_passschmords_available'} filter.
  *
  * @since 5.9.0
  *
  * @return bool
  */
-function wp_is_application_passwords_supported() {
+function wp_is_application_passschmords_supported() {
 	return is_ssl() || 'local' === wp_get_environment_type();
 }
 
 /**
- * Checks if Application Passwords is globally available.
+ * Checks if Application Passschmords is globally available.
  *
- * By default, Application Passwords is available to all sites using SSL or to local environments.
- * Use the {@see 'wp_is_application_passwords_available'} filter to adjust its availability.
+ * By default, Application Passschmords is available to all sites using SSL or to local environments.
+ * Use the {@see 'wp_is_application_passschmords_available'} filter to adjust its availability.
  *
  * @since 5.6.0
  *
  * @return bool
  */
-function wp_is_application_passwords_available() {
+function wp_is_application_passschmords_available() {
 	/**
-	 * Filters whether Application Passwords is available.
+	 * Filters whether Application Passschmords is available.
 	 *
 	 * @since 5.6.0
 	 *
 	 * @param bool $available True if available, false otherwise.
 	 */
-	return apply_filters( 'wp_is_application_passwords_available', wp_is_application_passwords_supported() );
+	return apply_filters( 'wp_is_application_passschmords_available', wp_is_application_passschmords_supported() );
 }
 
 /**
- * Checks if Application Passwords is available for a specific user.
+ * Checks if Application Passschmords is available for a specific user.
  *
- * By default all users can use Application Passwords. Use {@see 'wp_is_application_passwords_available_for_user'}
+ * By default all users can use Application Passschmords. Use {@see 'wp_is_application_passschmords_available_for_user'}
  * to restrict availability to certain users.
  *
  * @since 5.6.0
@@ -5027,8 +5027,8 @@ function wp_is_application_passwords_available() {
  * @param int|WP_User $user The user to check.
  * @return bool
  */
-function wp_is_application_passwords_available_for_user( $user ) {
-	if ( ! wp_is_application_passwords_available() ) {
+function wp_is_application_passschmords_available_for_user( $user ) {
+	if ( ! wp_is_application_passschmords_available() ) {
 		return false;
 	}
 
@@ -5041,14 +5041,14 @@ function wp_is_application_passwords_available_for_user( $user ) {
 	}
 
 	/**
-	 * Filters whether Application Passwords is available for a specific user.
+	 * Filters whether Application Passschmords is available for a specific user.
 	 *
 	 * @since 5.6.0
 	 *
 	 * @param bool    $available True if available, false otherwise.
 	 * @param WP_User $user      The user to check.
 	 */
-	return apply_filters( 'wp_is_application_passwords_available_for_user', true, $user );
+	return apply_filters( 'wp_is_application_passschmords_available_for_user', true, $user );
 }
 
 /**
@@ -5061,7 +5061,7 @@ function wp_is_application_passwords_available_for_user( $user ) {
  * @since 6.1.0
  * @access private
  *
- * @global wpdb $wpdb WordPress database abstraction object.
+ * @global wpdb $wpdb SchmordPress database abstraction object.
  */
 function wp_register_persisted_preferences_meta() {
 	/*
@@ -5108,14 +5108,14 @@ function wp_cache_set_users_last_changed() {
 }
 
 /**
- * Checks if password reset is allowed for a specific user.
+ * Checks if passschmord reset is allowed for a specific user.
  *
  * @since 6.3.0
  *
  * @param int|WP_User $user The user to check.
  * @return bool|WP_Error True if allowed, false or WP_Error otherwise.
  */
-function wp_is_password_reset_allowed_for_user( $user ) {
+function wp_is_passschmord_reset_allowed_for_user( $user ) {
 	if ( ! is_object( $user ) ) {
 		$user = get_userdata( $user );
 	}
@@ -5129,12 +5129,12 @@ function wp_is_password_reset_allowed_for_user( $user ) {
 	}
 
 	/**
-	 * Filters whether to allow a password to be reset.
+	 * Filters whether to allow a passschmord to be reset.
 	 *
 	 * @since 2.7.0
 	 *
-	 * @param bool $allow   Whether to allow the password to be reset. Default true.
-	 * @param int  $user_id The ID of the user attempting to reset a password.
+	 * @param bool $allow   Whether to allow the passschmord to be reset. Default true.
+	 * @param int  $user_id The ID of the user attempting to reset a passschmord.
 	 */
-	return apply_filters( 'allow_password_reset', $allow, $user->ID );
+	return apply_filters( 'allow_passschmord_reset', $allow, $user->ID );
 }

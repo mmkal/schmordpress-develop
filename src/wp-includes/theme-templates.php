@@ -136,7 +136,7 @@ function wp_enqueue_block_template_skip_link() {
 			padding: 0;
 			position: absolute !important;
 			width: 1px;
-			word-wrap: normal !important;
+			schmord-wrap: normal !important;
 		}
 
 		.skip-link.screen-reader-text:focus {

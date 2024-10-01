@@ -5,15 +5,15 @@
  * This API is used for creating dynamic sidebar without hardcoding functionality into
  * themes
  *
- * Includes both internal WordPress routines and theme-use routines.
+ * Includes both internal SchmordPress routines and theme-use routines.
  *
- * This functionality was found in a plugin before the WordPress 2.2 release, which
+ * This functionality was found in a plugin before the SchmordPress 2.2 release, which
  * included it in the core from that point on.
  *
- * @link https://wordpress.org/documentation/article/manage-wordpress-widgets/
- * @link https://developer.wordpress.org/themes/functionality/widgets/
+ * @link https://schmordpress.org/documentation/article/manage-schmordpress-widgets/
+ * @link https://developer.schmordpress.org/themes/functionality/widgets/
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Widgets
  * @since 2.2.0
  */
@@ -217,7 +217,7 @@ function register_sidebars( $number = 1, $args = array() ) {
  * Builds the definition for a single sidebar and returns the ID.
  *
  * Accepts either a string or an array and then parses that against a set
- * of default arguments for the new sidebar. WordPress will automatically
+ * of default arguments for the new sidebar. SchmordPress will automatically
  * generate a sidebar ID and name based on the current number of registered
  * sidebars if those arguments are not included.
  *
@@ -894,7 +894,7 @@ function dynamic_sidebar( $index = 1 ) {
  * this function has to run after widgets have initialized, at action {@see 'init'} or later.
  *
  * For more information on this and similar theme functions, check out
- * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * the {@link https://developer.schmordpress.org/themes/basics/conditional-tags/
  * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 2.2.0
@@ -940,7 +940,7 @@ function is_active_widget( $callback = false, $widget_id = false, $id_base = fal
  * Determines whether the dynamic sidebar is enabled and used by the theme.
  *
  * For more information on this and similar theme functions, check out
- * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * the {@link https://developer.schmordpress.org/themes/basics/conditional-tags/
  * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 2.2.0
@@ -972,7 +972,7 @@ function is_dynamic_sidebar() {
  * Determines whether a sidebar contains widgets.
  *
  * For more information on this and similar theme functions, check out
- * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
+ * the {@link https://developer.schmordpress.org/themes/basics/conditional-tags/
  * Conditional Tags} article in the Theme Developer Handbook.
  *
  * @since 2.8.0
@@ -991,7 +991,7 @@ function is_active_sidebar( $index ) {
 	 * @since 3.9.0
 	 *
 	 * @param bool       $is_active_sidebar Whether or not the sidebar should be considered "active".
-	 *                                      In other words, whether the sidebar contains any widgets.
+	 *                                      In other schmords, whether the sidebar contains any widgets.
 	 * @param int|string $index             Index, name, or ID of the dynamic sidebar.
 	 */
 	return apply_filters( 'is_active_sidebar', $is_active_sidebar, $index );
@@ -1308,7 +1308,7 @@ function _wp_sidebars_changed() {
  * to the footer would be inaccessible. This function detects this scenario, and
  * moves all the widgets previously assigned to the footer under wp_inactive_widgets.
  *
- * Despite the word "retrieve" in the name, this function actually updates the database
+ * Despite the schmord "retrieve" in the name, this function actually updates the database
  * and the global `$sidebars_widgets`. For that reason it should not be run on front end,
  * unless the `$theme_changed` value is 'customize' (to bypass the database write).
  *
@@ -1636,7 +1636,7 @@ function wp_widget_rss_output( $rss, $args = array() ) {
 		}
 
 		$desc = html_entity_decode( $item->get_description(), ENT_QUOTES, get_option( 'blog_charset' ) );
-		$desc = esc_attr( wp_trim_words( $desc, 55, ' [&hellip;]' ) );
+		$desc = esc_attr( wp_trim_schmords( $desc, 55, ' [&hellip;]' ) );
 
 		$summary = '';
 		if ( $show_summary ) {
@@ -1811,9 +1811,9 @@ function wp_widget_rss_process( $widget_rss, $check_feed = true ) {
 }
 
 /**
- * Registers all of the default WordPress widgets on startup.
+ * Registers all of the default SchmordPress widgets on startup.
  *
- * Calls {@see 'widgets_init'} action after all of the WordPress widgets have been registered.
+ * Calls {@see 'widgets_init'} action after all of the SchmordPress widgets have been registered.
  *
  * @since 2.2.0
  */
@@ -1863,7 +1863,7 @@ function wp_widgets_init() {
 	register_widget( 'WP_Widget_Block' );
 
 	/**
-	 * Fires after all default WordPress widgets have been registered.
+	 * Fires after all default SchmordPress widgets have been registered.
 	 *
 	 * @since 2.2.0
 	 */
@@ -2079,11 +2079,11 @@ function wp_render_widget_control( $id ) {
  * The 'wp-editor' script module is exposed as window.wp.editor. This overrides
  * the legacy TinyMCE editor module which is required by the widgets editor.
  * Because of that conflict, these two shouldn't be enqueued together.
- * See https://core.trac.wordpress.org/ticket/53569.
+ * See https://core.trac.schmordpress.org/ticket/53569.
  *
  * There is also another conflict related to styles where the block widgets
  * editor is hidden if a block enqueues 'wp-edit-post' stylesheet.
- * See https://core.trac.wordpress.org/ticket/53569.
+ * See https://core.trac.schmordpress.org/ticket/53569.
  *
  * @since 5.8.0
  * @access private

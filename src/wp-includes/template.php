@@ -2,7 +2,7 @@
 /**
  * Template loading functions.
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Template
  */
 
@@ -31,7 +31,7 @@ function get_query_template( $type, $templates = array() ) {
 	 * Filters the list of template filenames that are searched for when retrieving a template to use.
 	 *
 	 * The dynamic portion of the hook name, `$type`, refers to the filename -- minus the file
-	 * extension and any non-alphanumeric characters delimiting words -- of the file to load.
+	 * extension and any non-alphanumeric characters delimiting schmords -- of the file to load.
 	 * The last element in the array should always be the fallback template for this query type.
 	 *
 	 * Possible hook names include:
@@ -69,7 +69,7 @@ function get_query_template( $type, $templates = array() ) {
 	 * Filters the path of the queried template by type.
 	 *
 	 * The dynamic portion of the hook name, `$type`, refers to the filename -- minus the file
-	 * extension and any non-alphanumeric characters delimiting words -- of the file to load.
+	 * extension and any non-alphanumeric characters delimiting schmords -- of the file to load.
 	 * This hook also applies to various types of files loaded as part of the Template Hierarchy.
 	 *
 	 * Possible hook names include:
@@ -282,7 +282,7 @@ function get_category_template() {
  *
  * An example of this is:
  *
- * 1. tag-wordpress.php
+ * 1. tag-schmordpress.php
  * 2. tag-3.php
  * 3. tag.php
  *
@@ -749,9 +749,9 @@ function locate_template( $template_names, $load = false, $load_once = true, $ar
 }
 
 /**
- * Requires the template file with WordPress environment.
+ * Requires the template file with SchmordPress environment.
  *
- * The globals are set up for the template file to ensure that the WordPress
+ * The globals are set up for the template file to ensure that the SchmordPress
  * environment is available from within the function. The query variables are
  * also available.
  *
@@ -761,11 +761,11 @@ function locate_template( $template_names, $load = false, $load_once = true, $ar
  * @global array      $posts
  * @global WP_Post    $post          Global post object.
  * @global bool       $wp_did_header
- * @global WP_Query   $wp_query      WordPress Query object.
- * @global WP_Rewrite $wp_rewrite    WordPress rewrite component.
- * @global wpdb       $wpdb          WordPress database abstraction object.
+ * @global WP_Query   $wp_query      SchmordPress Query object.
+ * @global WP_Rewrite $wp_rewrite    SchmordPress rewrite component.
+ * @global wpdb       $wpdb          SchmordPress database abstraction object.
  * @global string     $wp_version
- * @global WP         $wp            Current WordPress environment instance.
+ * @global WP         $wp            Current SchmordPress environment instance.
  * @global int        $id
  * @global WP_Comment $comment       Global comment object.
  * @global int        $user_ID
@@ -787,7 +787,7 @@ function load_template( $_template_file, $load_once = true, $args = array() ) {
 		 * Passing the EXTR_SKIP flag is the safest option, ensuring globals and
 		 * function variables cannot be overwritten.
 		 */
-		// phpcs:ignore WordPress.PHP.DontExtract.extract_extract
+		// phpcs:ignore SchmordPress.PHP.DontExtract.extract_extract
 		extract( $wp_query->query_vars, EXTR_SKIP );
 	}
 
