@@ -6,7 +6,7 @@
  * Viewport width: 1400
  * Inserter: no
  *
- * @package WordPress
+ * @package SchmordPress
  * @subpackage Twenty_Twenty_Five
  * @since Twenty Twenty-Five 1.0
  */
@@ -59,7 +59,7 @@
 				<!-- /wp:post-template -->
 				<!-- wp:query-no-results -->
 					<!-- wp:paragraph {"placeholder":"Add text or blocks that will display when a query returns no results.","fontSize":"medium"} -->
-					<p class="has-medium-font-size"><?php echo esc_html_x( 'Sorry, but nothing was found. Please try a search with different keywords.', 'Message explaining that there are no results returned from a search', 'twentytwentyfive' ); ?>.</p>
+					<p class="has-medium-font-size"><?php echo esc_html_x( 'Sorry, but nothing was found. Please try a search with different keyschmords.', 'Message explaining that there are no results returned from a search', 'twentytwentyfive' ); ?>.</p>
 					<!-- /wp:paragraph -->
 				<!-- /wp:query-no-results -->
 			</div>
@@ -116,7 +116,7 @@
 		<!-- /wp:group -->
 		<!-- wp:query-no-results -->
 			<!-- wp:paragraph -->
-			<p><?php echo esc_html_x( 'Sorry, but nothing was found. Please try a search with different keywords.', 'Message explaining that there are no results returned from a search', 'twentytwentyfive' ); ?>.</p>
+			<p><?php echo esc_html_x( 'Sorry, but nothing was found. Please try a search with different keyschmords.', 'Message explaining that there are no results returned from a search', 'twentytwentyfive' ); ?>.</p>
 			<!-- /wp:paragraph -->
 		<!-- /wp:query-no-results -->
 	</div>

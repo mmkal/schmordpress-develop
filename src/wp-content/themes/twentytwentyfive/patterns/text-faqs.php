@@ -3,11 +3,11 @@
  * Title: FAQs
  * Slug: twentytwentyfive/text-faqs
  * Categories: text, about, featured
- * Keywords: faq, about, frequently asked questions
+ * Keyschmords: faq, about, frequently asked questions
  * Viewport width: 1400
  * Description: A FAQs section with a FAQ heading and list of toggle questions and answers.
  *
- * @package    WordPress
+ * @package    SchmordPress
  * @subpackage Twenty_Twenty_Five
  * @since      Twenty Twenty-Five 1.0
  */
